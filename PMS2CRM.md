@@ -511,34 +511,34 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | — | — | — | Hotel Room | Hotel Branch | Link | Company |
 | StatRoom | string | Room status code (VC, VD, AC, AD, OC, OD, OO, OI, OS) | — | — | — | — |
 | StatRoomName | string | Room status name ("Vacant Clean", "Vacant Dirty", etc.) | — | — | — | — |
-| RoomTypeCode | string | Room type code (e.g., DLX-K) | Item | — | — | — |
-| RoomTypeName | string | Room type name (e.g., "Deluxe King") | Item | — | — | — |
+| RoomTypeCode | string | Room type code (e.g., DLX-K) | Item | (+) room_type_code | Data | — |
+| RoomTypeName | string | Room type name (e.g., "Deluxe King") | Item | (+) room_type_name | Data | — |
 | — | — | — | Hotel Room | Category | Link | Item |
-| RoomName | string | Display name for the room | Hotel Room | — | — | — |
-| RackRate | number | Standard non-discounted price | Hotel Room | — | — | — |
-| FastCheckin | boolean | Eligible for fast check-in | Hotel Room | — | — | — |
-| BuildingId | number | Building system ID | Hotel Room | — | — | — |
-| BuildingName | string | Building name ("Building A", "B", "C") | Hotel Room | — | — | — |
-| WingId | number | Wing system ID | Hotel Room | — | — | — |
-| WingName | string | Wing name ("Left Wing", "Right Wing") | Hotel Room | — | — | — |
-| FloorId | number | Floor system ID | Hotel Room | — | — | — |
-| FloorName | string | Floor name ("Floor 1", "Floor 2") | Hotel Room | — | — | — |
-| ViewId | number | View system ID | Hotel Room | — | — | — |
-| ViewName | string | View name ("City View", "Sea View") | Hotel Room | — | — | — |
-| BedTypeId | number | Bed type system ID | Hotel Room | — | — | — |
-| BedTypeName | string | Bed type ("Twin", "Triple") | Hotel Room | — | — | — |
-| SpecialId | number | Special feature ID | Hotel Room | — | — | — |
-| SpecialName | string | Special feature ("Non Smoke", "Smoking Room") | Hotel Room | — | — | — |
-| ConnectionNo | string | Connecting room number (empty = non-connecting) | Hotel Room | — | — | — |
-| Seq | number | Display order sequence | Hotel Room | — | — | — |
-| RecordId | number | Related Reservation RecordId | Hotel Room | — | — | — |
-| RoomSize | number | Room size (sqm) | Hotel Room | — | — | — |
-| Active | boolean | Room active in system | Hotel Room | — | — | — |
-| FloorSide | string | Floor side ("East") | Hotel Room | — | — | — |
-| — | — | — | Hotel Room | NoOfExtraBed | — | — |
-| — | — | — | Hotel Room | max_adults | — | — |
-| — | — | — | Hotel Room | max_children | — | — |
-| — | — | — | Hotel Room | NoOfInfant | — | — |
+| RoomName | string | Display name for the room | Hotel Room | (+) room_name | Data | — |
+| RackRate | number | Standard non-discounted price | Hotel Room | (+) rack_rate | Currency | — |
+| FastCheckin | boolean | Eligible for fast check-in | Hotel Room | (+) fast_checkin | Check | — |
+| BuildingId | number | Building system ID | Hotel Room | (+) building_id | Int | — |
+| BuildingName | string | Building name ("Building A", "B", "C") | Hotel Room | (+) building_name | Data | — |
+| WingId | number | Wing system ID | Hotel Room | (+) wing_id | Int | — |
+| WingName | string | Wing name ("Left Wing", "Right Wing") | Hotel Room | (+) wing_name | Data | — |
+| FloorId | number | Floor system ID | Hotel Room | (+) floor_id | Int | — |
+| FloorName | string | Floor name ("Floor 1", "Floor 2") | Hotel Room | (+) floor_name | Data | — |
+| ViewId | number | View system ID | Hotel Room | (+) view_id | Int | — |
+| ViewName | string | View name ("City View", "Sea View") | Hotel Room | (+) view_name | Data | — |
+| BedTypeId | number | Bed type system ID | Hotel Room | (+) bed_type_id | Int | — |
+| BedTypeName | string | Bed type ("Twin", "Triple") | Hotel Room | (+) bed_type_name | Data | — |
+| SpecialId | number | Special feature ID | Hotel Room | (+) special_id | Int | — |
+| SpecialName | string | Special feature ("Non Smoke", "Smoking Room") | Hotel Room | (+) special_name | Data | — |
+| ConnectionNo | string | Connecting room number (empty = non-connecting) | Hotel Room | (+) connection_no | Data | — |
+| Seq | number | Display order sequence | Hotel Room | (+) seq | Int | — |
+| RecordId | number | Related Reservation RecordId | Hotel Room | (+) record_id | Int | — |
+| RoomSize | number | Room size (sqm) | Hotel Room | (+) room_size | Float | — |
+| Active | boolean | Room active in system | Hotel Room | (+) active | Check | — |
+| FloorSide | string | Floor side ("East") | Hotel Room | (+) floor_side | Data | — |
+| — | — | — | Hotel Room | (+) no_of_extra_bed | Int | — |
+| — | — | — | Hotel Room | (+) max_adults | Int | — |
+| — | — | — | Hotel Room | (+) max_children | Int | — |
+| — | — | — | Hotel Room | (+) no_of_infant | Int | — |
 
 **Fields NOT mapped (audit/visual/operational only):** CreateBy, CreateDt, LastupdateBy, LastupdateDt, BsnRmId (NOT USE), Showcolumn, Usedlastdate, Ltop, Lleft, Lwidth, Lhigh, Lsize, Ncurvature, Nlabelctr (NOT USE), Keycardno, ElecttricNo, IccardNo, ZoneCode, UtilityId, MaidAssignCode, RmDiscrepancy, RmDpcStaffcode, RmDpcDatetime, KeycardPublicdoor, EnableDigitalLock, DoorMacAddress, RoomMasterLang, RoomExtension
 
@@ -554,50 +554,51 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 
 | PMS Field | Type | Description | Example | Frappe Field |
 |-----------|------|-------------|---------|--------------|
-| ProfileId | number | Guest unique ID | 1 | — |
-| ProfileCode | string | Guest profile code | VH0000001 | — |
-| ProfileName | string | Full name | John Snow | — |
-| FirstName | string | First name | John | — |
-| LastName | string | Last name | Snow | — |
-| TitleId | number | Title ID | Enum: 1=Mr. 2=Miss 3=Mrs. 4=Ms 11=Other | — |
-| TitleName | string | Title display | MR. | — |
-| GenderId | number | Gender code | Enum: 1=Male 2=Female 3=Other | — |
-| GenderName | string | Gender display | "Male" | — |
-| VIPTypeCode | string | VIP status code | Enum: 1=MEMBER, 2=VIP, 3=Other | — |
-| VIPTypeName | string | VIP display | — | — |
-| DateOfBirth | string | Birthday (ISO 8601) | "2025-11-12T..." | — |
-| PassportNo | string | Passport/National ID | — | — |
-| JoinDate | string | Profile creation date | "2025-11-12T..." | — |
-| ExpireDate | string | Profile/membership expiry | "2025-11-12T..." | — |
-| MobileNo | string | Primary mobile | — | — |
-| NationalityCode | string | Nationality code | — | — |
-| NationalityName | string | Nationality name | — | — |
-| CountryId | number | Country ID | — | — |
-| CountryName | string | Country name | — | — |
-| Email | string | Primary email | — | — |
-| GuestTypeCode | string | Guest category | Enum: REG, BUS, FIT, GOV, GRP | — |
-| GuestTypeName | string | Guest type display | — | — |
-| ChannelCode | string | Booking channel code | OTA | — |
-| ChannelName | string | Booking channel name | Online Travel Agent | — |
-| SegmentCode | string | Market segment code | OTA | — |
-| SegmentName | string | Market segment name | Online Travel Agent | — |
-| Notice | string | General notice | — | — |
-| PolicyRemark | string | Special policies | — | — |
-| Active | boolean | Profile active | true | — |
-| KeepHistory | boolean | Retain visit history | true | — |
+| ProfileId | number | Guest unique ID | 1 | (+) profile_id |
+| ProfileCode | string | Guest profile code | VH0000001 | (+) profile_code |
+| ProfileName | string | Full name | John Snow | full_name (default) |
+| FirstName | string | First name | John | first_name (default) |
+| LastName | string | Last name | Snow | last_name (default) |
+| TitleId | number | Title ID | Enum: 1=Mr. 2=Miss 3=Mrs. 4=Ms 11=Other | salutation (default) |
+| TitleName | string | Title display | MR. | — (dùng TitleId map) |
+| GenderId | number | Gender code | Enum: 1=Male 2=Female 3=Other | gender (default) |
+| GenderName | string | Gender display | "Male" | — (dùng GenderId map) |
+| VIPTypeCode | string | VIP status code | Enum: 1=MEMBER, 2=VIP, 3=Other | (+) vip_type_code |
+| VIPTypeName | string | VIP display | — | — (dùng VIPTypeCode map) |
+| DateOfBirth | string | Birthday (ISO 8601) | "2025-11-12T..." | (+) date_of_birth |
+| IdCard | string | CMND/CCCD (SK cho matching) | "079123456789" | (+) id_card |
+| PassportNo | string | Passport number (PK cho matching) | "AB123456" | (+) passport_no |
+| JoinDate | string | Profile creation date | "2025-11-12T..." | (+) join_date |
+| ExpireDate | string | Profile/membership expiry | "2025-11-12T..." | (+) expire_date |
+| MobileNo | string | Primary mobile | — | mobile_no (default) |
+| NationalityCode | string | Nationality code | "TH" | (+) nationality_code |
+| NationalityName | string | Nationality name | "Thai" | — (dùng NationalityCode map) |
+| CountryId | number | Country ID | — | — (dùng CountryName map) |
+| CountryName | string | Country name | "Thailand" | (+) country |
+| Email | string | Primary email | — | email_id (default) |
+| GuestTypeCode | string | Guest category | Enum: REG, BUS, FIT, GOV, GRP | (+) guest_type_code |
+| GuestTypeName | string | Guest type display | — | — (dùng GuestTypeCode map) |
+| ChannelCode | string | Booking channel code | OTA | (+) channel_code |
+| ChannelName | string | Booking channel name | Online Travel Agent | — (dùng ChannelCode map) |
+| SegmentCode | string | Market segment code | OTA | (+) segment_code |
+| SegmentName | string | Market segment name | Online Travel Agent | — (dùng SegmentCode map) |
+| Notice | string | General notice | — | (+) notice |
+| PolicyRemark | string | Special policies | — | (+) policy_remark |
+| Active | boolean | Profile active | true | (+) is_active |
+| KeepHistory | boolean | Retain visit history | true | (+) keep_history |
 | SocialMediaType | string | Social media type ("LINE", "Facebook") | — | Source |
 | SocialMediaTypeName | string | Social media display | — | Channel |
 | SocialMediaId | string | Social media user ID | — | Channel |
-| LicensePlate | string | Vehicle license plate | — | — |
-| LanguageCode | string | Preferred language ("en-US", "th-TH") | — | — |
-| BlacklistStatus | boolean | On blacklist | true/false | — |
-| MiddleName | string | Middle name | — | — |
+| LicensePlate | string | Vehicle license plate | — | (+) license_plate |
+| LanguageCode | string | Preferred language ("en-US", "th-TH") | — | language (default) |
+| BlacklistStatus | boolean | On blacklist | true/false | (+) blacklist_status |
+| MiddleName | string | Middle name | — | middle_name (default) |
 | ~~MemberCardNo~~ | — | ~~CRM tự quản lý (custom_member_card_no trên Customer) — không sync từ PMS~~ | — | — |
 | ~~MemberTier~~ | — | ~~CRM tự quản lý — không sync từ PMS~~ | — | — |
-| StartEffectiveDate | string | Membership start | "2025-11-12T..." | — |
-| EndEffectiveDate | string | Membership expiry | "2025-11-12T..." | — |
-| RefNo | string | General reference number | — | — |
-| BackupEmail | string | Secondary email | — | — |
+| StartEffectiveDate | string | Membership start | "2025-11-12T..." | (+) start_effective_date |
+| EndEffectiveDate | string | Membership expiry | "2025-11-12T..." | (+) end_effective_date |
+| RefNo | string | General reference number | — | (+) ref_no |
+| BackupEmail | string | Secondary email | — | (+) backup_email |
 | BillingAddressType | number | Address for billing (1=Residential, 2=Working) | — | Address (Link) |
 | ResidentialAddress | object | Home address | See Address table | Address (Link) |
 | WorkingAddress | object | Work address | See Address table | Address (Link) |
@@ -609,7 +610,7 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | ConsentList | array | Guest consents (marketing) | See ConsentList table | — |
 | ProfileNotes | object | Preferences and caveats | See ProfileNotes table | Notes/comment |
 
-**NOT USED fields:** VisitType, VisitTypeName, IdCard, HiddenProfile
+**NOT USED fields:** VisitType, VisitTypeName, HiddenProfile
 
 #### Customer Doctype (created alongside Contact)
 
@@ -623,6 +624,10 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | Tax ID | Data | — | From BillingAddress.TaxId |
 | Payment Terms | — | — | — |
 | Currency | Link | Currency | From reservation CurrCode |
+| (+) Member Level | Select | Silver, Gold, Platinum | CRM tự quản lý membership tier |
+| (+) Point Balance | Number | — | Điểm loyalty hiện tại |
+| (+) Loyalty ID | Data | — | Mã loyalty CRM tự sinh |
+| (+) Total Points | Number | — | Tổng điểm tích lũy |
 | Join Date | Date | — | Tracking tenure |
 | Preferences | String | — | Food allergies, High floor, etc. |
 | VIP Status | Select | VIP 1, VIP 2, VVIP | From VIPTypeCode |
@@ -721,48 +726,48 @@ Actions:
 
 | PMS Field | Type | Description | Frappe Doctype | Frappe Field |
 |-----------|------|-------------|----------------|--------------|
-| RecordType | string | Record type ("RESERVATION", "IN-HOUSE") | Sales Order | — |
-| SeqNo | number | Sequence number | Sales Order | — |
-| ConfirmationNo | string | Confirmation number (RR2500001) | Sales Order | — |
-| RecordId | number | Internal reservation ID | Sales Order | — |
-| RecordStatus | number | Status code (0-8) | Sales Order | — |
-| BookingTypeId | number | Booking type ID | Sales Order | — |
-| ShowAddress | number | Address display flag (1=Agent, 2=Guest) | Sales Order | — |
+| RecordType | string | Record type ("RESERVATION", "IN-HOUSE") | Sales Order | (+) record_type |
+| SeqNo | number | Sequence number | Sales Order | (+) seq_no |
+| ConfirmationNo | string | Confirmation number (RR2500001) | Sales Order | (+) confirmation_no |
+| RecordId | number | Internal reservation ID | Sales Order | (+) record_id |
+| RecordStatus | number | Status code (0-8) | Sales Order | (+) record_status |
+| BookingTypeId | number | Booking type ID | Sales Order | (+) booking_type_id |
+| ShowAddress | number | Address display flag (1=Agent, 2=Guest) | Sales Order | (+) show_address |
 | NoOfRoom | number | Number of rooms | Sales Order | Sale Order Item → Qty=1 |
-| NoOfAdult | number | Total adults | Sales Order | Sale Order Item → NoOfAdult |
-| NoOfChild | number | Total children | Sales Order | Sale Order Item → NoOfChild |
-| NoOfInfant | number | Total infants | Sales Order | Sale Order Item → NoOfInfant |
-| NoOfExtraBed | number | Extra beds added | Sales Order | Sale Order Item → NoOfExtraBed |
-| NoOfExtraPerson | number | Extra persons | Sales Order | Sale Order Item → NoOfExtraPerson |
-| NoOfAdditionalGuest | number | Additional guests | Sales Order | Sale Order Item → NoOfAdditionalGuest |
-| ExtraBedQty | number | Extra bed quantity | Sales Order | Sale Order Item → ExtraBedQty |
-| NoOfGuest | number | Total guests (Adult+Child+Infant) | Sales Order | Sale Order Item → NoOfGuest |
-| RoomTypeCode | string | Room type code | Sales Order | Sale Order Item → ItemCode |
-| RoomTypeName | string | Room type name | Sales Order | Sale Order Item → ItemName |
-| RoomNo | string | Assigned room number | Sales Order | Sale Order Item → RoomNo |
-| ArrivalDate | string | Guest arrival date/time | Sales Order | — |
-| ArrivalTime | string | Estimated arrival time | Sales Order | — |
-| DepartureDate | string | Guest departure date/time | Sales Order | — |
-| DepartureTime | string | Estimated departure time | Sales Order | — |
-| OldDeparture | string | Previous departure date (if changed) | Sales Order | — |
-| ArrivingBy | string | Transport mode ("Flight", "Car") | Sales Order | — |
-| ArrivingNo | string | Flight/license plate for arrival | Sales Order | — |
-| DepartingBy | string | Transport mode for departure | Sales Order | — |
-| DepartingNo | string | Flight number for departure | Sales Order | — |
-| ContractId | number | Rate contract internal ID | Sales Order | — |
-| RateCode | string | Rate plan code ("BAR", "CORP") | Sales Order | — |
-| AvgRate | number | Average nightly rate | Sales Order | — |
-| BreakfastCode | string | Breakfast package code | Sales Order | — |
-| AvgBreakfast | number | Average nightly breakfast price | Sales Order | — |
-| SegmentCode | string | Market segment code | Sales Order | — |
-| SourceCode | string | Booking source code | Sales Order | — |
-| ChannelCode | string | Booking channel code | Sales Order | — |
-| GuestTypeCode | string | Guest type code | Sales Order | — |
-| CurrCode | string | Currency code ("USD", "THB") | Sales Order | — |
-| Remark | string | General remarks | Sales Order | — |
-| TrnComment | string | Transaction comment | Sales Order | — |
-| PolicyRemark | string | Special policy remark | Sales Order | — |
-| IsMainGroup | boolean | Main reservation for group | Sales Order | — |
+| NoOfAdult | number | Total adults | Sales Order | Sale Order Item → (+) no_of_adult |
+| NoOfChild | number | Total children | Sales Order | Sale Order Item → (+) no_of_child |
+| NoOfInfant | number | Total infants | Sales Order | Sale Order Item → (+) no_of_infant |
+| NoOfExtraBed | number | Extra beds added | Sales Order | Sale Order Item → (+) no_of_extra_bed |
+| NoOfExtraPerson | number | Extra persons | Sales Order | Sale Order Item → (+) no_of_extra_person |
+| NoOfAdditionalGuest | number | Additional guests | Sales Order | Sale Order Item → (+) no_of_additional_guest |
+| ExtraBedQty | number | Extra bed quantity | Sales Order | Sale Order Item → (+) extra_bed_qty |
+| NoOfGuest | number | Total guests (Adult+Child+Infant) | Sales Order | Sale Order Item → (+) no_of_guest |
+| RoomTypeCode | string | Room type code | Sales Order | Sale Order Item → item_code (default) |
+| RoomTypeName | string | Room type name | Sales Order | Sale Order Item → item_name (default) |
+| RoomNo | string | Assigned room number | Sales Order | Sale Order Item → (+) room_no |
+| ArrivalDate | string | Guest arrival date/time | Sales Order | (+) arrival_date |
+| ArrivalTime | string | Estimated arrival time | Sales Order | (+) arrival_time |
+| DepartureDate | string | Guest departure date/time | Sales Order | (+) departure_date |
+| DepartureTime | string | Estimated departure time | Sales Order | (+) departure_time |
+| OldDeparture | string | Previous departure date (if changed) | Sales Order | (+) old_departure |
+| ArrivingBy | string | Transport mode ("Flight", "Car") | Sales Order | (+) arriving_by |
+| ArrivingNo | string | Flight/license plate for arrival | Sales Order | (+) arriving_no |
+| DepartingBy | string | Transport mode for departure | Sales Order | (+) departing_by |
+| DepartingNo | string | Flight number for departure | Sales Order | (+) departing_no |
+| ContractId | number | Rate contract internal ID | Sales Order | (+) contract_id |
+| RateCode | string | Rate plan code ("BAR", "CORP") | Sales Order | (+) rate_code |
+| AvgRate | number | Average nightly rate | Sales Order | (+) avg_rate |
+| BreakfastCode | string | Breakfast package code | Sales Order | (+) breakfast_code |
+| AvgBreakfast | number | Average nightly breakfast price | Sales Order | (+) avg_breakfast |
+| SegmentCode | string | Market segment code | Sales Order | (+) segment_code |
+| SourceCode | string | Booking source code | Sales Order | (+) source_code |
+| ChannelCode | string | Booking channel code | Sales Order | (+) channel_code |
+| GuestTypeCode | string | Guest type code | Sales Order | (+) guest_type_code |
+| CurrCode | string | Currency code ("USD", "THB") | Sales Order | currency (default) |
+| Remark | string | General remarks | Sales Order | (+) remark |
+| TrnComment | string | Transaction comment | Sales Order | (+) trn_comment |
+| PolicyRemark | string | Special policy remark | Sales Order | (+) policy_remark |
+| IsMainGroup | boolean | Main reservation for group | Sales Order | (+) is_main_group |
 | Groups | object | Group details | Sales Order | Booking group (Link) |
 | Parties | object | Party details | Sales Order | Party group (Link) |
 | Options | object | Boolean flags | Sales Order | Custom fields (see Options) |
@@ -775,14 +780,14 @@ Actions:
 | ~~AddOns~~ | array | ~~Add-on packages/services~~ | — | — | *Folio charges — không sync* |
 | ~~Guarantees~~ | array | ~~Guarantee methods~~ | — | — | *Folio data — không sync* |
 | PurposeOfStays | array | Stay purposes | Sales Order | PurposeOfStays (Link) |
-| BookingNo | string | Original booking number | Sales Order | Sale Order |
-| CheckInNo | string | Registration number at check-in | Sales Order | Sale Order |
-| SaleCode | string | Salesperson code | Sales Order | Sale Order |
-| ContactPerson | string | Booking contact name | Sales Order | Contact (Link) |
-| ContactTelephone | string | Contact phone | Sales Order | Contact → Telephone |
-| ContactEmail | string | Contact email | Sales Order | Contact → Email |
-| Nights | number | Total nights | Sales Order | Sale Order Item → Qty=1 |
-| ContractName | string | Rate contract name | Sales Order | Contract |
+| BookingNo | string | Original booking number | Sales Order | (+) booking_no |
+| CheckInNo | string | Registration number at check-in | Sales Order | (+) check_in_no |
+| SaleCode | string | Salesperson code | Sales Order | (+) sale_code |
+| ContactPerson | string | Booking contact name | Sales Order | contact_person (Link → Contact) |
+| ContactTelephone | string | Contact phone | Sales Order | (+) contact_telephone |
+| ContactEmail | string | Contact email | Sales Order | (+) contact_email |
+| Nights | number | Total nights | Sales Order | Sale Order Item → qty (default) |
+| ContractName | string | Rate contract name | Sales Order | (+) contract_name |
 | ~~PaymentMethodId~~ | number | ~~Payment method ID~~ | — | — | *Folio data — không sync* |
 | ~~PaymentMethodName~~ | string | ~~Payment method name~~ | — | — | *Folio data — không sync* |
 | ~~ArCode~~ | string | ~~AR account code~~ | — | — | *Folio data — không sync* |
@@ -791,36 +796,36 @@ Actions:
 | ~~ReferenceNo~~ | string | ~~General reference number~~ | — | — | *Folio data — không sync* |
 | ~~ExternalConfirmNo~~ | string | ~~External confirmation number~~ | — | — | *Folio data — không sync* |
 | ~~VoucherNo~~ | string | ~~Voucher number~~ | — | — | *Folio data — không sync* |
-| UseRateFrom | number | Rate origin (0=Guest, 1=Contract, 2=Agent, 3=Source) | Customer | — |
-| CompanyAgentId | number | Travel agent company ID | Customer | — |
-| CompanyAgentCode | string | Travel agent code | Customer | — |
-| CompanyAgentName | string | Travel agent name | Customer | — |
-| CompanyAgentEmail | string | Travel agent email | Customer | — |
-| CompanyAgentTel | string | Travel agent phone | Customer | — |
-| CompanySourceCode | string | Booking source code | Customer | — |
-| CompanySourceName | string | Booking source name | Customer | — |
-| CompanySourceEmail | string | Booking source email | Customer | — |
-| CompanySourceTel | string | Booking source phone | Customer | — |
-| PaymentPolicy | string | Payment policy text | Sales Order | — |
-| CancellationPolicy | string | Cancellation policy text | Sales Order | — |
-| OtaBookingId | string | OTA booking ID | Sales Order | — |
-| OriginalRoomType | string | Original room type (if upgraded) | Sales Order | — |
+| UseRateFrom | number | Rate origin (0=Guest, 1=Contract, 2=Agent, 3=Source) | Customer | (+) use_rate_from |
+| CompanyAgentId | number | Travel agent company ID | Customer | (+) company_agent_id |
+| CompanyAgentCode | string | Travel agent code | Customer | (+) company_agent_code |
+| CompanyAgentName | string | Travel agent name | Customer | (+) company_agent_name |
+| CompanyAgentEmail | string | Travel agent email | Customer | (+) company_agent_email |
+| CompanyAgentTel | string | Travel agent phone | Customer | (+) company_agent_tel |
+| CompanySourceCode | string | Booking source code | Customer | (+) company_source_code |
+| CompanySourceName | string | Booking source name | Customer | (+) company_source_name |
+| CompanySourceEmail | string | Booking source email | Customer | (+) company_source_email |
+| CompanySourceTel | string | Booking source phone | Customer | (+) company_source_tel |
+| PaymentPolicy | string | Payment policy text | Sales Order | (+) payment_policy |
+| CancellationPolicy | string | Cancellation policy text | Sales Order | (+) cancellation_policy |
+| OtaBookingId | string | OTA booking ID | Sales Order | (+) ota_booking_id |
+| OriginalRoomType | string | Original room type (if upgraded) | Sales Order | (+) original_room_type |
 | IsShared | boolean | Sharer reservation (multi-guest) | — | — |
 | IsMainShare | boolean | Primary guest of share | — | — |
 | ShareRef | string | Reference code linking sharers | — | — |
 | FolioBalance | number | Outstanding folio balance | — | — |
 
-**NOT USED fields:** Extrabed, ExtraPerson, AppRateId, PkType, PkCode, PkCharge, RateCategories, IsRtc, FlagStatus, TripRefNo
+**NOT USED fields:** Extrabed, ExtraPerson, AppRateId, PkType, PkCode, PkCharge, RateCategories, IsRtc, FlagStatus, TripRefNo, ExternalRateType, AppRateDetailId, BlockNo, ShareType, IsTempShare, UsedById, UsedByName, UtilityPlan, MaxPax, RoomRate, AllowMonthlyAutopost, DepositInfo, Document, Emergency, HotelTransfer, EnableDigitalLock, PaymentInfo
 
 ### 6.5 Options (Object) → Sales Order Custom Fields
 
 | PMS Field | Type | Description | Frappe Field |
 |-----------|------|-------------|--------------|
-| SuperBlock | boolean | Super block reservation | Sale order - SuperBlock |
-| PayAtHotel | boolean | Pay at Hotel booking | Sale order - PayAtHotel |
-| UseContractAddress | boolean | Use contract address | Sale order - UseContractAddress |
-| NonRefundable | boolean | Non-refundable booking | Sale order - NonRefundable |
-| NonCancellation | boolean | Non-cancellable booking | Sale order - NonCancellation |
+| SuperBlock | boolean | Super block reservation | (+) super_block |
+| PayAtHotel | boolean | Pay at Hotel booking | (+) pay_at_hotel |
+| UseContractAddress | boolean | Use contract address | (+) use_contract_address |
+| NonRefundable | boolean | Non-refundable booking | (+) non_refundable |
+| NonCancellation | boolean | Non-cancellable booking | (+) non_cancellation |
 
 **NOT USED:** GenerateVat, ViewProfile, AllowPOSOnline, AllowUseInternet, DoNotMove, CreditLimit
 
