@@ -43,20 +43,18 @@ Each hotel branch = 1 Company in ERPNext. CompanyId maps to Company doctype.
 
 ### Reservation Lifecycle (PMS Status → Frappe State)
 
-```
-PMS RecordStatus                          Frappe Action                                  Document State
-────────────────────────────────────────  ─────────────────────────────────────────────  ──────────────────────────────────
-0 - PROSPECT                              Create Sales Order                             Draft (Sales Order)
-1 - TENTATIVE                             Create/Update Sales Order                      Draft (Sales Order)
-2 - CONFIRMED                             Create/Update Sales Order                      Draft (Sales Order)
-5 - WAITING LIST                          Create/Update Sales Order                      Draft (Sales Order)
-6 - HOLDING LIST                          Create/Update Sales Order                      Draft (Sales Order)
-7 - IN-HOUSE (Check-in)                   Update Sales Order (Room#, Guests)             Draft (Sales Order)
-7 - IN-HOUSE (Stay)                       Append Items (F&B, Spa, Minibar) to Table      Draft (Sales Order)
-8 - CHECKED-OUT                           Submit Sales Order → Create Sales Invoice      Submitted → Sales Invoice
-3 - CANCELLATION                          Cancel Sales Order                             Cancelled
-4 - NO-SHOW                               Cancel Sales Order with no-show flag           Cancelled
-```
+| PMS RecordStatus | Frappe Action | Document State |
+|---|---|---|
+| 0 - PROSPECT | Create Sales Order | Draft (Sales Order) |
+| 1 - TENTATIVE | Create/Update Sales Order | Draft (Sales Order) |
+| 2 - CONFIRMED | Create/Update Sales Order | Draft (Sales Order) |
+| 5 - WAITING LIST | Create/Update Sales Order | Draft (Sales Order) |
+| 6 - HOLDING LIST | Create/Update Sales Order | Draft (Sales Order) |
+| 7 - IN-HOUSE (Check-in) | Update Sales Order (Room#, Guests) | Draft (Sales Order) |
+| 7 - IN-HOUSE (Stay) | Append Items (F&B, Spa, Minibar) to Table | Draft (Sales Order) |
+| 8 - CHECKED-OUT | Submit Sales Order → Create Sales Invoice | Submitted → Sales Invoice |
+| 3 - CANCELLATION | Cancel Sales Order | Cancelled |
+| 4 - NO-SHOW | Cancel Sales Order with no-show flag | Cancelled |
 
 ```mermaid
 stateDiagram-v2
@@ -85,12 +83,10 @@ stateDiagram-v2
 
 ### Guest Identity — Primary/Secondary Key
 
-```
-Key         Field           Dùng để                          Ghi chú
-──────────  ──────────────  ───────────────────────────────  ──────────────────────────────────
-Primary     PassportNo      Match khách giữa PMS ↔ ERPNext   Unique toàn cầu, có khi check-in
-Secondary   IdCard (PMS)    Fallback khi không có passport   CMND/CCCD cho khách nội địa
-```
+| Key | Field | Dùng để | Ghi chú |
+|---|---|---|---|
+| Primary | PassportNo | Match khách giữa PMS ↔ ERPNext | Unique toàn cầu, có khi check-in |
+| Secondary | IdCard (PMS) | Fallback khi không có passport | CMND/CCCD cho khách nội địa |
 
 **Tại sao Passport là PK:**
 - Unique toàn cầu, không trùng giữa các khách
@@ -245,18 +241,16 @@ flowchart LR
 
 **ChannelCode** xác định kênh → quyết định thời điểm sync:
 
-```
-ChannelCode   Kênh                    Sync Contact khi nào
-────────────  ──────────────────────  ─────────────────────────────────────
-BCOM          Booking.com             Check-in (Status 7) — KHÔNG sync lúc booking
-AGODA         Agoda                   Check-in (Status 7) — KHÔNG sync lúc booking
-EXPEDIA       Expedia                 Check-in (Status 7) — KHÔNG sync lúc booking
-OTA_*         Các OTA khác            Check-in (Status 7) — KHÔNG sync lúc booking
-WEB           Website khách sạn       Booking (Status 0-2) — sync ngay
-WALKIN        Walk-in                 Booking (Status 0-2) — sync ngay
-DIRECT        Đặt trực tiếp          Booking (Status 0-2) — sync ngay
-PHONE         Đặt qua điện thoại     Booking (Status 0-2) — sync ngay
-```
+| ChannelCode | Kênh | Sync Contact khi nào |
+|---|---|---|
+| BCOM | Booking.com | Check-in (Status 7) — KHÔNG sync lúc booking |
+| AGODA | Agoda | Check-in (Status 7) — KHÔNG sync lúc booking |
+| EXPEDIA | Expedia | Check-in (Status 7) — KHÔNG sync lúc booking |
+| OTA_* | Các OTA khác | Check-in (Status 7) — KHÔNG sync lúc booking |
+| WEB | Website khách sạn | Booking (Status 0-2) — sync ngay |
+| WALKIN | Walk-in | Booking (Status 0-2) — sync ngay |
+| DIRECT | Đặt trực tiếp | Booking (Status 0-2) — sync ngay |
+| PHONE | Đặt qua điện thoại | Booking (Status 0-2) — sync ngay |
 
 ---
 
@@ -393,32 +387,28 @@ ERPNext (có sẵn)                    PMS → ERPNext (khi booking)
 
 ### Matching Rules — Thứ tự ưu tiên
 
-```
-Priority  Field(s)                    Type   Action khi match
-────────  ──────────────────────────  ─────  ─────────────────────────────────────────
-1         PassportNo                  PK     Auto-link + thêm PMS Profile Map row
-2         IdCard (CMND/CCCD)          SK     Auto-link + thêm PMS Profile Map row
-3         Email (exact, non-OTA)      Soft   Auto-link nhưng log để review
-4         MobileNo + LastName         Fuzzy  Flag để staff confirm thủ công
-—         Không match được            —      Tạo Contact mới + PMS Profile Map row đầu tiên
-```
+| Priority | Field(s) | Type | Action khi match |
+|---|---|---|---|
+| 1 | PassportNo | PK | Auto-link + thêm PMS Profile Map row |
+| 2 | IdCard (CMND/CCCD) | SK | Auto-link + thêm PMS Profile Map row |
+| 3 | Email (exact, non-OTA) | Soft | Auto-link nhưng log để review |
+| 4 | MobileNo + LastName | Fuzzy | Flag để staff confirm thủ công |
+| — | Không match được | — | Tạo Contact mới + PMS Profile Map row đầu tiên |
 
 **Quy tắc ghi đè khi match:**
 
-```
-Field               ERPNext có sẵn    PMS gửi về       Action
-──────────────────  ────────────────  ────────────────  ──────────────────────────
-Email               "real@gmail"      "hash@ota"        GIỮ ERPNext (source-of-truth)
-Email               "real@gmail"      "real@gmail"      Không thay đổi
-Email               —                 "real@gmail"      LẤY từ PMS (bổ sung)
-PassportNo          —                 "AB123456"        LẤY từ PMS (bổ sung)
-PassportNo          "AB123456"        "AB123456"        Không thay đổi
-IdCard              —                 "079123456789"    LẤY từ PMS (bổ sung)
-NationalityCode     —                 "TH"              LẤY từ PMS (bổ sung)
-MobileNo            "0891234567"      "0891234567"      Không thay đổi
-MobileNo            "0891234567"      "0899999999"      GIỮ ERPNext, log conflict
-PMS Profile Map     —                 CompanyId+ProfId  THÊM row (không ghi đè row cũ)
-```
+| Field | ERPNext có sẵn | PMS gửi về | Action |
+|---|---|---|---|
+| Email | "real@gmail" | "hash@ota" | GIỮ ERPNext (source-of-truth) |
+| Email | "real@gmail" | "real@gmail" | Không thay đổi |
+| Email | — | "real@gmail" | LẤY từ PMS (bổ sung) |
+| PassportNo | — | "AB123456" | LẤY từ PMS (bổ sung) |
+| PassportNo | "AB123456" | "AB123456" | Không thay đổi |
+| IdCard | — | "079123456789" | LẤY từ PMS (bổ sung) |
+| NationalityCode | — | "TH" | LẤY từ PMS (bổ sung) |
+| MobileNo | "0891234567" | "0891234567" | Không thay đổi |
+| MobileNo | "0891234567" | "0899999999" | GIỮ ERPNext, log conflict |
+| PMS Profile Map | — | CompanyId+ProfId | THÊM row (không ghi đè row cũ) |
 
 **Rule tổng quát: ERPNext là source-of-truth. PMS chỉ BỔ SUNG fields trống, KHÔNG ghi đè. PMS Profile Map chỉ THÊM row, không xóa.**
 
