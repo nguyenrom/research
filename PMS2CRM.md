@@ -73,7 +73,7 @@ PMS RecordStatus                          Frappe Action                         
 Key         Field           Dùng để                          Ghi chú
 ──────────  ──────────────  ───────────────────────────────  ──────────────────────────────────
 Primary     PassportNo      Match khách giữa PMS ↔ ERPNext   Unique toàn cầu, có khi check-in
-Secondary   NationalId      Fallback khi không có passport   CMND/CCCD cho khách nội địa
+Secondary   IdCard (PMS)    Fallback khi không có passport   CMND/CCCD cho khách nội địa
 Auxiliary   MemberCardNo    Match member đã đăng ký trước    Chỉ có nếu khách là member
 ```
 
@@ -82,9 +82,9 @@ Auxiliary   MemberCardNo    Match member đã đăng ký trước    Chỉ có n
 - Bắt buộc thu tại check-in (theo luật TM.05 Thailand, immigration VN)
 - 1 khách ở nhiều hotel → cùng 1 PassportNo → gộp được thành 1 Customer trên ERPNext
 
-**NationalId (CMND/CCCD) là SK:**
+**IdCard (PMS) = CMND/CCCD là SK:**
 - Cho khách nội địa không có passport
-- Map vào field riêng trên Contact (national_id), không trùng field PassportNo
+- PMS field tên `IdCard`, map vào Frappe Contact field `id_card`
 
 ---
 
@@ -136,7 +136,7 @@ Nhận profile từ PMS (CompanyId=2, ProfileId=200, PassportNo="AB123456"):
      → FOUND → Update Contact (đã biết khách này ở hotel này)
   2. KHÔNG tìm thấy → Tìm Contact WHERE PassportNo="AB123456"
      → FOUND → Thêm row vào PMS Profile Map (khách cũ, hotel mới)
-  3. KHÔNG tìm thấy → Tìm Contact WHERE national_id="079123456789"
+  3. KHÔNG tìm thấy → Tìm Contact WHERE id_card="079123456789"
      → FOUND → Thêm row vào PMS Profile Map
   4. KHÔNG tìm thấy → Tạo Contact mới + row PMS Profile Map đầu tiên
 ```
@@ -214,15 +214,15 @@ OTA → PMS                          PMS → ERPNext
                                        - Item = Room Category
                                        - ChannelCode = "BCOM"/"AGODA"/...
                                        - OtaBookingId = OTA ref number
-                                       - ota_guest_name = tên từ OTA (lưu tạm)
-                                       - ota_guest_email = email OTA proxy (lưu tạm)
-                                       - Flag: pending_guest_sync = true
+                                       - ota_guest_name (Frappe) = tên từ OTA (lưu tạm)
+                                       - ota_guest_email (Frappe) = email OTA proxy (lưu tạm)
+                                       - Flag: pending_guest_sync (Frappe) = true
 
 2. Khách đến check-in              reservation.checked_in (Status 7)
    - Hotel thu passport, scan      → BÂY GIỜ mới sync Contact:
    - Điền DOB, phone, address         Có PassportNo → TÌM Contact (matching logic):
    - Ký registration card               1. PassportNo (PK)
-                                         2. NationalId (SK)
+                                         2. IdCard (SK)
                                          3. MemberCardNo
                                        → FOUND → Update Contact + thêm PMS Profile Map row
                                        → NOT FOUND → Tạo Contact mới + PMS Profile Map
@@ -230,8 +230,8 @@ OTA → PMS                          PMS → ERPNext
                                     → Update Sales Order:
                                        - Gắn Customer link (lúc này mới có)
                                        - Assign RoomNo
-                                       - Update Occupant Detail
-                                       - Xóa flag pending_guest_sync
+                                       - Update Guests (Frappe: Occupant Detail)
+                                       - Xóa flag pending_guest_sync (Frappe)
 
 3. Trong thời gian lưu trú         reservation.stay_updated (Status 7)
    - Minibar, Spa, F&B             → Append Items to Sales Order
@@ -242,8 +242,8 @@ OTA → PMS                          PMS → ERPNext
 ```
 
 **Rủi ro cần xử lý:**
-- OTA gửi tên alias ("Mr. Booking") → lưu vào ota_guest_name trên Sales Order, KHÔNG tạo Contact
-- Email OTA proxy (hash@guest.booking.com) → lưu vào ota_guest_email, không gửi marketing
+- OTA gửi tên alias ("Mr. Booking") → lưu vào ota_guest_name (Frappe) trên Sales Order, KHÔNG tạo Contact
+- Email OTA proxy (hash@guest.booking.com) → lưu vào ota_guest_email (Frappe), không gửi marketing
 - Sales Order KHÔNG có Customer link cho đến khi check-in → report/filter cần handle NULL customer
 - Khách no-show OTA → Sales Order cancel mà chưa bao giờ có Contact → clean
 
@@ -263,7 +263,7 @@ Website/Walk-in → PMS              PMS → ERPNext
    - Phone, có thể có passport        → Sync Contact NGAY
                                     → TÌM Contact (matching logic):
                                        1. PassportNo (PK) — nếu có
-                                       2. NationalId (SK) — nếu có
+                                       2. IdCard (SK) — nếu có
                                        3. MemberCardNo — nếu có
                                        4. Email (exact match, non-OTA)
                                     → FOUND → Update Contact + thêm PMS Profile Map row
@@ -274,14 +274,14 @@ Website/Walk-in → PMS              PMS → ERPNext
                                     → Create Sales Order (Draft)
                                        - Customer = real Customer (đã có)
                                        - ChannelCode = "WEB"/"WALKIN"
-                                       - pending_guest_sync = false
+                                       - pending_guest_sync (Frappe) = false
 
 2. Check-in                         reservation.checked_in (Status 7)
                                     → Update Contact (bổ sung nếu thiếu):
                                        - PassportNo (scan tại quầy) → RE-MATCH nếu lúc booking chưa có
                                     → Update Sales Order:
                                        - Assign RoomNo
-                                       - Update Occupant Detail
+                                       - Update Guests (Frappe: Occupant Detail)
 
 3-4. Stay + Check-out              (Giống tình huống A từ bước 3)
 ```
@@ -296,22 +296,22 @@ Website/Walk-in → PMS              PMS → ERPNext
 
 #### Tình huống C: Member-first (Đăng ký thành viên trước)
 
-Khách đăng ký thành viên trên ERPNext → Contact + Customer đã tồn tại → Sau đó mới booking tại khách sạn → Match bằng PassportNo/NationalId.
+Khách đăng ký thành viên trên ERPNext → Contact + Customer đã tồn tại → Sau đó mới booking tại khách sạn → Match bằng PassportNo/IdCard.
 
 ```
 ERPNext (có sẵn)                    PMS → ERPNext (khi booking)
 ─────────────────────────          ──────────────────────────────────────────────────────
 
 0. Khách đăng ký member            Contact + Customer đã tồn tại trên ERPNext:
-   trên ERPNext (web/app)             - Contact: đầy đủ info + PassportNo/NationalId
-   - Điền profile đầy đủ              - Customer: Is Member = true
+   trên ERPNext (web/app)             - Contact: đầy đủ info + PassportNo/IdCard
+   - Điền profile đầy đủ              - Customer: Is Member (Frappe) = true
    - Nhận MemberCardNo                - PMS Profile Map: TRỐNG (chưa có PMS ProfileId)
    - Chưa ở hotel nào
 
 1. Khách booking tại hotel          profile.created / profile.updated
    (qua kênh WEB/WALKIN/DIRECT)    → TÌM Contact (matching logic):
    - PMS tạo ProfileId mới            1. PassportNo (PK) ← match ở đây
-                                       2. NationalId (SK)
+                                       2. IdCard (SK)
                                        3. MemberCardNo
                                     → FOUND → Update Contact:
                                        - Thêm row PMS Profile Map (hotel này, ProfileId mới)
@@ -337,7 +337,7 @@ ERPNext (có sẵn)                    PMS → ERPNext (khi booking)
 Priority  Field(s)                    Type   Action khi match
 ────────  ──────────────────────────  ─────  ─────────────────────────────────────────
 1         PassportNo                  PK     Auto-link + thêm PMS Profile Map row
-2         NationalId (CMND/CCCD)      SK     Auto-link + thêm PMS Profile Map row
+2         IdCard (CMND/CCCD)          SK     Auto-link + thêm PMS Profile Map row
 3         MemberCardNo                Aux    Auto-link + thêm PMS Profile Map row
 4         Email (exact, non-OTA)      Soft   Auto-link nhưng log để review
 5         MobileNo + LastName         Fuzzy  Flag để staff confirm thủ công
@@ -354,7 +354,7 @@ Email               "real@gmail"      "real@gmail"      Không thay đổi
 Email               —                 "real@gmail"      LẤY từ PMS (bổ sung)
 PassportNo          —                 "AB123456"        LẤY từ PMS (bổ sung)
 PassportNo          "AB123456"        "AB123456"        Không thay đổi
-NationalId          —                 "079123456789"    LẤY từ PMS (bổ sung)
+IdCard              —                 "079123456789"    LẤY từ PMS (bổ sung)
 NationalityCode     —                 "TH"              LẤY từ PMS (bổ sung)
 MobileNo            "0891234567"      "0891234567"      Không thay đổi
 MobileNo            "0891234567"      "0899999999"      GIỮ ERPNext, log conflict
@@ -385,7 +385,7 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 │   │       ├─ KHÔNG tìm thấy → Tìm bằng PassportNo (PK)
 │   │       │   └─ FOUND → khách cũ, hotel mới → thêm PMS Profile Map row
 │   │       │
-│   │       ├─ KHÔNG tìm thấy → Tìm bằng NationalId (SK)
+│   │       ├─ KHÔNG tìm thấy → Tìm bằng IdCard (SK)
 │   │       │   └─ FOUND → khách cũ, hotel mới → thêm PMS Profile Map row
 │   │       │
 │   │       ├─ KHÔNG tìm thấy → Tìm bằng MemberCardNo
@@ -402,7 +402,7 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 │   │   └─ NOT FOUND → Create Sales Order (Draft)
 │   │
 │   ├─ ChannelCode ∈ OTA → Sales Order KHÔNG có Customer link
-│   │   (pending_guest_sync = true, lưu ota_guest_name/email tạm)
+│   │   (pending_guest_sync (Frappe) = true, lưu ota_guest_name/email (Frappe) tạm)
 │   │
 │   └─ ChannelCode ∈ Non-OTA → Link Customer (đã tạo/match ở bước profile)
 │
@@ -415,8 +415,8 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 │   ├─ Update Sales Order:
 │   │   ├─ Gắn Customer link (nếu OTA, lần đầu có Customer)
 │   │   ├─ Assign RoomNo
-│   │   ├─ Update Occupant Detail
-│   │   └─ Xóa pending_guest_sync flag
+│   │   ├─ Update Guests (Frappe: Occupant Detail)
+│   │   └─ Xóa pending_guest_sync (Frappe) flag
 │   │
 │   └─ Update Sales Order (Room, Occupants, Customer link)
 │
@@ -440,20 +440,20 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 
 #### Phase 1: At Booking (Status 0=PROSPECT → 6=HOLDING LIST)
 1. **Kiểm tra ChannelCode** → xác định kênh booking
-2. **Non-OTA**: Match/tạo Contact + Customer ngay (bằng PassportNo/NationalId/MemberCardNo)
-3. **OTA**: KHÔNG sync Contact — lưu ota_guest_name/email tạm trên Sales Order
+2. **Non-OTA**: Match/tạo Contact + Customer ngay (bằng PassportNo/IdCard/MemberCardNo)
+3. **OTA**: KHÔNG sync Contact — lưu ota_guest_name/email (Frappe) tạm trên Sales Order
 4. Create Sales Order (Draft) — OTA: không có Customer link, Non-OTA: có Customer link
 5. Items: Room Category (e.g., RM-DELUXE) with estimated nights
-6. Metadata: Map booking_group_id, external_id, OtaBookingId, ChannelCode
-7. Deposit: Link to Customer → flag as `Is Payer` (chỉ non-OTA)
+6. Metadata: Map Groups.GroupCode, OtaBookingId, ExternalConfirmNo, ChannelCode
+7. Deposit: Link to Customer → flag as `Is Payer` (Frappe) (chỉ non-OTA)
 
 #### Phase 2: At Check-in & In-House (Status 7=IN-HOUSE)
-1. **Sync Contact** — dùng PassportNo (PK) hoặc NationalId (SK) để match
+1. **Sync Contact** — dùng PassportNo (PK) hoặc IdCard (SK) để match
 2. **OTA**: Lần đầu tạo/match Contact + gắn Customer link vào Sales Order
 3. **Non-OTA**: RE-MATCH nếu lúc booking chưa có passport
 4. **Multi-hotel**: Thêm PMS Profile Map row nếu khách đã có Contact từ hotel khác
-5. Room Assignment: Update Hotel Room link + room_number
-6. Occupant Sync: Update Occupant Detail child table
+5. Room Assignment: Update Hotel Room link + RoomNo
+6. Occupant Sync: Update Guests (Frappe: Occupant Detail) child table
 7. Incidental Charges: Append new items (Minibar, Spa, etc.)
 
 #### Phase 3: At Check-out (Status 8=CHECKED-OUT)
@@ -496,10 +496,10 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | # | Doctype | Custom Fields Needed | Cần cho |
 |---|---------|---------------------|---------|
 | 1 | Item | Hotel Branch (Link→Company), Room type fields | RoomMaster + Reservation |
-| 2 | Contact | PassportNo (PK), NationalId (SK), PMS Profile Map (Table), VIPTypeCode, GuestTypeCode, NationalityCode, BlacklistStatus, MemberCardNo, MemberTier, LanguageCode, LicensePlate, etc. | GuestProfile + Reservation + Multi-hotel |
+| 2 | Contact | PassportNo (PK), IdCard (SK), PMS Profile Map (Table), VIPTypeCode, GuestTypeCode, NationalityCode, BlacklistStatus, MemberCardNo, MemberTier, LanguageCode, LicensePlate, etc. | GuestProfile + Reservation + Multi-hotel |
 | 3 | Address | Standard fields sufficient; may need TaxId custom field | GuestProfile |
-| 4 | Customer | Is Payer, Is Member, Is Contact Point, VIP Status, Voucher (Table), Preferences | GuestProfile + Reservation |
-| 5 | Sales Order | ConfirmationNo, RecordId, RecordStatus, ChannelCode, pending_guest_sync, ota_guest_name, ota_guest_email, all Options flags, Booking group (Link), Party group (Link), ArrivalDate/Time, DepartureDate/Time, PurposeOfStays (Link), Contact Child Table, rate/channel/segment fields | Reservation + OTA sync |
+| 4 | Customer | Is Payer (Frappe), Is Member (Frappe), Is Contact Point (Frappe), VIP Status, Voucher (Table), Preferences | GuestProfile + Reservation |
+| 5 | Sales Order | ConfirmationNo, RecordId, RecordStatus, ChannelCode, pending_guest_sync (Frappe), ota_guest_name (Frappe), ota_guest_email (Frappe), Options flags, Booking group (Link), Party group (Link), ArrivalDate/Time, DepartureDate/Time, PurposeOfStays (Link), Guests child table, rate/channel/segment fields | Reservation + OTA sync |
 | 6 | Sales Order Item | RoomNo, Hotel Room (Link), NoOfAdult/Child/Infant/Guest, NoOfExtraBed/ExtraPerson | Reservation |
 | 7 | Sales Invoice | Mirror relevant Sales Order custom fields | Reservation (Check-out) |
 | 8 | Sales Invoice Item | Mirror relevant Sales Order Item custom fields | Reservation (Check-out) |
@@ -625,9 +625,9 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 |--------------|------------|--------|-------|
 | Contact | Link | Contact | Link to Contact doctype |
 | Billing address | Link | Address | — |
-| Is Payer | Boolean | — | Flag for payment responsibility |
-| Is Member | Boolean | — | Member flag |
-| Is Contact Point | Boolean | — | Primary contact flag |
+| Is Payer | Boolean | — | Flag for payment responsibility (Frappe) |
+| Is Member | Boolean | — | Member flag (Frappe, derived from PMS MemberCardNo) |
+| Is Contact Point | Boolean | — | Primary contact flag (Frappe) |
 | Tax ID | Data | — | From BillingAddress.TaxId |
 | Payment Terms | — | — | — |
 | Currency | Link | Currency | From reservation CurrCode |
@@ -705,16 +705,16 @@ Used for ResidentialAddress, WorkingAddress, and BillingAddress.
 
 Actions:
 1. Create Sales Order (Draft)
-2. Customer = Contact with `Is Contact Point` flag
+2. Customer = Contact with `Is Contact Point` (Frappe) flag
 3. Items = Room Category (e.g., RM-DELUXE) with estimated nights
-4. Metadata: Map booking_group_id and external_id
-5. Deposit → Link to Customer → flag as `Is Payer`
+4. Metadata: Map Groups.GroupCode and OtaBookingId/ExternalConfirmNo
+5. Deposit → Link to Customer → flag as `Is Payer` (Frappe)
 
 ### 6.2 Phase 2: Check-in & In-House (Status 7) — Update Sales Order (Still Draft)
 
 Actions:
-1. Room Assignment: Update Hotel Room link and physical room_number
-2. Occupant Sync: Update Occupant Detail child table with all guest Contacts
+1. Room Assignment: Update Hotel Room link and physical RoomNo
+2. Occupant Sync: Update Guests (Frappe: Occupant Detail) child table with all guest Contacts
 3. Contact: Update information for guest profile
 4. Incidental Charges: Append new rows to items table (Minibar, Spa, etc.)
 
@@ -865,6 +865,9 @@ Actions:
 | ExternalProfileCode | string | External system profile ID |
 | MemberShipId | string | Membership ID (from PMS) |
 | MemberConfirmNo | string | Membership confirmation number |
+| AccessId | number | Access system ID |
+| BankAccountNo | string | Bank account number |
+| BankCode | string | Bank code |
 | NoOfVisits | number | Total visits |
 | ProfileNotes | object | Preferences and caveats |
 | CheckinStatus | boolean | Guest checked in |
@@ -907,6 +910,8 @@ Actions:
 | IsPackageItem | boolean | Part of package |
 | IsPackageBenefitItem | boolean | Package benefit (zero value) |
 | PackageType | number | Package type ID |
+| ExternalItemId | number | External item system ID |
+| IsPackageBenefit | boolean | Package benefit flag |
 | ItemTypeCode | string | Item type code |
 | BuCode | string | Business unit code |
 | BreakfastTypeId | number | Breakfast type ID |
@@ -914,6 +919,7 @@ Actions:
 | BaseRate | number | Base rate before adjustments |
 | MealsCode | string | Meal plan code |
 | SubTransCode | string | Sub-transaction code |
+| IsAbfitem | boolean | ABF (American Breakfast) item flag |
 
 ### 6.8 Groups (Object) → Booking Group (Custom Doctype)
 
