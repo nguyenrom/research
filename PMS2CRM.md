@@ -7,16 +7,20 @@
 
 ## 1. Architecture Overview
 
-```
-PMS Event Occurs (real-time)
-    ↓
-Webhook (Notify) → Frappe Webhook Endpoint
-    ↓ (immediate <5s response)
-Verify X-Soraso-Signature (HMAC-SHA256 with Webhook Secret) → Return 200 OK
-    ↓ (async background job)
-Fetch full JSON via GET to resource_uri (with X-API-KEY + X-HOTEL-UNIQUE-KEY)
-    ↓
-Map & Create/Update Frappe Records
+```mermaid
+sequenceDiagram
+    participant PMS as PMS (Soraso)
+    participant WH as Frappe Webhook Endpoint
+    participant BG as Background Job
+    participant DB as ERPNext DB
+
+    PMS->>WH: Webhook POST (event + resource_uri)
+    WH->>WH: Verify X-Soraso-Signature (HMAC-SHA256)
+    WH-->>PMS: 200 OK (< 5s)
+    WH->>BG: Enqueue async job
+    BG->>PMS: GET resource_uri (X-API-KEY + X-HOTEL-UNIQUE-KEY)
+    PMS-->>BG: Full JSON payload
+    BG->>DB: Map & Create/Update Frappe Records
 ```
 
 ### Events to Handle
@@ -54,6 +58,18 @@ PMS RecordStatus                          Frappe Action                         
 4 - NO-SHOW                               Cancel Sales Order with no-show flag           Cancelled
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Draft: Status 0-2,5,6 (Booking)
+    Draft --> Draft: Status 7 Check-in (Update Room/Guests)
+    Draft --> Draft: Status 7 Stay (Append Items)
+    Draft --> Submitted: Status 8 Check-out (Submit SO)
+    Submitted --> Invoice: Auto-create Sales Invoice
+    Draft --> Cancelled: Status 3 Cancellation
+    Draft --> Cancelled: Status 4 No-show
+    Cancelled --> Draft: Recovery (re-activate)
+```
+
 **RecordStatus Enum:**
 - 0 = Prospect
 - 1 = Tentative
@@ -87,9 +103,45 @@ Secondary   IdCard (PMS)    Fallback khi không có passport   CMND/CCCD cho kh�
 
 ---
 
+### Contact vs Customer — Quy tắc chuyển đổi
+
+> **Mọi khách đều là Contact. Không phải mọi Contact đều là Customer.**
+
+```mermaid
+flowchart TD
+    A[Khách mới] --> B{Nguồn?}
+    B -->|PMS webhook| C[Tạo Contact]
+    B -->|Website đăng ký| D[Tạo Contact + Customer ngay]
+    
+    C --> E{Điều kiện trở thành Customer?}
+    E -->|Tự đăng ký website| F[Tạo Customer + gán MEMBERX]
+    E -->|Trả tiền phòng booking riêng| G[Tạo Customer + gán MEMBERX]
+    E -->|Được gán MEMBERX bởi staff/system| H[Tạo Customer]
+    E -->|Group member KHÔNG trả tiền| I[Giữ Contact - KHÔNG tạo Customer]
+    
+    F --> J[Customer có custom_member_card_no]
+    G --> J
+    H --> J
+```
+
+**3 điều kiện Contact → Customer:**
+
+| # | Điều kiện | Khi nào | MEMBERX |
+|---|-----------|---------|---------|
+| 1 | Tự đăng ký trên website CRM | Lúc đăng ký | Gán ngay |
+| 2 | Trả tiền phòng (booking riêng, non-group) | Check-in/Check-out | Gán khi xác nhận payer |
+| 3 | Payer trong group booking | Khi PMS gửi group + payer info | Gán cho payer |
+
+**Group booking:**
+- PMS gửi `Guests[]` array → tất cả thành viên → tạo Contact trên ERPNext
+- Chỉ người trả tiền (payer) → tạo/link Customer + gán `custom_member_card_no` (MEMBERX)
+- Thành viên không trả tiền → chỉ là Contact, KHÔNG tạo Customer
+
+---
+
 ### Multi-Hotel Guest Consolidation
 
-**Vấn đề:** 1 khách ở 3 hotel = 3 PMS ProfileId khác nhau (mỗi hotel 1 PMS instance). ERPNext phải gộp thành 1 Customer duy nhất.
+**Vấn đề:** 1 khách ở 3 hotel = 3 PMS ProfileId khác nhau (mỗi hotel 1 PMS instance). ERPNext phải gộp thành 1 Contact duy nhất. Customer chỉ tạo khi đủ điều kiện (xem "Contact vs Customer").
 
 ```
 PMS Hotel A (CompanyId=1)           PMS Hotel B (CompanyId=2)           PMS Hotel C (CompanyId=3)
@@ -129,15 +181,21 @@ Mỗi khi nhận profile từ 1 hotel, ghi vào child table để map ngược:
 | last_synced | Datetime | Lần sync cuối | "2026-04-01 14:30:00" |
 
 **Lookup logic khi nhận webhook:**
-```
-Nhận profile từ PMS (CompanyId=2, ProfileId=200, PassportNo="AB123456"):
-  1. Tìm Contact WHERE PMS Profile Map.pms_company_id=2 AND pms_profile_id=200
-     → FOUND → Update Contact (đã biết khách này ở hotel này)
-  2. KHÔNG tìm thấy → Tìm Contact WHERE PassportNo="AB123456"
-     → FOUND → Thêm row vào PMS Profile Map (khách cũ, hotel mới)
-  3. KHÔNG tìm thấy → Tìm Contact WHERE id_card="079123456789"
-     → FOUND → Thêm row vào PMS Profile Map
-  4. KHÔNG tìm thấy → Tạo Contact mới + row PMS Profile Map đầu tiên
+
+```mermaid
+flowchart TD
+    START[Nhận profile từ PMS<br/>CompanyId + ProfileId + PassportNo/IdCard] --> S1
+
+    S1{Tìm Contact WHERE<br/>PMS Profile Map.pms_company_id=CompanyId<br/>AND pms_profile_id=ProfileId}
+    S1 -->|FOUND| U1[Update Contact<br/>đã biết khách này ở hotel này]
+
+    S1 -->|NOT FOUND| S2{Tìm Contact WHERE<br/>PassportNo = PMS.PassportNo}
+    S2 -->|FOUND| U2[Thêm row PMS Profile Map<br/>khách cũ hotel mới]
+
+    S2 -->|NOT FOUND| S3{Tìm Contact WHERE<br/>id_card = PMS.IdCard}
+    S3 -->|FOUND| U3[Thêm row PMS Profile Map]
+
+    S3 -->|NOT FOUND| U4[Tạo Contact mới<br/>+ row PMS Profile Map đầu tiên]
 ```
 
 #### Customer — History across hotels
@@ -171,14 +229,19 @@ Customer: CUST-00123 (John Doe)
 
 ### 3 Tình huống đồng bộ Guest Data
 
+```mermaid
+flowchart LR
+    PMS[PMS Event] --> CH{ChannelCode?}
+    CH -->|OTA: BCOM,AGODA...| OTA[Sync Contact tại CHECK-IN<br/>Status 7 mới có PassportNo]
+    CH -->|Non-OTA: WEB,WALKIN...| NON[Sync Contact tại BOOKING<br/>Status 0-2 đã có info]
+    CH -->|Member-first| MEM[Contact đã có trên ERPNext<br/>Match bằng PassportNo/IdCard]
 ```
-Tình huống              Kênh define       Thời điểm sync Contact    Matching key
-──────────────────────  ────────────────  ────────────────────────  ──────────────────
-A. OTA Booking          ChannelCode=OTA   Check-in (Status 7)      PassportNo (lúc CI)
-B. Website / Walk-in    ChannelCode=WEB   Booking (Status 0-2)     PassportNo / NatID
-                        ChannelCode=WLK
-C. Member-first         —                 Đã có trên ERPNext       PassportNo / NatID
-```
+
+| Tình huống | Kênh | Thời điểm sync Contact | Matching key |
+|---|---|---|---|
+| A. OTA Booking | ChannelCode ∈ OTA group | Check-in (Status 7) | PassportNo (lúc CI) |
+| B. Website / Walk-in | ChannelCode ∈ {WEB, WALKIN, DIRECT, PHONE} | Booking (Status 0-2) | PassportNo / IdCard |
+| C. Member-first | — | Đã có trên ERPNext | PassportNo / IdCard |
 
 **ChannelCode** xác định kênh → quyết định thời điểm sync:
 
@@ -224,9 +287,10 @@ OTA → PMS                          PMS → ERPNext
                                          2. IdCard (SK)
                                        → FOUND → Update Contact + thêm PMS Profile Map row
                                        → NOT FOUND → Tạo Contact mới + PMS Profile Map
-                                    → Tạo/Link Customer
+                                    → Nếu là payer → Tạo/Link Customer (gán MEMBERX)
+                                    → Nếu là group member không trả tiền → chỉ Contact
                                     → Update Sales Order:
-                                       - Gắn Customer link (lúc này mới có)
+                                       - Gắn Customer link (nếu có payer)
                                        - Assign RoomNo
                                        - Update Guests (Frappe: Occupant Detail)
                                        - Xóa flag pending_guest_sync (Frappe)
@@ -265,11 +329,11 @@ Website/Walk-in → PMS              PMS → ERPNext
                                        3. Email (exact match, non-OTA)
                                     → FOUND → Update Contact + thêm PMS Profile Map row
                                     → NOT FOUND → Tạo Contact mới + PMS Profile Map
-                                    → Tạo/Link Customer
+                                    → Nếu là payer/booking riêng → Tạo/Link Customer (gán MEMBERX)
 
                                     reservation.created (Status 0-2)
                                     → Create Sales Order (Draft)
-                                       - Customer = real Customer (đã có)
+                                       - Customer = Customer (nếu đã tạo)
                                        - ChannelCode = "WEB"/"WALKIN"
                                        - pending_guest_sync (Frappe) = false
 
@@ -362,6 +426,30 @@ PMS Profile Map     —                 CompanyId+ProfId  THÊM row (không ghi 
 
 ### Sync Logic tổng hợp — Decision Tree
 
+```mermaid
+flowchart TD
+    WH[Webhook từ PMS] --> EVT{Event type?}
+    
+    EVT -->|profile.created/updated| CH{ChannelCode?}
+    CH -->|OTA| SKIP[SKIP - chờ check-in]
+    CH -->|Non-OTA| MATCH[Matching logic<br/>PassportNo → IdCard → Email]
+    MATCH --> PAYER{Là payer?}
+    PAYER -->|Yes| CUST[Tạo/Link Customer<br/>gán MEMBERX]
+    PAYER -->|No group member| CONT[Chỉ Contact]
+    
+    EVT -->|reservation.created/updated| SO[Create/Update<br/>Sales Order Draft]
+    
+    EVT -->|reservation.checked_in| CI[Sync Contact<br/>+ Update SO Room/Guests]
+    
+    EVT -->|reservation.stay_updated<br/>order.created| ITEM[Append Items to SO]
+    
+    EVT -->|reservation.checked_out| COUT[Submit SO<br/>→ Sales Invoice]
+    
+    EVT -->|reservation.cancelled<br/>reservation.noshow| CANCEL[Cancel SO]
+    
+    EVT -->|reservation.recovery| RECOVER[Re-activate SO → Draft]
+```
+
 ```
 Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 │
@@ -383,9 +471,10 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 │   │       ├─ KHÔNG tìm thấy → Tìm bằng IdCard (SK)
 │   │       │   └─ FOUND → khách cũ, hotel mới → thêm PMS Profile Map row
 │   │       │
-│   │       └─ KHÔNG tìm thấy → Tạo Contact mới + Customer + PMS Profile Map
+│   │       └─ KHÔNG tìm thấy → Tạo Contact mới + PMS Profile Map
+│   │           (Customer chỉ tạo nếu là payer — xem "Contact vs Customer")
 │   │
-│   └─ Tạo/Update Customer (link Contact) — chỉ nếu non-OTA
+│   └─ Tạo Customer (link Contact) — chỉ nếu non-OTA VÀ là payer (gán MEMBERX)
 │
 ├─ Event: reservation.created / reservation.updated
 │   │
@@ -612,23 +701,23 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 
 **NOT USED fields:** VisitType, VisitTypeName, HiddenProfile
 
-#### Customer Doctype (created alongside Contact)
+#### Customer Doctype (KHÔNG tạo cùng Contact — chỉ tạo khi đủ điều kiện)
+
+> **Contact → Customer khi:** (1) Tự đăng ký trên website, HOẶC (2) Được gán key MEMBERX, HOẶC (3) Trả tiền phòng khi booking riêng (non-group).
+> Group booking: tất cả thành viên → Contact. Chỉ người trả tiền (gán MEMBERX) → Customer.
 
 | Frappe Field | Field Type | Option | Notes |
 |--------------|------------|--------|-------|
 | Contact | Link | Contact | Link to Contact doctype |
+| (+) custom_member_card_no | Data | — | CRM tự sinh khi trở thành Customer (key MEMBERX) |
 | Billing address | Link | Address | — |
-| Is Payer | Boolean | — | Flag for payment responsibility (Frappe) |
-| Is Member | Boolean | — | Member flag (Frappe, CRM tự quản lý) |
-| Is Contact Point | Boolean | — | Primary contact flag (Frappe) |
+| Is Payer | Boolean | — | Flag trách nhiệm thanh toán (Frappe) |
+| Is Member | Boolean | — | Đã có MEMBERX key (Frappe) |
+| Is Contact Point | Boolean | — | Contact chính của group (Frappe) |
 | Tax ID | Data | — | From BillingAddress.TaxId |
 | Payment Terms | — | — | — |
 | Currency | Link | Currency | From reservation CurrCode |
-| (+) Member Level | Select | Silver, Gold, Platinum | CRM tự quản lý membership tier |
-| (+) Point Balance | Number | — | Điểm loyalty hiện tại |
-| (+) Loyalty ID | Data | — | Mã loyalty CRM tự sinh |
-| (+) Total Points | Number | — | Tổng điểm tích lũy |
-| Join Date | Date | — | Tracking tenure |
+| Join Date | Date | — | Ngày trở thành Customer |
 | Preferences | String | — | Food allergies, High floor, etc. |
 | VIP Status | Select | VIP 1, VIP 2, VVIP | From VIPTypeCode |
 | Voucher | Table | Voucher | Voucher child table |
