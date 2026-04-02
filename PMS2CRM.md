@@ -507,10 +507,9 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | 3 | Address | Standard fields sufficient; may need TaxId custom field | GuestProfile |
 | 4 | Customer | Is Payer, Is Member, Is Contact Point, VIP Status, Voucher (Table), Preferences | GuestProfile + Reservation |
 | 5 | Sales Order | ConfirmationNo, RecordId, RecordStatus, ChannelCode, pending_guest_sync, ota_guest_name, ota_guest_email, all Options flags, Booking group (Link), Party group (Link), ArrivalDate/Time, DepartureDate/Time, PurposeOfStays (Link), Contact Child Table, rate/channel/segment fields | Reservation + OTA sync |
-| 6 | Sales Order Item | RoomNo, Hotel Room (Link), NoOfAdult/Child/Infant/Guest, NoOfExtraBed/ExtraPerson, Transfer fields | Reservation |
+| 6 | Sales Order Item | RoomNo, Hotel Room (Link), NoOfAdult/Child/Infant/Guest, NoOfExtraBed/ExtraPerson | Reservation |
 | 7 | Sales Invoice | Mirror relevant Sales Order custom fields | Reservation (Check-out) |
 | 8 | Sales Invoice Item | Mirror relevant Sales Order Item custom fields | Reservation (Check-out) |
-| 9 | Payment Entry | Deposit-specific fields, ReffolioId (Link→Sales Order), GroupInvoiceCode | Reservation + POS |
 
 ---
 
@@ -828,12 +827,12 @@ Actions:
 | Options | object | Boolean flags | Sales Order | Custom fields (see Options) |
 | Guests | array | Guest list | Sales Order | Contact Child Table |
 | DailyRates | array | Daily rate charges | Sales Order | — |
-| Deposits | array | Deposit list | Sales Order | Payment Entry (Link) |
-| DepositRefunds | array | Deposit refund list | — | — |
-| SpecialBillings | array | Billing instructions/routing | Sales Order | Sale Order Item child table |
-| SpecialRequests | array | Special requests | Sales Order | Sale Order Item child table |
-| AddOns | array | Add-on packages/services | Sales Order | Sale Order Item child table |
-| Guarantees | array | Guarantee methods | Sales Order | Payment method |
+| ~~Deposits~~ | array | ~~Deposit list~~ | — | — | *Folio data — không sync, checkout mới settle* |
+| ~~DepositRefunds~~ | array | ~~Deposit refund list~~ | — | — | *Folio data — không sync* |
+| ~~SpecialBillings~~ | array | ~~Billing instructions/routing~~ | — | — | *Folio routing rules — PMS operational* |
+| ~~SpecialRequests~~ | array | ~~Special requests~~ | — | — | *Operational — đã có ProfileNotes (5.8)* |
+| ~~AddOns~~ | array | ~~Add-on packages/services~~ | — | — | *Folio charges — không sync* |
+| ~~Guarantees~~ | array | ~~Guarantee methods~~ | — | — | *Folio data — không sync* |
 | PurposeOfStays | array | Stay purposes | Sales Order | PurposeOfStays (Link) |
 | BookingNo | string | Original booking number | Sales Order | Sale Order |
 | CheckInNo | string | Registration number at check-in | Sales Order | Sale Order |
@@ -843,14 +842,14 @@ Actions:
 | ContactEmail | string | Contact email | Sales Order | Contact → Email |
 | Nights | number | Total nights | Sales Order | Sale Order Item → Qty=1 |
 | ContractName | string | Rate contract name | Sales Order | Contract |
-| PaymentMethodId | number | Payment method ID | Payment Entry | — |
-| PaymentMethodName | string | Payment method name | Payment Entry | — |
-| ArCode | string | AR account code | Payment Entry | — |
-| ArName | string | AR account name | Payment Entry | — |
-| ArRemark | string | AR account remark | Payment Entry | — |
-| ReferenceNo | string | General reference number | Payment Entry | — |
-| ExternalConfirmNo | string | External confirmation number | Payment Entry | — |
-| VoucherNo | string | Voucher number | Payment Entry | — |
+| ~~PaymentMethodId~~ | number | ~~Payment method ID~~ | — | — | *Folio data — không sync* |
+| ~~PaymentMethodName~~ | string | ~~Payment method name~~ | — | — | *Folio data — không sync* |
+| ~~ArCode~~ | string | ~~AR account code~~ | — | — | *Folio data — không sync* |
+| ~~ArName~~ | string | ~~AR account name~~ | — | — | *Folio data — không sync* |
+| ~~ArRemark~~ | string | ~~AR account remark~~ | — | — | *Folio data — không sync* |
+| ~~ReferenceNo~~ | string | ~~General reference number~~ | — | — | *Folio data — không sync* |
+| ~~ExternalConfirmNo~~ | string | ~~External confirmation number~~ | — | — | *Folio data — không sync* |
+| ~~VoucherNo~~ | string | ~~Voucher number~~ | — | — | *Folio data — không sync* |
 | UseRateFrom | number | Rate origin (0=Guest, 1=Contract, 2=Agent, 3=Source) | Customer | — |
 | CompanyAgentId | number | Travel agent company ID | Customer | — |
 | CompanyAgentCode | string | Travel agent code | Customer | — |
@@ -991,91 +990,7 @@ Actions:
 | MealsCode | string | Meal plan code |
 | SubTransCode | string | Sub-transaction code |
 
-### 6.9 Deposits (Child Array) → Payment Entry
-
-| PMS Field | Type | Description | Frappe Doctype |
-|-----------|------|-------------|----------------|
-| RecordId | number | Deposit internal ID | Payment Entry |
-| Seqno | number | Sequence number | Payment Entry |
-| LocationId | number | Location system ID | Payment Entry |
-| LocationName | string | Location name | Payment Entry |
-| DueDate | string | Deposit due date | Payment Entry |
-| Amount | number | Deposit amount | Payment Entry |
-| DocNo | string | Document number | Payment Entry |
-| PaymentBy | string | Payment method used | Payment Entry |
-| TransName | string | Transaction display name | Payment Entry |
-| Remark | string | Deposit remark | Payment Entry |
-| PaidStatus | number | Payment status (0=Unpaid, 1=Paid) | Payment Entry |
-| ReceiveBy | string | User who received payment | Payment Entry |
-| ReceiveName | string | Receiver name | Payment Entry |
-| ReceiveDate | string | Payment received timestamp | Payment Entry |
-| SystemDate | string | Record entry timestamp | Payment Entry |
-| ReceivePaymentBy | string | Payment method received | Payment Entry |
-| ReffolioId | number | Folio reference ID | Payment Entry → Sale Order (Link) |
-| GroupInvoiceCode | string | Group invoice code | Payment Entry |
-
-### 6.10 DepositRefunds (Child Array) → Payment Entry
-
-| PMS Field | Type | Description |
-|-----------|------|-------------|
-| RecordId | number | Original deposit ID |
-| Seqno | number | Refund sequence |
-| DocNo | string | Refund document number |
-| RefundBy | string | User who processed refund |
-| RefundDate | string | Refund timestamp |
-| RefundRemark | string | Refund remark |
-| ApproveBy | string | User who approved refund |
-
-### 6.11 SpecialBillings (Child Array) → Sales Order Item Child Table
-
-| PMS Field | Type | Description |
-|-----------|------|-------------|
-| FolioCode | string | Folio window code |
-| FolioLimitPost | number | Credit limit for folio window |
-| ChargeToRecordId | number | RecordId to route charges to |
-| ChargeToRoomNo | string | Room number to route charges to |
-| ChargeToGuestName | string | Guest name to route charges to |
-| AllowCharge | boolean | Charges allowed on folio |
-| DefaultFolio | boolean | Default folio |
-| PackageFolio | boolean | Folio for package charges |
-| GenVat | boolean | Generate VAT for folio |
-| AddressId | number | Address ID for folio |
-| ShowOnMobile | boolean | Visible on mobile app |
-| BillingDetails | array | Specific transaction codes to route |
-
-#### BillingDetails (Nested)
-
-| PMS Field | Type | Description |
-|-----------|------|-------------|
-| FolioCode | string | Folio code |
-| TransCode | string | Transaction code ("ROOM_CHARGE") |
-| TransName | string | Transaction display name |
-
-### 6.12 SpecialRequests (Child Array) → Sales Order Item Child Table
-
-| PMS Field | Type | Description |
-|-----------|------|-------------|
-| TransCode | string | Main request code |
-| SubTransCode | string | Sub-code ("EXTRA_PILLOW") |
-| SubTransName | string | Request display name |
-| Remark | string | Free-text remark |
-
-### 6.13 AddOns (Child Array)
-
-| PMS Field | Type | Description |
-|-----------|------|-------------|
-| PostingConditionId | number | Condition for when to post |
-| PostDate | string | Post date |
-| TransCode | string | Transaction code |
-| SubTransCode | string | Sub-transaction code |
-| SubTransName | string | Add-on display name |
-| Qty | number | Quantity |
-| Price | number | Price per unit |
-| TotalAmount | number | Total amount |
-| Remark | string | Remark |
-| IsPosted | boolean | Charge posted |
-
-### 6.14 Groups (Object) → Booking Group (Custom Doctype)
+### 6.9 Groups (Object) → Booking Group (Custom Doctype)
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -1087,7 +1002,7 @@ Actions:
 | DepositToMasterRoom | boolean | Deposits to group master room |
 | IsCustomProfile | boolean | Group uses custom profile |
 
-### 6.15 Parties (Object) → Party Group (Custom Doctype)
+### 6.10 Parties (Object) → Party Group (Custom Doctype)
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -1096,7 +1011,7 @@ Actions:
 | Remark | string | Party remark |
 | PostToRoom | string | Charge posting instructions |
 
-### 6.16 PurposeOfStays (Child Array) → PurposeOfStays (Custom Doctype)
+### 6.11 PurposeOfStays (Child Array) → PurposeOfStays (Custom Doctype)
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -1104,27 +1019,6 @@ Actions:
 | RecordId | number | Reservation RecordId |
 | PurposeCode | string | Purpose code ("BUSINESS") |
 | PurposeName | string | Purpose display name |
-
-### 6.17 HotelTransfer (Child Array) → Sales Order Item
-
-| PMS Field | Type | Description | Frappe Field |
-|-----------|------|-------------|--------------|
-| Id | number | Transfer request ID | Item |
-| VehicleId | number | Vehicle system ID | Item |
-| VehicleName | string | Vehicle name/type | Item |
-| TransportationType | number | Type (1=Pickup, 2=Drop Off) | Item |
-| TransportationTypeName | string | Type display | Item |
-| TransportationDate | string | Transfer date/time | Sale Order Item - TransportationDate |
-| Location | string | Pickup/dropoff location | Sale Order Item - Location |
-| LicensePlate | string | Vehicle license plate | Sale Order Item - LicensePlate |
-| Detail | string | Free-text details | Sale Order Item - Detail |
-| GuestName | string | Guest name | Sale Order Item - GuestName |
-| Telephone | string | Contact phone | Sale Order Item - Telephone |
-| DriverName | string | Assigned driver | Sale Order Item - DriverName |
-| NoOfAdult | number | Adults for transfer | Sale Order Item - NoOfAdult |
-| NoOfChild | number | Children for transfer | Sale Order Item - NoOfChild |
-| NoOfInfant | number | Infants for transfer | Sale Order Item - NoOfInfant |
-| IsRequired | boolean | Transfer confirmed | Sale Order Item - IsRequired |
 
 ---
 
