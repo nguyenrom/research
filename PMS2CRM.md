@@ -231,7 +231,6 @@ OTA → PMS                          PMS → ERPNext
                                        - Gắn Customer link (lúc này mới có)
                                        - Assign RoomNo
                                        - Update Occupant Detail
-                                       - Create Registration record
                                        - Xóa flag pending_guest_sync
 
 3. Trong thời gian lưu trú         reservation.stay_updated (Status 7)
@@ -280,7 +279,6 @@ Website/Walk-in → PMS              PMS → ERPNext
 2. Check-in                         reservation.checked_in (Status 7)
                                     → Update Contact (bổ sung nếu thiếu):
                                        - PassportNo (scan tại quầy) → RE-MATCH nếu lúc booking chưa có
-                                       - Registration record
                                     → Update Sales Order:
                                        - Assign RoomNo
                                        - Update Occupant Detail
@@ -420,7 +418,7 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 │   │   ├─ Update Occupant Detail
 │   │   └─ Xóa pending_guest_sync flag
 │   │
-│   └─ Create Registration record
+│   └─ Update Sales Order (Room, Occupants, Customer link)
 │
 ├─ Event: reservation.stay_updated / order.created
 │   └─ Append Items to Sales Order
@@ -456,8 +454,7 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 4. **Multi-hotel**: Thêm PMS Profile Map row nếu khách đã có Contact từ hotel khác
 5. Room Assignment: Update Hotel Room link + room_number
 6. Occupant Sync: Update Occupant Detail child table
-7. Create Registration record
-8. Incidental Charges: Append new items (Minibar, Spa, etc.)
+7. Incidental Charges: Append new items (Minibar, Spa, etc.)
 
 #### Phase 3: At Check-out (Status 8=CHECKED-OUT)
 1. Step A — Final Review: Last check of Draft Sales Order
@@ -488,22 +485,18 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 |---|---------|------|-------|---------|
 | 1 | PMS Profile Map | Custom (Child Table) | Map 1 Contact ↔ nhiều PMS ProfileId (per hotel). Fields: hotel_branch, pms_profile_id, pms_profile_code, pms_company_id, last_synced | Guest matching + Multi-hotel |
 | 2 | Hotel Room | Custom | Room master data, linked to Company and Item | RoomMaster sync |
-| 3 | MasterLang | Custom | Language translations | RoomMaster sync |
-| 4 | RoomExtension | Custom | Phone extensions per room | RoomMaster sync |
-| 5 | Maid | Custom | Housekeeper master data | RoomMaster sync |
-| 6 | Registration | Custom | Guest registration card + immigration | GuestProfile + Reservation sync |
-| 7 | Register Membership | Custom | Guest consent tracking | GuestProfile sync |
-| 8 | Booking group | Custom | Group reservation management | Reservation sync |
-| 9 | Party group | Custom | Party reservation management | Reservation sync |
-| 10 | PurposeOfStays | Custom | Purpose of stay tracking | Reservation sync |
-| 11 | Contract | Custom | Rate contract (Note: unclear source - possibly Customer with contract flag) | Reservation sync |
+| 3 | Register Membership | Custom | Guest consent tracking | GuestProfile sync |
+| 4 | Booking group | Custom | Group reservation management | Reservation sync |
+| 5 | Party group | Custom | Party reservation management | Reservation sync |
+| 6 | PurposeOfStays | Custom | Purpose of stay tracking | Reservation sync |
+| 7 | Contract | Custom | Rate contract (Note: unclear source - possibly Customer with contract flag) | Reservation sync |
 
 ### 3.2 Standard Doctypes Requiring Custom Fields
 
 | # | Doctype | Custom Fields Needed | Cần cho |
 |---|---------|---------------------|---------|
 | 1 | Item | Hotel Branch (Link→Company), Room type fields | RoomMaster + Reservation |
-| 2 | Contact | PassportNo (PK), NationalId (SK), PMS Profile Map (Table), VIPTypeCode, GuestTypeCode, NationalityCode, BlacklistStatus, MemberCardNo, MemberTier, LanguageCode, LicensePlate, Registration (Link), etc. | GuestProfile + Reservation + Multi-hotel |
+| 2 | Contact | PassportNo (PK), NationalId (SK), PMS Profile Map (Table), VIPTypeCode, GuestTypeCode, NationalityCode, BlacklistStatus, MemberCardNo, MemberTier, LanguageCode, LicensePlate, etc. | GuestProfile + Reservation + Multi-hotel |
 | 3 | Address | Standard fields sufficient; may need TaxId custom field | GuestProfile |
 | 4 | Customer | Is Payer, Is Member, Is Contact Point, VIP Status, Voucher (Table), Preferences | GuestProfile + Reservation |
 | 5 | Sales Order | ConfirmationNo, RecordId, RecordStatus, ChannelCode, pending_guest_sync, ota_guest_name, ota_guest_email, all Options flags, Booking group (Link), Party group (Link), ArrivalDate/Time, DepartureDate/Time, PurposeOfStays (Link), Contact Child Table, rate/channel/segment fields | Reservation + OTA sync |
@@ -532,7 +525,6 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | RoomName | string | Display name for the room | Hotel Room | — | — | — |
 | RackRate | number | Standard non-discounted price | Hotel Room | — | — | — |
 | FastCheckin | boolean | Eligible for fast check-in | Hotel Room | — | — | — |
-| Keycardno | string | Last keycard serial number | Hotel Room | — | — | — |
 | BuildingId | number | Building system ID | Hotel Room | — | — | — |
 | BuildingName | string | Building name ("Building A", "B", "C") | Hotel Room | — | — | — |
 | WingId | number | Wing system ID | Hotel Room | — | — | — |
@@ -547,46 +539,16 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | SpecialName | string | Special feature ("Non Smoke", "Smoking Room") | Hotel Room | — | — | — |
 | ConnectionNo | string | Connecting room number (empty = non-connecting) | Hotel Room | — | — | — |
 | Seq | number | Display order sequence | Hotel Room | — | — | — |
-| ElecttricNo | string | Electricity meter number | Hotel Room | — | — | — |
-| IccardNo | string | IC card number (for power) | Hotel Room | — | — | — |
 | RecordId | number | Related Reservation RecordId | Hotel Room | — | — | — |
 | RoomSize | number | Room size (sqm) | Hotel Room | — | — | — |
 | Active | boolean | Room active in system | Hotel Room | — | — | — |
-| ZoneCode | string | Area/zone code | Hotel Room | — | — | — |
-| UtilityId | number | Utility tracking ID | Hotel Room | — | — | — |
-| MaidAssignCode | string | Assigned housekeeper ID | Hotel Room | MaidAssignCode | Link | Maid |
-| RmDiscrepancy | string | Housekeeping discrepancy code | Hotel Room | — | — | — |
-| RmDpcStaffcode | string | Staff who reported discrepancy | Hotel Room | — | — | — |
-| RmDpcDatetime | string | Discrepancy timestamp | Hotel Room | — | — | — |
-| KeycardPublicdoor | string | Public door access rules ("Lounge,Gym") | Hotel Room | — | — | — |
 | FloorSide | string | Floor side ("East") | Hotel Room | — | — | — |
-| EnableDigitalLock | boolean | Uses smart/digital lock | Hotel Room | — | — | — |
-| DoorMacAddress | string | Door lock MAC address | Hotel Room | — | — | — |
-| RoomMasterLang | array | Language translations | Hotel Room | RoomMasterLang | Link | RoomMasterLang |
-| RoomExtension | array | Phone extensions | Hotel Room | RoomExtension | Link | RoomExtension |
 | — | — | — | Hotel Room | NoOfExtraBed | — | — |
 | — | — | — | Hotel Room | max_adults | — | — |
 | — | — | — | Hotel Room | max_children | — | — |
 | — | — | — | Hotel Room | NoOfInfant | — | — |
 
-**Fields NOT mapped (audit/visual only):** CreateBy, CreateDt, LastupdateBy, LastupdateDt, BsnRmId (NOT USE), Showcolumn, Usedlastdate, Ltop, Lleft, Lwidth, Lhigh, Lsize, Ncurvature, Nlabelctr (NOT USE)
-
-### 4.2 RoomMasterLang (Child Array) → MasterLang (Custom Doctype)
-
-| PMS Field | Type | Description | Frappe Field | Field Type |
-|-----------|------|-------------|--------------|------------|
-| Id | number | Translation record ID | Id | Data |
-| CompanyId | number | Hotel property ID | LangCulture | String |
-| LangCulture | string | Language code ("en-US", "th-TH") | — | — |
-| RoomName | string | Translated room name | — | — |
-
-### 4.3 RoomExtension (Child Array) → RoomExtension (Custom Doctype)
-
-| PMS Field | Type | Description | Frappe Field | Field Type |
-|-----------|------|-------------|--------------|------------|
-| Extension | string | Phone extension number | Extension | Data |
-| CallingNo | string | Direct-dial DID number | CallingNo | Data |
-| Icon | string | Icon name ("Desk", "Bathroom") | Hotel Branch | Link → Company |
+**Fields NOT mapped (audit/visual/operational only):** CreateBy, CreateDt, LastupdateBy, LastupdateDt, BsnRmId (NOT USE), Showcolumn, Usedlastdate, Ltop, Lleft, Lwidth, Lhigh, Lsize, Ncurvature, Nlabelctr (NOT USE), Keycardno, ElecttricNo, IccardNo, ZoneCode, UtilityId, MaidAssignCode, RmDiscrepancy, RmDpcStaffcode, RmDpcDatetime, KeycardPublicdoor, EnableDigitalLock, DoorMacAddress, RoomMasterLang, RoomExtension
 
 ---
 
@@ -635,7 +597,7 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | SocialMediaTypeName | string | Social media display | — | Channel |
 | SocialMediaId | string | Social media user ID | — | Channel |
 | LicensePlate | string | Vehicle license plate | — | — |
-| LanguageCode | string | Preferred language ("en-US", "th-TH") | — | MasterLang (Link) |
+| LanguageCode | string | Preferred language ("en-US", "th-TH") | — | — |
 | BlacklistStatus | boolean | On blacklist | true/false | — |
 | MiddleName | string | Middle name | — | — |
 | MemberCardNo | string | Physical membership card number | — | — |
@@ -649,7 +611,7 @@ Khi nhận webhook từ PMS (CompanyId, ProfileId, ChannelCode):
 | WorkingAddress | object | Work address | See Address table | Address (Link) |
 | BillingAddress | object | Billing address | See Address table | Address (Link) |
 | GuestPicture | array | Guest pictures | See GuestPicture table | — |
-| LastVisitInfo | object | Most recent stay summary | See LastVisitInfo table | — (informational only) |
+| ~~LastVisitInfo~~ | — | ~~ERPNext tự derive từ Sales Orders~~ | — | — |
 | MemberList | array | Associated memberships | See MemberList table | — |
 | AttachmentList | array | File attachments (passport scan) | See AttachmentList table | — |
 | ConsentList | array | Guest consents (marketing) | See ConsentList table | — |
@@ -701,20 +663,7 @@ Used for ResidentialAddress, WorkingAddress, and BillingAddress.
 | SeqNo | number | Display order |
 | PictureUrl | string | URL where picture is stored |
 
-### 5.4 LastVisitInfo (Object) — Informational Only
-
-| PMS Field | Type | Description |
-|-----------|------|-------------|
-| CheckIn | string | Last check-in timestamp |
-| CheckOut | string | Last check-out timestamp |
-| RoomTypeCode | string | Last room type code |
-| RoomTypeName | string | Last room type name |
-| NoOfVisit | number | Total visits |
-| RoomNight | number | Total room nights |
-| TotalRevenue | number | Total revenue generated |
-| RoomNo | string | Last room number |
-
-### 5.5 MemberListItem (Child Array) → Contact
+### 5.4 MemberListItem (Child Array) → Contact
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -722,7 +671,7 @@ Used for ResidentialAddress, WorkingAddress, and BillingAddress.
 | CustomerCode | string | Customer code for membership |
 | MemberCode | string | Membership code |
 
-### 5.6 AttachmentList (Child Array) → Contact
+### 5.5 AttachmentList (Child Array) → Contact
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -730,7 +679,7 @@ Used for ResidentialAddress, WorkingAddress, and BillingAddress.
 | AttachmentUrl | string | URL where attachment is stored |
 | DocumentType | string | Document type ("Passport", "ID Card") |
 
-### 5.7 ConsentList (Child Array) → Register Membership (Custom Doctype)
+### 5.6 ConsentList (Child Array) → Register Membership (Custom Doctype)
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -739,7 +688,7 @@ Used for ResidentialAddress, WorkingAddress, and BillingAddress.
 | AcceptFlag | boolean | Guest gave consent (true/false) |
 | ConsentTypeName | string | Consent name ("Email Marketing", "PDPA") |
 
-### 5.8 ProfileNotes (Object) → Contact Notes/comment
+### 5.7 ProfileNotes (Object) → Contact Notes/comment
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -830,7 +779,7 @@ Actions:
 | ~~Deposits~~ | array | ~~Deposit list~~ | — | — | *Folio data — không sync, checkout mới settle* |
 | ~~DepositRefunds~~ | array | ~~Deposit refund list~~ | — | — | *Folio data — không sync* |
 | ~~SpecialBillings~~ | array | ~~Billing instructions/routing~~ | — | — | *Folio routing rules — PMS operational* |
-| ~~SpecialRequests~~ | array | ~~Special requests~~ | — | — | *Operational — đã có ProfileNotes (5.8)* |
+| ~~SpecialRequests~~ | array | ~~Special requests~~ | — | — | *Operational — đã có ProfileNotes (5.7)* |
 | ~~AddOns~~ | array | ~~Add-on packages/services~~ | — | — | *Folio charges — không sync* |
 | ~~Guarantees~~ | array | ~~Guarantee methods~~ | — | — | *Folio data — không sync* |
 | PurposeOfStays | array | Stay purposes | Sales Order | PurposeOfStays (Link) |
@@ -875,18 +824,13 @@ Actions:
 
 | PMS Field | Type | Description | Frappe Field |
 |-----------|------|-------------|--------------|
-| ViewProfile | boolean | Profile viewable | Sale order - ViewProfile |
-| AllowPOSOnline | boolean | Allow POS charges | Sale order - AllowPOSOnline |
-| AllowUseInternet | boolean | Allow internet/wifi | Sale order - AllowUseInternet |
 | SuperBlock | boolean | Super block reservation | Sale order - SuperBlock |
 | PayAtHotel | boolean | Pay at Hotel booking | Sale order - PayAtHotel |
 | UseContractAddress | boolean | Use contract address | Sale order - UseContractAddress |
 | NonRefundable | boolean | Non-refundable booking | Sale order - NonRefundable |
 | NonCancellation | boolean | Non-cancellable booking | Sale order - NonCancellation |
-| DoNotMove | boolean | Lock guest in assigned room | Sale order - DoNotMove |
-| CreditLimit | string | Guest folio credit limit | Sale order - CreditLimit |
 
-**NOT USED:** GenerateVat
+**NOT USED:** GenerateVat, ViewProfile, AllowPOSOnline, AllowUseInternet, DoNotMove, CreditLimit
 
 ### 6.6 Guests (Child Array) → Contact
 
@@ -913,7 +857,7 @@ Actions:
 | GuestTypeCode | string | Guest type code |
 | VipTypeCode | string | VIP status code |
 | BillingAddressType | number | Billing address type |
-| Registration | object | Registration card + immigration details |
+| ~~Registration~~ | — | ~~Immigration/legal compliance — không sync CRM~~ |
 | GuestPicture | array | Guest pictures |
 | ResidentialAddress | object | Home address |
 | WorkingAddress | object | Work address |
@@ -927,26 +871,7 @@ Actions:
 | IsBirthdayToday | boolean | Birthday today |
 | BackupEmail | string | Secondary email |
 
-### 6.7 Registration (Nested in Guests) → Registration (Custom Doctype)
-
-| PMS Field | Type | Description |
-|-----------|------|-------------|
-| RegisterNo | string | Registration card number |
-| Signature | string | Signature URL/Base64 |
-| TravelFromTypeId | number | Place type traveled from |
-| TravelFrom | string | Place name traveled from |
-| FromCountryId | number | Country traveled from |
-| TravelToTypeId | number | Next destination type |
-| TravelTo | string | Next destination name |
-| ToCountryId | number | Next destination country |
-| TypeOfVisa | string | Visa type |
-| PointOfEntry | string | Port of entry ("BKK") |
-| ImmigrationNo | string | Immigration form number |
-| VisaArrival | string | Visa arrival date |
-| VisaDeparture | string | Visa departure date |
-| RegisterFileUrl | string | Scanned registration card URL |
-
-### 6.8 DailyRates (Child Array)
+### 6.7 DailyRates (Child Array)
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -990,7 +915,7 @@ Actions:
 | MealsCode | string | Meal plan code |
 | SubTransCode | string | Sub-transaction code |
 
-### 6.9 Groups (Object) → Booking Group (Custom Doctype)
+### 6.8 Groups (Object) → Booking Group (Custom Doctype)
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -1002,7 +927,7 @@ Actions:
 | DepositToMasterRoom | boolean | Deposits to group master room |
 | IsCustomProfile | boolean | Group uses custom profile |
 
-### 6.10 Parties (Object) → Party Group (Custom Doctype)
+### 6.9 Parties (Object) → Party Group (Custom Doctype)
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
@@ -1011,7 +936,7 @@ Actions:
 | Remark | string | Party remark |
 | PostToRoom | string | Charge posting instructions |
 
-### 6.11 PurposeOfStays (Child Array) → PurposeOfStays (Custom Doctype)
+### 6.10 PurposeOfStays (Child Array) → PurposeOfStays (Custom Doctype)
 
 | PMS Field | Type | Description |
 |-----------|------|-------------|
