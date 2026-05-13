@@ -155,10 +155,26 @@ fi
 
 ok "BMAD-METHOD detected at $BMAD_DIR/"
 
-# ---- Step 4: Check whether performance-marketing is already installed ----
+# ---- Step 4: Read existing modules (additive install) --------------------
+#
+# IMPORTANT: passing `--modules performance-marketing --yes` to bmad-method
+# wipes every other installed module's payload (core/bmm/cis). We always pass
+# the union of existing modules + performance-marketing so nothing is removed.
 
-if grep -q "code: ${MARKETING_MODULE_CODE}" "$BMAD_MANIFEST" 2>/dev/null; then
-  warn "Module '${MARKETING_MODULE_CODE}' already appears in the BMad manifest."
+command -v python3 >/dev/null 2>&1 || { err "python3 is required to parse the BMad manifest."; exit 1; }
+
+existing_modules=$(python3 - "$BMAD_MANIFEST" <<'PY'
+import sys, yaml
+with open(sys.argv[1]) as f:
+    m = yaml.safe_load(f) or {}
+print(",".join(e.get("name","") for e in (m.get("modules") or []) if e.get("name")))
+PY
+)
+
+if [[ -z "$existing_modules" ]]; then
+  merged_modules="$MARKETING_MODULE_CODE"
+elif [[ ",${existing_modules}," == *",${MARKETING_MODULE_CODE},"* ]]; then
+  warn "Module '${MARKETING_MODULE_CODE}' already listed in manifest — this will reinstall/refresh it."
   if [[ $ASSUME_YES -eq 0 ]]; then
     read -r -p "Reinstall / update from $MARKETING_REPO? [y/N] " reply
     case "$reply" in
@@ -166,7 +182,13 @@ if grep -q "code: ${MARKETING_MODULE_CODE}" "$BMAD_MANIFEST" 2>/dev/null; then
       *) info "Aborted."; exit 3 ;;
     esac
   fi
+  merged_modules="$existing_modules"
+else
+  merged_modules="${existing_modules},${MARKETING_MODULE_CODE}"
 fi
+
+info "Existing modules: ${existing_modules:-<none>}"
+info "Modules to install (additive): $merged_modules"
 
 # ---- Step 5: Build the install command -----------------------------------
 
@@ -176,10 +198,10 @@ if [[ -n "$PIN_REF" ]]; then
   info "Pinning to ref: $PIN_REF"
 fi
 
-install_args=(--custom-source "$source_arg")
+install_args=(--custom-source "$source_arg" --modules "$merged_modules")
 
 if [[ $ASSUME_YES -eq 1 ]]; then
-  install_args+=(--modules "$MARKETING_MODULE_CODE" --yes)
+  install_args+=(--yes)
 fi
 
 # ---- Step 6: Run the installer -------------------------------------------
