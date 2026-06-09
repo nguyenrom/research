@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>BMad Performance Marketing — Tổng quan dành cho Marketer</title>
+<style>
+  :root{
+    --bg:#fafaf7; --card:#ffffff; --ink:#1f2430; --muted:#5b6478;
+    --accent:#5b6cff; --accent2:#ff7a59; --line:#e7e9ef;
+    --tag-mkt:#eef1ff; --tag-mkt-ink:#2e3eb8;
+    --tag-dev:#fff0ea; --tag-dev-ink:#a73a16;
+    --tag-cis:#eafaf1; --tag-cis-ink:#1f7a47;
+    --tag-core:#f3f0ff; --tag-core-ink:#5d3fb5;
+    --phase1:#e8f4ff; --phase1-ink:#0d5fb0;
+    --phase2:#fff7e0; --phase2-ink:#996300;
+    --phase3:#ecfaf2; --phase3-ink:#13794a;
+    --any:#f1f1f5; --any-ink:#3d4357;
+    --sidebar-w:260px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:24px}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+       background:var(--bg);color:var(--ink);line-height:1.6;font-size:15.5px}
+  header{background:linear-gradient(135deg,#5b6cff 0%,#7d4cff 60%,#ff7a59 100%);
+         color:#fff;padding:48px 32px;text-align:center}
+  header h1{margin:0 0 10px;font-size:34px;letter-spacing:-0.5px}
+  header .desc{margin:0 auto 14px;max-width:780px;opacity:.96;font-size:16px;line-height:1.55}
+  header .meta{margin-top:14px;font-size:13px;opacity:.85}
+
+  /* ─── Layout: sidebar + content ─── */
+  .layout{display:flex;align-items:flex-start;max-width:1320px;margin:0 auto}
+  .sidebar{
+    position:sticky;top:0;align-self:flex-start;
+    width:var(--sidebar-w);flex-shrink:0;
+    height:100vh;overflow-y:auto;
+    padding:28px 20px 28px 28px;border-right:1px solid var(--line);
+    background:var(--card);
+  }
+  .sidebar h2{margin:0 0 14px;font-size:15px;color:var(--muted);
+              text-transform:uppercase;letter-spacing:1px;font-weight:700}
+  .sidebar ul{list-style:none;padding:0;margin:0}
+  .sidebar li{margin:0}
+  .sidebar a{
+    display:block;padding:7px 10px;margin:1px 0;
+    text-decoration:none;color:#3a4156;font-size:14px;border-radius:6px;
+    border-left:3px solid transparent;transition:all .15s ease;
+  }
+  .sidebar a:hover{background:#f4f6ff;color:var(--accent)}
+  .sidebar a.sub{padding-left:24px;font-size:13.5px;color:var(--muted)}
+  .sidebar a.active{background:#eef1ff;color:var(--accent);
+                    border-left-color:var(--accent);font-weight:600}
+  .sidebar-footer{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);
+                  font-size:11.5px;color:var(--muted);line-height:1.5}
+
+  .container{flex:1;min-width:0;max-width:1080px;margin:0 auto;padding:32px 36px 80px}
+
+  /* ─── Hamburger (mobile) ─── */
+  .menu-toggle{
+    display:none;position:fixed;top:14px;left:14px;z-index:200;
+    width:42px;height:42px;border:none;border-radius:8px;
+    background:var(--accent);color:#fff;cursor:pointer;
+    font-size:20px;box-shadow:0 4px 14px rgba(91,108,255,.35);
+    align-items:center;justify-content:center;
+  }
+  .sidebar-backdrop{
+    display:none;position:fixed;inset:0;background:rgba(20,24,40,.5);
+    z-index:99;
+  }
+
+  /* ─── Floating action buttons ─── */
+  .fab-stack{
+    position:fixed;bottom:20px;right:20px;z-index:200;
+    display:flex;flex-direction:column;gap:8px;align-items:center;
+  }
+  .fab{
+    width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;
+    color:#fff;font-size:15px;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .15s ease,box-shadow .15s ease,opacity .25s ease;
+  }
+  .fab:hover{transform:translateY(-2px)}
+  .fab:active{transform:translateY(0)}
+  .search-fab{
+    background:linear-gradient(135deg,#5b6cff 0%,#7d4cff 100%);
+    box-shadow:0 4px 14px rgba(91,108,255,.4);
+  }
+  .search-fab:hover{box-shadow:0 6px 18px rgba(91,108,255,.5)}
+  .top-fab{
+    background:#1f2430;box-shadow:0 4px 14px rgba(20,24,40,.3);
+    opacity:0;pointer-events:none;
+  }
+  .top-fab.visible{opacity:1;pointer-events:auto}
+  .top-fab:hover{background:#2d3346;box-shadow:0 6px 18px rgba(20,24,40,.4)}
+
+  .search-overlay{
+    display:none;position:fixed;inset:0;z-index:300;
+    background:rgba(20,24,40,.55);backdrop-filter:blur(4px);
+    align-items:flex-start;justify-content:center;padding:80px 20px 20px;
+  }
+  .search-overlay.open{display:flex}
+  .search-panel{
+    width:100%;max-width:640px;background:var(--card);border-radius:14px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;
+    display:flex;flex-direction:column;max-height:80vh;
+  }
+  .search-bar{
+    display:flex;align-items:center;gap:10px;padding:14px 18px;
+    border-bottom:1px solid var(--line);
+  }
+  .search-bar input{
+    flex:1;border:none;outline:none;font-size:16px;background:transparent;
+    color:var(--ink);font-family:inherit;
+  }
+  .search-bar input::placeholder{color:var(--muted)}
+  .search-close{
+    background:#f1f3f8;border:none;width:32px;height:32px;border-radius:8px;
+    cursor:pointer;color:var(--muted);font-size:14px;font-weight:600;
+  }
+  .search-close:hover{background:#e7e9ef;color:var(--ink)}
+  .search-stats{padding:8px 18px;font-size:12.5px;color:var(--muted);
+                background:#f8f9fc;border-bottom:1px solid var(--line);
+                display:flex;justify-content:space-between;align-items:center}
+  .search-nav{display:flex;gap:6px}
+  .search-nav button{
+    background:#fff;border:1px solid var(--line);border-radius:6px;
+    width:26px;height:26px;cursor:pointer;font-size:14px;color:var(--ink);
+  }
+  .search-nav button:hover{background:#eef1ff;border-color:var(--accent);color:var(--accent)}
+  .search-results{overflow-y:auto;padding:6px 0}
+  .search-result{
+    padding:10px 18px;cursor:pointer;border-bottom:1px solid #f4f5f8;
+    font-size:14px;line-height:1.5;
+  }
+  .search-result:last-child{border-bottom:none}
+  .search-result:hover, .search-result.active{background:#eef1ff}
+  .search-result.active{border-left:3px solid var(--accent);padding-left:15px}
+  .search-result .ctx{color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.45}
+  .search-result mark{background:#fff3a8;color:var(--ink);padding:0 2px;border-radius:2px;font-weight:600}
+  .search-empty{padding:24px 18px;text-align:center;color:var(--muted);font-size:14px}
+
+  .suggest-pill{
+    background:#f4f6ff;border:1px solid #d8def0;color:var(--accent);
+    padding:5px 11px;border-radius:999px;font-size:12.5px;cursor:pointer;
+    font-family:inherit;font-weight:500;
+  }
+  .suggest-pill:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  @keyframes flashTarget{
+    0%{box-shadow:0 0 0 4px rgba(91,108,255,0)}
+    20%{box-shadow:0 0 0 4px rgba(91,108,255,.5)}
+    100%{box-shadow:0 0 0 4px rgba(91,108,255,0)}
+  }
+  .flash-target{animation:flashTarget 1.6s ease-out;border-radius:12px}
+
+  section{margin-bottom:48px}
+  h2.section-title{font-size:24px;margin:0 0 6px;border-left:5px solid var(--accent);padding-left:12px}
+  .section-sub{color:var(--muted);margin:0 0 20px;font-size:14.5px}
+
+  h3.group-title{font-size:19px;margin:32px 0 4px;color:var(--ink)}
+  .group-sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:16px 18px;transition:transform .15s ease,box-shadow .15s ease;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(50,60,90,.06)}
+  .card .head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+  .card .name{font-weight:600;font-size:16px;line-height:1.3}
+  .card .name small{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:2px}
+  .card .code{background:var(--accent);color:#fff;border-radius:6px;padding:2px 8px;
+              font-size:12px;font-weight:600;letter-spacing:.5px;flex-shrink:0}
+  .card .desc{color:#3a4156;font-size:14px;margin:10px 0 0}
+  .card .footer{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+  .tag.phase1{background:var(--phase1);color:var(--phase1-ink)}
+  .tag.phase2{background:var(--phase2);color:var(--phase2-ink)}
+  .tag.phase3{background:var(--phase3);color:var(--phase3-ink)}
+  .tag.anytime{background:var(--any);color:var(--any-ink)}
+  .tag.required{background:#ffe7e1;color:#a31f00}
+  .skill-id{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12px;color:var(--muted)}
+
+  .workflow{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:24px}
+  .workflow h4{margin:0 0 14px;font-size:17px}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .flow .step{background:#f4f6ff;border:1px solid #d8def0;color:#2e3eb8;
+              padding:8px 14px;border-radius:8px;font-size:13.5px;font-weight:500}
+  .flow .arrow{color:var(--muted);font-size:18px}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;font-size:13px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+
+  .callout{background:#f0f4ff;border-left:4px solid var(--accent);
+           padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px}
+  .callout strong{color:var(--accent)}
+
+  table.matrix{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  table.matrix th,table.matrix td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+  table.matrix th{background:#f5f6fa;font-weight:600;color:var(--ink)}
+  table.matrix tr:last-child td{border-bottom:none}
+  table.matrix .menu{font-weight:700;color:var(--accent)}
+  table.matrix .skill{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;color:#5d3fb5;white-space:nowrap}
+
+  /* ─── Click to copy ─── */
+  .copyable{
+    cursor:pointer;border-radius:3px;padding:0 2px;margin:0 -2px;
+    transition:background .12s ease,color .12s ease;
+    position:relative;
+  }
+  .copyable:hover{background:#eef1ff;color:var(--accent)}
+  .copyable.copied{background:#d4f4dd;color:#13794a}
+  .card .code.copyable:hover{background:var(--accent2);color:#fff;opacity:.9}
+
+  .copy-toast{
+    position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:#1f2430;color:#fff;padding:10px 18px;border-radius:8px;
+    font-size:13.5px;box-shadow:0 8px 24px rgba(0,0,0,.25);
+    z-index:400;opacity:0;pointer-events:none;
+    transition:opacity .2s ease,transform .2s ease;
+    max-width:90vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .copy-toast code{background:rgba(255,255,255,.15);padding:1px 6px;border-radius:4px;
+                   font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;margin-left:6px}
+
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:24px;border-top:1px solid var(--line);margin-top:40px}
+  .heartbeat{
+    display:inline-block;color:#e0245e;font-size:14px;
+    transform-origin:center;
+    animation:heartbeat 1.4s ease-in-out infinite;
+  }
+  @keyframes heartbeat{
+    0%,100%   {transform:scale(1)}
+    14%       {transform:scale(1.18)}
+    28%       {transform:scale(1)}
+    42%       {transform:scale(1.18)}
+    70%       {transform:scale(1)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .heartbeat{animation:none}
+  }
+
+  @media (max-width:980px){
+    .menu-toggle{display:flex}
+    .sidebar{
+      position:fixed;top:0;left:0;height:100vh;z-index:150;
+      transform:translateX(-100%);transition:transform .25s ease;
+      box-shadow:4px 0 24px rgba(0,0,0,.12);
+    }
+    .sidebar.open{transform:translateX(0)}
+    .sidebar-backdrop.open{display:block}
+    .container{padding:60px 18px 60px;max-width:100%}
+    header{padding:54px 18px 32px}
+    header h1{font-size:26px}
+    header .desc{font-size:14.5px}
+  }
+  @media (max-width:600px){
+    .container{padding:60px 14px 60px}
+    header h1{font-size:23px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>BMAD Performance Marketing</h1>
+  <p class="desc">Marketing expertise for the BMAD Method and AI agents, covering CRO, copywriting, SEO, analytics, and growth engineering.</p>
+  <p class="meta">Cập nhật: 11/05/2026 by Nguyen Le · BMad Method v6.6.0 · 64 agents/skills</p>
+</header>
+
+<button class="menu-toggle" id="menuToggle" aria-label="Mở mục lục">☰</button>
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="layout">
+
+  <!-- ───────── SIDEBAR ───────── -->
+  <aside class="sidebar" id="sidebar">
+    <h2>📑 Mục lục</h2>
+    <ul>
+      <li><a href="#concept">1. Giới thiệu</a></li>
+      <li><a href="#flow">2. Khi nào dùng cái nào?</a></li>
+      <li><a href="#marketing">3. Nhóm Marketing</a></li>
+      <li><a href="#mkt-personas" class="sub">3.1 Chuyên gia cá nhân</a></li>
+      <li><a href="#mkt-sprints" class="sub">3.2 Quy trình Sprint</a></li>
+      <li><a href="#mkt-workflow" class="sub">3.3 Lộ trình chuẩn</a></li>
+      <li><a href="#dev">4. Nhóm Dev (BMM)</a></li>
+      <li><a href="#cis">5. Nhóm Sáng tạo (CIS)</a></li>
+      <li><a href="#core">6. Tiện ích lõi (Core)</a></li>
+      <li><a href="#matrix">7. Tra cứu menu code</a></li>
+    </ul>
+  </aside>
+
+  <div class="container">
+
+  <!-- ───────── 1. CONCEPT ───────── -->
+  <section id="concept">
+    <h2 class="section-title">1. Giới thiệu</h2>
+    <p class="section-sub">BMad là một &laquo;tòa soạn ảo&raquo; gồm các chuyên gia. Mỗi agent có một vai trò, tính cách và bộ kỹ năng riêng. Bạn có hai cách dùng:</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="head">
+          <div class="name">👤 Persona Agent<small>Chuyên gia cá nhân</small></div>
+        </div>
+        <p class="desc">Một &laquo;người&raquo; bạn trò chuyện trực tiếp như đồng nghiệp. Phù hợp cho: hỏi xin tư vấn, brainstorm, lấy ý kiến chuyên môn nhanh. Ví dụ: nói chuyện với <em>Ivy (LinkedIn)</em>, <em>Quincy (SEO)</em>, <em>Casey (CRO)</em>.</p>
+        <div class="footer"><span class="tag anytime">Dùng bất kỳ lúc nào</span></div>
+      </div>
+
+      <div class="card">
+        <div class="head">
+          <div class="name">📋 Workflow Sprint<small>Quy trình từng bước</small></div>
+        </div>
+        <p class="desc">Một quy trình dài hơi nhiều bước, ra deliverable hoàn chỉnh (chiến lược, kế hoạch, sản phẩm). Phù hợp cho: triển khai dự án mới, audit toàn diện, launch sản phẩm. Ví dụ: <em>SEO Sprint</em>, <em>Launch Sequence</em>.</p>
+        <div class="footer"><span class="tag phase1">Theo phase</span></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Quy tắc vàng:</strong> Mọi dự án marketing mới <em>phải</em> bắt đầu bằng <strong>Marketing Context (MC)</strong> — đây là &laquo;hồ sơ sản phẩm&raquo; mà tất cả agent khác cần đọc trước khi làm việc. Bỏ qua bước này, các agent sẽ làm việc chung chung và sai positioning.
+    </div>
+
+    <div class="callout" style="background:#fff7e6;border-left-color:#e89400">
+      <strong style="color:#996300">💬 Cách gọi agent trong chat — 3 kiểu đều hiểu:</strong>
+      <ol style="margin:8px 0 0;padding-left:22px">
+        <li><strong>Theo skill name (kỹ thuật):</strong> &laquo;chạy <code>bmad-marketing-orchestrator</code>&raquo; — chính xác 100%, không sợ nhầm.</li>
+        <li><strong>Theo display name (chính thức):</strong> &laquo;tôi muốn nói chuyện với <em>Marketing Orchestrator</em>&raquo;.</li>
+        <li><strong>Theo tên persona (thân mật):</strong> &laquo;<em>Max</em> ơi, lập giúp tôi kế hoạch tháng&raquo;, &laquo;hỏi <em>Quincy</em> về SEO&raquo;, &laquo;nhờ <em>Ivy</em> viết LinkedIn carousel&raquo;.</li>
+      </ol>
+      <p style="margin:8px 0 0;font-size:13.5px;color:#7a5400">→ Bạn còn có thể gọi nhanh bằng <strong>menu code</strong> (xem bảng tra cứu): &laquo;chạy MC&raquo;, &laquo;gọi MO&raquo;.</p>
+    </div>
+  </section>
+
+  <!-- ───────── 2. FLOW ───────── -->
+  <section id="flow">
+    <h2 class="section-title">2. Khi nào dùng cái nào?</h2>
+    <p class="section-sub">Hai kịch bản phổ biến nhất:</p>
+
+    <div class="workflow">
+      <h4>🎯 Kịch bản A — Triển khai dự án/sản phẩm mới</h4>
+      <div class="flow">
+        <span class="step">1. MC — Marketing Context</span>
+        <span class="arrow">→</span>
+        <span class="step">2. CRS / GA — Nghiên cứu khách &amp; audit</span>
+        <span class="arrow">→</span>
+        <span class="step">3. MS — Marketing Strategy</span>
+        <span class="arrow">→</span>
+        <span class="step">4. Sprints chuyên sâu (SEO, CRO, Paid…)</span>
+        <span class="arrow">→</span>
+        <span class="step">5. CP / SC / LS — Thực thi</span>
+      </div>
+    </div>
+
+    <div class="workflow">
+      <h4>💡 Kịch bản B — Cần tư vấn nhanh, làm 1 việc cụ thể</h4>
+      <div class="flow">
+        <span class="step">Gọi thẳng Persona Agent</span>
+        <span class="arrow">→</span>
+        <span class="step">Ví dụ: &laquo;Ivy, viết cho tôi 1 LinkedIn carousel&raquo;</span>
+      </div>
+      <p style="margin:14px 0 0;color:var(--muted);font-size:13.5px">→ Không cần MC nếu chỉ là task lẻ, nhưng có MC sẽ giúp output chuẩn brand hơn.</p>
+    </div>
+  </section>
+
+  <!-- ───────── 3. MARKETING ───────── -->
+  <section id="marketing">
+    <h2 class="section-title">3. Nhóm Marketing — BMAD Performance Marketing</h2>
+    <p class="section-sub">37 agent chuyên về marketing. Chia làm 2 loại: <strong>Personas</strong> (gọi độc lập) và <strong>Sprints</strong> (quy trình dự án mới).</p>
+
+    <div class="legend">
+      <span><span class="tag phase1">1-Analysis</span> Phân tích nền tảng</span>
+      <span><span class="tag phase2">2-Planning</span> Lên kế hoạch</span>
+      <span><span class="tag phase3">3-Execution</span> Thực thi</span>
+      <span><span class="tag anytime">Anytime</span> Gọi bất kỳ lúc nào</span>
+      <span><span class="tag required">Bắt buộc</span> Phải làm trước</span>
+    </div>
+
+    <!-- 3.1 PERSONAS -->
+    <h3 class="group-title" id="mkt-personas">3.1 Chuyên gia cá nhân (Persona Agents) — dùng độc lập</h3>
+    <p class="group-sub">Đây là 19 &laquo;đồng nghiệp ảo&raquo; bạn có thể gọi bất kỳ lúc nào để hỏi tư vấn, ra ý tưởng, hoặc nhờ làm 1 task lẻ.</p>
+
+    <h3 class="group-title">🎩 Lãnh đạo &amp; Điều phối</h3>
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Max — Marketing Orchestrator<small>bmad-marketing-orchestrator</small></div><span class="code">MO</span></div><p class="desc">Trưởng phòng marketing chiến lược. Biết tất cả chuyên gia khác, lập kế hoạch tổng và phân công cho ai làm gì. Hãy gọi Max khi bạn chưa biết bắt đầu từ đâu.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Nova — Social Media Strategist<small>bmad-social-media-strategist</small></div><span class="code">SMS</span></div><p class="desc">Quản lý chiến lược social tổng. Điều phối 8 chuyên gia kênh (Twitter, LinkedIn, TikTok…) để tránh chồng chéo và đảm bảo brand voice nhất quán đa nền tảng.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Luna — Launch Coordinator<small>bmad-launch-coordinator</small></div><span class="code">LC</span></div><p class="desc">Chuyên gia launch sản phẩm. Tổ chức chuỗi hoạt động J-14 → ngày launch → J+7 trên Product Hunt, directories, hunter outreach và đa kênh.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+    </div>
+
+    <h3 class="group-title">📊 Phân tích &amp; Tối ưu</h3>
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Mary — Business Analyst<small>bmad-agent-analyst</small></div><span class="code">BA</span></div><p class="desc">Phân tích viên cấp cao. Dùng Porter's Five Forces, SWOT, root cause analysis &amp; competitive intelligence để khám phá insight ẩn. Biến nhu cầu mơ hồ thành spec rõ ràng. Phù hợp khi cần audit thị trường hoặc gỡ requirement đầu dự án.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Market Research Workflow<small>bmad-market-research</small></div><span class="code">MR</span></div><p class="desc">Quy trình nghiên cứu thị trường chuyên sâu của Mary: phân tích quy mô thị trường (TAM/SAM/SOM), trend, đối thủ, segment, và cơ hội. Khác với CRS (tập trung khách hàng), MR tập trung vào <em>thị trường &amp; cạnh tranh</em> ở góc nhìn chiến lược.</p><div class="footer"><span class="tag phase1">1-Analysis</span></div></div>
+      <div class="card"><div class="head"><div class="name">Pixel — Growth Analyst<small>bmad-growth-analyst</small></div><span class="code">GAN</span></div><p class="desc">Chuyên gia số liệu &amp; tăng trưởng. Dựng KPI framework, audit funnel, thiết kế A/B test, chẩn đoán retention và mô hình hóa tăng trưởng.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Casey — CRO Strategist<small>bmad-cro-strategist</small></div><span class="code">CRO</span></div><p class="desc">Chuyên gia tối ưu tỷ lệ chuyển đổi cho landing page, signup flow, onboarding, form, popup, paywall. Tìm chỗ rò rỉ và đề xuất thử nghiệm.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Rhea — RevOps Strategist<small>bmad-revops-strategist</small></div><span class="code">ROS</span></div><p class="desc">Chuyên gia revenue ops &amp; sales enablement. Lead scoring, routing, CRM handoff, battlecard, deck, one-pager, demo script.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Vale — Monetization Strategist<small>bmad-monetization-strategist</small></div><span class="code">MON</span></div><p class="desc">Chuyên gia pricing &amp; packaging. Value metric, tier, freemium/trial, paywall, monetization experiment.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+    </div>
+
+    <div class="callout" style="margin-top:14px">
+      <strong>Lưu ý:</strong> <em>Mary</em> và <em>Market Research</em> thuộc module <strong>BMM</strong> (không phải Performance Marketing), nhưng cực kỳ hữu ích cho marketer giai đoạn nghiên cứu nền tảng. Cặp đôi <strong>MR + CRS</strong> bổ sung nhau: MR nhìn thị trường vĩ mô, CRS hiểu khách hàng vi mô.
+    </div>
+
+    <h3 class="group-title">✍️ Nội dung &amp; SEO</h3>
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Milo — Content Architect<small>bmad-content-architect</small></div><span class="code">CA</span></div><p class="desc">Kiến trúc sư nội dung. Lên editorial calendar, content brief, kiến trúc blog, landing page chuyển đổi cao.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Quincy — SEO Strategist<small>bmad-seo-strategist</small></div><span class="code">SEO</span></div><p class="desc">Chuyên gia SEO organic cho SaaS. Keyword research, technical audit, content gap analysis, SERP strategy, topic cluster.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+    </div>
+
+    <h3 class="group-title">💰 Paid &amp; Lifecycle</h3>
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Piper — Paid Media Buyer<small>bmad-paid-media-buyer</small></div><span class="code">PMB</span></div><p class="desc">Chuyên gia paid acquisition. Google Ads, Meta, LinkedIn, X, TikTok, retargeting, phân bổ ngân sách, performance creative.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Elle — Lifecycle Marketer<small>bmad-lifecycle-marketer</small></div><span class="code">LMK</span></div><p class="desc">Chuyên gia email &amp; lifecycle. Onboarding, nurture, win-back, churn prevention, dunning, cold outbound sequence.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Flynn — Growth Loop Designer<small>bmad-growth-loop-designer</small></div><span class="code">GLD</span></div><p class="desc">Chuyên gia growth loop. Free tool, lead magnet, referral program, affiliate, community-led growth, viral sharing loop.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+    </div>
+
+    <h3 class="group-title">📱 Chuyên gia kênh Social (8 nền tảng)</h3>
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Vex — Twitter Ghostwriter<small>bmad-twitter-ghostwriter</small></div><span class="code">TW</span></div><p class="desc">Viết tweet viral, thread, chiến lược personal brand cho founder SaaS trên X/Twitter.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Ivy — LinkedIn Creator<small>bmad-linkedin-creator</small></div><span class="code">LI</span></div><p class="desc">Chiến lược nội dung LinkedIn B2B. Biến profile founder thành cỗ máy lead qua bài kể chuyện và thought leadership.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Yuri — YouTube Strategist<small>bmad-youtube-strategist</small></div><span class="code">YT</span></div><p class="desc">Chuyên gia YouTube growth. Tối ưu CTR, retention, watch time. Coi YouTube như công cụ tìm kiếm.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Tikko — TikTok Creator<small>bmad-tiktok-creator</small></div><span class="code">TT</span></div><p class="desc">Chuyên gia video ngắn TikTok. Bắt trend, hook 1 giây, biến SaaS thành nội dung giải trí.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Indy — Instagram Strategist<small>bmad-instagram-strategist</small></div><span class="code">IG</span></div><p class="desc">Chuyên gia visual Instagram. Reels-first growth, polished feed aesthetic, brand presence con người.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Penny — Pinterest Strategist<small>bmad-pinterest-strategist</small></div><span class="code">PT</span></div><p class="desc">Chuyên gia Pinterest SEO. Coi nền tảng như evergreen visual search engine để kéo traffic chất lượng.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Karma Ken — Reddit Growth Hacker<small>bmad-reddit-growth-hacker</small></div><span class="code">RD</span></div><p class="desc">Marketing Reddit không bị coi là spam. Build karma, chiến dịch native theo từng subreddit.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+      <div class="card"><div class="head"><div class="name">Disco Dave — Discord Community Manager<small>bmad-discord-community-manager</small></div><span class="code">DC</span></div><p class="desc">Xây cộng đồng Discord. Thiết kế server, onboarding, biến lurker thành thành viên active.</p><div class="footer"><span class="tag anytime">Anytime</span></div></div>
+    </div>
+
+    <!-- 3.2 SPRINTS -->
+    <h3 class="group-title" id="mkt-sprints">3.2 Quy trình Sprint — triển khai dự án mới</h3>
+    <p class="group-sub">18 quy trình từng-bước, ra output hoàn chỉnh. Sắp xếp theo phase: Phân tích → Lên kế hoạch → Thực thi.</p>
+
+    <h3 class="group-title">📍 Phase 1 — Phân tích nền tảng</h3>
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Marketing Context<small>bmad-create-marketing-context</small></div><span class="code">MC</span></div><p class="desc">Tạo &laquo;hồ sơ sản phẩm&raquo; chia sẻ: ICP, positioning, ngôn ngữ khách hàng, objection, proof point. Là nền cho mọi sprint phía sau.</p><div class="footer"><span class="tag phase1">1-Analysis</span><span class="tag required">Bắt buộc</span></div></div>
+      <div class="card"><div class="head"><div class="name">Growth Audit<small>bmad-growth-audit</small></div><span class="code">GA</span></div><p class="desc">Audit toàn diện KPI &amp; channel hiện tại, sản xuất báo cáo SWOT và plan hành động.</p><div class="footer"><span class="tag phase1">1-Analysis</span></div></div>
+      <div class="card"><div class="head"><div class="name">Customer Research Sprint<small>bmad-customer-research-sprint</small></div><span class="code">CRS</span></div><p class="desc">Nghiên cứu khách hàng/ICP/VOC/JTBD, mining review &amp; community, lập profile đối thủ.</p><div class="footer"><span class="tag phase1">1-Analysis</span></div></div>
+    </div>
+
+    <h3 class="group-title">📅 Phase 2 — Lên kế hoạch</h3>
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Marketing Strategy<small>bmad-marketing-strategy</small></div><span class="code">MS</span></div><p class="desc">Chiến lược marketing tổng thể đa kênh, ra plan 90 ngày thống nhất.</p><div class="footer"><span class="tag phase2">2-Planning</span></div></div>
+      <div class="card"><div class="head"><div class="name">SEO Sprint<small>bmad-seo-sprint</small></div><span class="code">SS</span></div><p class="desc">Sprint SEO tập trung 2 tuần: audit → keyword strategy → content gap → quick wins.</p><div class="footer"><span class="tag phase2">2-Planning</span></div></div>
+      <div class="card"><div class="head"><div class="name">Advanced SEO Sprint<small>bmad-advanced-seo-sprint</small></div><span class="code">ASEO</span></div><p class="desc">SEO nâng cao: AI SEO/AEO/GEO, programmatic SEO, schema, site architecture, competitor pages, ASO.</p><div class="footer"><span class="tag phase2">2-Planning</span></div></div>
+      <div class="card"><div class="head"><div class="name">Monetization Sprint<small>bmad-monetization-sprint</small></div><span class="code">MNS</span></div><p class="desc">Pricing, packaging, value metric, freemium/trial, pricing page, paywall &amp; upgrade strategy.</p><div class="footer"><span class="tag phase2">2-Planning</span></div></div>
+    </div>
+
+    <h3 class="group-title">🚀 Phase 3 — Thực thi</h3>
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Content Pipeline<small>bmad-content-pipeline</small></div><span class="code">CP</span></div><p class="desc">Sản xuất 1 nội dung end-to-end: brief → draft → publish → đo performance, có quality gate.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">Social Campaign<small>bmad-social-campaign</small></div><span class="code">SC</span></div><p class="desc">Chiến dịch social đa nền tảng phối hợp: lập kế hoạch, sáng tạo, đăng tải, phân tích.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">Launch Sequence<small>bmad-launch-sequence</small></div><span class="code">LS</span></div><p class="desc">Điều phối launch sản phẩm/feature từ J-14 đến J+7 đa kênh: content, social, SEO, analytics.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">CRO Sprint<small>bmad-cro-sprint</small></div><span class="code">CS</span></div><p class="desc">Chẩn đoán rò rỉ chuyển đổi, ưu tiên giả thuyết, thiết kế experiment và ra action plan.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">Paid Acquisition Sprint<small>bmad-paid-acquisition-sprint</small></div><span class="code">PAS</span></div><p class="desc">Chọn kênh, kiến trúc campaign, ma trận creative, tracking, launch checklist, lịch tối ưu.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">Copy Conversion Sprint<small>bmad-copy-conversion-sprint</small></div><span class="code">CCS</span></div><p class="desc">Copywriting, copy-editing, marketing psychology, lead magnet messaging, conversion copy.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">Lifecycle Email Sprint<small>bmad-lifecycle-email-sprint</small></div><span class="code">LES</span></div><p class="desc">Email sequence: lifecycle, onboarding/nurture, cold outbound, churn prevention, dunning, win-back.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">RevOps Enablement Sprint<small>bmad-revops-enablement-sprint</small></div><span class="code">RES</span></div><p class="desc">Lifecycle RevOps, lead scoring/routing, CRM handoff, sales enablement, battlecard, demo script.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">Growth Loops Sprint<small>bmad-growth-loops-sprint</small></div><span class="code">GLS</span></div><p class="desc">Free tool, lead magnet, referral, affiliate/ambassador, community-led growth, viral loop.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+      <div class="card"><div class="head"><div class="name">Creative Production Sprint<small>bmad-creative-production-sprint</small></div><span class="code">CPS</span></div><p class="desc">Sản xuất creative: image, video concept, ad variation, social, thumbnail, mockup, banner, brief.</p><div class="footer"><span class="tag phase3">3-Execution</span></div></div>
+    </div>
+
+    <!-- 3.3 LỘ TRÌNH -->
+    <h3 class="group-title" id="mkt-workflow">3.3 Lộ trình chuẩn cho dự án mới</h3>
+    <div class="workflow">
+      <h4>Lộ trình tham khảo từ A → Z (8–12 tuần)</h4>
+      <div class="flow">
+        <span class="step">Tuần 1: MC (bắt buộc)</span>
+        <span class="arrow">→</span>
+        <span class="step">Tuần 1-2: CRS + GA</span>
+        <span class="arrow">→</span>
+        <span class="step">Tuần 3: MS</span>
+        <span class="arrow">→</span>
+        <span class="step">Tuần 4-6: SS / ASEO / MNS</span>
+        <span class="arrow">→</span>
+        <span class="step">Tuần 7+: CP / SC / PAS / CRO / LES song song</span>
+        <span class="arrow">→</span>
+        <span class="step">Khi launch: LS</span>
+      </div>
+      <p style="margin:14px 0 0;color:var(--muted);font-size:13.5px"><strong>Mẹo:</strong> Trong Phase 3, không chạy tất cả sprint cùng lúc. Chọn 2-3 sprint ưu tiên dựa trên kết quả Growth Audit (kênh nào đang yếu nhất / có cơ hội nhất).</p>
+    </div>
+  </section>
+
+  <!-- ───────── 4. DEV ───────── -->
+  <section id="dev">
+    <h2 class="section-title">4. Nhóm Phát triển sản phẩm (Dev / BMM)</h2>
+    <p class="section-sub">Nếu marketing của bạn dính tới việc xây feature/sản phẩm mới (ví dụ làm landing tool, build free tool cho lead magnet), đây là các agent kỹ thuật bạn có thể nhờ.</p>
+
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">📊 Mary — Business Analyst<small>bmad-agent-analyst</small></div></div><p class="desc">Phân tích thị trường, đối thủ, gỡ requirement mơ hồ thành spec rõ ràng. Phù hợp khi cần biến ý tưởng thành brief.</p></div>
+      <div class="card"><div class="head"><div class="name">📋 John — Product Manager<small>bmad-agent-pm</small></div></div><p class="desc">Tạo PRD qua user interview &amp; discovery. Hỏi &laquo;tại sao&raquo; liên tục, đưa quyết định dựa trên giá trị người dùng.</p></div>
+      <div class="card"><div class="head"><div class="name">🎨 Sally — UX Designer<small>bmad-agent-ux-designer</small></div></div><p class="desc">User research, interaction design, UI pattern, experience strategy. Kể chuyện user qua giọng văn empathetic.</p></div>
+      <div class="card"><div class="head"><div class="name">📚 Paige — Technical Writer<small>bmad-agent-tech-writer</small></div></div><p class="desc">Viết tài liệu, vẽ Mermaid diagram, giải thích khái niệm phức tạp dễ hiểu. Hữu ích cho onboarding doc, API doc.</p></div>
+      <div class="card"><div class="head"><div class="name">🏗️ Winston — Architect<small>bmad-agent-architect</small></div></div><p class="desc">Thiết kế hệ thống, cloud infra, API. Cân giữa scalable và &laquo;đủ dùng&raquo;. Chọn boring tech để ổn định.</p></div>
+      <div class="card"><div class="head"><div class="name">💻 Amelia — Developer<small>bmad-agent-dev</small></div></div><p class="desc">Lập trình theo story đã duyệt, TDD, code implementation. Cực kỳ ngắn gọn, mọi câu đều cite được.</p></div>
+      <div class="card"><div class="head"><div class="name">🧪 Quinn — QA Engineer<small>bmad-agent-qa</small></div></div><p class="desc">Test automation API/E2E, coverage analysis. &laquo;Ship rồi tối ưu sau&raquo; — viết test nhanh, pass ngay từ lần đầu.</p></div>
+      <div class="card"><div class="head"><div class="name">🏃 Bob — Scrum Master<small>bmad-agent-sm</small></div></div><p class="desc">Sprint planning, story prep, agile ceremony, backlog. Crisp và checklist-driven, không khoan nhượng với mơ hồ.</p></div>
+      <div class="card"><div class="head"><div class="name">🚀 Barry — Quick Flow Solo Dev<small>bmad-agent-quick-flow-solo-dev</small></div></div><p class="desc">Full-stack lone wolf, từ tech spec tới implement, ceremony tối thiểu. Code ship được &gt; code hoàn hảo nằm trên giấy.</p></div>
+    </div>
+  </section>
+
+  <!-- ───────── 5. CIS ───────── -->
+  <section id="cis">
+    <h2 class="section-title">5. Nhóm Sáng tạo &amp; Chiến lược (CIS)</h2>
+    <p class="section-sub">6 chuyên gia hỗ trợ tư duy. Marketer rất hay gọi nhóm này khi cần &laquo;xả ý tưởng&raquo;, làm pitch deck, hoặc viết storytelling.</p>
+    <div class="callout">
+      <strong>Top 3 cho marketer:</strong> <em>Sophia (Storytelling)</em> — viết brand story, case study; <em>Caravaggio (Presentation)</em> — pitch deck, infographic, YouTube thumbnail; <em>Carson (Brainstorming)</em> — phá bí khi nghĩ campaign mới.
+    </div>
+
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">🧠 Carson — Brainstorming Coach<small>bmad-cis-agent-brainstorming-coach</small></div></div><p class="desc">Facilitator như improv coach: năng lượng cao, áp dụng &laquo;YES AND&raquo;, ăn mừng ý tưởng điên rồ. Gọi khi bí ý tưởng.</p></div>
+      <div class="card"><div class="head"><div class="name">📖 Sophia — Master Storyteller<small>bmad-cis-agent-storyteller</small></div></div><p class="desc">Bậc thầy storytelling 50+ năm. Tìm câu chuyện thật, biến trừu tượng thành chi tiết sống động. Hữu ích cho brand story, case study.</p></div>
+      <div class="card"><div class="head"><div class="name">🎨 Maya — Design Thinking Coach<small>bmad-cis-agent-design-thinking-coach</small></div></div><p class="desc">Empathy mapping, prototyping, user insight. Validate qua tương tác thật với người dùng.</p></div>
+      <div class="card"><div class="head"><div class="name">⚡ Victor — Innovation Strategist<small>bmad-cis-agent-innovation-strategist</small></div></div><p class="desc">JTBD, Blue Ocean Strategy, business model innovation. Cựu McKinsey. Hỏi &laquo;đơn giản mà chí mạng&raquo;.</p></div>
+      <div class="card"><div class="head"><div class="name">🔬 Dr. Quinn — Creative Problem Solver<small>bmad-cis-agent-creative-problem-solver</small></div></div><p class="desc">TRIZ, Theory of Constraints, Systems Thinking. Truy nguyên gốc rễ vấn đề như Sherlock Holmes.</p></div>
+      <div class="card"><div class="head"><div class="name">🎨 Caravaggio — Presentation Master<small>bmad-cis-agent-presentation-master</small></div></div><p class="desc">Pitch deck, YouTube explainer, infographic, conference talk. Visual hierarchy &amp; storytelling. Ý tưởng &laquo;cái này thử nghĩ kiểu này xem!&raquo;.</p></div>
+    </div>
+  </section>
+
+  <!-- ───────── 6. CORE ───────── -->
+  <section id="core">
+    <h2 class="section-title">6. Bộ tiện ích lõi (Core)</h2>
+    <p class="section-sub">Các skill phụ trợ dùng được cho cả marketing và dev. Marketer hay dùng nhất là <strong>Brainstorming</strong>, <strong>Editorial Review</strong>, <strong>Distillator</strong>.</p>
+
+    <div class="grid">
+      <div class="card"><div class="head"><div class="name">Brainstorming<small>bmad-brainstorming</small></div><span class="code">BSP</span></div><p class="desc">Phiên brainstorming có cấu trúc với nhiều kỹ thuật sáng tạo. Dùng sớm trong giai đoạn ý tưởng hoặc khi bị bí.</p></div>
+      <div class="card"><div class="head"><div class="name">Party Mode<small>bmad-party-mode</small></div><span class="code">PM</span></div><p class="desc">Mở &laquo;phòng họp&raquo; nhiều agent cùng lúc. Mỗi agent là 1 subagent độc lập, cho ý kiến đa chiều về cùng 1 vấn đề.</p></div>
+      <div class="card"><div class="head"><div class="name">Editorial Review — Prose<small>bmad-editorial-review-prose</small></div><span class="code">EP</span></div><p class="desc">Biên tập viên lâm sàng: rà từng câu chữ, đề xuất sửa cụ thể dạng bảng 3 cột. Chạy sau khi viết xong.</p></div>
+      <div class="card"><div class="head"><div class="name">Editorial Review — Structure<small>bmad-editorial-review-structure</small></div><span class="code">ES</span></div><p class="desc">Soát cấu trúc: cắt, sắp xếp lại, đơn giản hóa, vẫn giữ thông điệp. Dùng khi tài liệu được ghép từ nhiều nguồn.</p></div>
+      <div class="card"><div class="head"><div class="name">Adversarial Review<small>bmad-review-adversarial-general</small></div><span class="code">AR</span></div><p class="desc">Review &laquo;hoài nghi&raquo;: tìm điểm yếu, lỗi logic. Dùng trước khi finalize deliverable.</p></div>
+      <div class="card"><div class="head"><div class="name">Edge Case Hunter<small>bmad-review-edge-case-hunter</small></div><span class="code">ECH</span></div><p class="desc">Đi qua mọi nhánh điều kiện và biên, chỉ báo các trường hợp chưa được xử lý. Bổ trợ Adversarial Review.</p></div>
+      <div class="card"><div class="head"><div class="name">Distillator<small>bmad-distillator</small></div><span class="code">DG</span></div><p class="desc">Nén tài liệu thành bản &laquo;distillate&raquo; tối ưu cho LLM, không mất thông tin. Hữu ích khi chuyển tài liệu lớn cho agent khác đọc.</p></div>
+      <div class="card"><div class="head"><div class="name">Index Docs<small>bmad-index-docs</small></div><span class="code">ID</span></div><p class="desc">Tự sinh/cập nhật <code>index.md</code> tham chiếu mọi tài liệu trong thư mục.</p></div>
+      <div class="card"><div class="head"><div class="name">Shard Document<small>bmad-shard-doc</small></div><span class="code">SD</span></div><p class="desc">Tách tài liệu lớn (&gt;500 dòng) thành nhiều file nhỏ theo heading. Quản lý dễ hơn.</p></div>
+      <div class="card"><div class="head"><div class="name">Customize<small>bmad-customize</small></div><span class="code">BC</span></div><p class="desc">Tùy biến hành vi agent/workflow: thêm fact bền vững, đổi template, chèn hook, custom menu. Không cần sửa file TOML tay.</p></div>
+      <div class="card"><div class="head"><div class="name">Advanced Elicitation<small>bmad-advanced-elicitation</small></div></div><p class="desc">Đẩy LLM cân nhắc lại, refine output gần nhất qua Socratic, first principles, pre-mortem, red team…</p></div>
+      <div class="card"><div class="head"><div class="name">BMad Help<small>bmad-help</small></div><span class="code">BH</span></div><p class="desc">Skill bạn vừa gọi — phân tích trạng thái hiện tại và gợi ý bước tiếp theo nên làm.</p></div>
+    </div>
+  </section>
+
+  <!-- ───────── 7. MATRIX ───────── -->
+  <section id="matrix">
+    <h2 class="section-title">7. Bảng tra cứu nhanh — Menu Code</h2>
+    <p class="section-sub">In bảng này dán cạnh màn hình để gọi nhanh. Ví dụ gõ trong chat: &laquo;hãy chạy MC&raquo; hoặc &laquo;tôi muốn nói chuyện với Quincy&raquo;.</p>
+
+    <p style="font-size:13px;color:var(--muted);margin:0 0 10px">💡 Click vào bất kỳ tên/code/skill name nào để copy nhanh.</p>
+    <table class="matrix">
+      <thead>
+        <tr><th style="width:70px">Code</th><th>Tên hiển thị</th><th>Skill Name</th><th>Loại</th><th>Khi dùng</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="menu">MC</td><td>Marketing Context</td><td class="skill">bmad-create-marketing-context</td><td>Sprint · Phase 1 ⚠️ bắt buộc</td><td>Khởi tạo hồ sơ sản phẩm cho mọi dự án mới</td></tr>
+        <tr><td class="menu">MR</td><td>Market Research Workflow</td><td class="skill">bmad-market-research</td><td>Sprint · Phase 1 (BMM)</td><td>Nghiên cứu thị trường, TAM/SAM/SOM, đối thủ</td></tr>
+        <tr><td class="menu">GA</td><td>Growth Audit</td><td class="skill">bmad-growth-audit</td><td>Sprint · Phase 1</td><td>Audit toàn diện KPI &amp; channel hiện tại</td></tr>
+        <tr><td class="menu">CRS</td><td>Customer Research Sprint</td><td class="skill">bmad-customer-research-sprint</td><td>Sprint · Phase 1</td><td>Nghiên cứu khách hàng, ICP, đối thủ</td></tr>
+        <tr><td class="menu">BA</td><td>Mary — Business Analyst</td><td class="skill">bmad-agent-analyst</td><td>Persona (BMM)</td><td>Phân tích thị trường, gỡ requirement</td></tr>
+        <tr><td class="menu">MS</td><td>Marketing Strategy</td><td class="skill">bmad-marketing-strategy</td><td>Sprint · Phase 2</td><td>Chiến lược marketing 90 ngày</td></tr>
+        <tr><td class="menu">SS</td><td>SEO Sprint</td><td class="skill">bmad-seo-sprint</td><td>Sprint · Phase 2</td><td>SEO audit + quick wins (2 tuần)</td></tr>
+        <tr><td class="menu">ASEO</td><td>Advanced SEO Sprint</td><td class="skill">bmad-advanced-seo-sprint</td><td>Sprint · Phase 2</td><td>AI SEO, programmatic SEO, schema</td></tr>
+        <tr><td class="menu">MNS</td><td>Monetization Sprint</td><td class="skill">bmad-monetization-sprint</td><td>Sprint · Phase 2</td><td>Pricing, packaging, paywall</td></tr>
+        <tr><td class="menu">CP</td><td>Content Pipeline</td><td class="skill">bmad-content-pipeline</td><td>Sprint · Phase 3</td><td>Sản xuất 1 nội dung end-to-end</td></tr>
+        <tr><td class="menu">SC</td><td>Social Campaign</td><td class="skill">bmad-social-campaign</td><td>Sprint · Phase 3</td><td>Chiến dịch social đa nền tảng</td></tr>
+        <tr><td class="menu">LS</td><td>Launch Sequence</td><td class="skill">bmad-launch-sequence</td><td>Sprint · Phase 3</td><td>Launch sản phẩm J-14 → J+7</td></tr>
+        <tr><td class="menu">CS</td><td>CRO Sprint</td><td class="skill">bmad-cro-sprint</td><td>Sprint · Phase 3</td><td>Tối ưu chuyển đổi tập trung</td></tr>
+        <tr><td class="menu">PAS</td><td>Paid Acquisition Sprint</td><td class="skill">bmad-paid-acquisition-sprint</td><td>Sprint · Phase 3</td><td>Paid ads end-to-end</td></tr>
+        <tr><td class="menu">CCS</td><td>Copy Conversion Sprint</td><td class="skill">bmad-copy-conversion-sprint</td><td>Sprint · Phase 3</td><td>Copywriting hướng chuyển đổi</td></tr>
+        <tr><td class="menu">LES</td><td>Lifecycle Email Sprint</td><td class="skill">bmad-lifecycle-email-sprint</td><td>Sprint · Phase 3</td><td>Email lifecycle hoàn chỉnh</td></tr>
+        <tr><td class="menu">RES</td><td>RevOps Enablement Sprint</td><td class="skill">bmad-revops-enablement-sprint</td><td>Sprint · Phase 3</td><td>RevOps + sales enablement</td></tr>
+        <tr><td class="menu">GLS</td><td>Growth Loops Sprint</td><td class="skill">bmad-growth-loops-sprint</td><td>Sprint · Phase 3</td><td>Free tool, referral, affiliate</td></tr>
+        <tr><td class="menu">CPS</td><td>Creative Production Sprint</td><td class="skill">bmad-creative-production-sprint</td><td>Sprint · Phase 3</td><td>Sản xuất creative ad/social</td></tr>
+        <tr><td class="menu">MO</td><td>Max — Marketing Orchestrator</td><td class="skill">bmad-marketing-orchestrator</td><td>Persona</td><td>Tư vấn chiến lược tổng</td></tr>
+        <tr><td class="menu">SMS</td><td>Nova — Social Media Strategist</td><td class="skill">bmad-social-media-strategist</td><td>Persona</td><td>Lên chiến lược social tổng</td></tr>
+        <tr><td class="menu">LC</td><td>Luna — Launch Coordinator</td><td class="skill">bmad-launch-coordinator</td><td>Persona</td><td>Tư vấn launch sản phẩm</td></tr>
+        <tr><td class="menu">GAN</td><td>Pixel — Growth Analyst</td><td class="skill">bmad-growth-analyst</td><td>Persona</td><td>Số liệu, KPI, A/B test</td></tr>
+        <tr><td class="menu">CRO</td><td>Casey — CRO Strategist</td><td class="skill">bmad-cro-strategist</td><td>Persona</td><td>Tối ưu chuyển đổi</td></tr>
+        <tr><td class="menu">ROS</td><td>Rhea — RevOps Strategist</td><td class="skill">bmad-revops-strategist</td><td>Persona</td><td>RevOps, sales enablement</td></tr>
+        <tr><td class="menu">MON</td><td>Vale — Monetization Strategist</td><td class="skill">bmad-monetization-strategist</td><td>Persona</td><td>Pricing, packaging</td></tr>
+        <tr><td class="menu">CA</td><td>Milo — Content Architect</td><td class="skill">bmad-content-architect</td><td>Persona</td><td>Editorial calendar, brief</td></tr>
+        <tr><td class="menu">SEO</td><td>Quincy — SEO Strategist</td><td class="skill">bmad-seo-strategist</td><td>Persona</td><td>Tư vấn SEO chuyên sâu</td></tr>
+        <tr><td class="menu">PMB</td><td>Piper — Paid Media Buyer</td><td class="skill">bmad-paid-media-buyer</td><td>Persona</td><td>Tư vấn paid ads</td></tr>
+        <tr><td class="menu">LMK</td><td>Elle — Lifecycle Marketer</td><td class="skill">bmad-lifecycle-marketer</td><td>Persona</td><td>Email/lifecycle sequence</td></tr>
+        <tr><td class="menu">GLD</td><td>Flynn — Growth Loop Designer</td><td class="skill">bmad-growth-loop-designer</td><td>Persona</td><td>Free tool, referral, affiliate</td></tr>
+        <tr><td class="menu">TW</td><td>Vex — Twitter Ghostwriter</td><td class="skill">bmad-twitter-ghostwriter</td><td>Persona Social</td><td>Viết tweet, thread</td></tr>
+        <tr><td class="menu">LI</td><td>Ivy — LinkedIn Creator</td><td class="skill">bmad-linkedin-creator</td><td>Persona Social</td><td>Nội dung LinkedIn B2B</td></tr>
+        <tr><td class="menu">YT</td><td>Yuri — YouTube Strategist</td><td class="skill">bmad-youtube-strategist</td><td>Persona Social</td><td>Chiến lược YouTube</td></tr>
+        <tr><td class="menu">TT</td><td>Tikko — TikTok Creator</td><td class="skill">bmad-tiktok-creator</td><td>Persona Social</td><td>TikTok video viral</td></tr>
+        <tr><td class="menu">IG</td><td>Indy — Instagram Strategist</td><td class="skill">bmad-instagram-strategist</td><td>Persona Social</td><td>Instagram + Reels</td></tr>
+        <tr><td class="menu">PT</td><td>Penny — Pinterest Strategist</td><td class="skill">bmad-pinterest-strategist</td><td>Persona Social</td><td>Pinterest SEO</td></tr>
+        <tr><td class="menu">RD</td><td>Karma Ken — Reddit Growth Hacker</td><td class="skill">bmad-reddit-growth-hacker</td><td>Persona Social</td><td>Marketing Reddit</td></tr>
+        <tr><td class="menu">DC</td><td>Disco Dave — Discord Manager</td><td class="skill">bmad-discord-community-manager</td><td>Persona Social</td><td>Build cộng đồng Discord</td></tr>
+        <tr><td class="menu">BSP</td><td>Brainstorming</td><td class="skill">bmad-brainstorming</td><td>Core</td><td>Khi bí ý tưởng</td></tr>
+        <tr><td class="menu">PM</td><td>Party Mode</td><td class="skill">bmad-party-mode</td><td>Core</td><td>Họp nhiều agent cùng lúc</td></tr>
+        <tr><td class="menu">EP</td><td>Editorial Review (Prose)</td><td class="skill">bmad-editorial-review-prose</td><td>Core</td><td>Biên tập câu chữ</td></tr>
+        <tr><td class="menu">ES</td><td>Editorial Review (Structure)</td><td class="skill">bmad-editorial-review-structure</td><td>Core</td><td>Soát cấu trúc tài liệu</td></tr>
+        <tr><td class="menu">AR</td><td>Adversarial Review</td><td class="skill">bmad-review-adversarial-general</td><td>Core</td><td>Review hoài nghi trước khi finalize</td></tr>
+        <tr><td class="menu">DG</td><td>Distillator</td><td class="skill">bmad-distillator</td><td>Core</td><td>Nén tài liệu cho LLM</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  </div><!-- /.container -->
+
+</div><!-- /.layout -->
+
+<footer>
+  From Saigon with love <span class="heartbeat" aria-label="love">♥️</span>
+</footer>
+
+<!-- ───────── Floating action buttons ───────── -->
+<div class="fab-stack">
+  <button class="fab top-fab" id="topFab" aria-label="Lên đầu trang" title="Lên đầu trang">↑</button>
+  <button class="fab search-fab" id="searchFab" aria-label="Tìm kiếm" title="Tìm kiếm (⌘K)">🔍</button>
+</div>
+
+<!-- Copy toast -->
+<div class="copy-toast" id="copyToast"></div>
+
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Tìm kiếm trong trang">
+  <div class="search-panel">
+    <div class="search-bar">
+      <span style="color:var(--muted);font-size:18px">🔍</span>
+      <input id="searchInput" type="search" placeholder="Tìm agent, skill, từ khóa…" autocomplete="off">
+      <button class="search-close" id="searchClose" aria-label="Đóng">Esc</button>
+    </div>
+    <div class="search-stats" id="searchStats" style="display:none">
+      <span id="searchCount">0 kết quả</span>
+      <span class="search-nav">
+        <button id="searchPrev" title="Trước (Shift+Enter)">↑</button>
+        <button id="searchNext" title="Sau (Enter)">↓</button>
+      </span>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<script>
+  // ───── Click-to-copy ─────
+  const toast = document.getElementById('copyToast');
+  let toastTimer;
+  function showToast(label, value){
+    toast.innerHTML = '✓ Đã copy ' + (label ? label : '') + '<code>' + value + '</code>';
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+  function copyText(text, el, label){
+    const done = () => {
+      if(el){
+        el.classList.add('copied');
+        setTimeout(() => el.classList.remove('copied'), 600);
+      }
+      showToast(label, text);
+    };
+    if(navigator.clipboard?.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(() => fallback());
+    } else fallback();
+    function fallback(){
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try{document.execCommand('copy'); done()}catch(e){}
+      ta.remove();
+    }
+  }
+
+  function makeCopyable(el, text, label){
+    if(!text) return;
+    el.classList.add('copyable');
+    el.dataset.copy = text;
+    el.title = 'Click để copy: ' + text;
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      copyText(text, el, label);
+    });
+  }
+
+  // Process all .card .name elements: split persona/display + skill
+  document.querySelectorAll('.card .name').forEach(name => {
+    const small = name.querySelector('small');
+    const skillName = small?.textContent.trim();
+    // first text node is the title (before <small>)
+    const titleNode = name.childNodes[0];
+    const titleText = titleNode?.nodeType === 3 ? titleNode.textContent.trim() : '';
+    if(!titleText) return;
+
+    // build new title HTML
+    const parts = titleText.split(' — ');
+    let html;
+    if(parts.length === 2){
+      const persona = parts[0].trim();
+      const display = parts[1].trim();
+      html = `<span class="copyable" data-copy="${persona}" title="Click để copy persona: ${persona}">${persona}</span> — <span class="copyable" data-copy="${display}" title="Click để copy display name: ${display}">${display}</span>`;
+    } else {
+      html = `<span class="copyable" data-copy="${titleText}" title="Click để copy: ${titleText}">${titleText}</span>`;
+    }
+
+    // Replace the title text node with our spans
+    const tmp = document.createElement('span');
+    tmp.innerHTML = html;
+    titleNode.replaceWith(...tmp.childNodes);
+
+    // Wire click handlers on the new copyable spans
+    name.querySelectorAll('.copyable').forEach(span => {
+      const val = span.dataset.copy;
+      const label = parts.length === 2
+        ? (span.textContent === parts[0].trim() ? 'persona ' : 'tên ')
+        : 'tên ';
+      span.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        copyText(val, span, label);
+      });
+    });
+
+    // Make skill name (small) copyable
+    if(small && skillName){
+      makeCopyable(small, skillName, 'skill ');
+    }
+  });
+
+  // Make .code badges in cards copyable (menu codes like MC, MO)
+  document.querySelectorAll('.card .code').forEach(code => {
+    const txt = code.textContent.trim();
+    if(txt) makeCopyable(code, txt, 'code ');
+  });
+
+  // Make table cells copyable (menu code, display name, skill name)
+  document.querySelectorAll('table.matrix tbody tr').forEach(tr => {
+    const tds = tr.querySelectorAll('td');
+    if(tds.length >= 3){
+      makeCopyable(tds[0], tds[0].textContent.trim(), 'code ');           // menu code
+      makeCopyable(tds[1], tds[1].textContent.trim(), 'tên ');            // display name
+      makeCopyable(tds[2], tds[2].textContent.trim(), 'skill ');          // skill name
+    }
+  });
+
+  // Hamburger toggle
+  const toggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  function closeSidebar(){sidebar.classList.remove('open');backdrop.classList.remove('open')}
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    backdrop.classList.toggle('open');
+  });
+  backdrop.addEventListener('click', closeSidebar);
+  sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSidebar));
+
+  // Active section highlighting on scroll
+  const links = Array.from(sidebar.querySelectorAll('a[href^="#"]'));
+  const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, {rootMargin: '-20% 0px -70% 0px', threshold: 0});
+  targets.forEach(t => observer.observe(t));
+
+  // ───── Back to top ─────
+  const topFab = document.getElementById('topFab');
+  window.addEventListener('scroll', () => {
+    topFab.classList.toggle('visible', window.scrollY > 400);
+  }, {passive:true});
+  topFab.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // ───── Floating full-text search ─────
+  const searchFab = document.getElementById('searchFab');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchClose = document.getElementById('searchClose');
+  const searchResults = document.getElementById('searchResults');
+  const searchStats = document.getElementById('searchStats');
+  const searchCount = document.getElementById('searchCount');
+  const searchPrev = document.getElementById('searchPrev');
+  const searchNext = document.getElementById('searchNext');
+
+  // Strip Vietnamese diacritics for accent-insensitive matching
+  function norm(s){
+    return (s||'').toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g,'')
+      .replace(/đ/g,'d');
+  }
+  function escapeHtml(s){return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+  // ─── Build search index once ───
+  // Each entry = a "result-worthy" element: section, card, table row, callout
+  const INDEX = [];
+  function indexSection(sec){
+    const id = sec.id;
+    const sectionTitle = sec.querySelector('.section-title')?.textContent.trim() || '';
+    // section itself
+    const subText = sec.querySelector('.section-sub')?.textContent.trim() || '';
+    if(sectionTitle){
+      INDEX.push({
+        el: sec,
+        type: 'section',
+        sectionTitle,
+        title: sectionTitle,
+        subtitle: subText,
+        text: sectionTitle + ' ' + subText,
+      });
+    }
+    // group titles
+    sec.querySelectorAll('.group-title').forEach(g => {
+      INDEX.push({
+        el: g,
+        type: 'group',
+        sectionTitle,
+        title: g.textContent.trim(),
+        subtitle: g.nextElementSibling?.classList.contains('group-sub') ? g.nextElementSibling.textContent.trim() : '',
+        text: g.textContent + ' ' + (g.nextElementSibling?.textContent || ''),
+      });
+    });
+    // cards
+    sec.querySelectorAll('.card').forEach(card => {
+      const nameEl = card.querySelector('.name');
+      const titleNode = nameEl?.childNodes[0]?.textContent?.trim() || '';
+      const skill = nameEl?.querySelector('small')?.textContent.trim() || '';
+      const code = card.querySelector('.code')?.textContent.trim() || '';
+      const desc = card.querySelector('.desc')?.textContent.trim() || '';
+      INDEX.push({
+        el: card,
+        type: 'agent',
+        sectionTitle,
+        title: titleNode,
+        subtitle: skill + (code ? ' · ' + code : ''),
+        text: titleNode + ' ' + skill + ' ' + code + ' ' + desc,
+        desc,
+      });
+    });
+    // table rows in matrix
+    sec.querySelectorAll('table.matrix tbody tr').forEach(tr => {
+      const tds = tr.querySelectorAll('td');
+      if(tds.length < 4) return;
+      INDEX.push({
+        el: tr,
+        type: 'row',
+        sectionTitle,
+        title: tds[0].textContent.trim() + ' — ' + tds[1].textContent.trim(),
+        subtitle: tds[2].textContent.trim(),
+        text: tr.textContent,
+        desc: tds[3].textContent.trim(),
+      });
+    });
+    // callouts
+    sec.querySelectorAll('.callout').forEach(c => {
+      const txt = c.textContent.trim();
+      INDEX.push({
+        el: c,
+        type: 'callout',
+        sectionTitle,
+        title: c.querySelector('strong')?.textContent.trim() || 'Lưu ý',
+        subtitle: '',
+        text: txt,
+        desc: txt.slice(0, 200),
+      });
+    });
+  }
+  document.querySelectorAll('section[id]').forEach(indexSection);
+
+  // pre-compute normalized text for each entry
+  INDEX.forEach(e => e._n = norm(e.text));
+
+  // ─── Search logic ───
+  function search(query){
+    const q = query.trim();
+    if(!q) return [];
+    const terms = norm(q).split(/\s+/).filter(t => t.length > 0);
+    if(terms.length === 0) return [];
+
+    const scored = [];
+    INDEX.forEach(entry => {
+      // ALL terms must match (AND search)
+      const allMatch = terms.every(t => entry._n.includes(t));
+      if(!allMatch) return;
+
+      // Score: title hits weigh more, full-phrase bonus, type weight
+      let score = 0;
+      const titleN = norm(entry.title);
+      const phraseN = norm(q);
+
+      terms.forEach(t => {
+        if(titleN.includes(t)) score += 10;
+        // count occurrences in body
+        let i = 0, count = 0;
+        while((i = entry._n.indexOf(t, i)) !== -1){count++; i += t.length}
+        score += count;
+      });
+      if(titleN.includes(phraseN)) score += 25;        // exact phrase in title
+      if(entry._n.includes(phraseN)) score += 5;       // exact phrase anywhere
+
+      // Type weighting
+      if(entry.type === 'agent') score += 3;
+      if(entry.type === 'section') score += 2;
+      if(entry.type === 'row') score += 1;
+
+      scored.push({entry, score});
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, 50);
+  }
+
+  function highlight(text, terms){
+    let html = escapeHtml(text);
+    // sort by length desc to avoid clobbering shorter matches inside longer ones
+    const sorted = [...terms].sort((a, b) => b.length - a.length);
+    sorted.forEach(t => {
+      // accent-insensitive regex by building pattern matching the original chars
+      // simpler approach: search in normalized version, map back via index
+      const htmlN = norm(html);
+      let result = '';
+      let i = 0;
+      while(i < html.length){
+        if(htmlN.substr(i, t.length) === t && !insideTag(html, i)){
+          result += '<mark>' + html.substr(i, t.length) + '</mark>';
+          i += t.length;
+        } else {
+          result += html[i];
+          i++;
+        }
+      }
+      html = result;
+    });
+    return html;
+  }
+  function insideTag(html, pos){
+    // crude check: are we currently inside <...>
+    const lastOpen = html.lastIndexOf('<', pos);
+    const lastClose = html.lastIndexOf('>', pos);
+    return lastOpen > lastClose;
+  }
+
+  function snippet(text, terms, len = 140){
+    const tN = norm(text);
+    let bestIdx = -1;
+    for(const t of terms){
+      const idx = tN.indexOf(t);
+      if(idx !== -1 && (bestIdx === -1 || idx < bestIdx)) bestIdx = idx;
+    }
+    if(bestIdx === -1) return text.slice(0, len) + (text.length > len ? '…' : '');
+    const start = Math.max(0, bestIdx - 40);
+    const end = Math.min(text.length, start + len);
+    return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+  }
+
+  // ─── Render results ───
+  let activeIdx = -1;
+  let currentResults = [];
+
+  function render(query){
+    currentResults = search(query);
+    activeIdx = -1;
+    searchResults.innerHTML = '';
+
+    if(!query.trim()){
+      // initial state - show hint
+      searchResults.innerHTML = '<div class="search-empty" style="text-align:left;padding:18px">' +
+        '<div style="font-size:13px;color:var(--muted);margin-bottom:8px">💡 Gợi ý:</div>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px">' +
+        ['SEO','Quincy','LinkedIn','CRO','launch','viết content','market research','pricing']
+          .map(s => `<button class="suggest-pill" data-q="${s}">${s}</button>`).join('') +
+        '</div></div>';
+      searchResults.querySelectorAll('.suggest-pill').forEach(b => {
+        b.addEventListener('click', () => {
+          searchInput.value = b.dataset.q;
+          render(b.dataset.q);
+          searchInput.focus();
+        });
+      });
+      searchStats.style.display = 'none';
+      return;
+    }
+
+    if(currentResults.length === 0){
+      searchResults.innerHTML = '<div class="search-empty">Không tìm thấy &laquo;' + escapeHtml(query) + '&raquo;<br><small style="color:var(--muted)">Thử ngắn hơn hoặc bỏ dấu</small></div>';
+      searchStats.style.display = 'none';
+      return;
+    }
+
+    searchStats.style.display = 'flex';
+    searchCount.textContent = currentResults.length + ' kết quả';
+
+    const terms = norm(query).split(/\s+/).filter(Boolean);
+
+    // Group by sectionTitle
+    const groups = new Map();
+    currentResults.forEach((r, i) => {
+      const k = r.entry.sectionTitle || 'Khác';
+      if(!groups.has(k)) groups.set(k, []);
+      groups.get(k).push({...r, _i: i});
+    });
+
+    groups.forEach((items, sectionName) => {
+      const header = document.createElement('div');
+      header.style.cssText = 'padding:10px 18px 4px;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:700;background:#fafbfd;position:sticky;top:0';
+      header.textContent = sectionName;
+      searchResults.appendChild(header);
+
+      items.forEach(({entry, _i}) => {
+        const div = document.createElement('div');
+        div.className = 'search-result';
+        div.dataset.idx = _i;
+
+        const typeBadge = {
+          agent:'👤', section:'📂', group:'📁', row:'📋', callout:'💡'
+        }[entry.type] || '•';
+
+        const titleHl = highlight(entry.title, terms);
+        const subHl = entry.subtitle ? '<span style="color:var(--muted);font-weight:400;font-size:13px"> · ' + highlight(entry.subtitle, terms) + '</span>' : '';
+        const ctx = entry.desc ? snippet(entry.desc, terms) : '';
+        const ctxHl = ctx ? '<div class="ctx">' + highlight(ctx, terms) + '</div>' : '';
+
+        div.innerHTML = '<strong>' + typeBadge + ' ' + titleHl + subHl + '</strong>' + ctxHl;
+        div.addEventListener('click', () => goto(entry.el));
+        div.addEventListener('mouseenter', () => setActive(_i));
+        searchResults.appendChild(div);
+      });
+    });
+
+    setActive(0);
+  }
+
+  function setActive(i){
+    if(currentResults.length === 0) return;
+    activeIdx = (i + currentResults.length) % currentResults.length;
+    searchResults.querySelectorAll('.search-result').forEach(el => {
+      el.classList.toggle('active', parseInt(el.dataset.idx) === activeIdx);
+    });
+    const activeEl = searchResults.querySelector('.search-result.active');
+    if(activeEl) activeEl.scrollIntoView({block:'nearest'});
+  }
+
+  function goto(el){
+    closeSearch();
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    el.classList.add('flash-target');
+    setTimeout(() => el.classList.remove('flash-target'), 1800);
+  }
+
+  // ─── Open / close ───
+  function openSearch(){
+    searchOverlay.classList.add('open');
+    setTimeout(() => searchInput.focus(), 50);
+    render('');
+  }
+  function closeSearch(){
+    searchOverlay.classList.remove('open');
+  }
+  searchFab.addEventListener('click', openSearch);
+  searchClose.addEventListener('click', closeSearch);
+  searchOverlay.addEventListener('click', e => {if(e.target === searchOverlay) closeSearch()});
+
+  document.addEventListener('keydown', e => {
+    if((e.metaKey || e.ctrlKey) && e.key === 'k'){e.preventDefault(); openSearch()}
+    if(e.key === 'Escape' && searchOverlay.classList.contains('open')) closeSearch();
+  });
+
+  // Live suggest from first character
+  let dbT;
+  searchInput.addEventListener('input', e => {
+    clearTimeout(dbT);
+    dbT = setTimeout(() => render(e.target.value), 80);
+  });
+  searchInput.addEventListener('keydown', e => {
+    if(e.key === 'ArrowDown'){e.preventDefault(); setActive(activeIdx + 1)}
+    else if(e.key === 'ArrowUp'){e.preventDefault(); setActive(activeIdx - 1)}
+    else if(e.key === 'Enter'){
+      e.preventDefault();
+      if(currentResults[activeIdx]) goto(currentResults[activeIdx].entry.el);
+    }
+  });
+  searchPrev.addEventListener('click', () => setActive(activeIdx - 1));
+  searchNext.addEventListener('click', () => setActive(activeIdx + 1));
+</script>
+
+</body>
+</html>
