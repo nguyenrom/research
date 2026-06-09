@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đánh giá &amp; Phản biện Proposal SEO — Văn Lang (VLU)</title>
+<style>
+  :root{
+    --ink:#1a2330; --muted:#5b6776; --line:#e3e8ef; --bg:#f6f8fb; --card:#fff;
+    --brand:#b3122a; --brand2:#7a0d1d; --ok:#15803d; --warn:#b45309; --red:#b91c1c;
+    --accent:#0d6e9c; --chip:#eef2f7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+  header.hero{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:48px 24px 40px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header.hero .wrap{padding:0 24px}
+  header.hero .kicker{text-transform:uppercase;letter-spacing:.12em;font-size:12.5px;opacity:.85;margin-bottom:10px}
+  header.hero h1{margin:0 0 10px;font-size:30px;line-height:1.25;font-weight:700}
+  header.hero p{margin:0;opacity:.92;max-width:760px}
+  header.hero .meta{margin-top:18px;font-size:13.5px;opacity:.85;display:flex;gap:18px;flex-wrap:wrap}
+  nav.toc{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  nav.toc .wrap{display:flex;gap:6px;flex-wrap:wrap;padding:10px 24px}
+  nav.toc a{font-size:13px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:7px}
+  nav.toc a:hover{background:var(--chip);color:var(--ink)}
+  main{padding:36px 0 60px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px;margin:0 0 22px;box-shadow:0 1px 2px rgba(20,30,50,.03)}
+  section h2{margin:0 0 6px;font-size:21px;display:flex;align-items:center;gap:10px}
+  section h2 .n{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex:none}
+  section .lead{color:var(--muted);margin:0 0 18px;font-size:15px}
+  h3{font-size:16.5px;margin:22px 0 8px;color:var(--brand2)}
+  p{margin:10px 0}
+  ul{margin:8px 0;padding-left:20px}
+  li{margin:5px 0}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  th,td{text-align:left;padding:10px 12px;border:1px solid var(--line);vertical-align:top}
+  th{background:#f1f4f8;font-weight:600}
+  tr:nth-child(even) td{background:#fafbfd}
+  .chip{display:inline-block;background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12.5px;color:var(--muted);margin:2px 4px 2px 0}
+  .seed{background:#fff7e6;border:1px solid #f0d9a8;border-radius:10px;padding:14px 16px;margin:14px 0}
+  .seed b{color:var(--warn)}
+  .rec{background:#ecfdf3;border:1px solid #b7e4c7;border-left:4px solid var(--ok);border-radius:8px;padding:10px 14px;margin:8px 0;font-size:14.5px}
+  .rec b{color:var(--ok)}
+  .flag{color:var(--red);font-weight:600}
+  .pa{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+  .pa .opt{background:#fafbfd;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px}
+  .pa .opt .h{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+  .mcard{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .mcard .title{font-weight:700;font-size:16px;margin-bottom:2px}
+  .mcard .src{font-size:12.5px;color:var(--accent);font-weight:600}
+  .pillar{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:3px 10px;border-radius:6px;margin:18px 0 6px}
+  .p1{background:#0d6e9c}.p2{background:#7a0d1d}.p3{background:#b45309}
+  .matrix td .s{font-weight:700;color:var(--brand)}
+  .wave{border-left:4px solid var(--accent);background:#f0f7fb;border-radius:8px;padding:14px 18px;margin:14px 0}
+  .wave h4{margin:0 0 6px;font-size:15px}
+  .step{display:flex;gap:14px;margin:10px 0;align-items:flex-start}
+  .step .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .step .body{flex:1}
+  .step .body b{display:block}
+  .tree{background:#fafbfd;border:1px dashed var(--line);border-radius:10px;padding:16px 18px;font-size:14.5px}
+  .tree code{background:#eef2f7;padding:1px 6px;border-radius:5px;font-size:13px}
+  details{border:1px solid var(--line);border-radius:8px;padding:8px 14px;margin:8px 0;background:#fafbfd}
+  summary{cursor:pointer;font-weight:600}
+  .qgrid{columns:2;column-gap:24px;font-size:13.5px;color:var(--muted)}
+  .qgrid p{margin:6px 0;break-inside:avoid}
+  footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 24px 50px}
+  .callout{background:#fff;border:2px solid var(--brand);border-radius:12px;padding:18px 20px;margin:14px 0}
+  .callout b{color:var(--brand)}
+  @media(max-width:720px){.pa,.qgrid{grid-template-columns:1fr;columns:1}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Brainstorming · Phản biện chiến lược</div>
+    <h1>Đánh giá &amp; Phản biện Proposal SEO — Trường Đại học Văn Lang</h1>
+    <p>Mục tiêu: <b>tự dựng bản đồ đúng</b> để chủ động lên chiến lược &amp; kế hoạch, dùng nó soi proposal của vendor — thay vì chạy theo proposal. Đầu ra: bộ câu hỏi chất vấn + chiến lược thay thế + trình tự việc-cần-làm.</p>
+    <div class="meta">
+      <span>Người chủ trì: Rom</span><span>Ngày: 02/06/2026</span><span>Phương pháp: Progressive Flow (debate-driven)</span><span>8 hạt giống → 75 câu hỏi → 12 quyết định</span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#frame">Khung &amp; 8 hạt giống</a>
+  <a href="#first">Sự thật gốc</a>
+  <a href="#segments">Ma trận phân khúc</a>
+  <a href="#main">12 quyết định Main</a>
+  <a href="#roadmap">Trình tự việc-cần-làm</a>
+  <a href="#tree">Cây quyết định</a>
+  <a href="#checklist">Checklist chất vấn vendor</a>
+  <a href="#secondary">Câu hỏi mở rộng</a>
+</div></nav>
+
+<main class="wrap">
+
+  <section id="frame">
+    <h2><span class="n">0</span> Khung phản biện &amp; 8 hạt giống ban đầu</h2>
+    <p class="lead">8 nhận định ban đầu của Rom không phải kết luận — chúng là <b>hạt giống</b> để tranh biện, mở rộng thành tiêu chí ra quyết định. Không bỏ sót câu nào; mỗi câu được nâng cấp vào 12 quyết định Main.</p>
+    <table>
+      <tr><th style="width:42%">Hạt giống</th><th>Bản chất</th><th>Trụ cột</th><th>Nâng thành</th></tr>
+      <tr><td>① SEO về cơ bản chỉ là chiến lược content</td><td>Phạm vi công việc</td><td>Chiến lược</td><td>M2</td></tr>
+      <tr><td>② Cần website đúng schema để Search Engine &amp; AI hiểu khi crawl</td><td>Kỹ thuật web</td><td>Website</td><td>M8</td></tr>
+      <tr><td>③ Thay đổi web để adapt — chi phí đã gồm? Trở ngại → deadline?</td><td>Phụ thuộc &amp; rủi ro</td><td>Website</td><td>M6</td></tr>
+      <tr><td>④ SEO duy trì hàng năm hay cam kết hiệu quả thứ hạng bao lâu?</td><td>Tầm nhìn &amp; KPI</td><td>Chiến lược</td><td>M4</td></tr>
+      <tr><td>⑤ Viral qua micro-influencer hiệu quả &amp; rẻ hơn</td><td>Cơ cấu kênh</td><td>Chiến lược</td><td>M3</td></tr>
+      <tr><td>⑥ Thay vì đua từ khóa chung — chiến lược khác?</td><td>Định vị cạnh tranh</td><td>Chiến lược</td><td>M3</td></tr>
+      <tr><td>⑦ Mục tiêu là sales, không chỉ brand → journey + tracking + retarget</td><td>Mục tiêu &amp; chuyển đổi</td><td>Chiến lược + Website</td><td>M5 + M7</td></tr>
+      <tr><td>⑧ Chia dự án 3 phần: Chiến lược → Website → Triển khai</td><td>Cấu trúc dự án</td><td>—</td><td>Khung toàn báo cáo</td></tr>
+    </table>
+  </section>
+
+  <section id="first">
+    <h2><span class="n">1</span> Hai sự thật gốc (First Principles)</h2>
+    <p class="lead">Chốt nền tảng trước để mọi tiêu chí không lạc đề.</p>
+    <div class="seed"><b>Gốc #1 — Mô hình mua:</b> Giáo dục bậc cao là quyết định <b>đắt tiền, rủi ro cao, chu kỳ dài 6–18 tháng, nhiều người cùng quyết</b> (học viên + gia đình + đôi khi doanh nghiệp tài trợ). → Tư duy "SEO lên top → có lead" là của sản phẩm mua nhanh, một người quyết. Sai mô hình mua = sai toàn bộ thước đo.</div>
+    <div class="seed"><b>Gốc #2 — Intent theo giai đoạn:</b> Giai đoạn sớm người ta search <b>nỗi đau/khát vọng</b> ("đang đi làm có nên học thạc sĩ"); giai đoạn muộn mới search tên trường. "Từ khóa chung chung" có 2 loại rất khác: <b>chung-vô dụng</b> vs <b>chung-đúng nỗi đau</b>. → Đây là cốt lõi để trả lời hạt giống ⑥.</div>
+  </section>
+
+  <section id="segments">
+    <h2><span class="n">2</span> Ma trận phân khúc &amp; thứ tự ưu tiên</h2>
+    <p class="lead">Quyết định M1 = phủ <b>cả 4 phân khúc</b> (Bậc × Người quyết). Hệ quả: không thể dùng một chiến lược cho cả 4 — bắt buộc phân khúc &amp; xếp sóng, nếu không ngân sách dàn mỏng.</p>
+    <table class="matrix">
+      <tr><th></th><th>B1 — Người học tự quyết</th><th>B2 — Gia đình / Doanh nghiệp tài trợ</th></tr>
+      <tr><th>A1 — Sau ĐH / cao cấp</th>
+        <td><span class="s">S1</span> Người đi làm học thạc sĩ, nâng cấp sự nghiệp<br><span class="chip">"MBA buổi tối", "học thạc sĩ khi đi làm có đáng"</span></td>
+        <td><span class="s">S2</span> Family Academy / kế nghiệp / DN cử người đi đào tạo<br><span class="chip">ít đối thủ · biên cao · deal lớn</span></td></tr>
+      <tr><th>A2 — ĐH chính quy</th>
+        <td><span class="s">S3</span> Thí sinh 18+ tự chọn ngành<br><span class="chip">"ngành dễ xin việc", "review Văn Lang" · social/Gen-Z</span></td>
+        <td><span class="s">S4</span> Phụ huynh chọn trường cho con<br><span class="chip">nặng niềm tin &amp; an toàn</span></td></tr>
+    </table>
+    <div class="wave"><h4>🌊 Sóng 1 (ưu tiên) — S2 + S1 (khối sau ĐH)</h4>
+      Ít đối thủ SEO, biên cao, ngách rõ, tận dụng research sẵn có → <b>thắng nhanh &amp; chắc</b>. Tạo nền topic-authority + tài sản nội dung + dữ liệu first-party + bằng chứng ROI.</div>
+    <div class="wave"><h4>🌊 Sóng 2 — S3 + S4 (ĐH chính quy)</h4>
+      Cạnh tranh khốc liệt, mùa vụ gắt, nhân khẩu bất lợi → cần nền authority của Sóng 1 mới đủ sức đua. Thêm social search + influencer (tạo nhu cầu) ở giai đoạn này.</div>
+    <div class="rec"><b>Khuyến nghị đã chốt:</b> Đánh Sóng 1 trước. Đánh ngược (chính quy trước) = đốt tiền vào ô khó nhất khi chưa có nền.</div>
+  </section>
+
+  <section id="main">
+    <h2><span class="n">3</span> 12 quyết định Main — 2 phương án + khuyến nghị</h2>
+    <p class="lead">Phân tầng theo yêu cầu của Rom: đây là các câu <b>phải trả lời để ra quyết định &amp; lên plan</b> (Main). Câu mở rộng nằm ở mục cuối (Secondary). Mẫu hình: gần như mọi câu nên chọn <b>PA2</b> = full-stack, sở hữu dữ liệu, tự chủ, đo lường thật.</p>
+
+    <div class="pillar p1">Trụ cột 1 — Chiến lược</div>
+
+    <div class="mcard">
+      <div class="title">M1 — Đối tượng &amp; bậc trọng tâm <span class="src">[gate · ĐÃ CHỐT]</span></div>
+      <p>Chọn cả 4 phân khúc (A1+A2, B1+B2), triển khai theo 2 sóng. Xem Ma trận phân khúc ở trên.</p>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M2 — Phạm vi thật của "SEO" <span class="src">[hạt giống ①⑤]</span></div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Chỉ content (như đa số vendor báo giá).</div>
+        <div class="opt"><div class="h">Phương án 2</div>Full-stack: technical + content + authority + GEO; kết hợp bắt nhu cầu (capture) + tạo nhu cầu (generation).</div>
+      </div>
+      <div class="rec"><b>⭐ PA2, tuần tự:</b> technical (nền) → content → authority. Sóng 1 ưu tiên capture (bottom-funnel S1/S2 ra lead nhanh); generation (influencer/social) đẩy ở Sóng 2. Phản biện trực tiếp niềm tin "SEO = chỉ content".</div>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M3 — Định vị cạnh tranh <span class="src">[hạt giống ⑤⑥]</span></div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Đua từ khóa chung trực diện ("đại học TP.HCM"…).</div>
+        <div class="opt"><div class="h">Phương án 2</div>Topic-cluster ngách + khuếch đại lợi thế không-copy-được (giảng viên thật, alumni, case kế nghiệp).</div>
+      </div>
+      <div class="rec"><b>⭐ PA2.</b> S2 (kế nghiệp) gần như không có đối thủ SEO → thắng dễ; S1 đánh cụm "sự nghiệp + học khi đi làm". Influencer/UGC là bổ trợ tạo sóng, <b>không thay thế</b> SEO (influencer tạo nhu cầu, SEO bắt nhu cầu — nuôi nhau).</div>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M4 — Tầm nhìn &amp; KPI <span class="src">[hạt giống ④]</span></div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Hợp đồng 1 năm, KPI = thứ hạng + traffic.</div>
+        <div class="opt"><div class="h">Phương án 2</div>Cam kết 3 năm (review theo quý), KPI hỗn hợp: năm 1 đo leading (hạng/traffic/lead), từ năm 2 đo lagging (hồ sơ/nhập học).</div>
+      </div>
+      <div class="rec"><b>⭐ PA2 + cổng thoát (M12).</b> SEO là "trồng cây" (năm 1 lỗ, năm 2 hòa, năm 3 hái quả). Tránh bẫy vendor cam kết "top thứ hạng" khi kỷ nguyên AI Overviews đang làm thứ hạng mất nghĩa dần.</div>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M5 — Định nghĩa "thắng" + CPA <span class="src">[hạt giống ⑦]</span></div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>"Sales" = lead (để lại số). Vendor chịu tới đây.</div>
+        <div class="opt"><div class="h">Phương án 2</div>Bậc thang: vendor tới MQL/SQL → trường tới nhập học, đo cả hai, nối qua CRM.</div>
+      </div>
+      <div class="rec"><b>⭐ PA2.</b> Đặt <b>CPA tối đa theo LTV từng phân khúc</b> TRƯỚC khi xét báo giá (S2 LTV cao → chấp nhận CPA cao; S3 cạnh tranh → CPA mỏng). Đây là thước đo "có nên duyệt proposal hay không".</div>
+    </div>
+
+    <div class="pillar p2">Trụ cột 2 — Nền tảng / Website</div>
+
+    <div class="mcard">
+      <div class="title">M6 — Website có adapt được không <span class="src">[hạt giống ②③]</span></div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Sửa/vá trực tiếp web tổng hiện tại.</div>
+        <div class="opt"><div class="h">Phương án 2</div>Dựng landing hub/microsite riêng cho khối sau ĐH (Sóng 1) — kiểm soát được, né nút thắt CNTT nội bộ; song song audit &amp; vá dần web tổng.</div>
+      </div>
+      <div class="rec"><b>⭐ PA2.</b> Bắt vendor nộp <b>baseline tốc độ/Core Web Vitals trước khi ký</b> + ghi rõ <b>trần chi phí phát sinh &amp; ai gánh</b> vào hợp đồng → trả lời thẳng câu "deadline có bị ảnh hưởng không".</div>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M7 — Journey + chuyển đổi + dữ liệu <span class="src">[hạt giống ⑦]</span></div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Vendor dựng tracking/journey trên hệ thống của họ.</div>
+        <div class="opt"><div class="h">Phương án 2</div>GA4/GSC/pixel/CRM đứng tên trường; journey có chủ đích (ngách→ngành→đặt lịch tư vấn) + công cụ chốt (đặt lịch, máy tính học phí, chatbot).</div>
+      </div>
+      <div class="rec"><b>⭐ PA2 tuyệt đối.</b> Dữ liệu first-party là tài sản còn lại sau hợp đồng. Retarget phân tầng theo độ "nóng", không bắn đại trà.</div>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M8 — Tối ưu cho ai đọc <span class="src">[hạt giống ②]</span></div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Chỉ Google truyền thống.</div>
+        <div class="opt"><div class="h">Phương án 2</div>Google + GEO (AI Overviews/ChatGPT/Perplexity trích dẫn) + social search (TikTok/YouTube cho S3).</div>
+      </div>
+      <div class="rec"><b>⭐ PA2.</b> Cùng một nền schema + E-E-A-T phục vụ cả Google lẫn AI. Social search đưa vào Sóng 2 (S3 Gen-Z).</div>
+    </div>
+
+    <div class="pillar p3">Trụ cột 3 — Triển khai (kiểm soát &amp; tự chủ)</div>
+
+    <div class="mcard">
+      <div class="title">M9 — Ranh giới trách nhiệm + người cầm trịch</div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Khoán trọn cho vendor.</div>
+        <div class="opt"><div class="h">Phương án 2</div>Bảng RACI rõ; 1 người nội bộ là "chủ sản phẩm" nghiệm thu (có thể là Rom); SLA duyệt content 2 chiều.</div>
+      </div>
+      <div class="rec"><b>⭐ PA2.</b> 80% dự án trễ do khách chậm duyệt; RACI chặn trước việc đổ lỗi &amp; giữ bạn ở thế cầm trịch.</div>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M10 — Quyền sở hữu &amp; bàn giao <span class="src">[then chốt tự chủ]</span></div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Vendor giữ tài khoản &amp; công cụ.</div>
+        <div class="opt"><div class="h">Phương án 2</div>Mọi tài khoản đứng tên trường + phụ lục deliverable bàn giao + điều khoản đào tạo/chuyển giao đội nội bộ.</div>
+      </div>
+      <div class="rec"><b>⭐ PA2.</b> Đây chính là điều biến bạn từ "phụ thuộc vendor" → "tự dẫn dắt, thuê vendor như tay làm".</div>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M11 — Ai sản xuất nội dung chuyên môn (E-E-A-T)</div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Vendor viết chay/AI, gắn tên trường.</div>
+        <div class="opt"><div class="h">Phương án 2</div>Giảng viên/cựu học viên thật đứng tên; pipeline phỏng vấn chuyên gia → vendor biên tập SEO → giảng viên duyệt.</div>
+      </div>
+      <div class="rec"><b>⭐ PA2</b> (bắt buộc với YMYL giáo dục). AI chỉ để mở rộng quy mô có kiểm soát, không viết rỗng (Google phạt nội dung AI rỗng).</div>
+    </div>
+
+    <div class="mcard">
+      <div class="title">M12 — Đo lường + điều kiện dừng</div>
+      <div class="pa">
+        <div class="opt"><div class="h">Phương án 1</div>Vendor tự đo, tự báo cáo, không mốc dừng.</div>
+        <div class="opt"><div class="h">Phương án 2</div>Dashboard read-only cho trường + nối lead online→hồ sơ offline qua CRM + mô hình quy kết thống nhất + định nghĩa tiêu chí thất bại.</div>
+      </div>
+      <div class="rec"><b>⭐ PA2.</b> "Định nghĩa thất bại trước khi cãi nhau" — vd: 6 tháng không đạt leading KPI → review lại/đổi hướng. Cổng thoát bảo vệ ngân sách.</div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <h2><span class="n">4</span> Trình tự việc-cần-làm (Roadmap)</h2>
+    <p class="lead">Ánh xạ 3 phần ⑧ (Chiến lược → Website → Triển khai) và 2 sóng. Điểm mấu chốt: <b>GĐ0 do trường tự làm trước khi gọi vendor</b> — biến Strategy Brief thành công cụ đấu thầu, đảo thế cờ.</p>
+
+    <div class="step"><div class="num">0</div><div class="body"><b>GĐ0 — CHIẾN LƯỢC (tự làm, trước khi gọi vendor)</b>
+      <ul>
+        <li>Tính LTV từng phân khúc → chốt <b>CPA tối đa</b> &amp; ngân sách trần (M5).</li>
+        <li>Chốt định vị ngách + topic-cluster (M3), phạm vi full-stack (M2), tầm nhìn 3 năm + KPI hỗn hợp (M4).</li>
+        <li>Gom danh sách giảng viên/alumni làm nguồn E-E-A-T (M11).</li>
+        <li><b>Đầu ra: Strategy Brief</b> → dùng để mời vendor đấu thầu theo khung của mình.</li>
+      </ul></div></div>
+
+    <div class="step"><div class="num">1</div><div class="body"><b>GĐ1 — NỀN TẢNG / WEBSITE</b>
+      <ul>
+        <li>Audit web hiện tại: tốc độ/schema/quyền sửa — chốt baseline (M6).</li>
+        <li>Dựng microsite/landing hub cho khối sau ĐH (M6).</li>
+        <li>Cài tracking GA4/GSC/pixel/CRM <b>đứng tên trường</b> (M7, M10).</li>
+        <li>Thiết kế journey + công cụ chốt cho S2/S1; nền schema + GEO (M7, M8).</li>
+      </ul></div></div>
+
+    <div class="step"><div class="num">2</div><div class="body"><b>GĐ2 — TRIỂN KHAI SÓNG 1 (S2 + S1, sau ĐH)</b>
+      <ul>
+        <li>Keyword/topic research ngách cho S2 (kế nghiệp) &amp; S1 (thạc sĩ người đi làm).</li>
+        <li>Chạy pipeline nội dung E-E-A-T (phỏng vấn giảng viên → biên tập → duyệt) (M11).</li>
+        <li>Sản xuất topic-cluster + landing chuyển đổi; thiết lập dashboard read-only (M12).</li>
+        <li>RACI + nhịp họp tinh gọn (M9). <b>Cổng review 6 tháng</b> theo leading KPI (M4, M12).</li>
+      </ul></div></div>
+
+    <div class="step"><div class="num">3</div><div class="body"><b>GĐ3 — MỞ RỘNG SÓNG 2 (S3 + S4, chính quy) + generation</b>
+      <ul>
+        <li>Thêm social search + micro-influencer + UGC (tạo nhu cầu).</li>
+        <li>Đua topic-cluster chính quy dựa trên nền authority đã xây ở Sóng 1.</li>
+        <li>Phòng thủ thương hiệu: chống cướp từ khóa, đè tin xấu.</li>
+        <li>Chuyển trọng tâm đo sang lagging KPI (hồ sơ/nhập học).</li>
+      </ul></div></div>
+  </section>
+
+  <section id="tree">
+    <h2><span class="n">5</span> Cây quyết định — 3 ngã rẽ then chốt</h2>
+    <div class="tree">
+      <p>🔀 <b>Web tổng có adapt được (schema/tốc độ/quyền sửa)?</b><br>
+      → <code>Có</code>: vá &amp; tối ưu trực tiếp. &nbsp; → <code>Không / chậm</code>: <b>dựng microsite riêng cho Sóng 1</b> (đã chọn hướng này), vá web tổng song song.</p>
+      <p>🔀 <b>Mùa tuyển sinh tới có gấp không?</b><br>
+      → <code>Gấp</code>: thêm <b>Google/Social Ads bắc cầu</b> độ trễ 6–12 tháng của SEO để hứng mùa năm nay. &nbsp; → <code>Không gấp</code>: tập trung xây tài sản SEO bền.</p>
+      <p>🔀 <b>Sau 6 tháng có đạt leading KPI (hạng/traffic/lead)?</b><br>
+      → <code>Đạt</code>: mở Sóng 2 + tăng ngân sách. &nbsp; → <code>Không đạt</code>: kích hoạt <b>điều kiện dừng</b> — review hướng/đổi vendor (M12).</p>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <h2><span class="n">6</span> Checklist chất vấn vendor (14 câu + cờ đỏ)</h2>
+    <p class="lead">Dùng Strategy Brief làm chuẩn, hỏi vendor 14 câu sau. <span class="flag">Cờ đỏ</span> = dấu hiệu vendor yếu hoặc đang "vẽ".</p>
+    <table>
+      <tr><th style="width:4%">#</th><th style="width:48%">Câu hỏi chất vấn</th><th>Cờ đỏ cần cảnh giác</th></tr>
+      <tr><td>1</td><td><b>Phạm vi (M2):</b> Anh/chị bán technical, content hay authority? Cho xem cách audit technical.</td><td><span class="flag">🚩</span> Chỉ nói content, không nhắc technical/schema/tốc độ.</td></tr>
+      <tr><td>2</td><td><b>Định vị (M3):</b> Chiến lược từ khóa cho từng phân khúc? Có topic-cluster ngách không?</td><td><span class="flag">🚩</span> Đưa vài từ khóa chung chung, không phân khúc theo S1–S4.</td></tr>
+      <tr><td>3</td><td><b>Cam kết &amp; KPI (M4):</b> Cam kết gì, đo bằng gì, trong bao lâu?</td><td><span class="flag">🚩</span> Hứa "top 1 Google trong X tháng" cho từ khóa cạnh tranh — hứa hão.</td></tr>
+      <tr><td>4</td><td><b>Sales (M5):</b> Conversion định nghĩa thế nào, chịu trách nhiệm tới nấc nào?</td><td><span class="flag">🚩</span> Hứa "ra sales/nhập học" mà không định nghĩa, không đo offline.</td></tr>
+      <tr><td>5</td><td><b>Website (M6):</b> Chi phí sửa web đã gồm chưa? Nếu web cản trở thì xử lý &amp; gánh chi phí ra sao?</td><td><span class="flag">🚩</span> "Tính sau / phát sinh" không có trần &amp; không phân định ai gánh.</td></tr>
+      <tr><td>6</td><td><b>Dữ liệu (M7/M10):</b> Tài khoản GA4/Search Console/CRM/pixel đứng tên ai?</td><td><span class="flag">🚩</span> Đứng tên vendor; bạn không có quyền admin.</td></tr>
+      <tr><td>7</td><td><b>GEO (M8):</b> Có tối ưu để AI Overviews/ChatGPT trích dẫn không?</td><td><span class="flag">🚩</span> Không biết GEO là gì / chỉ nói về Google.</td></tr>
+      <tr><td>8</td><td><b>RACI (M9):</b> Việc gì của trường, việc gì của vendor? Cho xem bảng phân vai.</td><td><span class="flag">🚩</span> Không phân định, khoán mơ hồ "cứ để bên em lo".</td></tr>
+      <tr><td>9</td><td><b>Bàn giao (M10):</b> Hết hợp đồng bàn giao những gì? Có đào tạo đội nội bộ không?</td><td><span class="flag">🚩</span> Né câu hỏi; dựng trên plugin/hệ thống riêng gây lock-in.</td></tr>
+      <tr><td>10</td><td><b>Nội dung (M11):</b> Ai viết? Giảng viên có duyệt? Dùng AI bao nhiêu %?</td><td><span class="flag">🚩</span> Viết chay/100% AI, không có nguồn chuyên môn thật đứng tên.</td></tr>
+      <tr><td>11</td><td><b>Đo lường (M12):</b> Báo cáo thế nào? Có dashboard read-only? Tiêu chí dừng?</td><td><span class="flag">🚩</span> Tự đo tự báo cáo, không cho trường truy cập trực tiếp.</td></tr>
+      <tr><td>12</td><td><b>Quy kết (M12):</b> Quy kết đa kênh ra sao? Nối lead online ↔ hồ sơ offline thế nào?</td><td><span class="flag">🚩</span> Mỗi kênh tự nhận 100% công (cộng dồn &gt;100%).</td></tr>
+      <tr><td>13</td><td><b>Chi phí ẩn:</b> Tổng chi phí gồm công cụ (Ahrefs/GA4/CRM) &amp; nhân sự nào của trường?</td><td><span class="flag">🚩</span> Báo giá thấp bất thường → ẩn phí công cụ/nhân sự nội bộ.</td></tr>
+      <tr><td>14</td><td><b>Mùa vụ &amp; độ trễ:</b> SEO bao lâu có kết quả? Mùa tuyển sinh năm nay tính sao?</td><td><span class="flag">🚩</span> Hứa kết quả nhanh phi thực tế; không thừa nhận độ trễ 6–12 tháng.</td></tr>
+    </table>
+    <div class="callout"><b>Nguyên tắc vàng:</b> Vendor giỏi sẽ <b>chủ động nói về độ trễ, về việc trường phải làm, về quyền sở hữu dữ liệu và tiêu chí dừng</b>. Vendor "bán giấc mơ" sẽ chỉ nói về thứ hạng &amp; traffic. Strategy Brief của bạn là thước — proposal nào không khớp khung này thì sửa hoặc loại.</div>
+  </section>
+
+  <section id="secondary">
+    <h2><span class="n">7</span> Câu hỏi mở rộng (Secondary)</h2>
+    <p class="lead">Không gate quyết định — dùng để đào sâu khi cần. Đây là 75 câu hỏi đã sinh trong Pha 1, gom theo lăng kính.</p>
+    <details><summary>Chiến lược &amp; định vị</summary>
+      <div class="qgrid">
+        <p>Q11 — Chạm nơi họ thực sự ra quyết định (cộng đồng/review/truyền miệng)?</p>
+        <p>Q14 — Đối thủ (RMIT/FPT/UEH/Hoa Sen) đã chiếm cụm nào? Đánh khoảng trống.</p>
+        <p>Q35 — Programmatic/topic-cluster: hàng trăm trang ngách dài đối thủ lười làm.</p>
+        <p>Q36 — Nhân khẩu VN (sinh giảm) → dịch trọng tâm sang sau ĐH/học suốt đời.</p>
+        <p>Q43 — Cộng đồng alumni = cỗ máy truyền miệng + backlink + UGC.</p>
+        <p>Q57–59 — Đối tác THPT / doanh nghiệp / hiệp hội (B2B2C, mua sỉ).</p>
+        <p>Q68 — Topic authority: thành nguồn Google/AI tin cậy cho vài chủ đề.</p>
+        <p>Q72 — Lợi thế không-copy-được (giảng viên/cơ sở/alumni/văn hóa).</p>
+        <p>Q75 — Sản phẩm tương lai (micro-credential/học suốt đời) — SEO xây nền?</p>
+      </div></details>
+    <details><summary>Kênh, mùa vụ &amp; đo lường</summary>
+      <div class="qgrid">
+        <p>Q7 — Đo "branded search lift" sau chiến dịch influencer.</p>
+        <p>Q15 — Zero-click/AI Overviews → đo share-of-voice trong câu trả lời AI.</p>
+        <p>Q18 — So sánh SEO vs Ads theo chi phí/lead lũy kế 24–36 tháng.</p>
+        <p>Q31 — Mô hình quy kết đa chạm thống nhất (tránh cộng 300%).</p>
+        <p>Q32 — Nối lead online ↔ hồ sơ nhập học thật trong CRM.</p>
+        <p>Q38–40 — Social search (TikTok/YouTube), zero-click, đa thiết bị.</p>
+        <p>Q61 — Đa dạng hóa kênh — đừng all-in SEO (1 update Google xoá 40% traffic).</p>
+        <p>Q63–65 — Dồn content/ngân sách đúng đỉnh mùa; evergreen vs thời vụ.</p>
+      </div></details>
+    <details><summary>Website, nội dung &amp; chuyển đổi</summary>
+      <div class="qgrid">
+        <p>Q5–6 — Mục tiêu GEO + schema cụ thể (Course/EducationalOrganization/FAQ/Review).</p>
+        <p>Q23 — Audit Core Web Vitals, yêu cầu baseline trước khi ký.</p>
+        <p>Q46–49 — Nguồn E-E-A-T, pipeline sản xuất, ranh giới AI, tái sử dụng đa kênh.</p>
+        <p>Q50–53 — User journey có chủ đích, công cụ chốt, CRO/A-B test, retarget phân tầng.</p>
+      </div></details>
+    <details><summary>Tài chính, pháp lý, vendor &amp; rủi ro</summary>
+      <div class="qgrid">
+        <p>Q13 — Chi phí chìm ngoài báo giá (nhân sự, pháp chế, công cụ).</p>
+        <p>Q16–17,19 — LTV/CPA, đường cong tiền-ra-trước, định giá tài sản nội dung.</p>
+        <p>Q24–26 — Tuyên bố quảng cáo, bảo vệ thương hiệu SERP, Nghị định 13.</p>
+        <p>Q27–30 — Deliverable bàn giao, chống lock-in, chuyển giao nội bộ, kiểm chứng độc lập.</p>
+        <p>Q42,60,62 — Reputation management, đè tin xấu, chống cướp từ khóa thương hiệu.</p>
+        <p>Q44–45 — Sinh viên quốc tế / chương trình tiếng Anh / Việt kiều.</p>
+        <p>Q69–70 — Cập nhật khi quy chế Bộ GD&amp;ĐT đổi; ranh giới quảng cáo giáo dục.</p>
+        <p>Q71,73–74 — AI thay thế (GEO), reverse "đốt tiền thế nào", website có còn là trung tâm?</p>
+      </div></details>
+  </section>
+
+  <footer>
+    Brainstorming Session · Đánh giá proposal SEO cho VLU · 02/06/2026 · Phương pháp Progressive Flow (debate-driven)<br>
+    Từ 8 hạt giống → 75 câu hỏi (20 lăng kính) → 12 quyết định Main → roadmap 4 giai đoạn + checklist 14 câu chất vấn vendor.
+  </footer>
+</main>
+</body>
+</html>
