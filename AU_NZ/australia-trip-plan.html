@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Úc/Tasmania 12-15 ngày — Nature Road Trip · Plan chia sẻ nhóm bạn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ochre: #C65D1F;
+    --ochre-dark: #8B3F0E;
+    --eucalyptus: #4A6B3E;
+    --eucalyptus-dark: #2D4225;
+    --sand: #F4E9D8;
+    --cream: #FFFBF3;
+    --ink: #1A1410;
+    --ink-soft: #4A3F35;
+    --line: #E5D7BE;
+    --accent: #D4AF37;
+    --rust: #B85433;
+    --sea: #3B7A8C;
+    --shadow: 0 1px 3px rgba(26,20,16,0.08), 0 4px 12px rgba(26,20,16,0.05);
+    --shadow-lg: 0 4px 8px rgba(26,20,16,0.1), 0 16px 32px rgba(26,20,16,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; line-height: 1.15; color: var(--ink); }
+  a { color: var(--ochre-dark); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--ochre) 0%, var(--rust) 50%, var(--eucalyptus-dark) 100%);
+    color: var(--cream);
+    padding: 80px 5vw 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+    background: radial-gradient(ellipse at top right, rgba(212,175,55,0.25), transparent 60%),
+                radial-gradient(ellipse at bottom left, rgba(74,107,62,0.4), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before { content: ''; width: 32px; height: 2px; background: var(--accent); }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    color: var(--cream);
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    max-width: 900px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; font-weight: 800; }
+  .hero p.lead {
+    font-size: clamp(17px, 1.6vw, 21px);
+    max-width: 700px;
+    opacity: 0.92;
+    margin-bottom: 32px;
+  }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .hero-tag {
+    background: rgba(255,251,243,0.15);
+    border: 1px solid rgba(255,251,243,0.3);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+  }
+
+  /* NAV */
+  nav.sticky {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,251,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 5vw;
+  }
+  nav.sticky .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  nav.sticky .brand { font-weight: 700; font-family: 'Bricolage Grotesque'; font-size: 18px; }
+  nav.sticky .brand span { color: var(--ochre); }
+  nav.sticky ul { display: flex; list-style: none; gap: 24px; flex-wrap: wrap; }
+  nav.sticky a { color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  nav.sticky a:hover { color: var(--ochre); }
+
+  /* MAIN */
+  main { max-width: 1100px; margin: 0 auto; padding: 64px 5vw; }
+  section { margin-bottom: 80px; scroll-margin-top: 80px; }
+  section h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-bottom: 12px;
+    display: flex; align-items: baseline; gap: 16px;
+  }
+  section h2 .num { font-size: 16px; color: var(--ochre); font-weight: 600; font-family: 'Inter'; letter-spacing: 1px; }
+  section .section-sub { font-size: 17px; color: var(--ink-soft); margin-bottom: 32px; max-width: 720px; }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .card-image {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, var(--ochre), var(--eucalyptus));
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-image::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+  }
+  .card-image.placeholder {
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Bricolage Grotesque';
+    font-size: 14px;
+    text-align: center;
+    padding: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .card-image.placeholder span { position: relative; z-index: 1; }
+  .card-body { padding: 20px 24px 16px; flex: 1; display: flex; flex-direction: column; }
+  .card h3 { font-size: 17px; margin-bottom: 6px; line-height: 1.25; }
+  .card .card-meta { font-size: 11px; color: var(--ochre); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px; }
+  .card p { font-size: 13.5px; color: var(--ink-soft); flex: 1; }
+  .card .tag-row { margin-top: 10px; }
+  .card-links {
+    display: flex;
+    gap: 6px;
+    padding: 12px 20px;
+    border-top: 1px solid var(--line);
+    background: #FBF6EB;
+  }
+  .card-links a {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid var(--line);
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .card-links a:hover { background: var(--ochre); color: white; border-color: var(--ochre); }
+
+  #gems .card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  #gems .card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    border-radius: 12px;
+    transform: none;
+  }
+  #gems .card:hover { transform: none; }
+  #gems .card-image { display: none; }
+  #gems .card-body { padding: 18px 20px; }
+  #gems .card h3 { font-size: 18px; margin-bottom: 6px; }
+  #gems .card p { font-size: 14px; }
+  #gems .card-links {
+    border-top: none;
+    border-left: 1px solid var(--line);
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px;
+  }
+  @media (max-width: 720px) {
+    #gems .card { grid-template-columns: 1fr; }
+    #gems .card-links {
+      border-left: none;
+      border-top: 1px solid var(--line);
+      flex-direction: row;
+    }
+  }
+
+  .culture-list { display: flex; flex-direction: column; gap: 12px; }
+  .culture-item {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr) 190px;
+    overflow: hidden;
+  }
+  .culture-day {
+    background: #FBF6EB;
+    border-right: 1px solid var(--line);
+    color: var(--ochre-dark);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 18px 14px;
+  }
+  .culture-body { padding: 18px 20px; }
+  .culture-kicker {
+    color: var(--ochre);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .culture-body h3 { font-size: 18px; margin-bottom: 6px; }
+  .culture-body p { color: var(--ink-soft); font-size: 14px; }
+  .culture-links {
+    background: #FBF6EB;
+    border-left: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+    padding: 14px;
+  }
+  .culture-links a {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink-soft);
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+  }
+  .culture-links a:hover { background: var(--ochre); border-color: var(--ochre); color: white; }
+  @media (max-width: 760px) {
+    .culture-item { grid-template-columns: 1fr; }
+    .culture-day { border-right: none; border-bottom: 1px solid var(--line); padding: 10px 16px; }
+    .culture-links { border-left: none; border-top: 1px solid var(--line); flex-direction: row; flex-wrap: wrap; }
+    .culture-links a { flex: 1; min-width: 92px; }
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: linear-gradient(135deg, var(--sand), #F8EFDE);
+    border-left: 4px solid var(--ochre);
+    padding: 24px 28px;
+    border-radius: 8px;
+    margin: 32px 0;
+  }
+  .callout h4 {
+    color: var(--ochre-dark);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    font-family: 'Inter';
+    font-weight: 700;
+  }
+  .callout p { color: var(--ink); font-size: 15px; }
+  .callout strong { color: var(--ochre-dark); }
+
+  /* TOGGLE */
+  .plan-toggle {
+    display: inline-flex;
+    background: var(--sand);
+    border-radius: 100px;
+    padding: 4px;
+    margin-bottom: 32px;
+    gap: 4px;
+  }
+  .plan-toggle button {
+    background: transparent;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    transition: all 0.2s;
+  }
+  .plan-toggle button.active {
+    background: var(--ochre);
+    color: white;
+    box-shadow: 0 2px 8px rgba(198,93,31,0.3);
+  }
+
+  /* DAYS */
+  .day-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .day-card:hover { box-shadow: var(--shadow-lg); }
+  .day-card-inner { padding: 28px 28px 20px; }
+  .day-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+  .day-badge {
+    background: var(--ochre);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-family: 'Inter';
+  }
+  .day-badge.travel { background: var(--sea); }
+  .day-badge.hidden { background: var(--eucalyptus); }
+  .day-badge.highlight { background: var(--accent); color: var(--ink); }
+  .day-card h3 { font-size: 20px; flex: 1; min-width: 240px; }
+  .day-route {
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--sand);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .day-content ul { list-style: none; padding: 0; }
+  .day-content li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed var(--line);
+  }
+  .day-content li:last-child { border-bottom: none; }
+  .day-content li::before {
+    content: '◆';
+    color: var(--ochre);
+    position: absolute; left: 0; top: 8px;
+    font-size: 10px;
+  }
+  .day-content li strong { color: var(--ink); }
+  .day-stay {
+    margin-top: 12px;
+    padding: 14px 16px;
+    background: #F4F0E5;
+    border-radius: 10px;
+    font-size: 13.5px;
+    color: var(--eucalyptus-dark);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .day-stay-icon { font-size: 18px; flex-shrink: 0; }
+  .day-stay-text { flex: 1; min-width: 200px; }
+  .day-stay-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .day-stay-links a {
+    background: white;
+    color: var(--eucalyptus-dark);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .day-stay-links a:hover { background: var(--eucalyptus); color: white; border-color: var(--eucalyptus); }
+  .day-route-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--sea);
+    color: white !important;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 4px;
+  }
+  .day-route-link:hover { background: var(--eucalyptus-dark); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+  th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; }
+  th { background: var(--eucalyptus-dark); color: var(--cream); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--sand); }
+  td strong { color: var(--ink); }
+  .price { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .total-row td { background: var(--ochre) !important; color: white; font-weight: 700; font-size: 15px; }
+  .total-row td strong { color: white; }
+
+  /* PLAN VIEW */
+  .plan-view { display: none; }
+  .plan-view.active { display: block; }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* CHECKLIST */
+  .checklist { background: white; padding: 24px; border-radius: 12px; border: 1px solid var(--line); }
+  .checklist li {
+    list-style: none;
+    padding: 10px 0 10px 32px;
+    position: relative;
+    font-size: 14px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '☐';
+    position: absolute; left: 0; top: 8px;
+    font-size: 18px;
+    color: var(--ochre);
+  }
+
+  /* SMALL TAG */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag {
+    background: var(--sand);
+    color: var(--ink-soft);
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tag.hidden { background: #E1EBD9; color: var(--eucalyptus-dark); }
+  .tag.cost { background: #F5E1C8; color: var(--ochre-dark); }
+  .tag.warn { background: #FBE6E0; color: #8B2D14; }
+
+  /* NUMBERS */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .stat {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-num { font-family: 'Bricolage Grotesque'; font-size: 32px; font-weight: 700; color: var(--ochre); display: block; }
+  .stat-label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-top: 4px; }
+
+  /* ROUTE MAP */
+  .route-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+  @media (max-width: 860px) { .route-overview { grid-template-columns: 1fr; } }
+  .route-map-panel,
+  .route-schedule {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .route-map-panel { padding: 18px; }
+  .route-map {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: block;
+  }
+  .route-map text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    fill: var(--ink);
+  }
+  .route-map .small-label { font-size: 10px; fill: var(--ink-soft); }
+  .route-map .map-land { fill: #F1EADB; stroke: var(--line); stroke-width: 2; }
+  .route-map .route-line {
+    fill: none;
+    stroke: var(--ochre);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .route-map .route-alt {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 3;
+    stroke-dasharray: 7 7;
+    stroke-linecap: round;
+  }
+  .route-map .route-node { fill: white; stroke: var(--ochre-dark); stroke-width: 3; }
+  .route-map .node-number {
+    font-weight: 800;
+    font-size: 11px;
+    fill: var(--ochre-dark);
+    text-anchor: middle;
+    dominant-baseline: central;
+  }
+  .route-map .drive-time {
+    font-size: 9.5px;
+    fill: var(--sea);
+    font-weight: 700;
+    text-anchor: middle;
+  }
+  .route-schedule h3 {
+    padding: 18px 20px 12px;
+    font-size: 20px;
+    border-bottom: 1px solid var(--line);
+    background: #F5F1E5;
+  }
+  .route-row {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .route-row:last-child { border-bottom: none; }
+  .route-day {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--ochre-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .route-place { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .route-note { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+
+  /* REGION HUB - quick access to all key area links */
+  .region-hub {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .region-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .region-card h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .region-card h4 .emoji { font-size: 20px; }
+  .region-card p { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 12px; }
+  .region-card .region-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .region-card .region-links a {
+    background: var(--sand);
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .region-card .region-links a:hover { background: var(--ochre); color: white; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Plan du lịch · Tasmania self-drive · Tháng 4-5/2027</div>
+    <h1>12-15 ngày <em>Tasmania</em>, tự lái qua coast, rainforest và alpine lakes</h1>
+    <p class="lead">Lộ trình bắt đầu ở Sydney để transit, sau đó bay sang Hobart và tự lái một vòng Tasmania. Nhóm ngủ hostel/campsite, đi bộ trong ngày, ưu tiên thiên nhiên, wildlife, Hobart city và lịch sử convict ở Tasman Peninsula.</p>
+    <div class="hero-meta">
+      <span class="hero-tag">🥾 Day hikes</span>
+      <span class="hero-tag">🚗 Self-drive Tasmania</span>
+      <span class="hero-tag">🍂 Cuối tháng 4 - đầu tháng 5</span>
+      <span class="hero-tag">🏕️ Campsite + hostel</span>
+      <span class="hero-tag">💰 $2,500–$3,800 AUD</span>
+      <span class="hero-tag">📅 12 hoặc 15 ngày</span>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky">
+  <div class="nav-inner">
+    <div class="brand">🇦🇺 Tas <span>Road Trip</span></div>
+    <ul>
+      <li><a href="#why">Tại sao</a></li>
+      <li><a href="#route-map">Map</a></li>
+      <li><a href="#culture">City & văn hóa</a></li>
+      <li><a href="#regions">Khu vực</a></li>
+      <li><a href="#gems">Điểm gợi ý</a></li>
+      <li><a href="#itinerary">Itinerary</a></li>
+      <li><a href="#budget">Budget</a></li>
+      <li><a href="#packing">Packing</a></li>
+      <li><a href="#checklist">Checklist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<!-- SECTION 1: WHY -->
+<section id="why">
+  <h2><span class="num">01</span> Tại sao plan này</h2>
+  <p class="section-sub">Đây là lộ trình Tasmania cho nhóm thích thiên nhiên, tự lái và đi bộ trong ngày. Chuyến đi tập trung vào một vòng từ Hobart để giảm thời gian quay lại cùng cung đường. Sydney chỉ là điểm transit đầu/cuối.</p>
+
+  <div class="stat-grid">
+    <div class="stat"><span class="stat-num">40%</span><span class="stat-label">Tasmania là national park</span></div>
+    <div class="stat"><span class="stat-num">1.3M</span><span class="stat-label">visitor/năm (vs Syd 17M)</span></div>
+    <div class="stat"><span class="stat-num">2–3 tuần</span><span class="stat-label">Fagus turning chỉ trong năm</span></div>
+    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Free camping spots Tas</span></div>
+  </div>
+
+  <div class="callout">
+    <h4>🍂 Thời điểm đề xuất</h4>
+    <p><strong>Turning of the Fagus</strong> (Nothofagus gunnii) thường rơi vào cuối tháng 4 đến đầu tháng 5. Hai điểm nên để trong route là <strong>Mount Field NP — Tarn Shelf</strong> và <strong>Cradle Mountain — Dove/Crater Lake</strong>. Thời tiết Tasmania thay đổi nhanh, nên các ngày hike alpine cần giữ phương án nhẹ hơn nếu mưa/gió mạnh.</p>
+  </div>
+
+  <div class="callout">
+    <h4>🧭 Cách đi chính</h4>
+    <p><strong>Loop 15 ngày:</strong> Sydney transit → Hobart → Tasman Peninsula → Cockle Creek → Maria Island → Freycinet → Bay of Fires → Cradle Mountain → Tarkine/Stanley → Mount Field → Hobart/Bruny → Sydney/VN. <strong>Bản 12 ngày</strong> bỏ Cockle Creek, Tarkine/Stanley và Bruny overnight để route gọn hơn.</p>
+  </div>
+</section>
+
+<!-- SECTION 2: ROUTE MAP -->
+<section id="route-map">
+  <h2><span class="num">02</span> Route map & thời gian từng điểm</h2>
+  <p class="section-sub">Map dưới đây là sơ đồ tuyến chính để nhìn nhanh hướng đi. Thời gian lái là ước tính, chưa tính thời gian dừng ăn, chụp ảnh hoặc thời tiết xấu.</p>
+
+  <div class="route-overview">
+    <div class="route-map-panel">
+      <svg class="route-map" viewBox="0 0 420 520" role="img" aria-label="Sơ đồ route Tasmania 12-15 ngày">
+        <path class="map-land" d="M209 31 C269 38 329 87 352 154 C379 234 359 315 316 380 C286 426 261 484 201 492 C139 500 89 451 70 390 C48 319 45 243 68 171 C91 95 142 24 209 31 Z" />
+        <path class="route-line" d="M228 415 C264 397 294 360 319 309 C343 258 342 212 304 172 C275 140 235 127 198 146 C159 166 134 193 126 238 C118 283 134 319 166 347 C197 375 215 389 228 415 Z" />
+        <path class="route-alt" d="M197 347 C153 370 111 373 88 331 C61 282 80 234 126 238" />
+        <path class="route-alt" d="M228 415 C248 432 266 449 282 471" />
+
+        <circle class="route-node" cx="170" cy="96" r="14" /><text class="node-number" x="170" y="96">1</text>
+        <text x="190" y="91">Sydney</text><text class="small-label" x="190" y="106">Transit 1 đêm</text>
+
+        <circle class="route-node" cx="228" cy="415" r="14" /><text class="node-number" x="228" y="415">2</text>
+        <text x="248" y="410">Hobart</text><text class="small-label" x="248" y="425">Pickup/trả xe</text>
+
+        <circle class="route-node" cx="282" cy="471" r="14" /><text class="node-number" x="282" y="471">3</text>
+        <text x="301" y="466">Tasman Peninsula</text><text class="small-label" x="301" y="481">Cape Hauy</text>
+
+        <circle class="route-node" cx="88" cy="331" r="14" /><text class="node-number" x="88" y="331">4</text>
+        <text x="28" y="310">Cockle Creek</text><text class="small-label" x="28" y="325">Chỉ bản 15 ngày</text>
+
+        <circle class="route-node" cx="304" cy="172" r="14" /><text class="node-number" x="304" y="172">5</text>
+        <text x="323" y="168">Maria Island</text><text class="small-label" x="323" y="183">Triabunna ferry</text>
+
+        <circle class="route-node" cx="319" cy="309" r="14" /><text class="node-number" x="319" y="309">6</text>
+        <text x="244" y="292">Freycinet</text><text class="small-label" x="244" y="307">Coles Bay</text>
+
+        <circle class="route-node" cx="342" cy="212" r="14" /><text class="node-number" x="342" y="212">7</text>
+        <text x="263" y="204">Bay of Fires</text><text class="small-label" x="263" y="219">St Helens</text>
+
+        <circle class="route-node" cx="198" cy="146" r="14" /><text class="node-number" x="198" y="146">8</text>
+        <text x="89" y="141">Cradle Mountain</text><text class="small-label" x="89" y="156">2 đêm</text>
+
+        <circle class="route-node" cx="126" cy="238" r="14" /><text class="node-number" x="126" y="238">9</text>
+        <text x="28" y="228">Tarkine / Stanley</text><text class="small-label" x="28" y="243">Chỉ bản 15 ngày</text>
+
+        <circle class="route-node" cx="166" cy="347" r="14" /><text class="node-number" x="166" y="347">10</text>
+        <text x="36" y="361">Mount Field</text><text class="small-label" x="36" y="376">Tarn Shelf</text>
+
+        <text class="drive-time" x="280" y="373">Hobart → Tasman 1.5h</text>
+        <text class="drive-time" x="347" y="258">Freycinet → Bay 2h</text>
+        <text class="drive-time" x="272" y="151">Bay → Cradle 5h</text>
+        <text class="drive-time" x="150" y="385">Mt Field → Hobart 1.5h</text>
+      </svg>
+    </div>
+
+    <div class="route-schedule">
+      <h3>Lịch đêm theo route</h3>
+      <div class="route-row"><div class="route-day">D1</div><div><div class="route-place">Sydney</div><div class="route-note">Transit 1 đêm, gần Central Station.</div></div></div>
+      <div class="route-row"><div class="route-day">D2-3</div><div><div class="route-place">Tasman Peninsula</div><div class="route-note">Hobart Airport → Eaglehawk/Fortescue, Port Arthur, Cape Hauy và các natural arches.</div></div></div>
+      <div class="route-row"><div class="route-day">D4</div><div><div class="route-place">Cockle Creek</div><div class="route-note">Chỉ bản 15 ngày. Nếu đi 12 ngày, chuyển thẳng sang Triabunna.</div></div></div>
+      <div class="route-row"><div class="route-day">D4/5</div><div><div class="route-place">Maria Island / Triabunna</div><div class="route-note">Ngủ Darlington nếu muốn ở lại đảo; cần canh giờ ferry.</div></div></div>
+      <div class="route-row"><div class="route-day">D5-7</div><div><div class="route-place">Freycinet / Coles Bay</div><div class="route-note">Mt Amos, Wineglass Bay, Friendly Beaches.</div></div></div>
+      <div class="route-row"><div class="route-day">D7/8</div><div><div class="route-place">Bay of Fires / St Helens</div><div class="route-note">Một đêm coast phía đông trước khi lái sang Cradle.</div></div></div>
+      <div class="route-row"><div class="route-day">D8-10</div><div><div class="route-place">Cradle Mountain</div><div class="route-note">Nên giữ 2 đêm vì thời tiết alpine khó đoán.</div></div></div>
+      <div class="route-row"><div class="route-day">D11-12</div><div><div class="route-place">Tarkine / Stanley</div><div class="route-note">Chỉ bản 15 ngày. Bản 12 ngày đi Cradle → Mount Field.</div></div></div>
+      <div class="route-row"><div class="route-day">D10/13</div><div><div class="route-place">Mount Field</div><div class="route-note">Russell Falls, glow worm, Tarn Shelf nếu thời tiết ổn.</div></div></div>
+      <div class="route-row"><div class="route-day">D12/15</div><div><div class="route-place">Hobart / Bruny / fly out</div><div class="route-note">Bruny hợp với bản 15 ngày; bản 12 ngày bay về từ Hobart.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: CITY & CULTURE -->
+<section id="culture">
+  <h2><span class="num">03</span> City, lịch sử & văn hóa theo route</h2>
+  <p class="section-sub">Các điểm này thêm phần city/culture mà không làm route bị lệch. Nên đặt vào đầu/cuối loop quanh Hobart và ngày Tasman Peninsula.</p>
+
+  <div class="culture-list">
+    <article class="culture-item">
+      <div class="culture-day">D2 / D11</div>
+      <div class="culture-body">
+        <div class="culture-kicker">Hobart waterfront</div>
+        <h3>Salamanca Place + Battery Point</h3>
+        <p>Salamanca hợp cho market/cafe/gallery nếu lịch rơi vào thứ Bảy. Battery Point đi bộ từ Salamanca qua Kelly's Steps, có nhà cổ, lane nhỏ và cảm giác Hobart city rõ hơn là chỉ ghé sân bay rồi đi.</p>
+        <div class="tag-row"><span class="tag hidden">City walk</span><span class="tag">2-3h</span></div>
+      </div>
+      <div class="culture-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Salamanca+Place+Hobart" target="_blank">🗺️ Maps</a>
+        <a href="https://www.salamancamarket.com.au/" target="_blank">Market</a>
+        <a href="https://tasmania.com/points-of-interest/battery-point/" target="_blank">Battery Point</a>
+      </div>
+    </article>
+
+    <article class="culture-item">
+      <div class="culture-day">D3</div>
+      <div class="culture-body">
+        <div class="culture-kicker">Tasman Peninsula</div>
+        <h3>Port Arthur Historic Site</h3>
+        <p>Đây là điểm lịch sử mạnh nhất của plan. Đặt vào cùng ngày Tasman Peninsula: sáng/giữa ngày Port Arthur, chiều chọn Cape Hauy hoặc natural arches tùy sức và thời tiết.</p>
+        <div class="tag-row"><span class="tag hidden">Convict history</span><span class="tag cost">Paid entry</span></div>
+      </div>
+      <div class="culture-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Port+Arthur+Historic+Site" target="_blank">🗺️ Maps</a>
+        <a href="https://portarthur.org.au/what-to-do/" target="_blank">Info</a>
+        <a href="https://portarthur.org.au/port-arthur-entry/" target="_blank">Tickets</a>
+      </div>
+    </article>
+
+    <article class="culture-item">
+      <div class="culture-day">D11/14</div>
+      <div class="culture-body">
+        <div class="culture-kicker">Hobart art</div>
+        <h3>MONA ferry + museum</h3>
+        <p>MONA hợp nếu nhóm thích art hiện đại và muốn một city day khác với hiking. Nên đi bằng ferry từ Brooke Street Pier nếu có nửa ngày ở Hobart; kiểm tra ngày mở cửa trước khi chốt.</p>
+        <div class="tag-row"><span class="tag">Half-day</span><span class="tag cost">Paid entry</span></div>
+      </div>
+      <div class="culture-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=MONA+Hobart" target="_blank">🗺️ Maps</a>
+        <a href="https://locals.mona.net.au/visit" target="_blank">Visit</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Hobart+Tasmania" target="_blank">Stay</a>
+      </div>
+    </article>
+
+    <article class="culture-item">
+      <div class="culture-day">Optional</div>
+      <div class="culture-body">
+        <div class="culture-kicker">Coal River Valley</div>
+        <h3>Richmond village</h3>
+        <p>Nếu cần một điểm lịch sử nhẹ gần Hobart, Richmond là stop dễ thêm trước/sau khi ra East Coast. Hợp khi nhóm muốn town walk, bridge, bakery/cafe thay vì thêm một hike.</p>
+        <div class="tag-row"><span class="tag hidden">Town stop</span><span class="tag">1-2h</span></div>
+      </div>
+      <div class="culture-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Richmond+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Richmond+Tasmania+historic+village&tbm=isch" target="_blank">Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Richmond+Tasmania" target="_blank">Stay</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- SECTION 4: REGIONS — quick links hub -->
+<section id="regions">
+  <h2><span class="num">04</span> Khu vực chính — Google Maps + Booking</h2>
+  <p class="section-sub">Mỗi khu vực có link xem nhanh vị trí, ảnh tham khảo và chỗ ở gần đó để nhóm dễ chia sẻ và tự kiểm tra thêm.</p>
+
+  <div class="region-hub">
+    <div class="region-card">
+      <h4><span class="emoji">🏙️</span> Sydney CBD</h4>
+      <p>Transit 1 đêm, gần Central Station tiện bay sớm</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Sydney+Central+Station" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Sydney+Australia&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Sydney+CBD" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🏛️</span> Hobart</h4>
+      <p>Cửa ngõ Tas — sân bay, Salamanca, MONA, YHA waterfront</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Hobart+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Hobart+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Hobart+Tasmania" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🌊</span> Tasman Peninsula (Eaglehawk Neck)</h4>
+      <p>Sea cliffs, Cape Hauy, Tasman Arch, Port Arthur</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Eaglehawk+Neck+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Tasman+Peninsula+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Eaglehawk+Neck+Tasmania" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🦘</span> Triabunna (cửa ngõ Maria Island)</h4>
+      <p>Bắt ferry sang Maria Island</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Triabunna+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Maria+Island+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Triabunna+Tasmania" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🍷</span> Coles Bay (Freycinet NP)</h4>
+      <p>Wineglass Bay, Mt Amos, Friendly Beaches, YHA</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Coles+Bay+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Freycinet+National+Park&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Coles+Bay+Tasmania" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🔥</span> St Helens / Binalong Bay (Bay of Fires)</h4>
+      <p>Free beach camps, orange-lichen granite</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Binalong+Bay+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Bay+of+Fires+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=St+Helens+Tasmania" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">⛰️</span> Cradle Mountain</h4>
+      <p>Dove Lake, Marions Lookout, wombat quanh trail</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Cradle+Mountain+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Cradle+Mountain+Dove+Lake&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Cradle+Mountain+Tasmania" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🌳</span> Tarkine / Corinna</h4>
+      <p>Rainforest cổ, Western Explorer, Corinna/Pieman River</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Corinna+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Tarkine+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Stanley+Tasmania" target="_blank">🏠 Booking (Stanley)</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">💧</span> Mount Field NP</h4>
+      <p>Russell Falls, Tarn Shelf Fagus, glow worm</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Mount+Field+National+Park" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Mount+Field+National+Park+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Westerway+Tasmania" target="_blank">🏠 Booking (Westerway)</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🐧</span> Bruny Island</h4>
+      <p>The Neck, Cape Bruny Lighthouse, oysters</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Bruny+Island+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Bruny+Island+The+Neck&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Bruny+Island" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🌅</span> Cockle Creek (chỉ 15d plan)</h4>
+      <p>Southernmost road Úc, free camp, Adamsons Peak</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Cockle+Creek+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Cockle+Creek+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Southport+Tasmania" target="_blank">🏠 Booking (Southport)</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">✈️</span> Launceston (sân bay phụ)</h4>
+      <p>Tùy chọn open-jaw, Cataract Gorge, Stillwater</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Launceston+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Launceston+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Launceston+Tasmania" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: POINTS -->
+<section id="gems">
+  <h2><span class="num">05</span> 14 điểm gợi ý theo route</h2>
+  <p class="section-sub">Danh sách dưới đây đi theo hướng route để nhóm dễ chọn điểm dừng. Mỗi dòng có link Google Maps, ảnh tham khảo và chỗ ở gần khu vực.</p>
+
+  <div class="card-grid">
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #2D4225, #4A6B3E);"><span>🌅 Cockle Creek<br>Southernmost road of Australia</span></div>
+      <div class="card-body">
+        <div class="card-meta">South Coast</div>
+        <h3>1. Cockle Creek</h3>
+        <p>Điểm cuối đường ở phía nam Tasmania. Có khu cắm trại, Fishers Point walk 4km và view Southern Ocean. Hợp với bản 15 ngày.</p>
+        <div class="tag-row"><span class="tag hidden">Free camp</span><span class="tag">South Coast</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Cockle+Creek+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Cockle+Creek+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Southport+Tasmania" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Tarn_Shelf_Mt_Field_National_Park_2.jpg/800px-Tarn_Shelf_Mt_Field_National_Park_2.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">Mount Field</div>
+        <h3>2. Mount Field — Tarn Shelf (Fagus)</h3>
+        <p>Hồ alpine và fagus chuyển màu cuối tháng 4/đầu tháng 5. Hike từ Lake Dobson khoảng 3-4h nếu thời tiết phù hợp.</p>
+        <div class="tag-row"><span class="tag hidden">Fagus</span><span class="tag warn">Theo thời tiết</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Tarn+Shelf+Mount+Field+National+Park" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Tarn+Shelf+Fagus+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Westerway+Tasmania" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Vombatus_ursinus_-Maria_Island_National_Park.jpg/800px-Vombatus_ursinus_-Maria_Island_National_Park.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">Maria Island</div>
+        <h3>3. Maria Island — Wombat Capital</h3>
+        <p>Đảo không có xe hơi, dễ gặp wombat quanh Darlington. Có thể ngủ ở Darlington Penitentiary nếu muốn ở lại qua đêm.</p>
+        <div class="tag-row"><span class="tag hidden">Off-grid</span><span class="tag cost">$44 ferry</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Maria+Island+National+Park" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Maria+Island+wombat+painted+cliffs&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Triabunna+Tasmania" target="_blank">🏠 Stay (Triabunna)</a>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Tarkine_walks.JPG/800px-Tarkine_walks.JPG');"></div>
+      <div class="card-body">
+        <div class="card-meta">North West</div>
+        <h3>4. Tarkine — Western Explorer Road</h3>
+        <p>Rainforest cổ ở north-west Tasmania. Cung Smithton/Corinna/Stanley hợp với bản 15 ngày và cần kiểm tra điều kiện đường.</p>
+        <div class="tag-row"><span class="tag hidden">No wifi</span><span class="tag">Platypus</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Corinna+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Tarkine+rainforest+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Stanley+Tasmania" target="_blank">🏠 Stay (Stanley)</a>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Panorama_Bay_of_Fires.jpg/800px-Panorama_Bay_of_Fires.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">East Coast</div>
+        <h3>5. Bay of Fires — The Gardens</h3>
+        <p>Bãi biển và đá granite phủ địa y màu cam. Có nhiều điểm camp/stop dọc bờ, hợp để ngủ một đêm giữa Freycinet và Cradle.</p>
+        <div class="tag-row"><span class="tag hidden">Free beach camp</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Bay+of+Fires+Binalong+Bay+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Bay+of+Fires+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=St+Helens+Tasmania" target="_blank">🏠 Stay (St Helens)</a>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Cradle_Mountain_Dove_Lake_HDR_Stevage.jpg/800px-Cradle_Mountain_Dove_Lake_HDR_Stevage.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">Cradle Mountain</div>
+        <h3>6. Cradle Mountain — Marions Lookout</h3>
+        <p>Hike khoảng 3h lên điểm nhìn Dove Lake. Nếu thời tiết xấu, có thể đổi sang Dove Lake Circuit hoặc Enchanted Walk.</p>
+        <div class="tag-row"><span class="tag">Day hike</span><span class="tag">Wombat</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Marions+Lookout+Cradle+Mountain" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Marions+Lookout+Cradle+Mountain&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Cradle+Mountain+Tasmania" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Wineglass_Bay_from_Lookout_crop.jpg/800px-Wineglass_Bay_from_Lookout_crop.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">Freycinet</div>
+        <h3>7. Freycinet — Mt Amos</h3>
+        <p>Mt Amos là hike/scramble qua granite, nhìn xuống Wineglass Bay từ trên cao. Nếu đá ướt nên đổi sang Wineglass Bay Lookout.</p>
+        <div class="tag-row"><span class="tag">Day hike</span><span class="tag warn">Scramble</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Mount+Amos+Freycinet" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Mount+Amos+Wineglass+Bay&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Coles+Bay+Tasmania" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #3B7A8C, #C65D1F);"><span>🏖️ Friendly Beaches<br>Bãi dài gần Freycinet</span></div>
+      <div class="card-body">
+        <div class="card-meta">Freycinet</div>
+        <h3>8. Friendly Beaches (kế Freycinet)</h3>
+        <p>Bãi dài gần Freycinet, ít đông hơn khu Wineglass Bay lookout. Hợp để dừng chiều muộn hoặc đổi gió sau Mt Amos.</p>
+        <div class="tag-row"><span class="tag hidden">Beach stop</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Friendly+Beaches+Freycinet" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Friendly+Beaches+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Coles+Bay+Tasmania" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Cape_Raoul_from_Lookout.jpg/800px-Cape_Raoul_from_Lookout.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">Tasman Peninsula</div>
+        <h3>9. Tasman Peninsula — Cape Hauy</h3>
+        <p>Day hike khoảng 4h, là một phần của Three Capes Track. View sea cliffs, Totem Pole và Candlestick ở cuối trail.</p>
+        <div class="tag-row"><span class="tag">Day hike</span><span class="tag">Free</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Cape+Hauy+Track+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Cape+Hauy+Totem+Pole+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Eaglehawk+Neck+Tasmania" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Russell_Falls_2.jpg/800px-Russell_Falls_2.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">Mount Field</div>
+        <h3>10. Russell Falls + glow-worm grotto</h3>
+        <p>Điểm dễ đi trong Mount Field. Có thể kết hợp Russell Falls, Horseshoe Falls, Tall Trees và quay lại khu thác buổi tối để xem glow worm.</p>
+        <div class="tag-row"><span class="tag">Easy walk</span><span class="tag">Glow worm</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Russell+Falls+Mount+Field" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Russell+Falls+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Westerway+Tasmania" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/The_Neck_Bruny_Island.jpg/800px-The_Neck_Bruny_Island.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">Bruny Island</div>
+        <h3>11. Bruny Island self-drive</h3>
+        <p>Tự lái qua The Neck, Cape Bruny Lighthouse và các điểm ăn hải sản. Phù hợp với bản 15 ngày nếu nhóm còn thời gian ở cuối chuyến.</p>
+        <div class="tag-row"><span class="tag hidden">Self-drive</span><span class="tag cost">$2 oyster</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=The+Neck+Bruny+Island" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Bruny+Island+The+Neck&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Bruny+Island" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #4A6B3E, #2D4225);"><span>💧 Pelverata Falls<br>114m thác local-only</span></div>
+      <div class="card-body">
+        <div class="card-meta">Hobart area</div>
+        <h3>12. Pelverata Falls (35p từ Hobart)</h3>
+        <p>Thác gần Hobart, trail khoảng 3h qua rừng eucalyptus. Đây là phương án nhẹ nếu có thêm thời gian quanh Hobart.</p>
+        <div class="tag-row"><span class="tag hidden">Hobart detour</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Pelverata+Falls+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Pelverata+Falls+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Hobart+Tasmania" target="_blank">🏠 Stay (Hobart)</a>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #4A6B3E, #C65D1F);"><span>🌲 Liffey Falls<br>Free camp Great Western Tiers</span></div>
+      <div class="card-body">
+        <div class="card-meta">Great Western Tiers</div>
+        <h3>13. Liffey Falls + free camp</h3>
+        <p>Điểm dừng ở Great Western Tiers, hợp khi cần nghỉ giữa Cradle và Launceston. Có thác nhiều tầng và khu camp gần đó.</p>
+        <div class="tag-row"><span class="tag hidden">Free camp</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Liffey+Falls+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Liffey+Falls+Tasmania&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Deloraine+Tasmania" target="_blank">🏠 Stay (Deloraine)</a>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="card">
+      <div class="card-image" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/TASMAN_ARCH%2C_TASMAN_PENINSULA%2C_TASMANIA.jpg/800px-TASMAN_ARCH%2C_TASMAN_PENINSULA%2C_TASMANIA.jpg');"></div>
+      <div class="card-body">
+        <div class="card-meta">Tasman Peninsula</div>
+        <h3>14. Tasman Arch + Devils Kitchen + Blowhole</h3>
+        <p>Cụm natural arches ở Tasman Peninsula, rất tiện ghé trong ngày đầu tự lái từ Hobart xuống Eaglehawk Neck.</p>
+        <div class="tag-row"><span class="tag">Free</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Tasman+Arch+Tasmania" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Tasman+Arch+Devils+Kitchen&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Eaglehawk+Neck+Tasmania" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 5: ITINERARY -->
+<section id="itinerary">
+  <h2><span class="num">06</span> Itinerary day-by-day</h2>
+  <p class="section-sub">Hai version để chọn theo số ngày nghỉ. Bản 12 ngày giữ loop chính ở East Coast, Cradle và Mount Field; bản 15 ngày thêm Cockle Creek, Tarkine và Bruny.</p>
+
+  <div class="plan-toggle">
+    <button class="active" data-plan="12">🥾 12 ngày — Loop chính</button>
+    <button data-plan="15">🌿 15 ngày — Thêm South Coast + Tarkine</button>
+  </div>
+
+  <!-- 12 DAY PLAN -->
+  <div class="plan-view active" id="plan-12">
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge travel">Day 1</span>
+          <h3>VN → Sydney (transit)</h3>
+          <a href="https://www.google.com/maps/search/?api=1&query=Sydney+Central+YHA" target="_blank" class="day-route-link">🗺️ SYD CBD</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Bay từ VN, đáp Sydney chiều/tối</li>
+            <li>Bus 400 SYD airport → Bondi Junction (~$5) hoặc train</li>
+            <li>Nghỉ gần Central để sáng hôm sau bay Hobart thuận tiện</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏠</span>
+            <div class="day-stay-text"><strong>YHA Sydney Central</strong> — dorm $40-50 AUD/đêm, gần Central Station</div>
+            <div class="day-stay-links">
+              <a href="https://www.yha.com.au/hostels/nsw/sydney-surrounds/" target="_blank">YHA</a>
+              <a href="https://www.booking.com/searchresults.html?ss=Sydney+Central+Station" target="_blank">Booking</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge travel">Day 2</span>
+          <h3>Sydney → Hobart → Tasman Peninsula</h3>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Hobart+Airport&destination=Eaglehawk+Neck+Tasmania" target="_blank" class="day-route-link">🗺️ Route</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Sáng sớm bay Jetstar/Virgin SYD → HBA (~$150, 1h55)</li>
+            <li>Trưa: nhận xe thuê ở Hobart Airport (Budget/Europcar ~$80/ngày)</li>
+            <li>Mua đồ camping ở Big W Hobart (~$100): sleeping bag liner, gas stove, mì, gạo</li>
+            <li>Mua SIM Telstra prepaid $30/20GB ở airport</li>
+            <li>Nếu hạ cánh sớm: ghé Salamanca waterfront hoặc Battery Point trước khi rời Hobart</li>
+            <li>Chiều: lái 1.5h xuống <strong>Tasman Peninsula</strong></li>
+            <li>Dừng Pirates Bay Lookout trước khi về chỗ ngủ</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏠</span>
+            <div class="day-stay-text"><strong>Eaglehawk Neck hostel</strong> ~$45 dorm, hoặc <strong>Lime Bay camp</strong> (40p drive)</div>
+            <div class="day-stay-links">
+              <a href="https://www.booking.com/searchresults.html?ss=Eaglehawk+Neck+Tasmania" target="_blank">Booking</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Lime+Bay+State+Reserve+Tasmania" target="_blank">Lime Bay</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge hidden">Day 3</span>
+          <h3>Tasman Peninsula — Cape Hauy + Natural Arches</h3>
+          <a href="https://www.google.com/maps/search/?api=1&query=Fortescue+Bay+Tasmania" target="_blank" class="day-route-link">🗺️ Fortescue</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Sáng: <strong>Tasman Arch + Devils Kitchen + Blowhole</strong> (free, 2h)</li>
+            <li>Nếu muốn lịch sử: dành 2-3h cho <strong>Port Arthur Historic Site</strong>; hôm đó rút Cape Hauy thành option ngắn hơn nếu cần</li>
+            <li>Trưa: lái đến <strong>Fortescue Bay</strong> trailhead</li>
+            <li>Chiều: <strong>Cape Hauy day hike</strong> — 4h, 9km, view Totem Pole sea stacks (free segment Three Capes)</li>
+            <li>Tối: fish & chips Doo-lishus food truck</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏕️</span>
+            <div class="day-stay-text"><strong>Fortescue Bay campground</strong> $13 (national park, view biển)</div>
+            <div class="day-stay-links">
+              <a href="https://parks.tas.gov.au/explore-our-parks/tasman-national-park/fortescue-bay-campground" target="_blank">Parks Tas</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Fortescue+Bay+Campground" target="_blank">Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge highlight">Day 4</span>
+          <h3>Tasman Peninsula → Triabunna → Maria Island</h3>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Eaglehawk+Neck&destination=Triabunna+Tasmania" target="_blank" class="day-route-link">🗺️ Route</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Sáng: lái Eaglehawk → Triabunna (~1h45)</li>
+            <li>11h: gửi xe Triabunna ($10/ngày), <strong>Encounter Maria ferry</strong> ($44 return, 45p)</li>
+            <li>Trưa: lên đảo, thuê xe đạp $35/ngày tại Triabunna</li>
+            <li><strong>Painted Cliffs</strong> (45p hike) — đá vàng đỏ kẻ sọc</li>
+            <li><strong>Wombat encounter</strong> quanh Darlington — hàng trăm con</li>
+            <li>Đêm: tìm <strong>Tasmanian Devil</strong> quanh settlement với đèn pin</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏚️</span>
+            <div class="day-stay-text"><strong>Darlington Penitentiary</strong> (Maria Island) — basic dorm $33, bếp chung, no wifi. Mang sleeping bag.</div>
+            <div class="day-stay-links">
+              <a href="https://parks.tas.gov.au/explore-our-parks/maria-island-national-park/accommodation" target="_blank">Parks Tas</a>
+              <a href="https://encountermaria.com.au/" target="_blank">Ferry</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge">Day 5</span>
+          <h3>Maria Island morning → Freycinet</h3>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Triabunna+Tasmania&destination=Coles+Bay+Tasmania" target="_blank" class="day-route-link">🗺️ Route</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Sáng: hike <strong>Bishop and Clerk peak</strong> 4h return (view top đảo)</li>
+            <li>13h ferry về Triabunna, lấy xe</li>
+            <li>Lái lên Coles Bay (~1.5h)</li>
+            <li>Chiều muộn: <strong>Cape Tourville Lighthouse</strong> drive-in 15p, sunset Freycinet</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏠</span>
+            <div class="day-stay-text"><strong>Coles Bay YHA</strong> $40 dorm — nên đặt sớm vì khu này ít lựa chọn giá mềm</div>
+            <div class="day-stay-links">
+              <a href="https://www.yha.com.au/hostels/tas/" target="_blank">YHA</a>
+              <a href="https://www.booking.com/searchresults.html?ss=Coles+Bay+Tasmania" target="_blank">Booking</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge hidden">Day 6</span>
+          <h3>Freycinet — Mt Amos + Friendly Beaches</h3>
+          <a href="https://www.google.com/maps/search/?api=1&query=Mount+Amos+Freycinet" target="_blank" class="day-route-link">🗺️ Mt Amos</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>6h sáng: <strong>Mt Amos hike</strong> (3h scramble) — nhìn xuống Wineglass Bay từ trên cao</li>
+            <li>Nếu đá ướt, đổi sang Wineglass Bay Lookout/Circuit</li>
+            <li>Chiều: <strong>Friendly Beaches</strong> — bãi dài, granite đỏ</li>
+            <li>Tối: BBQ ở hostel, ngủ sớm</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏠</span>
+            <div class="day-stay-text"><strong>Coles Bay YHA</strong> đêm 2</div>
+            <div class="day-stay-links">
+              <a href="https://www.booking.com/searchresults.html?ss=Coles+Bay+Tasmania" target="_blank">Booking</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge hidden">Day 7</span>
+          <h3>Coles Bay → Bay of Fires (free beach camp)</h3>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Coles+Bay+Tasmania&destination=Binalong+Bay+Tasmania" target="_blank" class="day-route-link">🗺️ Route</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Sáng: lái Bicheno (~30p) — <strong>Bicheno Blowhole</strong> + cafe Pasinis</li>
+            <li>Trưa: St Helens ăn fish & chips ở Captain's Catch</li>
+            <li>Chiều: <strong>Binalong Bay → The Gardens</strong> — bãi đá phủ địa y màu cam</li>
+            <li>Tối: 1 trong 5 free camp (Cosy Corner, Sloop Reef, Swimcart, Jeanneret, Policemans Point)</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏕️</span>
+            <div class="day-stay-text"><strong>Free beach camp</strong> — Cosy Corner hoặc Swimcart (đẹp nhất). FREE, có toilet, không nước.</div>
+            <div class="day-stay-links">
+              <a href="https://www.google.com/maps/search/?api=1&query=Cosy+Corner+Bay+of+Fires" target="_blank">Cosy Corner</a>
+              <a href="https://www.freecampingtasmania.com/listing/bay-of-fires-cosy-corner-south/" target="_blank">Info</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge travel">Day 8</span>
+          <h3>Bay of Fires → Cradle Mountain (drive day)</h3>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=St+Helens+Tasmania&destination=Cradle+Mountain+Tasmania&waypoints=Launceston+Tasmania" target="_blank" class="day-route-link">🗺️ Route 5h</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Sunrise tại free camp</li>
+            <li>Lái 5h qua Launceston (lunch + Cataract Gorge 1h free)</li>
+            <li>Chiều: đến <strong>Cradle Mountain</strong></li>
+            <li>Hoàng hôn: <strong>Enchanted Walk</strong> 20p — thường dễ gặp wombat quanh trail</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏠</span>
+            <div class="day-stay-text"><strong>Discovery Parks Cradle Mountain</strong> cabin $80 hoặc <strong>Cradle Mountain hostel</strong> (4km out) ~$50 dorm</div>
+            <div class="day-stay-links">
+              <a href="https://www.booking.com/searchresults.html?ss=Cradle+Mountain+Tasmania" target="_blank">Booking</a>
+              <a href="https://www.discoveryholidayparks.com.au/caravan-parks/tasmania/cradle-mountain" target="_blank">Discovery</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge highlight">Day 9</span>
+          <h3>Cradle Mountain — Marions Lookout + Dove Lake</h3>
+          <a href="https://www.google.com/maps/search/?api=1&query=Dove+Lake+Cradle+Mountain" target="_blank" class="day-route-link">🗺️ Dove Lake</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>5h45 sáng: shuttle đầu vào Dove Lake (Park Pass + shuttle $25/ngày)</li>
+            <li><strong>Marions Lookout hike</strong> khoảng 3h, view rộng xuống Dove Lake</li>
+            <li>Nếu khoẻ: tiếp tục <strong>Cradle Mountain summit</strong> (8h total)</li>
+            <li>Chiều: <strong>Dove Lake Circuit</strong> 6km — Fagus nếu đúng mùa</li>
+            <li>Tối: nấu cơm, ngắm sao (Dark Sky area)</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏠</span>
+            <div class="day-stay-text"><strong>Cradle Mountain hostel</strong> đêm 2</div>
+            <div class="day-stay-links">
+              <a href="https://www.booking.com/searchresults.html?ss=Cradle+Mountain+Tasmania" target="_blank">Booking</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge highlight">Day 10</span>
+          <h3>Cradle → Mount Field NP</h3>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Cradle+Mountain&destination=Mount+Field+National+Park" target="_blank" class="day-route-link">🗺️ Route 4h</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Sáng: <strong>Weindorfers Forest Walk</strong> 20p — Fagus stand dễ</li>
+            <li>Lái xuống Mt Field (~4h qua Sheffield + Bothwell)</li>
+            <li>Chiều: <strong>Three Falls Circuit</strong> 6km (Russell + Horseshoe + Lady Barron + Tall Trees)</li>
+            <li>Tối: quay lại Russell Falls, tắt đèn/đèn pin thấp để xem <strong>glow worm grotto</strong></li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏠</span>
+            <div class="day-stay-text"><strong>National Park cabin</strong> $90 hoặc <strong>Westerway Riverside</strong> $65</div>
+            <div class="day-stay-links">
+              <a href="https://www.booking.com/searchresults.html?ss=Westerway+Tasmania" target="_blank">Booking</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge highlight">Day 11</span>
+          <h3>Mt Field — Tarn Shelf (Fagus)</h3>
+          <a href="https://www.google.com/maps/search/?api=1&query=Lake+Dobson+Mt+Field" target="_blank" class="day-route-link">🗺️ Lake Dobson</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Sáng sớm: <strong>Lake Dobson Road</strong> (gravel, 16km, 40p)</li>
+            <li><strong>Tarn Shelf hike</strong> 4-5h — hồ alpine viền Fagus vàng cam</li>
+            <li>Nếu đường trơn hoặc gió mạnh, đổi sang Three Falls Circuit và Tall Trees</li>
+            <li>Chiều: lái về Hobart (~75p)</li>
+            <li>Tối: Salamanca Place + Battery Point walk; nếu rơi vào thứ Bảy thì canh Salamanca Market buổi sáng hôm sau</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">🏠</span>
+            <div class="day-stay-text"><strong>YHA Hobart Central</strong> $40 dorm — waterfront</div>
+            <div class="day-stay-links">
+              <a href="https://www.yha.com.au/hostels/tas/" target="_blank">YHA</a>
+              <a href="https://www.booking.com/searchresults.html?ss=Hobart+Tasmania" target="_blank">Booking</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-card-inner">
+        <div class="day-header">
+          <span class="day-badge travel">Day 12</span>
+          <h3>Hobart → Sydney → VN</h3>
+          <a href="https://www.google.com/maps/search/?api=1&query=Hobart+Airport" target="_blank" class="day-route-link">🗺️ HBA Airport</a>
+        </div>
+        <div class="day-content">
+          <ul>
+            <li>Nếu bay chiều: chọn MONA ferry + museum hoặc đi Battery Point cafe trước khi trả xe</li>
+            <li>Trả xe Hobart Airport</li>
+            <li>Bay HBA → SYD (~$150), transit SYD</li>
+            <li>Bay tối SYD → VN</li>
+          </ul>
+          <div class="day-stay">
+            <span class="day-stay-icon">✈️</span>
+            <div class="day-stay-text">Trên máy bay 😴</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 15 DAY PLAN -->
+  <div class="plan-view" id="plan-15">
+
+    <p style="margin-bottom: 24px; padding: 16px; background: var(--sand); border-radius: 12px; font-size: 14px;">
+      <strong>Khác biệt với 12 ngày:</strong> Thêm <strong>3 ngày</strong> cho Cockle Creek, Tarkine/Stanley và Bruny Island. Bản này hợp nếu nhóm muốn đi vòng rộng hơn và không phải đổi chỗ ngủ quá gấp.
+    </p>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 1</span>
+        <h3>VN → Sydney</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Sydney+Central+YHA" target="_blank" class="day-route-link">🗺️ SYD</a>
+      </div>
+      <div class="day-content">
+        <ul><li>Y hệt 12d Day 1 — YHA Sydney Central</li></ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>YHA Sydney Central</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Sydney+Central+Station" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 2</span>
+        <h3>Sydney → Hobart → Tasman Peninsula</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Hobart+Airport&destination=Eaglehawk+Neck" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul><li>Giống 12d Day 2 — bay Hobart, nhận xe, nếu kịp ghé Salamanca/Battery Point rồi đến Tasman Peninsula</li></ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Eaglehawk Neck hostel</strong> hoặc Lime Bay camp</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Eaglehawk+Neck+Tasmania" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 3</span>
+        <h3>Tasman Peninsula</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Cape+Hauy+Track" target="_blank" class="day-route-link">🗺️ Cape Hauy</a>
+      </div>
+      <div class="day-content">
+        <ul><li>Giống 12d Day 3 — thêm Port Arthur Historic Site nếu muốn phần lịch sử rõ hơn, sau đó chọn Cape Hauy hoặc Natural Arches theo thời gian</li></ul>
+        <div class="day-stay"><span class="day-stay-icon">🏕️</span><div class="day-stay-text"><strong>Fortescue Bay</strong> free camp $13</div><div class="day-stay-links"><a href="https://parks.tas.gov.au/explore-our-parks/tasman-national-park/fortescue-bay-campground" target="_blank">Parks Tas</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 4 <span style="background: var(--ochre-dark); margin-left: 6px; font-size: 11px; padding: 3px 8px; border-radius: 100px; color: white;">NEW</span></span>
+        <h3>Cockle Creek — Southernmost road of Australia</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Eaglehawk+Neck&destination=Cockle+Creek+Tasmania" target="_blank" class="day-route-link">🗺️ Route 3h</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: lái về nam, dọc Huon Valley</li>
+          <li>Stop: <strong>Hastings Caves + Thermal Springs</strong> bơi nước nóng giữa rừng ($25)</li>
+          <li>Chiều: đến <strong>Cockle Creek</strong> — đường nhựa tận cùng nam Úc</li>
+          <li><strong>Fishers Point walk</strong> 4km return — whale sculpture, view Adamsons Peak + Southern Ocean</li>
+          <li>Tối: camp ở Gillams Beach hoặc Cockle Creek Campground</li>
+        </ul>
+        <div class="day-stay">
+          <span class="day-stay-icon">🏕️</span>
+          <div class="day-stay-text"><strong>Cockle Creek Campground</strong> — có toilet, không nước uống, nên mua đủ đồ trước khi xuống.</div>
+          <div class="day-stay-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Cockle+Creek+Campground" target="_blank">Maps</a>
+            <a href="https://parks.tas.gov.au/explore-our-parks/southwest-national-park/cockle-creek" target="_blank">Parks Tas</a>
+          </div>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge highlight">Day 5</span>
+        <h3>Cockle Creek → Triabunna → Maria Island</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Cockle+Creek+Tasmania&destination=Triabunna+Tasmania&waypoints=Hobart" target="_blank" class="day-route-link">🗺️ Route 4h</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng sớm: hike South Cape Bay 4h return nếu khoẻ</li>
+          <li>Trưa: lái lên Triabunna qua Hobart (~4h)</li>
+          <li>Bắt ferry 16h sang Maria, cần kiểm tra lại lịch ferry trước ngày đi</li>
+        </ul>
+        <div class="day-stay">
+          <span class="day-stay-icon">🏚️</span>
+          <div class="day-stay-text"><strong>Darlington Penitentiary</strong> Maria Island $33</div>
+          <div class="day-stay-links">
+            <a href="https://parks.tas.gov.au/explore-our-parks/maria-island-national-park/accommodation" target="_blank">Parks Tas</a>
+            <a href="https://encountermaria.com.au/" target="_blank">Ferry</a>
+          </div>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge">Day 6</span>
+        <h3>Maria Island full → Freycinet</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Triabunna&destination=Coles+Bay" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul><li>Giống 12d Day 5 — Bishop & Clerk + ferry về + lái Freycinet</li></ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Coles Bay YHA</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Coles+Bay+Tasmania" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 7</span>
+        <h3>Freycinet — Mt Amos + Friendly Beaches</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Mount+Amos+Freycinet" target="_blank" class="day-route-link">🗺️ Mt Amos</a>
+      </div>
+      <div class="day-content">
+        <ul><li>Giống 12d Day 6 — Mt Amos + Friendly Beaches</li></ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Coles Bay YHA</strong> đêm 2</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Coles+Bay+Tasmania" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 8</span>
+        <h3>Bay of Fires (free beach camp)</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Coles+Bay&destination=Binalong+Bay" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul><li>Giống 12d Day 7 — Bicheno + St Helens + Bay of Fires</li></ul>
+        <div class="day-stay"><span class="day-stay-icon">🏕️</span><div class="day-stay-text"><strong>Free beach camp</strong> Bay of Fires</div><div class="day-stay-links"><a href="https://www.google.com/maps/search/?api=1&query=Cosy+Corner+Bay+of+Fires" target="_blank">Maps</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 9</span>
+        <h3>Bay of Fires → Cradle Mountain</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=St+Helens&destination=Cradle+Mountain&waypoints=Launceston" target="_blank" class="day-route-link">🗺️ Route 5h</a>
+      </div>
+      <div class="day-content">
+        <ul><li>Giống 12d Day 8 — lái qua Launceston</li></ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Cradle Mountain hostel</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Cradle+Mountain+Tasmania" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge highlight">Day 10</span>
+        <h3>Cradle — Marions Lookout / summit + Fagus</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Dove+Lake+Cradle" target="_blank" class="day-route-link">🗺️ Dove Lake</a>
+      </div>
+      <div class="day-content">
+        <ul><li>Giống 12d Day 9</li></ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Cradle Mountain hostel</strong> đêm 2</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Cradle+Mountain+Tasmania" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 11 <span style="background: var(--ochre-dark); margin-left: 6px; font-size: 11px; padding: 3px 8px; border-radius: 100px; color: white;">NEW</span></span>
+        <h3>Cradle → Tarkine (Corinna) — temperate rainforest</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Cradle+Mountain&destination=Corinna+Tasmania&waypoints=Tullah+Tasmania" target="_blank" class="day-route-link">🗺️ Route 4h</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: lái Cradle → Tullah → Zeehan (~2h)</li>
+          <li>Trưa: vào <strong>Western Explorer Road</strong> — gravel, 2WD OK mùa khô</li>
+          <li>Chiều: đến <strong>Corinna</strong> — thị trấn nhỏ giữa rainforest, sóng điện thoại hạn chế</li>
+          <li>Hike <strong>Whyte River Walk</strong> 1h — gặp platypus chiều/sáng</li>
+          <li>Tối: ăn ở Tarkine Hotel restaurant (chỉ chỗ ăn duy nhất)</li>
+        </ul>
+        <div class="day-stay">
+          <span class="day-stay-icon">🌲</span>
+          <div class="day-stay-text"><strong>Corinna Cabins</strong> $180 cabin hoặc camp gần tuyến nếu nhóm muốn tiết kiệm</div>
+          <div class="day-stay-links">
+            <a href="https://corinna.com.au/" target="_blank">Corinna Lodge</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Corinna+Tasmania" target="_blank">Maps</a>
+          </div>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 12 <span style="background: var(--ochre-dark); margin-left: 6px; font-size: 11px; padding: 3px 8px; border-radius: 100px; color: white;">NEW</span></span>
+        <h3>Tarkine full — Julius River + Trowutta Arch</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Corinna&destination=Stanley+Tasmania" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: kayak Pieman River ($60, 2h) — gum tree khổng lồ</li>
+          <li>Trưa: <strong>Tarkine Drive</strong> loop — Sumac Lookout, <strong>Julius River Forest Reserve</strong>, <strong>Trowutta Arch</strong></li>
+          <li>Chiều: đến Smithton hoặc Stanley (<strong>The Nut</strong> volcanic plug nếu kịp sunset)</li>
+        </ul>
+        <div class="day-stay">
+          <span class="day-stay-icon">🏠</span>
+          <div class="day-stay-text"><strong>Stanley Cabin Park</strong> $80 hoặc <strong>Big Bay free camp</strong></div>
+          <div class="day-stay-links">
+            <a href="https://www.booking.com/searchresults.html?ss=Stanley+Tasmania" target="_blank">Booking</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Nut+Stanley+Tasmania" target="_blank">The Nut</a>
+          </div>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge highlight">Day 13</span>
+        <h3>Stanley → Mount Field NP</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Stanley+Tasmania&destination=Mount+Field+National+Park&waypoints=Devonport" target="_blank" class="day-route-link">🗺️ Route 5h</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng sớm: leo <strong>The Nut</strong> chairlift hoặc hike 20p</li>
+          <li>Drive Stanley → Mt Field qua Devonport (5h)</li>
+          <li>Stop ăn trưa Devonport hoặc Sheffield (town of murals — free)</li>
+          <li>Chiều: <strong>Russell Falls + Three Falls Circuit</strong></li>
+          <li>Tối: <strong>glow worm grotto</strong></li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Mt Field cabin</strong> hoặc Westerway Riverside</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Westerway+Tasmania" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge highlight">Day 14</span>
+        <h3>Mt Field — Tarn Shelf Fagus + về Hobart + Bruny</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Mount+Field&destination=Bruny+Island&waypoints=Hobart" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng sớm: <strong>Lake Dobson Road → Tarn Shelf</strong> Fagus hike 4-5h</li>
+          <li>Chiều: lái về Hobart, trả đồ camping</li>
+          <li>Nếu ngủ Hobart: Salamanca Place + Battery Point walk trước dinner</li>
+          <li><strong>Option A</strong>: Bruny Island self-drive (ferry Kettering 4pm, ngủ Bruny Cabin Park $90) — <strong>The Neck</strong> sunset penguin</li>
+          <li><strong>Option B</strong>: nghỉ Hobart, đi MONA ferry + museum nếu còn nửa ngày, ngủ YHA</li>
+        </ul>
+        <div class="day-stay">
+          <span class="day-stay-icon">🏠</span>
+          <div class="day-stay-text"><strong>Bruny Cabin Park</strong> HOẶC <strong>YHA Hobart Central</strong></div>
+          <div class="day-stay-links">
+            <a href="https://www.booking.com/searchresults.html?ss=Bruny+Island" target="_blank">Booking Bruny</a>
+            <a href="https://www.booking.com/searchresults.html?ss=Hobart+Tasmania" target="_blank">Booking Hobart</a>
+          </div>
+        </div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 15</span>
+        <h3>Bruny → Hobart → Sydney → VN</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Hobart+Airport" target="_blank" class="day-route-link">🗺️ HBA Airport</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng (nếu ở Bruny): <strong>Cape Bruny Lighthouse</strong> + Get Shucked oysters $2/con</li>
+          <li>Trưa: ferry về, lái Hobart Airport, trả xe</li>
+          <li>Chiều: bay HBA → SYD → VN tối</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">✈️</span><div class="day-stay-text">Máy bay</div></div>
+      </div>
+    </div></div>
+
+  </div>
+</section>
+
+<!-- SECTION 6: BUDGET -->
+<section id="budget">
+  <h2><span class="num">07</span> Budget breakdown</h2>
+  <p class="section-sub">So sánh 12 và 15 ngày. Không tính vé máy bay VN ↔ Sydney (~$1,000 USD round-trip).</p>
+
+  <table>
+    <thead>
+      <tr><th>Hạng mục</th><th>12 ngày</th><th>15 ngày</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Flights nội địa</strong></td><td class="price">$300</td><td class="price">$300</td><td>SYD↔HBA × 2 (Jetstar/Virgin sale)</td></tr>
+      <tr><td><strong>Rental xe</strong></td><td class="price">$640</td><td class="price">$800</td><td>10-13 ngày × $80 (Budget compact, full insurance)</td></tr>
+      <tr><td><strong>Xăng</strong></td><td class="price">$180</td><td class="price">$280</td><td>~$0.16/km. 15d Tas drives ~1,750km</td></tr>
+      <tr><td><strong>Parks Pass Holiday</strong></td><td class="price">$96</td><td class="price">$96</td><td>8 weeks, all parks</td></tr>
+      <tr><td><strong>Accommodation</strong></td><td class="price">$520</td><td class="price">$680</td><td>Hostel $40 + free camp + Maria $33</td></tr>
+      <tr><td><strong>Ăn uống</strong></td><td class="price">$420</td><td class="price">$525</td><td>$35/ngày — nấu hostel + 1-2 bữa nhà hàng</td></tr>
+      <tr><td><strong>Ferry + bike Maria</strong></td><td class="price">$80</td><td class="price">$80</td><td>Ferry $44 return + bike $35</td></tr>
+      <tr><td><strong>Cradle shuttle</strong></td><td class="price">$25</td><td class="price">$25</td><td>1 ngày Dove Lake</td></tr>
+      <tr><td><strong>Camping gear (mua mới)</strong></td><td class="price">$120</td><td class="price">$120</td><td>Sleeping bag, gas stove, basic kit (Big W Hobart)</td></tr>
+      <tr><td><strong>Telstra SIM + misc</strong></td><td class="price">$80</td><td class="price">$100</td><td>SIM $30 + tips + buffer</td></tr>
+      <tr><td><strong>Kayak Pieman River (15d)</strong></td><td class="price">—</td><td class="price">$60</td><td>Tarkine kayak optional</td></tr>
+      <tr><td><strong>Hastings thermal springs (15d)</strong></td><td class="price">—</td><td class="price">$25</td><td>Hot spring sau Cockle Creek</td></tr>
+      <tr class="total-row"><td><strong>TỔNG</strong></td><td class="price"><strong>~$2,461 AUD</strong></td><td class="price"><strong>~$3,091 AUD</strong></td><td>Trong khung mid-range</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECTION 7: PACKING -->
+<section id="packing">
+  <h2><span class="num">08</span> Packing — Autumn Tasmania</h2>
+  <p class="section-sub">Tas mùa thu: 7-18°C ngày, có thể 0°C đêm cao nguyên Cradle. Mưa bất chợt. Mang layer.</p>
+
+  <div class="two-col">
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">🥾 Hiking & Outdoor</h3>
+      <ul>
+        <li><strong>Backpack 50-65L</strong> + daypack 25L</li>
+        <li><strong>Giày hiking waterproof</strong> (Salomon X Ultra / Merrell Moab)</li>
+        <li><strong>Waterproof shell jacket</strong> (Goretex hoặc tương đương)</li>
+        <li>Merino base layer 2-3 cái</li>
+        <li>Fleece mid layer</li>
+        <li>Quần hiking quick-dry × 2</li>
+        <li>Beanie + găng mỏng + buff</li>
+        <li>Trekking poles (Mt Amos + Marions)</li>
+        <li>Sleeping bag liner</li>
+        <li>Headlamp + spare battery (glow worm)</li>
+        <li>Dép sandal/crocs</li>
+      </ul>
+    </div>
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">⚙️ Tech & Misc</h3>
+      <ul>
+        <li>Adapter Type I (Úc — 2 chân chéo)</li>
+        <li>Power bank 20,000mAh</li>
+        <li>Camera + lens tele 200mm+ cho wildlife</li>
+        <li>Bình nước reusable 1.5L + viên lọc</li>
+        <li>Sunscreen SPF50 + kính râm</li>
+        <li>Bộ ăn camping: dao + nĩa + bát + nồi nhỏ</li>
+        <li>Mua Hobart Big W: gas stove $20, ấm $15, sleeping bag $40</li>
+        <li>Snack VN: mì gói, ruốc bông, thịt khô</li>
+        <li>First-aid kit + thuốc cá nhân</li>
+        <li>Khăn microfiber × 2</li>
+        <li>Dry bag chống nước cho phone</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: CHECKLIST -->
+<section id="checklist">
+  <h2><span class="num">09</span> Pre-trip checklist</h2>
+  <p class="section-sub">Backwards planning từ ngày bay. Cố định những việc cần lead time dài trước.</p>
+
+  <div class="two-col">
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">T-6 → T-3 tháng</h3>
+      <ul>
+        <li>Quyết định năm (2027 hay 2028) — lock Fagus window 25/4 ± 2 tuần</li>
+        <li>Apply visa subclass 600 (4-6 tuần xử lý)</li>
+        <li>Book vé VN → Sydney round-trip</li>
+        <li>Book SYD ↔ HBA Jetstar/Virgin (sale Tuesdays)</li>
+        <li>Mua travel insurance ($80-150 cho 15 ngày)</li>
+      </ul>
+    </div>
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">T-1 tháng</h3>
+      <ul>
+        <li>Book rental Budget/Europcar one-way HBA</li>
+        <li>Book Coles Bay YHA (autumn dễ hết)</li>
+        <li>Book Maria Island Darlington Penitentiary (Parks Tas)</li>
+        <li>Book Cradle shuttle + Parks Pass online</li>
+        <li>Order trekking poles, fleece, waterproof shell</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top: 16px;">
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">T-1 tuần</h3>
+      <ul>
+        <li>Download offline: Google Maps Tasmania, WikiCamps, Maps.me</li>
+        <li>In bản sao passport + visa + itinerary</li>
+        <li>Đổi $300 AUD cash</li>
+        <li>Check Fagus update — Discover Tasmania Facebook</li>
+        <li>Confirm tất cả booking, lưu QR/email offline</li>
+        <li>Pack dry-run vào 50L backpack</li>
+      </ul>
+    </div>
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">Ngày 1 Hobart</h3>
+      <ul>
+        <li>Pickup car — kiểm tra xước trước khi rời</li>
+        <li>Big W/Kmart Hobart: stove $20, sleeping bag $40, bowl + nồi $15</li>
+        <li>Telstra prepaid SIM $30/20GB</li>
+        <li>Coles supermarket: rau, trứng, sữa, snack 7 ngày</li>
+        <li>Tank đầy xăng trước rời Hobart</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+  document.querySelectorAll('.plan-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const plan = btn.dataset.plan;
+      document.querySelectorAll('.plan-toggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.plan-view').forEach(v => v.classList.remove('active'));
+      document.getElementById('plan-' + plan).classList.add('active');
+      document.getElementById('itinerary').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>

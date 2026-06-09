@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Zealand 12-15 ngày — South Island Road Trip · Plan chia sẻ nhóm bạn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ochre: #2F7D63;
+    --ochre-dark: #155243;
+    --eucalyptus: #3E5F7A;
+    --eucalyptus-dark: #183348;
+    --sand: #E8E0C9;
+    --cream: #FBFAF3;
+    --ink: #141915;
+    --ink-soft: #3F4A43;
+    --line: #DCD2B8;
+    --accent: #D7A93A;
+    --rust: #7F8F53;
+    --sea: #287C91;
+    --shadow: 0 1px 3px rgba(20,25,21,0.08), 0 4px 12px rgba(20,25,21,0.05);
+    --shadow-lg: 0 4px 8px rgba(20,25,21,0.1), 0 16px 32px rgba(20,25,21,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; line-height: 1.15; color: var(--ink); }
+  a { color: var(--ochre-dark); }
+
+  .hero {
+    background: linear-gradient(135deg, var(--eucalyptus-dark) 0%, var(--ochre) 50%, var(--rust) 100%);
+    color: var(--cream);
+    padding: 80px 5vw 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+    background: radial-gradient(ellipse at top right, rgba(215,169,58,0.28), transparent 60%),
+                radial-gradient(ellipse at bottom left, rgba(40,124,145,0.38), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before { content: ''; width: 32px; height: 2px; background: var(--accent); }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    color: var(--cream);
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    max-width: 940px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; font-weight: 800; }
+  .hero p.lead {
+    font-size: clamp(17px, 1.6vw, 21px);
+    max-width: 760px;
+    opacity: 0.92;
+    margin-bottom: 32px;
+  }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .hero-tag {
+    background: rgba(251,250,243,0.15);
+    border: 1px solid rgba(251,250,243,0.3);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+  }
+
+  nav.sticky {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251,250,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 5vw;
+  }
+  nav.sticky .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  nav.sticky .brand { font-weight: 700; font-family: 'Bricolage Grotesque'; font-size: 18px; }
+  nav.sticky .brand span { color: var(--ochre); }
+  nav.sticky ul { display: flex; list-style: none; gap: 24px; flex-wrap: wrap; }
+  nav.sticky a { color: var(--ink-soft); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  nav.sticky a:hover { color: var(--ochre); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 64px 5vw; }
+  section { margin-bottom: 80px; scroll-margin-top: 80px; }
+  section h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    margin-bottom: 12px;
+    display: flex; align-items: baseline; gap: 16px;
+  }
+  section h2 .num { font-size: 16px; color: var(--ochre); font-weight: 600; font-family: 'Inter'; letter-spacing: 1px; }
+  section .section-sub { font-size: 17px; color: var(--ink-soft); margin-bottom: 32px; max-width: 760px; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .card-image {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, var(--ochre), var(--eucalyptus));
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-image::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+  }
+  .card-image.placeholder {
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.78);
+    font-family: 'Bricolage Grotesque';
+    font-size: 14px;
+    text-align: center;
+    padding: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .card-image.placeholder span { position: relative; z-index: 1; }
+  .card-body { padding: 20px 24px 16px; flex: 1; display: flex; flex-direction: column; }
+  .card h3 { font-size: 17px; margin-bottom: 6px; line-height: 1.25; }
+  .card .card-meta { font-size: 11px; color: var(--ochre); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px; }
+  .card p { font-size: 13.5px; color: var(--ink-soft); flex: 1; }
+  .card .tag-row { margin-top: 10px; }
+  .card-links {
+    display: flex;
+    gap: 6px;
+    padding: 12px 20px;
+    border-top: 1px solid var(--line);
+    background: #F5F1E5;
+  }
+  .card-links a {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid var(--line);
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .card-links a:hover { background: var(--ochre); color: white; border-color: var(--ochre); }
+
+  #gems .card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  #gems .card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    border-radius: 12px;
+    transform: none;
+  }
+  #gems .card:hover { transform: none; }
+  #gems .card-image { display: none; }
+  #gems .card-body { padding: 18px 20px; }
+  #gems .card h3 { font-size: 18px; margin-bottom: 6px; }
+  #gems .card p { font-size: 14px; }
+  #gems .card-links {
+    border-top: none;
+    border-left: 1px solid var(--line);
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px;
+  }
+  @media (max-width: 720px) {
+    #gems .card { grid-template-columns: 1fr; }
+    #gems .card-links {
+      border-left: none;
+      border-top: 1px solid var(--line);
+      flex-direction: row;
+    }
+  }
+
+  .culture-list { display: flex; flex-direction: column; gap: 12px; }
+  .culture-item {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr) 190px;
+    overflow: hidden;
+  }
+  .culture-day {
+    background: #F5F1E5;
+    border-right: 1px solid var(--line);
+    color: var(--ochre-dark);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 18px 14px;
+  }
+  .culture-body { padding: 18px 20px; }
+  .culture-kicker {
+    color: var(--ochre);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .culture-body h3 { font-size: 18px; margin-bottom: 6px; }
+  .culture-body p { color: var(--ink-soft); font-size: 14px; }
+  .culture-links {
+    background: #F5F1E5;
+    border-left: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+    padding: 14px;
+  }
+  .culture-links a {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--ink-soft);
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+  }
+  .culture-links a:hover { background: var(--ochre); border-color: var(--ochre); color: white; }
+  @media (max-width: 760px) {
+    .culture-item { grid-template-columns: 1fr; }
+    .culture-day { border-right: none; border-bottom: 1px solid var(--line); padding: 10px 16px; }
+    .culture-links { border-left: none; border-top: 1px solid var(--line); flex-direction: row; flex-wrap: wrap; }
+    .culture-links a { flex: 1; min-width: 92px; }
+  }
+
+  .callout {
+    background: linear-gradient(135deg, var(--sand), #F1EAD8);
+    border-left: 4px solid var(--ochre);
+    padding: 24px 28px;
+    border-radius: 8px;
+    margin: 32px 0;
+  }
+  .callout h4 {
+    color: var(--ochre-dark);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    font-family: 'Inter';
+    font-weight: 700;
+  }
+  .callout p { color: var(--ink); font-size: 15px; }
+  .callout strong { color: var(--ochre-dark); }
+
+  .plan-toggle {
+    display: inline-flex;
+    flex-wrap: wrap;
+    background: var(--sand);
+    border-radius: 100px;
+    padding: 4px;
+    margin-bottom: 32px;
+    gap: 4px;
+  }
+  .plan-toggle button {
+    background: transparent;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--ink-soft);
+    transition: all 0.2s;
+  }
+  .plan-toggle button.active {
+    background: var(--ochre);
+    color: white;
+    box-shadow: 0 2px 8px rgba(47,125,99,0.3);
+  }
+
+  .day-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .day-card:hover { box-shadow: var(--shadow-lg); }
+  .day-card-inner { padding: 28px 28px 20px; }
+  .day-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+  .day-badge {
+    background: var(--ochre);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-family: 'Inter';
+  }
+  .day-badge.travel { background: var(--sea); }
+  .day-badge.hidden { background: var(--eucalyptus); }
+  .day-card h3 { font-size: 20px; flex: 1; min-width: 240px; }
+  .day-content ul { list-style: none; padding: 0; }
+  .day-content li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed var(--line);
+  }
+  .day-content li:last-child { border-bottom: none; }
+  .day-content li::before {
+    content: '◆';
+    color: var(--ochre);
+    position: absolute; left: 0; top: 8px;
+    font-size: 10px;
+  }
+  .day-content li strong { color: var(--ink); }
+  .day-stay {
+    margin-top: 12px;
+    padding: 14px 16px;
+    background: #EEF0E4;
+    border-radius: 10px;
+    font-size: 13.5px;
+    color: var(--eucalyptus-dark);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .day-stay-icon { font-size: 18px; flex-shrink: 0; }
+  .day-stay-text { flex: 1; min-width: 200px; }
+  .day-stay-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .day-stay-links a {
+    background: white;
+    color: var(--eucalyptus-dark);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .day-stay-links a:hover { background: var(--eucalyptus); color: white; border-color: var(--eucalyptus); }
+  .day-route-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--sea);
+    color: white !important;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 4px;
+  }
+  .day-route-link:hover { background: var(--eucalyptus-dark); }
+
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+  th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; }
+  th { background: var(--eucalyptus-dark); color: var(--cream); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--sand); }
+  td strong { color: var(--ink); }
+  .price { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .total-row td { background: var(--ochre) !important; color: white; font-weight: 700; font-size: 15px; }
+  .total-row td strong { color: white; }
+
+  .plan-view { display: none; }
+  .plan-view.active { display: block; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+
+  .checklist { background: white; padding: 24px; border-radius: 12px; border: 1px solid var(--line); }
+  .checklist li {
+    list-style: none;
+    padding: 10px 0 10px 32px;
+    position: relative;
+    font-size: 14px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '☐';
+    position: absolute; left: 0; top: 8px;
+    font-size: 18px;
+    color: var(--ochre);
+  }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .tag {
+    background: var(--sand);
+    color: var(--ink-soft);
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tag.hidden { background: #DDE9DD; color: var(--ochre-dark); }
+  .tag.cost { background: #F2E2BC; color: #816015; }
+  .tag.warn { background: #F4DED6; color: #7E351F; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .stat {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-num { font-family: 'Bricolage Grotesque'; font-size: 32px; font-weight: 700; color: var(--ochre); display: block; }
+  .stat-label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-top: 4px; }
+
+  .route-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+  @media (max-width: 860px) { .route-overview { grid-template-columns: 1fr; } }
+  .route-map-panel, .route-schedule {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .route-map-panel { padding: 18px; }
+  .route-map {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    display: block;
+  }
+  .route-map text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    fill: var(--ink);
+  }
+  .route-map .small-label { font-size: 10px; fill: var(--ink-soft); }
+  .route-map .map-land { fill: #ECF0E2; stroke: var(--line); stroke-width: 2; }
+  .route-map .route-line { fill: none; stroke: var(--ochre); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  .route-map .route-alt { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 7 7; stroke-linecap: round; }
+  .route-map .route-node { fill: white; stroke: var(--ochre-dark); stroke-width: 3; }
+  .route-map .node-number { font-weight: 800; font-size: 11px; fill: var(--ochre-dark); text-anchor: middle; dominant-baseline: central; }
+  .route-map .drive-time {
+    font-size: 9.5px;
+    fill: var(--sea);
+    font-weight: 700;
+    text-anchor: middle;
+  }
+  .route-schedule h3 {
+    font-size: 20px;
+    padding: 18px 20px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .route-row {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .route-row:last-child { border-bottom: none; }
+  .route-row .route-index {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ochre);
+    color: white;
+    font-weight: 800;
+    font-size: 12px;
+  }
+  .route-row strong { display: block; color: var(--ink); font-size: 14px; }
+  .route-row span { display: block; color: var(--ink-soft); font-size: 12.5px; }
+  .route-row .route-nights {
+    color: var(--ochre-dark);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    background: var(--sand);
+    border-radius: 100px;
+    padding: 5px 10px;
+  }
+
+  .region-hub {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .region-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .region-card h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .region-card h4 .emoji { font-size: 20px; }
+  .region-card p { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 12px; }
+  .region-card .region-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .region-card .region-links a {
+    background: var(--sand);
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .region-card .region-links a:hover { background: var(--ochre); color: white; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Plan du lịch · South Island · Tháng 3-4/2027</div>
+    <h1>12-15 ngày <em>New Zealand Nam Đảo</em>, tự lái qua alpine, fiord, rainforest và dark sky</h1>
+    <p class="lead">Lộ trình vòng từ Christchurch, tập trung vào Nam Đảo: tự lái, hostel/DOC camp, các cung đi bộ trong ngày, Fiordland, màu thu Wānaka/Arrowtown, Dunedin lịch sử và bầu trời sao vùng Aoraki Mackenzie.</p>
+    <div class="hero-meta">
+      <span class="hero-tag">🥾 Day hikes</span>
+      <span class="hero-tag">🚗 Self-drive loop</span>
+      <span class="hero-tag">🍂 Autumn South Island</span>
+      <span class="hero-tag">🏕️ DOC camp + hostel</span>
+      <span class="hero-tag">🌌 Aoraki dark sky</span>
+      <span class="hero-tag">💰 NZD $2,800-$4,200 local</span>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky">
+  <div class="nav-inner">
+    <div class="brand">🇳🇿 NZ <span>South Island</span></div>
+    <ul>
+      <li><a href="#why">Tại sao</a></li>
+      <li><a href="#route-map">Map</a></li>
+      <li><a href="#culture">City & văn hóa</a></li>
+      <li><a href="#regions">Khu vực</a></li>
+      <li><a href="#gems">Điểm gợi ý</a></li>
+      <li><a href="#itinerary">Itinerary</a></li>
+      <li><a href="#budget">Budget</a></li>
+      <li><a href="#packing">Packing</a></li>
+      <li><a href="#checklist">Checklist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<section id="why">
+  <h2><span class="num">01</span> Tại sao plan này</h2>
+  <p class="section-sub">Đây là lộ trình Nam Đảo cho nhóm thích thiên nhiên, tự lái và đi bộ trong ngày. Chuyến đi tập trung vào một vòng từ Christchurch để giảm thời gian quay lại cùng một cung đường.</p>
+
+  <div class="stat-grid">
+    <div class="stat"><span class="stat-num">1 đảo</span><span class="stat-label">Tập trung Nam Đảo</span></div>
+    <div class="stat"><span class="stat-num">320+</span><span class="stat-label">DOC campsites toàn NZ</span></div>
+    <div class="stat"><span class="stat-num">Mar-May</span><span class="stat-label">Autumn window chính thức</span></div>
+    <div class="stat"><span class="stat-num">2-3</span><span class="stat-label">Ngày buffer thời tiết</span></div>
+  </div>
+
+  <div class="callout">
+    <h4>🍂 Thời điểm đề xuất</h4>
+    <p><strong>Cuối tháng 3 đến giữa tháng 4</strong> là thời điểm hợp lý cho lộ trình này. Wānaka và Arrowtown bắt đầu có màu thu, Fiordland vẫn có nhiều ngày đi bộ được, và đêm ở Mackenzie Basin thường lạnh, trời trong hơn.</p>
+  </div>
+
+  <div class="callout">
+    <h4>🧭 Cách đi chính</h4>
+    <p><strong>Loop 15 ngày:</strong> Christchurch → Arthur's Pass → West Coast → Wānaka → Arrowtown/Glenorchy → Te Anau/Milford → Catlins → Dunedin → Twizel/Aoraki → Christchurch. Cách đi này giữ các chặng lớn theo vòng tròn và dành 3 đêm ở Te Anau để linh hoạt với thời tiết Fiordland.</p>
+  </div>
+</section>
+
+<section id="route-map">
+  <h2><span class="num">02</span> Route map & thời gian từng điểm</h2>
+  <p class="section-sub">Bản đồ dưới đây là sơ đồ tuyến để cả nhóm nhìn nhanh thứ tự đi, nơi ngủ và số đêm ở từng khu. Thời gian lái chỉ là ước tính chưa tính dừng chụp ảnh, ăn uống hoặc thời tiết.</p>
+
+  <div class="route-overview">
+    <div class="route-map-panel">
+      <svg class="route-map" viewBox="0 0 520 650" role="img" aria-label="Sơ đồ route Nam Đảo New Zealand 15 ngày">
+        <path class="map-land" d="M315 28 C365 68 386 126 366 178 C348 226 366 266 421 294 C474 321 491 365 450 400 C413 432 386 461 393 510 C402 574 360 620 296 623 C242 626 206 597 205 545 C204 505 178 484 142 467 C91 442 65 404 88 359 C112 313 94 273 65 239 C26 191 40 132 91 103 C135 78 171 96 206 71 C241 46 272 2 315 28 Z"/>
+        <path class="route-line" d="M308 92 L226 128 L174 190 L151 253 L214 320 L256 350 L283 425 L348 486 L390 543 L333 584 L308 92"/>
+        <path class="route-alt" d="M256 350 L326 389 L283 425"/>
+
+        <circle class="route-node" cx="308" cy="92" r="15"/><text class="node-number" x="308" y="92">1</text>
+        <text x="327" y="86">Christchurch</text><text class="small-label" x="327" y="101">Day 1 · 1 đêm</text>
+
+        <circle class="route-node" cx="226" cy="128" r="15"/><text class="node-number" x="226" y="128">2</text>
+        <text x="102" y="124">Arthur's Pass</text><text class="small-label" x="104" y="139">Day 2 · 1 đêm</text>
+
+        <circle class="route-node" cx="174" cy="190" r="15"/><text class="node-number" x="174" y="190">3</text>
+        <text x="58" y="184">Hokitika</text><text class="small-label" x="58" y="199">Day 3 · 1 đêm</text>
+
+        <circle class="route-node" cx="151" cy="253" r="15"/><text class="node-number" x="151" y="253">4</text>
+        <text x="38" y="249">Ōkārito / Franz</text><text class="small-label" x="38" y="264">Day 4 · 1 đêm</text>
+
+        <circle class="route-node" cx="214" cy="320" r="15"/><text class="node-number" x="214" y="320">5</text>
+        <text x="104" y="316">Wānaka</text><text class="small-label" x="104" y="331">Day 5-6 · 2 đêm</text>
+
+        <circle class="route-node" cx="256" cy="350" r="15"/><text class="node-number" x="256" y="350">6</text>
+        <text x="276" y="343">Arrowtown / Glenorchy</text><text class="small-label" x="276" y="358">Day 7-8 · 2 đêm</text>
+
+        <circle class="route-node" cx="283" cy="425" r="15"/><text class="node-number" x="283" y="425">7</text>
+        <text x="305" y="420">Te Anau / Milford</text><text class="small-label" x="305" y="435">Day 9-11 · 3 đêm</text>
+
+        <circle class="route-node" cx="348" cy="486" r="15"/><text class="node-number" x="348" y="486">8</text>
+        <text x="368" y="482">Catlins</text><text class="small-label" x="368" y="497">Day 12 · 1 đêm</text>
+
+        <circle class="route-node" cx="390" cy="543" r="15"/><text class="node-number" x="390" y="543">9</text>
+        <text x="410" y="538">Dunedin</text><text class="small-label" x="410" y="553">Day 13 · 1 đêm</text>
+
+        <circle class="route-node" cx="333" cy="584" r="15"/><text class="node-number" x="333" y="584">10</text>
+        <text x="195" y="579">Twizel / Aoraki</text><text class="small-label" x="195" y="594">Day 14 · 1 đêm</text>
+
+        <text class="drive-time" x="267" y="104">2h</text>
+        <text class="drive-time" x="197" y="158">1.5h</text>
+        <text class="drive-time" x="145" y="221">2h</text>
+        <text class="drive-time" x="179" y="288">4.5h</text>
+        <text class="drive-time" x="246" y="328">1.5h</text>
+        <text class="drive-time" x="290" y="382">2.5h</text>
+        <text class="drive-time" x="321" y="456">3h</text>
+        <text class="drive-time" x="382" y="512">2h</text>
+        <text class="drive-time" x="360" y="574">4h</text>
+        <text class="drive-time" x="390" y="318">4h + stops</text>
+        <text class="small-label" x="336" y="390">Mavora optional</text>
+      </svg>
+    </div>
+
+    <div class="route-schedule">
+      <h3>Thời gian ở từng cụm điểm</h3>
+      <div class="route-row"><div class="route-index">1</div><div><strong>Christchurch</strong><span>Đáp chuyến bay, chuẩn bị xe và đồ ăn</span></div><div class="route-nights">1 đêm</div></div>
+      <div class="route-row"><div class="route-index">2</div><div><strong>Arthur's Pass</strong><span>Castle Hill, Cave Stream lookout, short walks</span></div><div class="route-nights">1 đêm</div></div>
+      <div class="route-row"><div class="route-index">3</div><div><strong>Hokitika</strong><span>Hokitika Gorge, beach, Glow Worm Dell</span></div><div class="route-nights">1 đêm</div></div>
+      <div class="route-row"><div class="route-index">4</div><div><strong>Ōkārito / Franz Josef</strong><span>Lagoon kayak, Ōkārito Trig, rainforest walks</span></div><div class="route-nights">1 đêm</div></div>
+      <div class="route-row"><div class="route-index">5</div><div><strong>Wānaka</strong><span>Roys Peak hoặc Diamond Lake, Lake Hāwea</span></div><div class="route-nights">2 đêm</div></div>
+      <div class="route-row"><div class="route-index">6</div><div><strong>Arrowtown / Glenorchy</strong><span>Arrowtown, Glenorchy Road, Routeburn day walk</span></div><div class="route-nights">2 đêm</div></div>
+      <div class="route-row"><div class="route-index">7</div><div><strong>Te Anau / Milford Road</strong><span>Key Summit, Milford Sound, Lake Marian hoặc Kepler</span></div><div class="route-nights">3 đêm</div></div>
+      <div class="route-row"><div class="route-index">8</div><div><strong>Catlins</strong><span>Curio Bay, McLean Falls, Lake Wilkie, Nugget Point</span></div><div class="route-nights">1 đêm</div></div>
+      <div class="route-row"><div class="route-index">9</div><div><strong>Dunedin / Otago Peninsula</strong><span>Wildlife, Sandymount hoặc Sandfly Bay</span></div><div class="route-nights">1 đêm</div></div>
+      <div class="route-row"><div class="route-index">10</div><div><strong>Twizel / Aoraki</strong><span>Tasman Lake, Kea Point, Sealy Tarns, dark sky</span></div><div class="route-nights">1 đêm</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="culture">
+  <h2><span class="num">03</span> City, lịch sử & văn hóa theo route</h2>
+  <p class="section-sub">Các điểm này được đặt vào ngày city/base day để chuyến đi không chỉ là hiking. Nếu nhóm thích bảo tàng, kiến trúc, câu chuyện địa phương và city walk, nên giữ các điểm dưới đây trong lịch.</p>
+
+  <div class="culture-list">
+    <article class="culture-item">
+      <div class="culture-day">D1 / D15</div>
+      <div class="culture-body">
+        <div class="culture-kicker">Christchurch</div>
+        <h3>The Arts Centre + Quake City</h3>
+        <p>The Arts Centre hợp để đi bộ nhẹ ngày đầu: khu heritage/culture trong các tòa Gothic Revival cũ, có gallery, cafe và Rutherford's Den. Quake City giúp hiểu câu chuyện động đất Canterbury trước khi rời thành phố.</p>
+        <div class="tag-row"><span class="tag hidden">City walk</span><span class="tag">2-4h</span></div>
+      </div>
+      <div class="culture-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=The+Arts+Centre+Christchurch" target="_blank">🗺️ Maps</a>
+        <a href="https://www.christchurchnz.com/explore/activities-attractions/arts-culture/the-arts-centre" target="_blank">Info</a>
+        <a href="https://quakecity.co.nz/" target="_blank">Quake City</a>
+      </div>
+    </article>
+
+    <article class="culture-item">
+      <div class="culture-day">D7</div>
+      <div class="culture-body">
+        <div class="culture-kicker">Arrowtown</div>
+        <h3>Arrowtown Chinese Settlement + historic main street</h3>
+        <p>Đây là điểm văn hóa nên giữ trên đường Wānaka → Glenorchy. Đi bộ qua khu Chinese Settlement để hiểu thêm câu chuyện gold rush và cộng đồng người Hoa ở Otago, sau đó ăn trưa/cafe ở main street.</p>
+        <div class="tag-row"><span class="tag hidden">Gold rush history</span><span class="tag">1-2h</span></div>
+      </div>
+      <div class="culture-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Arrowtown+Chinese+Settlement" target="_blank">🗺️ Maps</a>
+        <a href="https://www.doc.govt.nz/chinese-settlement" target="_blank">DOC</a>
+        <a href="https://www.arrowtown.com/discover/our-history/" target="_blank">History</a>
+      </div>
+    </article>
+
+    <article class="culture-item">
+      <div class="culture-day">D13</div>
+      <div class="culture-body">
+        <div class="culture-kicker">Dunedin</div>
+        <h3>Toitū Otago Settlers Museum + railway station</h3>
+        <p>Dunedin là city stop đáng giữ vì có lịch sử Scotland/Otago rõ hơn các thị trấn khác trong route. Toitū kể câu chuyện con người tạo nên Dunedin/Otago; railway station và khu trung tâm hợp đi bộ cuối ngày.</p>
+        <div class="tag-row"><span class="tag hidden">Museum</span><span class="tag">2-3h</span></div>
+      </div>
+      <div class="culture-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Toitu+Otago+Settlers+Museum" target="_blank">🗺️ Maps</a>
+        <a href="https://www.toituosm.com/" target="_blank">Toitū</a>
+        <a href="https://www.google.com/search?q=Dunedin+Railway+Station&tbm=isch" target="_blank">Images</a>
+      </div>
+    </article>
+
+    <article class="culture-item">
+      <div class="culture-day">D13/14</div>
+      <div class="culture-body">
+        <div class="culture-kicker">Otago Peninsula</div>
+        <h3>Larnach Castle + Otago Peninsula wildlife</h3>
+        <p>Nếu nhóm thích kiến trúc/lịch sử kiểu Victorian, thêm Larnach Castle trước hoặc sau Sandymount/Sandfly Bay. Nếu chỉ muốn nature, giữ Otago Peninsula wildlife và bỏ castle để tiết kiệm thời gian.</p>
+        <div class="tag-row"><span class="tag">Optional</span><span class="tag cost">Paid entry</span></div>
+      </div>
+      <div class="culture-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Larnach+Castle+Dunedin" target="_blank">🗺️ Maps</a>
+        <a href="https://www.dunedinnz.com/visit/see-and-do/tours/qualmark/larnach-castle" target="_blank">DunedinNZ</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Portobello+Dunedin" target="_blank">Stay</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="regions">
+  <h2><span class="num">04</span> Khu vực chính — Google Maps + Booking</h2>
+  <p class="section-sub">Quick-access hub để chia sẻ và book nhanh: mỗi vùng có link Maps, ảnh thực tế và accommodation search. Route khuyến nghị là loop từ Christchurch, không one-way để giảm phí thuê xe.</p>
+
+  <div class="region-hub">
+    <div class="region-card">
+      <h4><span class="emoji">🏙️</span> Christchurch</h4>
+      <p>Điểm vào/ra, pickup xe, mua gear, ngủ hồi sức</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Christchurch+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Christchurch+New+Zealand&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Christchurch+New+Zealand" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🪨</span> Kura Tāwhiti / Castle Hill</h4>
+      <p>Limestone boulders, dừng trên đường vào Arthur's Pass</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Kura+Tawhiti+Castle+Hill+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Kura+Tawhiti+Castle+Hill&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Arthur%27s+Pass+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">⛰️</span> Arthur's Pass</h4>
+      <p>Alpine pass, kea, Bealey Spur, Devil's Punchbowl</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Arthur%27s+Pass+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Arthur%27s+Pass+National+Park&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Arthur%27s+Pass+New+Zealand" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🌊</span> Hokitika / West Coast</h4>
+      <p>Rainforest, driftwood beach, Hokitika Gorge, glow worms</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Hokitika+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Hokitika+Gorge+West+Coast&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Hokitika+New+Zealand" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🛶</span> Ōkārito / Glacier Country</h4>
+      <p>Lagoon kayak, kiwi habitat, Lake Matheson mirror view</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Okarito+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Okarito+Lagoon+New+Zealand&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Franz+Josef+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🏔️</span> Wānaka</h4>
+      <p>Autumn colour base, Roys Peak, Diamond Lake, Hāwea</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Wanaka+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Wanaka+autumn+New+Zealand&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Wanaka+New+Zealand" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🍁</span> Arrowtown / Glenorchy</h4>
+      <p>Autumn gold + gateway Routeburn side</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Glenorchy+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Arrowtown+autumn+Glenorchy&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Glenorchy+New+Zealand" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🌧️</span> Te Anau / Milford Road</h4>
+      <p>Fiordland base, Key Summit, Lake Marian, Milford cruise</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Te+Anau+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Milford+Road+Fiordland&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🌿</span> The Catlins</h4>
+      <p>Southern coast, waterfalls, sea lions, low-tide caves</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=The+Catlins+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=The+Catlins+New+Zealand&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Owaka+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🐧</span> Dunedin / Otago Peninsula</h4>
+      <p>Wildlife cuối trip: albatross, penguin, sea lions</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Otago+Peninsula+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Otago+Peninsula+wildlife&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Dunedin+New+Zealand" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+    <div class="region-card">
+      <h4><span class="emoji">🌌</span> Twizel / Aoraki / Tekapo</h4>
+      <p>Aoraki walks, Tasman Lake, Sealy Tarns, Dark Sky Reserve</p>
+      <div class="region-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Aoraki+Mount+Cook+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Aoraki+Mount+Cook+Lake+Tekapo+stars&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Twizel+New+Zealand" target="_blank">🏠 Booking</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gems">
+  <h2><span class="num">05</span> 14 điểm gợi ý theo route</h2>
+  <p class="section-sub">Danh sách dưới đây đi theo hướng route. Mỗi vùng có một vài điểm quen thuộc và một vài điểm ít đông hơn để nhóm dễ chọn theo thời tiết và sức khỏe.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #8E9B6A, #D7A93A);"><span>🪨 Kura Tāwhiti<br>Limestone boulder field</span></div>
+      <div class="card-body">
+        <div class="card-meta">Christchurch → Arthur's Pass</div>
+        <h3>1. Kura Tāwhiti / Castle Hill</h3>
+        <p>Điểm mở màn hoàn hảo: đá vôi khổng lồ giữa đồng cỏ alpine, 1.5h từ Christchurch, không cần tour.</p>
+        <div class="tag-row"><span class="tag hidden">Free walk</span><span class="tag">Photo</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Kura+Tawhiti+Castle+Hill" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Kura+Tawhiti+Castle+Hill&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Arthur%27s+Pass+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #183348, #3E5F7A);"><span>⛰️ Bealey Spur<br>Arthur's Pass alpine edge</span></div>
+      <div class="card-body">
+        <div class="card-meta">Arthur's Pass</div>
+        <h3>2. Bealey Spur / Arthur's Pass</h3>
+        <p>Day hike ít đông hơn các điểm drive-in, view Waimakariri valley, cảm giác alpine rất nhanh sau Christchurch.</p>
+        <div class="tag-row"><span class="tag">Half-day</span><span class="tag warn">Weather check</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Bealey+Spur+Track" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Bealey+Spur+Track&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Arthur%27s+Pass+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #287C91, #155243);"><span>🛶 Ōkārito Lagoon<br>Kayak + coastal birds</span></div>
+      <div class="card-body">
+        <div class="card-meta">West Coast</div>
+        <h3>3. Ōkārito Lagoon kayak</h3>
+        <p>Lagoon rộng, rừng mưa sát biển và nhiều chim nước. Đẹp hơn nếu đi sáng sớm, ít gió.</p>
+        <div class="tag-row"><span class="tag hidden">Low crowd</span><span class="tag cost">Kayak</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Okarito+Lagoon" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Okarito+Lagoon+kayak&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Franz+Josef+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #1E4B4D, #7F8F53);"><span>🏔️ Lake Matheson<br>Mirror of Aoraki/Tasman</span></div>
+      <div class="card-body">
+        <div class="card-meta">Glacier Country</div>
+        <h3>4. Lake Matheson</h3>
+        <p>Đi trước mặt trời mọc để có mặt hồ phẳng. Nếu mây kín thì skip nhẹ, không cố biến nó thành điểm chính.</p>
+        <div class="tag-row"><span class="tag">Easy walk</span><span class="tag warn">Weather-dependent</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Lake+Matheson+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Lake+Matheson+New+Zealand&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Fox+Glacier+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #3E5F7A, #2F7D63);"><span>💧 Haast Pass<br>Waterfalls + beech forest</span></div>
+      <div class="card-body">
+        <div class="card-meta">Haast Pass</div>
+        <h3>5. Haast Pass stops</h3>
+        <p>Thunder Creek, Fantail Falls, river stones và beech forest. Đây là ngày lái dài nhưng có nhiều điểm dừng ngắn.</p>
+        <div class="tag-row"><span class="tag">Road trip</span><span class="tag">Short walks</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Haast+Pass+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Haast+Pass+waterfalls&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Wanaka+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #D7A93A, #2F7D63);"><span>🏔️ Diamond Lake<br>Rocky Mountain summit</span></div>
+      <div class="card-body">
+        <div class="card-meta">Wānaka</div>
+        <h3>6. Diamond Lake / Rocky Mountain</h3>
+        <p>7km loop, view Wānaka và Mount Aspiring. Đường có đoạn steep/slippery, nên đi cẩn thận nếu trời ướt.</p>
+        <div class="tag-row"><span class="tag hidden">Ít đông hơn</span><span class="tag">3h</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Diamond+Lake+Rocky+Mountain+Wanaka" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Diamond+Lake+Rocky+Mountain+Wanaka&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Wanaka+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #183348, #D7A93A);"><span>🥾 Roys Peak<br>Sunrise hike</span></div>
+      <div class="card-body">
+        <div class="card-meta">Wānaka</div>
+        <h3>7. Roys Peak</h3>
+        <p>Đường đi 16km return, khoảng 5-6h, dốc đều. Nếu nhóm muốn một ngày hike dài ở Wānaka thì đây là lựa chọn rõ ràng; đi sớm và xem forecast gió.</p>
+        <div class="tag-row"><span class="tag warn">Dốc</span><span class="tag">5-6h</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Roys+Peak+Track" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Roys+Peak+Track&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Wanaka+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #7F8F53, #183348);"><span>🍁 Glenorchy Road<br>Lake Wakatipu edge</span></div>
+      <div class="card-body">
+        <div class="card-meta">Glenorchy</div>
+        <h3>8. Glenorchy / Paradise Road</h3>
+        <p>Một trong các cung lái đẹp nhất Nam Đảo. Khu này phù hợp để ngủ gần Routeburn side trước ngày đi bộ.</p>
+        <div class="tag-row"><span class="tag">Scenic drive</span><span class="tag hidden">Stay outside QT</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Glenorchy+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Glenorchy+Road+New+Zealand&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Glenorchy+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #2F7D63, #3E5F7A);"><span>🌲 Routeburn Flats<br>Day walk from Glenorchy</span></div>
+      <div class="card-body">
+        <div class="card-meta">Routeburn</div>
+        <h3>9. Routeburn day hike</h3>
+        <p>Đi từ Glenorchy side tới Routeburn Flats hoặc Routeburn Falls rồi quay lại trong ngày. Không cần đặt hut qua đêm.</p>
+        <div class="tag-row"><span class="tag hidden">Day walk</span><span class="tag">Self-guided</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Routeburn+Shelter+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Routeburn+Flats+Track&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Glenorchy+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #183348, #287C91);"><span>🏞️ Key Summit<br>Fiordland panorama</span></div>
+      <div class="card-body">
+        <div class="card-meta">Fiordland</div>
+        <h3>10. Key Summit</h3>
+        <p>Half-day walk từ The Divide trên Milford Road. Nếu chỉ chọn một walk khi đi Milford Sound và trời tốt, chọn điểm này.</p>
+        <div class="tag-row"><span class="tag">3h</span><span class="tag warn">Cần trời tốt</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Key+Summit+Track" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Key+Summit+Track&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #287C91, #183348);"><span>🌊 Lake Marian<br>Hanging valley alpine lake</span></div>
+      <div class="card-body">
+        <div class="card-meta">Milford Road</div>
+        <h3>11. Lake Marian</h3>
+        <p>Alpine lake trong hanging valley, đẹp nếu calm. DOC xếp advanced tramping track: steep, muddy, cần fitness/kỹ năng backcountry.</p>
+        <div class="tag-row"><span class="tag warn">Khó hơn</span><span class="tag">Fiordland</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Lake+Marian+Track" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Lake+Marian+Track&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #155243, #7F8F53);"><span>🌾 Mavora Lakes<br>Optional gravel-road detour</span></div>
+      <div class="card-body">
+        <div class="card-meta">Detour Te Anau</div>
+        <h3>12. Mavora Lakes</h3>
+        <p>Đường vòng qua hồ, tussock và forest khi đi Queenstown/Glenorchy xuống Te Anau. Chỉ đi nếu xe, đường, thời tiết và rental contract phù hợp.</p>
+        <div class="tag-row"><span class="tag hidden">Vắng</span><span class="tag warn">Check đường</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Mavora+Lakes+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Mavora+Lakes+New+Zealand&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #2F7D63, #D7A93A);"><span>🌿 The Catlins<br>Waterfalls + wild coast</span></div>
+      <div class="card-body">
+        <div class="card-meta">Catlins</div>
+        <h3>13. Catlins waterfall coast</h3>
+        <p>Purakaunui Falls, McLean Falls, Curio Bay, Nugget Point. Khu này hợp để đổi nhịp sau Fiordland: biển, rừng và thác.</p>
+        <div class="tag-row"><span class="tag hidden">Ít đông hơn</span><span class="tag">Wildlife</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Purakaunui+Falls+New+Zealand" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=The+Catlins+Purakaunui+Falls+Nugget+Point&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Owaka+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image placeholder" style="background: linear-gradient(135deg, #183348, #2F7D63);"><span>🌌 Aoraki Mackenzie<br>Dark sky + alpine walks</span></div>
+      <div class="card-body">
+        <div class="card-meta">Aoraki Mackenzie</div>
+        <h3>14. Aoraki / Tekapo dark sky</h3>
+        <p>Kết trip bằng Tasman Lake, Kea Point hoặc Sealy Tarns tùy track status, rồi đêm sao ở Mackenzie Basin. Ngủ Twizel/Aoraki giúp sáng hôm sau vào núi thuận hơn Tekapo.</p>
+        <div class="tag-row"><span class="tag">Dark sky</span><span class="tag warn">Check track</span></div>
+      </div>
+      <div class="card-links">
+        <a href="https://www.google.com/maps/search/?api=1&query=Aoraki+Mount+Cook+National+Park" target="_blank">🗺️ Maps</a>
+        <a href="https://www.google.com/search?q=Aoraki+Mackenzie+Dark+Sky+Reserve&tbm=isch" target="_blank">📷 Images</a>
+        <a href="https://www.booking.com/searchresults.html?ss=Lake+Tekapo+New+Zealand" target="_blank">🏠 Stay</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="itinerary">
+  <h2><span class="num">06</span> Itinerary day-by-day</h2>
+  <p class="section-sub">Có hai version để chọn theo số ngày nghỉ. Bản 15 ngày đi thêm Arthur's Pass và West Coast; bản 12 ngày đi ngắn hơn và vẫn giữ các điểm chính ở Wānaka, Fiordland, Catlins và Aoraki.</p>
+
+  <div class="plan-toggle">
+    <button class="active" data-plan="15">🌿 15 ngày — Full loop</button>
+    <button data-plan="12">🎒 12 ngày — Short loop</button>
+  </div>
+
+  <div class="plan-view active" id="plan-15">
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 1</span>
+        <h3>VN → Christchurch</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Christchurch+Airport" target="_blank" class="day-route-link">🗺️ CHC</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Đáp Christchurch, không lái xa trong ngày đầu</li>
+          <li>Pickup SIM, mua đồ camping nhẹ ở Kmart/Bivouac/Countdown</li>
+          <li>Nếu đáp sớm: đi bộ The Arts Centre + Quake City để lấy nhịp city/history trước khi vào road trip</li>
+          <li><strong>Hidden gem nhẹ:</strong> New Brighton Pier hoặc Port Hills sunset nếu còn sức</li>
+          <li>Ngủ hostel gần CBD hoặc airport nếu đáp muộn</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Urbanz / Haka House Christchurch</strong> hoặc airport motel nếu bay muộn</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Christchurch+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 2</span>
+        <h3>Christchurch → Castle Hill → Arthur's Pass</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Christchurch&destination=Arthur%27s+Pass&waypoints=Kura+Tawhiti+Castle+Hill" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: pickup rental car/camper, grocery 3 ngày</li>
+          <li>Dừng <strong>Kura Tāwhiti / Castle Hill</strong> 1-2h</li>
+          <li><strong>Hidden gem:</strong> Cave Stream Scenic Reserve nếu nước thấp và nhóm có kinh nghiệm đi hang</li>
+          <li>Chiều: Devil's Punchbowl Falls hoặc Otira Viaduct Lookout</li>
+          <li>Canh kea nhưng không cho ăn, giữ đồ nhỏ trong xe</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Arthur's Pass Alpine Motel</strong> hoặc DOC campsite gần làng nếu có xe/camping gear</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Arthur%27s+Pass+New+Zealand" target="_blank">Booking</a><a href="https://www.doc.govt.nz/parks-and-recreation/places-to-stay/stay-at-a-campsite/" target="_blank">DOC Camps</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 3</span>
+        <h3>Arthur's Pass → Hokitika</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Arthur%27s+Pass&destination=Hokitika" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: <strong>Bealey Spur</strong> nếu forecast tốt; nếu mưa, chọn short walks trong làng</li>
+          <li>Trưa: drive qua Otira Gorge xuống West Coast</li>
+          <li>Chiều: <strong>Hokitika Gorge</strong> + driftwood beach sunset</li>
+          <li><strong>Hidden gem:</strong> Glow Worm Dell miễn phí gần town, đi sau khi trời tối</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Hokitika hostel/motel</strong> — ngủ khô sau ngày alpine</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Hokitika+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 4</span>
+        <h3>Hokitika → Ōkārito / Franz Josef</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Hokitika&destination=Okarito+New+Zealand" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: drive xuống Ōkārito, dừng Lake Mahinapua nếu thích</li>
+          <li>Trưa/chiều: <strong>Ōkārito Lagoon kayak</strong> nếu gió nhẹ</li>
+          <li><strong>Hidden gem:</strong> Ōkārito Trig Walk cho view lagoon + Southern Alps, ngắn nhưng đáng</li>
+          <li>Backup mưa/gió: Franz Josef rainforest walks</li>
+          <li>Tối: nếu có slot, kiwi night walk quanh Ōkārito/Franz Josef</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Franz Josef hostel</strong> hoặc Ōkārito campsite/cabin</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Franz+Josef+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 5</span>
+        <h3>Franz/Fox → Haast Pass → Wānaka</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Franz+Josef&destination=Wanaka&waypoints=Lake+Matheson|Haast+Pass" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sunrise: <strong>Lake Matheson</strong> nếu trời trong</li>
+          <li>Drive dài qua Haast Pass, stop Thunder Creek / Fantail Falls</li>
+          <li><strong>Hidden gem:</strong> Ship Creek dunes/swamp forest walk trước khi rẽ vào Haast Pass</li>
+          <li>Check Blue Pools status trước khi đưa vào ngày chính; nếu track chưa ổn thì bỏ qua</li>
+          <li>Chiều: Lake Hāwea viewpoint, vào Wānaka ngủ 2 đêm</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Haka House Wānaka / YHA-style hostel</strong> hoặc holiday park</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Wanaka+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 6</span>
+        <h3>Wānaka — Roys Peak hoặc Diamond Lake</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Roys+Peak+Track" target="_blank" class="day-route-link">🗺️ Hike</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li><strong>Option A</strong>: Roys Peak sunrise — 16km return, 5-6h, steep</li>
+          <li><strong>Option B</strong>: Diamond Lake / Rocky Mountain — 7km loop, 3h, ít đông hơn</li>
+          <li><strong>Hidden gem:</strong> Glendhu Bay / Bremner Bay chiều muộn, đẹp mà không cần chen ở That Wānaka Tree</li>
+          <li>Chiều: Wānaka lakefront, grocery restock</li>
+          <li>Không gộp Roys Peak + Rob Roy trong cùng ngày</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Wānaka</strong> đêm 2</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Wanaka+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 7</span>
+        <h3>Wānaka → Arrowtown → Glenorchy</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Wanaka&destination=Glenorchy&waypoints=Arrowtown" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: Crown Range road sang Arrowtown, đi bộ dưới hàng cây thu</li>
+          <li>Giữ 45-60 phút cho <strong>Arrowtown Chinese Settlement</strong> và main street lịch sử</li>
+          <li><strong>Hidden gem:</strong> Sawpit Gully walk ở Arrowtown nếu muốn thay cafe bằng 2-3h hiking</li>
+          <li>Trưa: skip Queenstown nếu không cần shopping/adrenaline</li>
+          <li>Chiều: <strong>Glenorchy Road</strong> dọc Lake Wakatipu, sunset ở Glenorchy wharf</li>
+          <li>Ngủ Glenorchy để hôm sau vào Routeburn sớm</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Glenorchy hostel/cabin</strong> hoặc Queenstown nếu cần nhiều lựa chọn rẻ hơn</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Glenorchy+New+Zealand" target="_blank">Booking</a><a href="https://www.booking.com/searchresults.html?ss=Queenstown+New+Zealand" target="_blank">QT</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 8</span>
+        <h3>Routeburn day hike — Glenorchy side</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Routeburn+Shelter" target="_blank" class="day-route-link">🗺️ Trailhead</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng sớm: Routeburn Shelter → Routeburn Flats, nếu khỏe lên Routeburn Falls rồi quay lại</li>
+          <li>Đi một phần Routeburn trong ngày, không cần đặt hut qua đêm</li>
+          <li><strong>Hidden gem/backup:</strong> Lake Sylvan Track, vòng rừng beech gần Routeburn Shelter</li>
+          <li>Chiều muộn: drive về Queenstown hoặc ngủ Glenorchy thêm đêm</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Glenorchy / Queenstown</strong> tùy thời tiết và sức</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Glenorchy+New+Zealand" target="_blank">Glenorchy</a><a href="https://www.booking.com/searchresults.html?ss=Queenstown+New+Zealand" target="_blank">Queenstown</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 9</span>
+        <h3>Glenorchy / Queenstown → Kingston → Te Anau</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Glenorchy&destination=Te+Anau&waypoints=Queenstown|Kingston|Mossburn" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Route thuận nhất: quay qua Queenstown → Kingston → Mossburn → Te Anau</li>
+          <li><strong>Hidden gem optional:</strong> Mavora Lakes chỉ là detour nếu xe/đường/forecast và rental contract cho phép</li>
+          <li>Không coi Mavora là đường bắt buộc; ưu tiên đến Te Anau trước chiều để check Fiordland forecast</li>
+          <li>Chiều: vào Te Anau, check forecast Fiordland Visitor Centre</li>
+          <li>Book/confirm Milford cruise cho ngày 10 hoặc 11 tùy thời tiết</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Te Anau hostel / holiday park</strong> — ở 3 đêm</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 10</span>
+        <h3>Milford Road — Key Summit + Piopiotahi</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Te+Anau&destination=Milford+Sound&waypoints=The+Divide" target="_blank" class="day-route-link">🗺️ Milford</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng rất sớm: Te Anau → Eglinton Valley → Mirror Lakes → The Divide</li>
+          <li>Nếu trời tốt: <strong>Key Summit</strong> 3h return, view Darran/Hollyford</li>
+          <li><strong>Hidden gem ngắn:</strong> Lake Gunn Nature Walk ở Cascade Creek, rừng beech phủ moss rất Fiordland</li>
+          <li>Trưa/chiều: Milford Sound cruise hoặc kayak nếu budget cho phép</li>
+          <li>Nên ngủ Te Anau thay vì đi Queenstown ↔ Milford trong ngày để lịch thoải mái hơn</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Te Anau</strong> đêm 2</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">Booking</a><a href="https://www.journeys.nzta.govt.nz/journey-planner" target="_blank">NZTA</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 11</span>
+        <h3>Fiordland buffer — Lake Marian hoặc Kepler lakeside</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Lake+Marian+Track" target="_blank" class="day-route-link">🗺️ Lake Marian</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Nếu hôm qua mưa, dùng hôm nay đổi Milford/Key Summit</li>
+          <li>Nếu forecast đẹp và đủ kỹ năng: <strong>Lake Marian</strong> advanced tramping track</li>
+          <li><strong>Hidden gem nhẹ:</strong> Lake Manapouri / Frasers Beach cho chiều nghỉ, ít đông hơn Te Anau lakefront</li>
+          <li>Option nhẹ: Kepler carpark → Dock Bay/Brod Bay hoặc Rainbow Reach</li>
+          <li>Tối: nghỉ thật, giặt đồ, nấu ăn, chuẩn bị Catlins drive</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Te Anau</strong> đêm 3 — buffer là thứ làm trip này bền</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 12</span>
+        <h3>Te Anau → Southern Scenic Route → Catlins</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Te+Anau&destination=Owaka&waypoints=Waipapa+Point|Curio+Bay" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Drive qua Southland, chấp nhận đây là ngày chuyển hệ sinh thái</li>
+          <li>Stop: Waipapa Point, Slope Point nếu thời tiết ổn</li>
+          <li><strong>Hidden gem:</strong> Lake Wilkie boardwalk hoặc Matai Falls nếu muốn short walk trong rừng</li>
+          <li>Chiều: Curio Bay / Porpoise Bay, tìm wildlife từ xa</li>
+          <li>Ngủ Papatowai/Owaka, tránh lái đêm vì đường hẹp và wildlife</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Owaka / Papatowai cabin, hostel hoặc holiday park</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Owaka+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 13</span>
+        <h3>Catlins full → Dunedin / Otago Peninsula</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Owaka&destination=Dunedin&waypoints=Purakaunui+Falls|Nugget+Point" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: <strong>Cathedral Caves</strong> nếu đúng low tide và mở cửa</li>
+          <li>Purakaunui Falls + McLean Falls, chọn theo thời gian</li>
+          <li>Chiều: Nugget Point lighthouse, biển động rất đẹp</li>
+          <li><strong>Hidden gem:</strong> Sandymount Track hoặc Sandfly Bay ở Otago Peninsula nếu còn sáng</li>
+          <li>Nếu muốn city/history: vào <strong>Toitū Otago Settlers Museum</strong> hoặc đi bộ quanh Dunedin Railway Station trước bữa tối</li>
+          <li>Tối: Dunedin/Otago Peninsula, wildlife tour nếu muốn đầu tư</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Dunedin / Portobello</strong> — gần Otago Peninsula</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Dunedin+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge travel">Day 14</span>
+        <h3>Dunedin → Moeraki / Oamaru → Twizel / Aoraki</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Dunedin&destination=Twizel&waypoints=Moeraki+Boulders|Oamaru" target="_blank" class="day-route-link">🗺️ Route</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: Otago Peninsula nếu chưa kịp wildlife</li>
+          <li>Nếu nhóm thích lịch sử/kiến trúc: ghé <strong>Larnach Castle</strong> trước khi rời Dunedin; nếu ưu tiên nature thì bỏ qua</li>
+          <li>Moeraki Boulders lúc low tide nếu timing hợp</li>
+          <li><strong>Hidden gem:</strong> Oamaru Victorian Precinct hoặc blue penguin nếu ngủ gần Oamaru; nếu đi tiếp thì chỉ dừng ngắn</li>
+          <li>Chiều: drive vào Mackenzie Basin, ưu tiên ngủ Twizel hoặc Aoraki để sáng hôm sau vào núi thuận hơn</li>
+          <li>Tối: <strong>Aoraki Mackenzie Dark Sky</strong> — tự ngắm sao hoặc tour nếu muốn telescope</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">🌌</span><div class="day-stay-text"><strong>Twizel / Aoraki</strong> — Twizel rẻ và tiện ăn uống; Aoraki gần trailhead nhất</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Twizel+New+Zealand" target="_blank">Twizel</a><a href="https://www.booking.com/searchresults.html?ss=Aoraki+Mount+Cook+Village" target="_blank">Aoraki</a></div></div>
+      </div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header">
+        <span class="day-badge hidden">Day 15</span>
+        <h3>Twizel / Aoraki → Tekapo → Christchurch → VN</h3>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Twizel&destination=Christchurch+Airport&waypoints=Aoraki+Mount+Cook+Village|Lake+Tekapo" target="_blank" class="day-route-link">🗺️ Return</a>
+      </div>
+      <div class="day-content">
+        <ul>
+          <li>Sáng: Aoraki short hike theo track status hiện hành</li>
+          <li>Recommended: <strong>Tasman Lake viewpoint</strong>, <strong>Kea Point</strong> hoặc <strong>Sealy Tarns</strong>; Hooker Valley phải check lại vì bridge/closure từng thay đổi</li>
+          <li><strong>Hidden gem:</strong> Tasman Lake lúc sáng sớm, thường ít đông hơn Hooker Valley</li>
+          <li>Mueller Hut chỉ cân nhắc nếu có điều kiện mùa/gear/kinh nghiệm phù hợp</li>
+          <li>Chiều: lái về Christchurch, trả xe, bay tối hoặc ngủ CHC bay hôm sau</li>
+        </ul>
+        <div class="day-stay"><span class="day-stay-icon">✈️</span><div class="day-stay-text">Trả xe ở CHC. Nếu bay hôm sau, ngủ Christchurch để tránh rủi ro drive + flight cùng ngày.</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Christchurch+New+Zealand" target="_blank">Booking</a></div></div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="plan-view" id="plan-12">
+    <p style="margin-bottom: 24px; padding: 16px; background: var(--sand); border-radius: 12px; font-size: 14px;">
+      <strong>Bản 12 ngày:</strong> bỏ Arthur's Pass + West Coast để giảm km lái. Vẫn giữ Mackenzie Basin, Wānaka, Glenorchy/Routeburn, Fiordland, Catlins và Dunedin. Đây là bản phù hợp nếu chỉ có khoảng 12 ngày và muốn route gọn.
+    </p>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge travel">Day 1</span><h3>VN → Christchurch</h3><a href="https://www.google.com/maps/search/?api=1&query=Christchurch+Airport" target="_blank" class="day-route-link">🗺️ CHC</a></div>
+      <div class="day-content"><ul><li>Đáp CHC, ngủ gần CBD/airport, không lái xa</li><li>Mua SIM + chuẩn bị gear</li><li>Nếu đáp sớm: The Arts Centre + Quake City</li><li><strong>Hidden gem nhẹ:</strong> New Brighton Pier hoặc Port Hills sunset nếu còn sức</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Christchurch hostel</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Christchurch+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge travel">Day 2</span><h3>Christchurch → Tekapo / Aoraki</h3><a href="https://www.google.com/maps/dir/?api=1&origin=Christchurch&destination=Lake+Tekapo" target="_blank" class="day-route-link">🗺️ Route</a></div>
+      <div class="day-content"><ul><li>Pickup xe, grocery, drive vào Mackenzie Basin</li><li>Chiều Lake Tekapo / Lake Pukaki</li><li><strong>Hidden gem:</strong> Lake Alexandrina nếu muốn góc hồ yên hơn Tekapo</li><li>Tối dark sky nếu trời quang</li></ul><div class="day-stay"><span class="day-stay-icon">🌌</span><div class="day-stay-text"><strong>Tekapo / Twizel</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Lake+Tekapo+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge hidden">Day 3</span><h3>Aoraki morning → Wānaka</h3><a href="https://www.google.com/maps/dir/?api=1&origin=Aoraki+Mount+Cook&destination=Wanaka" target="_blank" class="day-route-link">🗺️ Route</a></div>
+      <div class="day-content"><ul><li>Sáng: Tasman Lake viewpoint / Kea Point / Sealy Tarns theo sức</li><li><strong>Hidden gem:</strong> Tasman Lake thường yên hơn Hooker Valley và rất hợp sunrise</li><li>Chiều drive qua Lindis Pass vào Wānaka</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Wānaka</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Wanaka+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge hidden">Day 4</span><h3>Wānaka hike day</h3><a href="https://www.google.com/maps/search/?api=1&query=Diamond+Lake+Rocky+Mountain+Wanaka" target="_blank" class="day-route-link">🗺️ Hike</a></div>
+      <div class="day-content"><ul><li>Option A: Roys Peak sunrise</li><li>Option B: Diamond Lake / Rocky Mountain loop</li><li><strong>Hidden gem:</strong> Glendhu Bay / Bremner Bay chiều muộn</li><li>Chiều lakefront + restock</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Wānaka</strong> đêm 2</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Wanaka+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge hidden">Day 5</span><h3>Wānaka → Arrowtown → Glenorchy</h3><a href="https://www.google.com/maps/dir/?api=1&origin=Wanaka&destination=Glenorchy&waypoints=Arrowtown" target="_blank" class="day-route-link">🗺️ Route</a></div>
+      <div class="day-content"><ul><li>Arrowtown autumn colours</li><li>Arrowtown Chinese Settlement + main street lịch sử</li><li><strong>Hidden gem:</strong> Sawpit Gully nếu muốn thêm walk 2-3h</li><li>Drive Glenorchy Road sunset</li><li>Ngủ gần Routeburn trailhead</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Glenorchy / Queenstown</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Glenorchy+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge hidden">Day 6</span><h3>Routeburn day hike</h3><a href="https://www.google.com/maps/search/?api=1&query=Routeburn+Shelter" target="_blank" class="day-route-link">🗺️ Trail</a></div>
+      <div class="day-content"><ul><li>Routeburn Shelter → Flats/Falls → quay lại</li><li><strong>Hidden gem/backup:</strong> Lake Sylvan nếu mưa hoặc muốn ngày nhẹ</li><li>Chiều về Queenstown/Glenorchy</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Glenorchy / Queenstown</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Queenstown+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge travel">Day 7</span><h3>Queenstown/Glenorchy → Te Anau</h3><a href="https://www.google.com/maps/dir/?api=1&origin=Queenstown&destination=Te+Anau" target="_blank" class="day-route-link">🗺️ Route</a></div>
+      <div class="day-content"><ul><li>Drive thuận chiều qua Kingston → Mossburn → Te Anau</li><li><strong>Hidden gem optional:</strong> Mavora Lakes chỉ đi nếu road/rental/forecast phù hợp</li><li>Chiều check forecast Fiordland, book Milford/Key Summit window</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Te Anau</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge hidden">Day 8</span><h3>Milford Road + Key Summit / Milford Sound</h3><a href="https://www.google.com/maps/dir/?api=1&origin=Te+Anau&destination=Milford+Sound&waypoints=The+Divide" target="_blank" class="day-route-link">🗺️ Milford</a></div>
+      <div class="day-content"><ul><li>Drive sớm Milford Road</li><li>Key Summit nếu trời tốt</li><li><strong>Hidden gem ngắn:</strong> Lake Gunn Nature Walk ở Cascade Creek</li><li>Milford cruise/kayak chiều</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Te Anau</strong> đêm 2</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge hidden">Day 9</span><h3>Fiordland buffer</h3><a href="https://www.google.com/maps/search/?api=1&query=Lake+Marian+Track" target="_blank" class="day-route-link">🗺️ Options</a></div>
+      <div class="day-content"><ul><li>Lake Marian nếu đủ kỹ năng và forecast đẹp</li><li>Hoặc Kepler lakeside/Rainbow Reach</li><li><strong>Hidden gem nhẹ:</strong> Lake Manapouri / Frasers Beach chiều nghỉ</li><li>Buffer để cứu ngày Milford nếu mưa</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Te Anau</strong> đêm 3</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Te+Anau+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge hidden">Day 10</span><h3>Te Anau → Catlins</h3><a href="https://www.google.com/maps/dir/?api=1&origin=Te+Anau&destination=Owaka" target="_blank" class="day-route-link">🗺️ Route</a></div>
+      <div class="day-content"><ul><li>Southern Scenic Route</li><li>Curio Bay / Waipapa Point / McLean Falls tùy timing</li><li><strong>Hidden gem:</strong> Lake Wilkie boardwalk hoặc Matai Falls</li><li>Ngủ Owaka/Papatowai</li></ul><div class="day-stay"><span class="day-stay-icon">🏠</span><div class="day-stay-text"><strong>Catlins stay</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Owaka+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge hidden">Day 11</span><h3>Catlins → Dunedin / Otago Peninsula</h3><a href="https://www.google.com/maps/dir/?api=1&origin=Owaka&destination=Dunedin&waypoints=Purakaunui+Falls|Nugget+Point" target="_blank" class="day-route-link">🗺️ Route</a></div>
+      <div class="day-content"><ul><li>Purakaunui Falls, Nugget Point</li><li><strong>Hidden gem:</strong> Sandymount Track hoặc Sandfly Bay nếu còn sáng</li><li>Chiều Otago Peninsula wildlife hoặc Toitū Otago Settlers Museum nếu muốn city/history</li><li>Ngủ Dunedin/Portobello</li></ul><div class="day-stay"><span class="day-stay-icon">🐧</span><div class="day-stay-text"><strong>Dunedin / Portobello</strong></div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Dunedin+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+
+    <div class="day-card"><div class="day-card-inner">
+      <div class="day-header"><span class="day-badge travel">Day 12</span><h3>Dunedin → Christchurch → VN</h3><a href="https://www.google.com/maps/dir/?api=1&origin=Dunedin&destination=Christchurch+Airport&waypoints=Moeraki+Boulders|Oamaru" target="_blank" class="day-route-link">🗺️ Return</a></div>
+      <div class="day-content"><ul><li>Moeraki/Oamaru nếu bay tối muộn hoặc ngủ CHC</li><li>Nếu nhóm thích kiến trúc/lịch sử và không vội: Larnach Castle buổi sáng rồi mới lái về</li><li>Không ép drive 5h + flight quốc tế nếu chuyến bay sớm</li><li>Trả xe Christchurch</li></ul><div class="day-stay"><span class="day-stay-icon">✈️</span><div class="day-stay-text">Bay hoặc ngủ Christchurch thêm 1 đêm nếu cần an toàn lịch.</div><div class="day-stay-links"><a href="https://www.booking.com/searchresults.html?ss=Christchurch+New+Zealand" target="_blank">Booking</a></div></div></div>
+    </div></div>
+  </div>
+</section>
+
+<section id="budget">
+  <h2><span class="num">07</span> Budget breakdown</h2>
+  <p class="section-sub">Không tính vé máy bay VN ↔ Christchurch/Auckland. Tính local cost theo kiểu thuê car nhỏ + hostel/DOC camp. Campervan self-contained có thể đắt hơn tiền thuê nhưng tiết kiệm ngủ nếu dùng campsite hợp pháp.</p>
+
+  <table>
+    <thead>
+      <tr><th>Hạng mục</th><th>12 ngày</th><th>15 ngày</th><th>Ghi chú</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Rental car / small camper</strong></td><td class="price">NZD $720-$1,250</td><td class="price">NZD $950-$1,650</td><td>Low/shoulder season; full insurance nên cộng thêm</td></tr>
+      <tr><td><strong>Xăng</strong></td><td class="price">$320-$420</td><td class="price">$450-$620</td><td>South Island roads chậm, nhiều detour</td></tr>
+      <tr><td><strong>Accommodation</strong></td><td class="price">$650-$950</td><td class="price">$850-$1,250</td><td>Hostel/holiday park/DOC mix</td></tr>
+      <tr><td><strong>DOC campsites</strong></td><td class="price">$80-$180</td><td class="price">$120-$240</td><td>Basic free; standard thường $10-$20/adult</td></tr>
+      <tr><td><strong>Ăn uống</strong></td><td class="price">$480-$660</td><td class="price">$600-$825</td><td>$40-$55/ngày, tự nấu là chính</td></tr>
+      <tr><td><strong>Milford cruise/kayak</strong></td><td class="price">$90-$180</td><td class="price">$90-$180</td><td>Tour duy nhất nên giữ vì fiord cần lên nước</td></tr>
+      <tr><td><strong>Kayak Ōkārito / wildlife optional</strong></td><td class="price">—</td><td class="price">$80-$180</td><td>Bản 15 ngày có West Coast</td></tr>
+      <tr><td><strong>Gear + SIM + misc</strong></td><td class="price">$250-$400</td><td class="price">$300-$500</td><td>SIM, gas, laundry, parking, buffer</td></tr>
+      <tr class="total-row"><td><strong>TỔNG LOCAL</strong></td><td class="price"><strong>~NZD $2,590-$4,040</strong></td><td class="price"><strong>~NZD $3,390-$5,445</strong></td><td>Có thể giảm nếu camping mạnh và book sớm</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="packing">
+  <h2><span class="num">08</span> Packing — Autumn South Island</h2>
+  <p class="section-sub">Nam Đảo tháng 3-4 có thể có nắng đẹp, mưa Fiordland, gió alpine và đêm lạnh. Layer là bắt buộc; cotton/jeans không hợp cho hike ướt.</p>
+
+  <div class="two-col">
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">🥾 Hiking & Outdoor</h3>
+      <ul>
+        <li><strong>Backpack 50-65L</strong> + daypack 25L</li>
+        <li><strong>Waterproof shell jacket</strong> có hood</li>
+        <li>Fleece / puffer nhẹ / merino base layer</li>
+        <li>Quần hiking quick-dry, không jeans</li>
+        <li>Giày hiking waterproof + tất wool</li>
+        <li>Beanie + găng tay mỏng + buff</li>
+        <li>Trekking poles cho Roys/Sealy/Routeburn descent</li>
+        <li>Headlamp + pin dự phòng</li>
+        <li>Emergency blanket + whistle + first-aid</li>
+        <li>Insect repellent mạnh cho sandflies ở West Coast/Fiordland</li>
+      </ul>
+    </div>
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">⚙️ Drive, Camp & Admin</h3>
+      <ul>
+        <li>Adapter Type I, power bank 20,000mAh</li>
+        <li>Offline Google Maps + Organic Maps + NZTA Journey Planner bookmark</li>
+        <li>Dry bag cho phone/camera khi Fiordland mưa</li>
+        <li>Bình nước 1.5L + viên lọc nếu camp</li>
+        <li>Bộ ăn camping: nồi nhỏ, muỗng, dao, lighter</li>
+        <li>Travel insurance có hiking/self-drive cover</li>
+        <li>International Driving Permit nếu giấy phép cần bản dịch</li>
+        <li>Bản offline passport, visa, rental contract, booking</li>
+        <li>Không mang đồ bẩn vào NZ: khai báo biosecurity nghiêm túc</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="checklist">
+  <h2><span class="num">09</span> Pre-trip checklist</h2>
+  <p class="section-sub">Hai thứ cần khóa sớm nhất là visa và thuê xe/camping legality. Nếu đi sau 7/6/2026 và muốn freedom camp, phải chú ý green warrant/self-contained rules.</p>
+
+  <div class="two-col">
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">T-6 → T-3 tháng</h3>
+      <ul>
+        <li>Chốt window: late March → mid April nếu muốn autumn đẹp nhất</li>
+        <li>Apply New Zealand Visitor Visa nếu passport không thuộc visa-waiver list</li>
+        <li>Không mua vé non-refundable trước khi visa approved</li>
+        <li>Book vé VN → Christchurch/Auckland và domestic nếu cần</li>
+        <li>Book rental car/camper, kiểm tra điều khoản gravel roads</li>
+      </ul>
+    </div>
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">T-2 → T-1 tháng</h3>
+      <ul>
+        <li>Book Wānaka, Te Anau, Aoraki/Tekapo đêm chính</li>
+        <li>Book Milford cruise/kayak với chính sách đổi ngày tốt</li>
+        <li>Kiểm tra DOC track alerts: Hooker, Lake Marian, Routeburn, Roys Peak</li>
+        <li>Kiểm tra freedom camping/campsite rules theo từng council/DOC site</li>
+        <li>Mua/thuê gear mưa, layer, trekking poles</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top: 16px;">
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">T-1 tuần</h3>
+      <ul>
+        <li>Download offline map toàn South Island</li>
+        <li>Lưu NZTA Journey Planner + MetService + DOC alerts</li>
+        <li>Confirm rental pickup, insurance, roadside assistance</li>
+        <li>In/lưu offline visa, passport, insurance, bookings</li>
+        <li>Pack dry-run vào backpack, cân lại hành lý</li>
+      </ul>
+    </div>
+    <div class="checklist">
+      <h3 style="margin-bottom: 12px;">Ngày 1 Christchurch</h3>
+      <ul>
+        <li>Pickup xe: quay video toàn thân xe, kính, mâm, lốp</li>
+        <li>Hỏi rõ gravel-road policy trước khi đi Mavora/Rob Roy access</li>
+        <li>Mua gas/food 3 ngày, refill nước</li>
+        <li>Set Google Maps offline + pin các điểm ngủ</li>
+        <li>Không lái đêm ngày đầu sau flight dài</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+  document.querySelectorAll('.plan-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const plan = btn.dataset.plan;
+      document.querySelectorAll('.plan-toggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.plan-view').forEach(v => v.classList.remove('active'));
+      document.getElementById('plan-' + plan).classList.add('active');
+      document.getElementById('itinerary').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
