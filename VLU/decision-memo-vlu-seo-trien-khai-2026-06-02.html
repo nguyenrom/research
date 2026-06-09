@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decision Memo — Triển khai SEO Tuyển sinh VLU</title>
+<style>
+  :root{
+    --ink:#1a2330; --muted:#5b6675; --line:#e3e8ef; --bg:#f6f8fb; --card:#fff;
+    --brand:#9a1f2b; --brand2:#c0392b; --good:#15803d; --bad:#b42318; --warn:#b45309;
+    --chip:#eef2f7; --accent:#1d4ed8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:0 20px 80px}
+  header.hero{
+    background:linear-gradient(135deg,#7d1620,#b32433); color:#fff;
+    padding:44px 20px 38px; margin-bottom:28px;
+  }
+  header.hero .inner{max-width:980px;margin:0 auto}
+  .kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.85;margin:0 0 8px}
+  header.hero h1{margin:0;font-size:30px;line-height:1.2;font-weight:800}
+  header.hero .meta{margin-top:14px;font-size:13.5px;opacity:.92;display:flex;flex-wrap:wrap;gap:6px 18px}
+  header.hero .meta b{font-weight:600}
+  .purpose{
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+    border-radius:10px;padding:12px 16px;margin-top:18px;font-size:14px;line-height:1.55
+  }
+  .toc{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 18px;margin-bottom:28px;font-size:14px
+  }
+  .toc b{display:block;margin-bottom:6px;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .toc a{color:var(--accent);text-decoration:none;margin-right:16px;display:inline-block;padding:2px 0;white-space:nowrap}
+  .toc a:hover{text-decoration:underline}
+  section{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:26px 28px;margin-bottom:22px;box-shadow:0 1px 2px rgba(16,24,40,.04)
+  }
+  h2{font-size:21px;margin:0 0 6px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .tag{
+    font-size:12px;font-weight:700;color:#fff;background:var(--brand);
+    padding:3px 9px;border-radius:999px;letter-spacing:.04em
+  }
+  h2 + .sub{color:var(--muted);margin:0 0 18px;font-size:14.5px}
+  h3{font-size:16.5px;margin:24px 0 8px;font-weight:700}
+  h3 .code{font:600 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--chip);padding:3px 7px;border-radius:6px;color:var(--brand)}
+  p{margin:10px 0}
+  .tree{
+    background:#0f172a;color:#e2e8f0;border-radius:10px;padding:18px 20px;
+    font:13.5px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre;overflow-x:auto;margin:14px 0
+  }
+  .tree .ok{color:#4ade80}.tree .no{color:#f87171}.tree .q{color:#fbbf24}
+  .callout{
+    border-left:4px solid var(--warn);background:#fff8ec;border-radius:0 10px 10px 0;
+    padding:14px 18px;margin:18px 0;font-size:14.5px
+  }
+  .callout.crit{border-color:var(--bad);background:#fef2f2}
+  .callout b{color:var(--bad)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f3f6fa;font-weight:700;font-size:12.5px;letter-spacing:.03em;color:#33415c;border-bottom:2px solid #d7deea}
+  tr:last-child td{border-bottom:none}
+  td.opt{font-weight:600;width:24%}
+  .pro{color:var(--good)} .con{color:var(--bad)}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;margin-right:6px}
+  .pill.rec{background:#dcfce7;color:#15803d}
+  .pill.avoid{background:#fee2e2;color:#b42318}
+  .pill.default{background:#dbeafe;color:#1d4ed8}
+  ol.scen{counter-reset:s;list-style:none;padding:0;margin:10px 0}
+  ol.scen li{position:relative;padding:12px 14px 12px 48px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;background:#fbfcfe;font-size:14.5px}
+  ol.scen li::before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+  ol.scen b{color:var(--brand2)}
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+  .opt-card{border:1px solid var(--line);border-radius:12px;padding:18px;background:#fbfcfe}
+  .opt-card.rec{border:2px solid var(--good);background:#f4fbf6}
+  .opt-card h4{margin:0 0 8px;font-size:15.5px}
+  .opt-card .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--good);margin-bottom:4px}
+  .opt-card ul{margin:8px 0 0;padding-left:18px}
+  .opt-card li{margin:4px 0;font-size:13.5px}
+  footer{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
+  .files{font-size:13px;color:var(--muted);margin-top:8px}
+  .files code{background:var(--chip);padding:1px 6px;border-radius:5px;font-size:12px}
+  @media(max-width:680px){.options{grid-template-columns:1fr}header.hero h1{font-size:24px}td.opt{width:auto}}
+  @media print{body{background:#fff}section,.toc{box-shadow:none;border-color:#ccc}header.hero{background:#7d1620 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="inner">
+    <p class="kicker">Decision Memo · Đại học Văn Lang</p>
+    <h1>Triển khai SEO Tuyển sinh VLU<br>— Vấn đề, Tình huống &amp; Cân Ưu–Nhược để Ra Quyết định</h1>
+    <div class="meta">
+      <span><b>Ngày:</b> 02/06/2026</span>
+      <span><b>Soạn cho:</b> NA</span>
+      <span><b>Loại:</b> Decision Memo</span>
+      <span><b>Trạng thái:</b> Draft v1</span>
+    </div>
+    <div class="purpose">
+      <b>Mục đích:</b> đặt vấn đề &amp; tình huống, cân ưu/nhược từng biến quyết định để client/đối tác chốt
+      <em>có làm SEO không và làm thế nào</em>. Đây <u>không phải</u> kế hoạch thực thi — là khung hỗ trợ ra quyết định.
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="toc">
+    <b>Nội dung</b>
+    <a href="#a">A. Cây quyết định Go/No-Go</a>
+    <a href="#b">B. 9 biến quyết định</a>
+    <a href="#c">C. Kịch bản tổng hợp</a>
+    <a href="#d">D. Dữ liệu cần chốt</a>
+    <a href="#e">E. 2 phương án khuyến nghị</a>
+  </nav>
+
+  <!-- A -->
+  <section id="a">
+    <h2><span class="tag">A</span> Quyết định gốc — Go/No-Go</h2>
+    <p class="sub">Ba biến chặn quyết định <em>có nên làm SEO không</em>, trước khi bàn “làm thế nào”.</p>
+    <div class="tree"><span class="q">1. Mục tiêu thời gian?</span>
+   ├─ Cần ra số NGAY cho mùa 2026 → SEO <span class="no">KHÔNG kịp</span> → ưu tiên Paid + Influencer
+   └─ Xây tài sản cho mùa 2027+ → SEO hợp lý → <span class="ok">đi tiếp câu 2</span>
+
+<span class="q">2. Có quyền sửa website không?</span>
+   ├─ Không / khó (phụ thuộc IT trường) → SEO <span class="no">rủi ro cao</span> → giới hạn scope hoặc hoãn
+   └─ Có quyền + môi trường dev → <span class="ok">đi tiếp câu 3</span>
+
+<span class="q">3. Mục tiêu là sales hay brand?</span>
+   ├─ Sales → bắt buộc tracking + CRM attribution; thiếu thì <span class="no">không đo được</span>
+   └─ Brand → SEO vẫn chạy nhưng KPI khác</div>
+
+    <div class="callout crit">
+      <b>TÌNH HUỐNG QUAN TRỌNG NHẤT (dễ bị bỏ qua):</b><br>
+      Hôm nay <b>02/06/2026</b>. Lịch MOET 2026: thi THPT <b>11–12/6</b>, đăng ký nguyện vọng <b>2–14/7</b>,
+      xác nhận nhập học <b>trước 21/8</b>. SEO cần <b>6–12 tháng</b> để index + lên hạng →
+      <b>SEO gần như KHÔNG tác động được mùa tuyển sinh 2026</b>. Đây là kèo cho <b>mùa 2027</b>.
+      Muốn lay chuyển 2026 chỉ còn <b>Paid + Influencer</b>.
+      → Nếu kỳ vọng client là “tăng tuyển sinh năm nay”, phải nói thẳng: SEO sai công cụ về mặt thời gian.
+    </div>
+  </section>
+
+  <!-- B -->
+  <section id="b">
+    <h2><span class="tag">B</span> Các biến quyết định</h2>
+    <p class="sub">Mỗi biến: lựa chọn · ưu · nhược · chọn khi nào.</p>
+
+    <h3>B1. Thời điểm — kịp mùa hay xây dài hạn</h3>
+    <table>
+      <tr><th>Lựa chọn</th><th>Ưu</th><th>Nhược</th><th>Chọn khi</th></tr>
+      <tr><td class="opt">SEO ngay (2027 play)</td><td class="pro">CAC thấp dài hạn, tài sản tích lũy</td><td class="con">Không cứu được 2026</td><td>Client chấp nhận đường dài</td></tr>
+      <tr><td class="opt">Paid + Influencer cho 2026, SEO chạy nền</td><td class="pro">Có số ngay + xây nền song song</td><td class="con">Tốn ngân sách kép</td><td>Cần kết quả 2026 <em>và</em> dài hạn</td></tr>
+      <tr><td class="opt">Hoãn SEO</td><td class="pro">Không lãng phí khi web chưa sẵn sàng</td><td class="con">Mất lợi thế first-mover AEO</td><td>Web/IT chưa cho đụng</td></tr>
+    </table>
+
+    <h3>B2. Phạm vi SEO — content-only vs full-stack</h3>
+    <table>
+      <tr><th>Lựa chọn</th><th>Ưu</th><th>Nhược</th><th>Chọn khi</th></tr>
+      <tr><td class="opt">Chỉ content</td><td class="pro">Rẻ, dễ ký</td><td class="con">Thiếu technical/schema/link → kết quả nửa vời (đúng rủi ro đã nêu)</td><td>Web đã chuẩn kỹ thuật sẵn</td></tr>
+      <tr><td class="opt">Full-stack (content+technical+offpage+CRO)</td><td class="pro">Hiệu quả thật</td><td class="con">Đắt, cần quyền sửa web</td><td>Mục tiêu là kết quả thật</td></tr>
+    </table>
+
+    <h3>B3. Chiến lược keyword</h3>
+    <table>
+      <tr><th>Lựa chọn</th><th>Ưu</th><th>Nhược</th><th>Chọn khi</th></tr>
+      <tr><td class="opt">Head-term “trường nào tốt”</td><td class="pro">Volume lớn</td><td class="con">Bị listicle + HUTECH/UEF chiếm; đắt; khó thắng</td><td><span class="pill avoid">Hầu như không nên</span></td></tr>
+      <tr><td class="opt">Long-tail + programmatic</td><td class="pro">Ít cạnh tranh, thắng bằng số lượng</td><td class="con">Cần web hỗ trợ template</td><td><span class="pill default">Mặc định nên</span></td></tr>
+      <tr><td class="opt">Comparison “Văn Lang vs X”</td><td class="pro">ROI cao nhất, intent đáy phễu</td><td class="con">Nhạy cảm (so đối thủ)</td><td><span class="pill rec">Ưu tiên cao</span></td></tr>
+      <tr><td class="opt">AEO / GEO</td><td class="pro">First-mover, chưa ai làm</td><td class="con">Mật độ AI Overview tiếng Việt còn thấp/chưa chắc, khó đo</td><td>Đầu tư sớm nếu chấp nhận thăm dò</td></tr>
+    </table>
+
+    <h3>B4. SEO vs Paid vs Influencer — vai trò phễu</h3>
+    <table>
+      <tr><th>Kênh</th><th>Vai trò</th><th>Ưu</th><th>Nhược</th></tr>
+      <tr><td class="opt">Influencer (nano/micro TikTok)</td><td>Tạo nhu cầu</td><td class="pro">Rẻ, đúng Gen-Z/phụ huynh</td><td class="con">Chưa có ROI tuyển sinh ĐH được chứng minh; không bắt người đang search</td></tr>
+      <tr><td class="opt">SEO / AEO</td><td>Bắt nhu cầu</td><td class="pro">CAC thấp 3–6× dài hạn</td><td class="con">Chậm 6–12 tháng</td></tr>
+      <tr><td class="opt">Paid search/social</td><td>Bắt + đẩy nóng</td><td class="pro">Có số ngay, đúng mùa</td><td class="con">Tắt tiền là tắt lead; lead paid convert ~2% vs first-party 4–5%</td></tr>
+    </table>
+    <div class="callout"><b>Không phải chọn 1.</b> Quyết định thật là <em>tỷ lệ phân bổ</em> giữa 3 kênh theo mục tiêu thời gian (B1).</div>
+
+    <h3>B5. Mô hình cam kết / KPI</h3>
+    <table>
+      <tr><th>Lựa chọn</th><th>Ưu</th><th>Nhược</th><th>Chọn khi</th></tr>
+      <tr><td class="opt">Cam kết thứ hạng</td><td class="pro">Client thích nghe</td><td class="con">Không ai cam kết thật được; Google cấm hứa → rủi ro uy tín</td><td><span class="pill avoid">Tránh</span></td></tr>
+      <tr><td class="opt">Cam kết leading indicator (content, index, traffic)</td><td class="pro">Trung thực, đo được</td><td class="con">Khó “bán” cho client quen nghe thứ hạng</td><td><span class="pill default">Mặc định nên</span></td></tr>
+      <tr><td class="opt">Cam kết lead / nhập học</td><td class="pro">Gắn sales thật</td><td class="con">Phụ thuộc khâu tư vấn/sales của trường — ngoài tầm agency</td><td>Chỉ khi kiểm soát cả phễu + CRM</td></tr>
+    </table>
+
+    <h3>B6. Quyền kiểm soát website <span class="code">rủi ro deadline</span></h3>
+    <p>Tình huống: <em>ai nắm CMS?</em> → quyết định toàn bộ tính khả thi của technical SEO &amp; schema.</p>
+    <div class="callout"><b>Phụ thuộc IT trường:</b> ưu = không build lại; nhược = <b>rủi ro deadline số 1</b>, agency không kiểm soát tiến độ.
+    → bắt buộc điều khoản: <em>“deadline tính từ khi bàn giao quyền truy cập + môi trường dev/staging.”</em></div>
+
+    <h3>B7–B9. Nguồn lực · Quy mô · AEO</h3>
+    <table>
+      <tr><th>Biến</th><th>Lựa chọn</th><th>Ưu</th><th>Nhược</th></tr>
+      <tr><td class="opt">B7 — Nguồn lực</td><td>In-house / Agency / <b>Hybrid</b></td><td class="pro">Hybrid: agency làm technical+strategy, trường cấp chuyên môn nội dung</td><td class="con">Cần phối hợp chặt</td></tr>
+      <tr><td class="opt">B8 — Quy mô</td><td><b>Pilot 1 ngành</b> (RHM/QTKS) vs full ~200 trang</td><td class="pro">Pilot: rủi ro thấp, đo trước khi nhân rộng</td><td class="con">Chậm hơn</td></tr>
+      <tr><td class="opt">B9 — AEO</td><td>Đầu tư sớm (nhẹ) vs chờ</td><td class="pro">Sớm: first-mover</td><td class="con">Mật độ AIO tiếng Việt chưa chắc → không all-in</td></tr>
+    </table>
+  </section>
+
+  <!-- C -->
+  <section id="c">
+    <h2><span class="tag">C</span> Kịch bản tổng hợp <span style="font-size:14px;font-weight:500;color:var(--muted)">(nếu… thì…)</span></h2>
+    <ol class="scen">
+      <li><b>Client muốn tăng tuyển sinh 2026</b> → SEO sai công cụ về thời gian → đề xuất Paid+Influencer cho mùa này, SEO ký riêng làm nền 2027.</li>
+      <li><b>Không kiểm soát được website</b> → đừng ký full-stack SEO; làm content + off-page trước, hoãn technical đến khi có quyền.</li>
+      <li><b>Ngân sách hạn chế, muốn ROI rõ</b> → bỏ head-term, dồn vào comparison + decision pages 2–3 ngành mũi nhọn (RHM, QTKS), đo bằng lead.</li>
+      <li><b>Mục tiêu sales nhưng không cho truy cập CRM</b> → không đo được nhập học → hạ kỳ vọng xuống KPI lead/traffic, hoặc đàm phán quyền CRM (D5).</li>
+    </ol>
+  </section>
+
+  <!-- D -->
+  <section id="d">
+    <h2><span class="tag">D</span> Dữ liệu cần chốt</h2>
+    <p class="sub">Chưa trả lời được những câu này thì chưa quyết được.</p>
+    <table>
+      <tr><th>#</th><th>Câu hỏi quyết định</th><th>Thiếu cái này thì…</th></tr>
+      <tr><td class="opt">D1</td><td>Mục tiêu thời gian: mùa 2026 hay 2027+?</td><td class="con">Không biết SEO có đúng công cụ không</td></tr>
+      <tr><td class="opt">D2</td><td>Ai kiểm soát website / CMS?</td><td class="con">Không định được scope &amp; rủi ro deadline</td></tr>
+      <tr><td class="opt">D3</td><td>KPI cuối = thứ hạng / traffic / lead / nhập học?</td><td class="con">Không chốt được mô hình cam kết</td></tr>
+      <tr><td class="opt">D4</td><td>Ngân sách &amp; kỳ vọng phân bổ Gen vs Capture?</td><td class="con">Không chia được SEO/Paid/Influencer</td></tr>
+      <tr><td class="opt">D5</td><td>Có quyền truy cập CRM nhập học?</td><td class="con">Không đo được “sales”, chỉ đo brand/traffic</td></tr>
+      <tr><td class="opt">D6</td><td>Ai cấp nội dung chuyên môn (khoa/giảng viên)?</td><td class="con">Không đảm bảo E-E-A-T, nhất là RHM (YMYL)</td></tr>
+    </table>
+  </section>
+
+  <!-- E -->
+  <section id="e">
+    <h2><span class="tag">E</span> Khuyến nghị — 2 phương án để client chọn</h2>
+    <p class="sub">Theo pattern client-facing: 2 lựa chọn có khuyến nghị, không áp đặt một đáp án. Cả hai phụ thuộc chốt D1–D6.</p>
+    <div class="options">
+      <div class="opt-card rec">
+        <div class="lbl">★ Khuyến nghị</div>
+        <h4>Phương án 1 — Tách thời gian</h4>
+        <p style="font-size:13.5px;margin:6px 0">Paid+Influencer xử lý mùa 2026 (số ngay); đồng thời ký SEO full-stack làm nền 2027 (pilot 1 ngành trước).</p>
+        <ul>
+          <li class="pro">Vừa cứu mùa này vừa xây tài sản dài hạn</li>
+          <li class="pro">Chiếm first-mover AEO</li>
+          <li class="con">Cần ngân sách kép</li>
+        </ul>
+      </div>
+      <div class="opt-card">
+        <h4>Phương án 2 — SEO thuần, dài hạn</h4>
+        <p style="font-size:13.5px;margin:6px 0">Chỉ làm SEO, chấp nhận không tác động 2026, dồn lực xây nền cho 2027+.</p>
+        <ul>
+          <li class="pro">Chi phí tập trung, CAC thấp nhất dài hạn</li>
+          <li class="con">Bỏ trống mùa 2026</li>
+          <li class="con">Rủi ro nếu client kỳ vọng kết quả sớm</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Draft v1 · 02/06/2026 · Decision Memo hỗ trợ ra quyết định, không phải kế hoạch thực thi.</p>
+    <p class="files">Tài liệu cùng luồng:
+      <code>strategy-vlu-seo-tuyensinh</code> ·
+      <code>market-vlu-seo-tuyensinh-data</code> (b1) ·
+      <code>keyword-intent-map-vlu-tuyensinh</code> (b2)
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

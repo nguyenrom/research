@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
+<meta name="referrer" content="no-referrer">
+<title>Case Study #4 — VinUniversity Vietnam · VLU Research</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2a5a8c;
+    --accent: #e63946;
+    --gold: #d4a418;
+    --bg: #fdfdfb;
+    --text: #1a1a1a;
+    --muted: #666;
+    --border: #e0dcd0;
+    --soft-bg: #f6f3ec;
+    --success: #2a7a3e;
+    --warning: #d97706;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.65;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 28px 64px; }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white; padding: 48px 28px 36px;
+  }
+  header .breadcrumb { font-size: 0.82em; opacity: 0.8; margin-bottom: 10px; }
+  header h1 { font-size: 1.8em; line-height: 1.2; margin-bottom: 8px; font-weight: 800; max-width: 920px; }
+  header .subtitle { font-size: 1em; opacity: 0.95; font-weight: 300; max-width: 920px; }
+  header .meta { margin-top: 14px; font-size: 0.85em; opacity: 0.85; }
+  header .meta span { display: inline-block; margin-right: 14px; }
+
+  h2 {
+    font-size: 1.45em; color: var(--primary); margin: 40px 0 14px;
+    padding-bottom: 8px; border-bottom: 3px solid var(--gold);
+    font-weight: 700;
+  }
+  h3 { font-size: 1.15em; color: var(--primary); margin: 24px 0 10px; font-weight: 700; }
+  h4 { font-size: 1em; margin: 18px 0 8px; color: #333; font-weight: 700; }
+  p { margin-bottom: 12px; }
+  ul, ol { margin: 10px 0 14px 24px; }
+  li { margin-bottom: 5px; }
+  code { background: var(--soft-bg); padding: 2px 6px; border-radius: 3px; font-size: 0.92em; }
+  strong { color: var(--primary); }
+
+  .callout {
+    background: var(--soft-bg); border-left: 4px solid var(--gold);
+    padding: 14px 18px; margin: 16px 0; border-radius: 4px;
+  }
+  .callout-warning { border-left-color: var(--warning); background: #fef6e0; }
+  .callout-success { border-left-color: var(--success); background: #e6f4ea; }
+  .callout-critical { border-left-color: var(--accent); background: #fde8e8; }
+
+  .table-wrap { overflow-x: auto; margin: 14px 0; }
+  table {
+    border-collapse: collapse; width: 100%;
+    background: white; font-size: 0.9em;
+    border: 1px solid var(--border);
+  }
+  th, td {
+    padding: 9px 11px; text-align: left; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th { background: var(--primary); color: white; font-weight: 700; font-size: 0.85em; }
+  tr:hover td { background: #fafafa; }
+
+  .stat-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px; margin: 18px 0;
+  }
+  .stat-card {
+    background: white; border: 1px solid var(--border);
+    padding: 14px 12px; border-radius: 8px; text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .stat-card .num {
+    font-size: 1.5em; font-weight: 800; color: var(--accent);
+    line-height: 1;
+  }
+  .stat-card .label { font-size: 0.78em; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+  .stat-card.gold .num { color: var(--gold); }
+  .stat-card.success .num { color: var(--success); }
+  .stat-card.primary .num { color: var(--primary); }
+
+  .badge {
+    display: inline-block; padding: 3px 8px; border-radius: 4px;
+    font-size: 0.75em; font-weight: 700; white-space: nowrap;
+  }
+  .badge-green { background: #e6f4ea; color: #1b5e20; }
+  .badge-yellow { background: #fff8e1; color: #8d6e00; }
+  .badge-red { background: #fde8e8; color: #b71c1c; }
+  .badge-blue { background: #e3f2fd; color: #0d47a1; }
+
+  .nav-link {
+    display: inline-block; margin-top: 8px; color: white;
+    background: rgba(255,255,255,0.15); padding: 5px 12px;
+    border-radius: 4px; text-decoration: none; font-size: 0.82em;
+  }
+  .nav-link:hover { background: rgba(255,255,255,0.25); }
+
+  footer {
+    margin-top: 48px; padding: 24px 0; border-top: 1px solid var(--border);
+    text-align: center; color: var(--muted); font-size: 0.85em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="breadcrumb">VLU Research › Case Study Scope Analysis › <strong>Case #4</strong></div>
+    <h1>VinUniversity Vietnam — Case Study Deep-Dive Proposal</h1>
+    <p class="subtitle">VN domestic precedent gần nhất cho VLU Family Academy capital decision · Phân tích scope research</p>
+    <div class="meta">
+      <span>📅 2026-05-23</span>
+      <span>🔗 Liên quan: VLU-research-final-report.html §17.5</span>
+      <span>📋 Status: Pre-research proposal</span>
+    </div>
+    <a class="nav-link" href="VLU-research-final-report.html">← Back to main report</a>
+  </div>
+</header>
+
+<div class="container">
+
+<h2>1. Quick Facts</h2>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Item</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Founded</td><td>2019 (PM Decision 1824/QĐ-TTg)</td></tr>
+<tr><td>Founder</td><td>Vingroup (Phạm Nhật Vượng) — largest VN private conglomerate</td></tr>
+<tr><td>Investment</td><td><strong>$285M USD</strong> (~6,500 tỷ VND) Y0 commitment</td></tr>
+<tr><td>Academic partner</td><td><strong>Cornell University</strong> (Cornell SC Johnson School of Business) + <strong>University of Pennsylvania</strong> (Penn Medicine cho Y dược)</td></tr>
+<tr><td>Faculty model</td><td>450 faculty/staff scaled over 7 years</td></tr>
+<tr><td>Rating achieved</td><td>5-star QS (record-fast cho VN private)</td></tr>
+<tr><td>Tuition</td><td><strong>$32,300/yr</strong> (Medicine, MBA) — top of VN market</td></tr>
+<tr><td>Campus</td><td>Hà Nội (Gia Lâm), không HCMC</td></tr>
+<tr><td>Programs</td><td>UG Computer Science, Business, Engineering, Health Sciences; PG MBA, Master's</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="stat-row">
+  <div class="stat-card primary"><div class="num">$285M</div><div class="label">Vingroup Y0 commitment</div></div>
+  <div class="stat-card gold"><div class="num">2019</div><div class="label">Year launched</div></div>
+  <div class="stat-card"><div class="num">$32.3k</div><div class="label">MBA tuition/yr</div></div>
+  <div class="stat-card success"><div class="num">5★</div><div class="label">QS rating</div></div>
+</div>
+
+<h2>2. Vì sao case này quan trọng cho VLU decision</h2>
+
+<h3>Lý do 1 — VN domestic precedent gần nhất</h3>
+<p>Không có Western analog nào trả lời được những câu hỏi sau, chỉ có VinU làm được:</p>
+<ul>
+  <li>MOET program approval cycle thực tế mất bao lâu (VinU đã đi qua process này từ 2017–2019)</li>
+  <li>Cách handle Thông tư 23/2021 (application-oriented track) trong thực tế VN</li>
+  <li>VinU MBA pricing <strong>$32k đã prove segment WTP</strong> ở mức này tồn tại tại VN</li>
+</ul>
+
+<h3>Lý do 2 — Premium positioning playbook</h3>
+<p>VLU đang muốn vào tier $12–30k (Family Academy). VinU đã prove $32k khả thi. Câu hỏi để agent đào:</p>
+<ul>
+  <li>Cohort size VinU MBA actual Y1, Y2, Y3?</li>
+  <li>Yield rate (accept → enroll) ở mức pricing này?</li>
+  <li>Marketing channel mix nào work cho premium VN segment?</li>
+  <li>% học viên VN vs international?</li>
+</ul>
+
+<h3>Lý do 3 — Cornell partnership model</h3>
+<p>VLU đang weigh <strong>D4 (IMD vs Kellogg)</strong>. VinU đã chạy partnership với Cornell 5+ năm. Tham chiếu:</p>
+<ul>
+  <li>Cornell charge VinU bao nhiêu cho partnership? (public deal terms)</li>
+  <li>Faculty rotation thực tế work ra sao?</li>
+  <li>Brand co-mention dynamics ("VinU partnered with Cornell" message)</li>
+</ul>
+
+<h3>Lý do 4 — Cap-ex benchmark cực kỳ quan trọng</h3>
+<div class="callout callout-success">
+<ul>
+  <li>VinU spent <strong>$285M</strong> để launch 1 university full</li>
+  <li>VLU chỉ ask <strong>$97.5k</strong> cho 1 program → factor ~3000× difference</li>
+  <li><strong>Lesson:</strong> VinU $285M không bao gồm 1 family business program riêng → confirm market chưa được serve <em>ngay cả bởi player có $285M cap</em></li>
+</ul>
+</div>
+
+<h2>3. Lessons cụ thể VinU có thể teach (qua agent research)</h2>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Câu hỏi research</th><th>Sao quan trọng cho VLU</th></tr></thead>
+<tbody>
+<tr><td>VinU MBA Y1 cohort actual size?</td><td>Calibrate VLU cohort 22 target — quá lạc quan hay realistic?</td></tr>
+<tr><td>VinU phải subsidize bao nhiêu sau 5 năm?</td><td>Reality check cho VLU "Y2 break-even" claim</td></tr>
+<tr><td>Vingroup employees có buộc học VinU MBA không?</td><td>Tactic captive demand — VLU không có equivalent (không có conglomerate backing)</td></tr>
+<tr><td>VinU có family business module/program nào không?</td><td>Direct competitive intel — nếu YES, VLU đối mặt với Vingroup capital firepower</td></tr>
+<tr><td>Brand drag từ "Vin-" prefix trong premium segment?</td><td>Analog cho D3 (VLU sub-brand vs standalone)</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>4. Caveats — VinU KHÔNG phải perfect analog</h2>
+
+<div class="callout callout-warning">
+<strong>Cần research agent flag những giới hạn này:</strong>
+<ol>
+  <li><strong>Scale mismatch</strong> — VinU full university launch, VLU 1 program add-on. Lessons có thể chỉ apply ở overhead/admin layer, không apply cohort dynamics.</li>
+  <li><strong>Capital asymmetry</strong> — Vingroup có thể bear losses indefinitely. VLU không có equivalent backstop → Y1 break-even pressure cao hơn nhiều.</li>
+  <li><strong>Hanoi vs HCMC</strong> — VinU at Gia Lâm (Hanoi). VLU at HCMC. Family business gen-2 demographic phân bố khác — HCMC có concentration cao hơn nhưng more fragmented.</li>
+  <li><strong>Geography of family business wealth</strong> — Top 100 family businesses VN concentrate đâu? Cần check trước khi extrapolate.</li>
+</ol>
+</div>
+
+<h2>5. Specific outputs agent cần đem về</h2>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>#</th><th>Output</th><th>Nguồn dự kiến</th><th>Priority</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Cohort trajectory chart</strong>: VinU MBA enrollment Y1→Y5 actual numbers</td><td>Vingroup annual report, Cornell SC Johnson reports</td><td><span class="badge badge-red">High</span></td></tr>
+<tr><td>2</td><td><strong>MOET approval timeline</strong>: Document trail từ partnership announcement → first cohort start</td><td>MOET public records, VinU press releases 2017–2019</td><td><span class="badge badge-red">High</span></td></tr>
+<tr><td>3</td><td><strong>Cornell partnership financials</strong>: Public-record info về annual partner fee, IP arrangements</td><td>Cornell financial filings, news investigations</td><td><span class="badge badge-yellow">Med</span></td></tr>
+<tr><td>4</td><td><strong>Faculty model</strong>: % international vs VN faculty, retention rates, compensation benchmarks</td><td>VinU staff directory, LinkedIn, Glassdoor</td><td><span class="badge badge-yellow">Med</span></td></tr>
+<tr><td>5</td><td><strong>Direct quote/insight</strong> từ VinU senior leader về year 1 reality</td><td>Forbes Vietnam interviews, Doanh Nhân Sài Gòn</td><td><span class="badge badge-red">High</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>6. Connection to existing report sections</h2>
+
+<div class="table-wrap">
+<table>
+<thead><tr><th>Section</th><th>How VinU case enriches it</th></tr></thead>
+<tbody>
+<tr><td><strong>§4.2 Pricing benchmark</strong></td><td>Validate top-tier WTP $32k actually fills cohorts in VN (or doesn't)</td></tr>
+<tr><td><strong>§4.6 MOET framework</strong></td><td>Real-world timing + friction points trong approval process</td></tr>
+<tr><td><strong>§8 Pricing Deep Dive</strong></td><td>Confirm/disconfirm $12–30k tier feasibility (anchor to VinU $32k ceiling)</td></tr>
+<tr><td><strong>§9.5 Y0 capital</strong></td><td>Sensitivity: cap-ex vs ambition tradeoff (VinU $285M = max ceiling)</td></tr>
+<tr><td><strong>§14 Director's Lens</strong></td><td>VN-specific operational concerns (faculty acquisition, regulatory, brand)</td></tr>
+<tr><td><strong>§16.2 Competitive C1 entry</strong></td><td>Upgrade current 5-line entry → full competitive intel</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>7. Decision Point</h2>
+
+<div class="callout callout-critical">
+<strong>Confirm hay swap?</strong>
+<ul>
+  <li><strong>KEEP VinU làm case #4</strong> với scope research như trên (recommended)</li>
+  <li><strong>SWAP</strong> sang RMIT VN (25 năm scale-up, premium mainstream, longer track record)</li>
+  <li><strong>SWAP</strong> sang Fulbright Vietnam (different positioning, US partnership model)</li>
+  <li><strong>ADD second VN case</strong> — VinU + RMIT VN, cắt case khác trong list 6</li>
+</ul>
+</div>
+
+<footer>
+<p>VLU Research — Case Study Scope Analysis · 2026-05-23<br>
+Generated as pre-research proposal · Awaiting confirm to launch market research agent</p>
+</footer>
+
+</div>
+</body>
+</html>
