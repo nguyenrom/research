@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Game "Quét Bill – Quay Trúng Thưởng" · Wireframe Concept</title>
+<style>
+  :root{
+    --ink:#1f2933; --muted:#7b8794; --line:#cbd2d9; --bg:#f5f7fa;
+    --card:#ffffff; --accent:#1c6dd0; --accentbg:#e7f0fb;
+    --win:#1e8e5a; --winbg:#e4f5ec; --warn:#c08a00; --warnbg:#fbf3df; --danger:#c0392b;
+    --dash:#a6b0bb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       background:var(--bg);color:var(--ink);line-height:1.5;}
+  header.top{background:var(--ink);color:#fff;padding:28px 32px;}
+  header.top .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#9fb3c8;}
+  header.top h1{margin:6px 0 4px;font-size:24px;font-weight:700;}
+  header.top p{margin:0;color:#cbd2d9;font-size:14px;max-width:760px;}
+  .wrap{max-width:1240px;margin:0 auto;padding:28px 24px 64px;}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;background:#fff;border:1px solid var(--line);
+          border-radius:10px;padding:14px 18px;margin:24px 0;font-size:13px;color:var(--muted);}
+  .legend b{color:var(--ink)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .swatch{width:14px;height:14px;border-radius:3px;display:inline-block;border:1px solid var(--line)}
+
+  /* Flow bar */
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+        border-radius:10px;padding:16px 18px;margin-bottom:30px;}
+  .flow .step{background:var(--accentbg);color:var(--accent);border:1px solid #bcd6f5;border-radius:20px;
+              padding:6px 14px;font-size:13px;font-weight:600;white-space:nowrap;}
+  .flow .arrow{color:var(--dash);font-weight:700;}
+
+  .sectitle{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+            margin:36px 0 14px;border-bottom:1px solid var(--line);padding-bottom:8px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px;}
+
+  .screen{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+          display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(0,0,0,.04);}
+  .screen .bar{display:flex;align-items:center;justify-content:space-between;
+               padding:10px 14px;border-bottom:1px solid var(--line);background:#fafbfc;}
+  .screen .bar .id{font-size:11px;font-weight:700;color:#fff;background:var(--ink);border-radius:6px;
+                   padding:3px 8px;letter-spacing:.04em;}
+  .screen .bar .ttl{font-size:13.5px;font-weight:700;}
+  .screen .bar.win .id{background:var(--win)}
+  .screen .bar.alt .id{background:var(--muted)}
+  /* phone mock */
+  .phone{margin:16px auto;width:230px;border:2px solid var(--ink);border-radius:22px;padding:10px 10px 14px;
+         background:#fff;}
+  .phone .notch{width:70px;height:5px;background:var(--ink);border-radius:4px;margin:2px auto 10px;opacity:.6}
+  .ph-body{min-height:330px;display:flex;flex-direction:column;gap:9px;}
+  .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .ph{border:1.5px dashed var(--dash);border-radius:8px;color:var(--muted);font-size:12px;
+      display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;background:#fcfdfe;}
+  .field{border:1.5px solid var(--line);border-radius:8px;padding:9px 10px;font-size:12px;color:#52606d;background:#fff;}
+  .btn{background:var(--accent);color:#fff;border-radius:8px;text-align:center;padding:10px;font-size:13px;font-weight:600;}
+  .btn.ghost{background:#fff;color:var(--accent);border:1.5px solid var(--accent);}
+  .btn.win{background:var(--win)}
+  .camera{flex:1;background:repeating-linear-gradient(45deg,#eef2f6,#eef2f6 10px,#e6ebf0 10px,#e6ebf0 20px);
+          border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;min-height:170px;}
+  .camera .frame{position:absolute;inset:24px;border:2px solid var(--accent);border-radius:8px;}
+  .camera .frame::before,.camera .frame::after{content:"";position:absolute;width:18px;height:18px;border:3px solid var(--accent);}
+  .cap{width:46px;height:46px;border-radius:50%;border:3px solid var(--accent);margin:6px auto 0;background:#fff;}
+  .wheel{width:150px;height:150px;border-radius:50%;margin:6px auto;
+         background:conic-gradient(#1c6dd0 0 45deg,#e7f0fb 45deg 90deg,#1c6dd0 90deg 135deg,#e7f0fb 135deg 180deg,
+         #1c6dd0 180deg 225deg,#e7f0fb 225deg 270deg,#1c6dd0 270deg 315deg,#e7f0fb 315deg 360deg);
+         border:4px solid var(--ink);position:relative;}
+  .wheel::after{content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+                border-left:9px solid transparent;border-right:9px solid transparent;border-top:16px solid var(--danger);}
+  .otp{display:flex;gap:6px;justify-content:center;}
+  .otp span{width:30px;height:38px;border:1.5px solid var(--line);border-radius:6px;display:flex;
+            align-items:center;justify-content:center;font-weight:700;color:#52606d;}
+  .prize{border:2px solid var(--win);background:var(--winbg);border-radius:10px;padding:14px;text-align:center;}
+  .prize .big{font-size:20px;font-weight:800;color:var(--win)}
+  .note{background:#fafbfc;border-top:1px dashed var(--line);padding:12px 14px;font-size:12px;color:#52606d;}
+  .note b{color:var(--ink)}
+  .note ul{margin:6px 0 0;padding-left:18px;}
+  .note li{margin:3px 0;}
+  .pill{display:inline-block;font-size:10.5px;font-weight:700;border-radius:20px;padding:2px 9px;margin-left:6px;}
+  .pill.zbs{background:#f0e9fb;color:#6b3fa0;border:1px solid #d8c7f0}
+  .pill.be{background:#e4f5ec;color:#1e8e5a;border:1px solid #b9e2cc}
+
+  /* admin */
+  .admin{grid-column:1/-1;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .admin .bar{background:var(--ink);color:#fff;padding:12px 18px;font-weight:700;display:flex;gap:10px;align-items:center;}
+  .admin .body{padding:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+  .kpi{border:1px solid var(--line);border-radius:10px;padding:14px;background:#fafbfc;}
+  .kpi .n{font-size:22px;font-weight:800;color:var(--accent)}
+  .kpi .t{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .tablemock{grid-column:1/-1;border:1.5px dashed var(--dash);border-radius:10px;padding:14px;color:var(--muted);font-size:12.5px;}
+  .tablemock .row{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:7px 0;}
+  .tablemock .row:last-child{border:0}
+
+  .edge{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
+  .edge .e{background:#fff;border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:8px;padding:14px;}
+  .edge .e.bad{border-left-color:var(--danger)}
+  .edge .e h4{margin:0 0 6px;font-size:14px}
+  .edge .e p{margin:0;font-size:12.5px;color:#52606d}
+  footer{color:var(--muted);font-size:12px;text-align:center;margin-top:48px;}
+</style>
+</head>
+<body>
+
+<style>
+  #gate{position:fixed;inset:0;z-index:9999;background:#0b2b3a;display:flex;align-items:center;justify-content:center;
+        font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  #gate .gbox{background:#fff;border-radius:14px;padding:34px 34px 30px;width:340px;max-width:88vw;text-align:center;
+              box-shadow:0 18px 50px rgba(0,0,0,.4);}
+  #gate .gt{font-size:22px;font-weight:800;color:#0b2b3a;letter-spacing:.04em;}
+  #gate .gu{font-size:13px;color:#6b7480;margin:4px 0 20px;}
+  #gate input{width:100%;box-sizing:border-box;padding:12px 14px;font-size:16px;border:1.5px solid #cbd2d9;
+              border-radius:9px;outline:none;}
+  #gate input:focus{border-color:#1c6dd0;}
+  #gate button{width:100%;margin-top:12px;padding:12px;font-size:15px;font-weight:700;color:#fff;background:#1c6dd0;
+               border:0;border-radius:9px;cursor:pointer;}
+  #gate button:hover{background:#155bb0;}
+  #gate .ge{min-height:18px;margin-top:10px;font-size:13px;color:#c0392b;}
+</style>
+<div id="gate">
+  <div class="gbox">
+    <div class="gt">Blue Coral</div>
+    <div class="gu">Nhập mật khẩu để xem tài liệu</div>
+    <input id="gpw" type="password" placeholder="Mật khẩu" autofocus autocomplete="off">
+    <button id="gbtn">Truy cập</button>
+    <div class="ge" id="gerr"></div>
+  </div>
+</div>
+<script>
+  (function(){
+    var PW="BC";
+    var gate=document.getElementById('gate');
+    if(sessionStorage.getItem('bc_gate')==='1'){gate.parentNode.removeChild(gate);return;}
+    document.documentElement.style.overflow='hidden';
+    function open(){document.documentElement.style.overflow='';sessionStorage.setItem('bc_gate','1');gate.parentNode.removeChild(gate);}
+    function check(){
+      if(document.getElementById('gpw').value===PW){open();}
+      else{document.getElementById('gerr').textContent='Mật khẩu không đúng. Vui lòng thử lại.';
+           document.getElementById('gpw').select();}
+    }
+    document.getElementById('gbtn').addEventListener('click',check);
+    document.getElementById('gpw').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});
+    document.getElementById('gpw').focus();
+  })();
+</script>
+
+<header class="top">
+  <div class="kicker">Blue Coral · bluecoral.vn · Concept Wireframe · v1.0</div>
+  <h1>Mini Game "Quét Hóa Đơn – Quay Số Trúng Thưởng"</h1>
+  <p>Web event chạy trên trình duyệt di động: người chơi quét bill → xác thực thông tin & OTP (qua Zalo ZBS) →
+     quay vòng quay may mắn → nhận quà. Tài liệu này liệt kê toàn bộ màn hình để hình dung trải nghiệm end-to-end.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="legend">
+    <span><b>Chú thích:</b></span>
+    <span><span class="swatch" style="background:#fcfdfe;border-style:dashed"></span> Vùng nội dung / placeholder</span>
+    <span><span class="swatch" style="background:#1c6dd0"></span> Nút hành động chính</span>
+    <span><span class="pill zbs" style="margin:0">ZBS</span> Liên quan tích hợp Zalo</span>
+    <span><span class="pill be" style="margin:0">BE</span> Xử lý phía hệ thống</span>
+    <span style="color:#52606d">Đây là wireframe (khung sườn) — màu sắc & hình ảnh thật sẽ làm ở bước UI/UX.</span>
+  </div>
+
+  <!-- FLOW -->
+  <div class="flow">
+    <span class="step">S0 · Nhập mật khẩu</span><span class="arrow">→</span>
+    <span class="step">S1 · Trang chủ event</span><span class="arrow">→</span>
+    <span class="step">S2 · Quét bill</span><span class="arrow">→</span>
+    <span class="step">S3 · Xác nhận hóa đơn</span><span class="arrow">→</span>
+    <span class="step">S4 · Thông tin người chơi</span><span class="arrow">→</span>
+    <span class="step">S5 · OTP (Zalo)</span><span class="arrow">→</span>
+    <span class="step">S6 · Vòng quay</span><span class="arrow">→</span>
+    <span class="step">S7 · Kết quả</span><span class="arrow">→</span>
+    <span class="step">S8 · Lịch sử / Nhận quà</span>
+  </div>
+
+  <div class="sectitle">A · Hành trình người chơi (Player Journey)</div>
+  <div class="grid">
+
+    <!-- S0 - Password gate -->
+    <div class="screen">
+      <div class="bar"><span class="ttl">Nhập mật khẩu truy cập</span><span class="id">S0</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="ph" style="height:60px">LOGO Blue Coral</div>
+        <div class="lbl" style="text-align:center">Nhập mật khẩu để mở chương trình</div>
+        <div class="field">• • &nbsp; (mật khẩu)</div>
+        <div class="ph" style="height:24px">Mật khẩu mặc định: BC</div>
+        <div class="btn">TRUY CẬP</div>
+      </div></div>
+      <div class="note"><b>Cổng bảo vệ trang event.</b> <span class="pill be">BE</span>
+        <ul><li>Mật khẩu mặc định: <b>BC</b></li><li>Sai mật khẩu sẽ không vào được trang chương trình</li></ul></div>
+    </div>
+
+    <!-- S1 -->
+    <div class="screen">
+      <div class="bar"><span class="ttl">Trang chủ Event</span><span class="id">S1</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="ph" style="height:70px">LOGO thương hiệu / Banner chương trình</div>
+        <div class="lbl">Tên chương trình</div>
+        <div class="ph" style="height:30px">"Quét bill – Quay trúng thưởng"</div>
+        <div class="ph" style="height:46px">Mô tả ngắn + thời gian diễn ra</div>
+        <div class="btn">BẮT ĐẦU CHƠI</div>
+        <div class="btn ghost">Thể lệ &amp; Quà tặng</div>
+      </div></div>
+      <div class="note"><b>Mục tiêu:</b> thu hút, nêu thể lệ, CTA rõ ràng.
+        <ul><li>Hiển thị quà & thể lệ minh bạch</li><li>Đếm ngược thời gian event (tùy chọn)</li></ul></div>
+    </div>
+
+    <!-- S1 -->
+    <div class="screen">
+      <div class="bar"><span class="ttl">Quét hóa đơn</span><span class="id">S2</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="lbl">Đưa hóa đơn vào khung</div>
+        <div class="camera"><div class="frame"></div><span style="color:#52606d;font-size:11px">Camera trực tiếp</span></div>
+        <div class="cap"></div>
+        <div class="ph" style="height:26px">Hoặc tải ảnh từ thư viện</div>
+      </div></div>
+      <div class="note"><b>Giao diện camera</b> mở trực tiếp trên web (getUserMedia).
+        <span class="pill be">BE</span>
+        <ul><li>Khung canh hóa đơn + đèn flash</li><li>Cho phép upload ảnh dự phòng</li></ul></div>
+    </div>
+
+    <!-- S2 -->
+    <div class="screen">
+      <div class="bar"><span class="ttl">Xác nhận hóa đơn</span><span class="id">S3</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="lbl">Ảnh đã chụp</div>
+        <div class="ph" style="height:120px">Preview ảnh hóa đơn</div>
+        <div class="field">Giá trị nhận diện: 350.000đ <span style="color:#7b8794">(OCR)</span></div>
+        <div class="btn">XÁC NHẬN HÓA ĐƠN</div>
+        <div class="btn ghost">Chụp lại</div>
+      </div></div>
+      <div class="note"><b>Kiểm tra hợp lệ:</b> chống trùng bill, đọc giá trị. <span class="pill be">BE</span>
+        <ul><li>OCR đọc số tiền (tùy chọn) → điều kiện tham gia</li><li>Chặn hóa đơn đã dùng</li></ul></div>
+    </div>
+
+    <!-- S3 -->
+    <div class="screen">
+      <div class="bar"><span class="ttl">Thông tin người chơi</span><span class="id">S4</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="lbl">Họ và tên</div><div class="field">Nguyễn Văn A</div>
+        <div class="lbl">Email</div><div class="field">email@vidu.com</div>
+        <div class="lbl">Số điện thoại (Zalo)</div><div class="field">09xx xxx xxx</div>
+        <div class="lbl">Cửa hàng</div><div class="field">▾ Chọn cửa hàng tham gia</div>
+        <div class="ph" style="height:26px">☐ Đồng ý điều khoản &amp; cho phép thu thập dữ liệu</div>
+        <div class="btn">GỬI &amp; NHẬN OTP</div>
+      </div></div>
+      <div class="note"><b>Thu thập lead:</b> tên, email, SĐT, cửa hàng. <span class="pill zbs">ZBS</span>
+        <ul><li>Validate định dạng SĐT/email</li><li>Checkbox đồng ý (Nghị định 13/2023)</li></ul></div>
+    </div>
+
+    <!-- S4 -->
+    <div class="screen">
+      <div class="bar"><span class="ttl">Xác thực OTP</span><span class="id">S5</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="ph" style="height:46px">Mã OTP đã gửi qua Zalo tới 09xx xxx xxx</div>
+        <div class="lbl">Nhập mã 6 số</div>
+        <div class="otp"><span>1</span><span>2</span><span>3</span><span></span><span></span><span></span></div>
+        <div class="btn">XÁC NHẬN</div>
+        <div class="ph" style="height:26px">Gửi lại mã (60s)</div>
+      </div></div>
+      <div class="note"><b>OTP qua Zalo ZBS/ZNS.</b> <span class="pill zbs">ZBS</span>
+        <ul><li>Mỗi tin nhắn ~450đ (tính theo lượng)</li><li>Giới hạn số lần gửi lại / chống spam</li></ul></div>
+    </div>
+
+    <!-- S5 -->
+    <div class="screen">
+      <div class="bar"><span class="ttl">Vòng quay may mắn</span><span class="id">S6</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="lbl" style="text-align:center">Bạn có 1 lượt quay</div>
+        <div class="wheel"></div>
+        <div class="btn win" style="background:#1c6dd0">QUAY NGAY</div>
+        <div class="ph" style="height:30px">Hiệu ứng quay + âm thanh</div>
+      </div></div>
+      <div class="note"><b>Lucky Draw Engine.</b> <span class="pill be">BE</span>
+        <ul><li>Tỷ lệ trúng (payout rate) cấu hình được</li><li>Trừ tồn kho quà theo thời gian thực</li></ul></div>
+    </div>
+
+    <!-- S6a -->
+    <div class="screen">
+      <div class="bar win"><span class="ttl">Kết quả — Trúng thưởng</span><span class="id">S7a</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="ph" style="height:40px">🎉 Hiệu ứng chúc mừng</div>
+        <div class="prize"><div class="lbl">Bạn đã trúng</div><div class="big">VOUCHER 200.000đ</div>
+          <div style="font-size:12px;color:#52606d;margin-top:6px">Mã quà: ABCD-1234</div></div>
+        <div class="ph" style="height:40px">Hướng dẫn nhận quà</div>
+        <div class="btn">LƯU MÃ / XEM LỊCH SỬ</div>
+      </div></div>
+      <div class="note"><b>Trúng thưởng:</b> hiện quà, mã, hướng dẫn nhận. <span class="pill zbs">ZBS</span>
+        <ul><li>Gửi mã quà về Zalo (tùy chọn)</li><li>Ghi nhận winner vào hệ thống</li></ul></div>
+    </div>
+
+    <!-- S6b -->
+    <div class="screen">
+      <div class="bar alt"><span class="ttl">Kết quả — Chưa trúng</span><span class="id">S7b</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="ph" style="height:70px">😊 "Chúc bạn may mắn lần sau!"</div>
+        <div class="ph" style="height:50px">Ưu đãi an ủi / mã giảm giá (tùy chọn)</div>
+        <div class="btn ghost">Chia sẻ chương trình</div>
+        <div class="ph" style="height:26px">Hẹn gặp lại ở hóa đơn tiếp theo</div>
+      </div></div>
+      <div class="note"><b>Không trúng:</b> giữ thiện cảm, gợi ý chơi tiếp / quà an ủi.</div>
+    </div>
+
+    <!-- S7 -->
+    <div class="screen">
+      <div class="bar"><span class="ttl">Lịch sử &amp; Quà của tôi</span><span class="id">S8</span></div>
+      <div class="phone"><div class="notch"></div><div class="ph-body">
+        <div class="lbl">Lượt đã chơi</div>
+        <div class="field">26/05 · Voucher 200k · Mã ABCD-1234</div>
+        <div class="field">25/05 · Chưa trúng</div>
+        <div class="lbl">Trạng thái quà</div>
+        <div class="ph" style="height:40px">Đã nhận / Chờ nhận</div>
+        <div class="btn ghost">Quét hóa đơn mới</div>
+      </div></div>
+      <div class="note"><b>Minh bạch:</b> tra cứu lịch sử & trạng thái nhận quà.</div>
+    </div>
+
+  </div>
+
+  <!-- ADMIN -->
+  <div class="sectitle">B · Trang quản trị (Admin Dashboard) — phía thương hiệu / Blue Coral vận hành</div>
+  <div class="grid">
+    <div class="admin">
+      <div class="bar">⚙️ Bảng điều khiển chiến dịch <span class="pill be" style="margin-left:6px">BE</span></div>
+      <div class="body">
+        <div class="kpi"><div class="n">1.284</div><div class="t">Lượt tham gia</div></div>
+        <div class="kpi"><div class="n">962</div><div class="t">Bill hợp lệ</div></div>
+        <div class="kpi"><div class="n">318</div><div class="t">Quà đã trúng</div></div>
+        <div class="kpi"><div class="n">28%</div><div class="t">Tỷ lệ trúng (payout)</div></div>
+        <div class="kpi"><div class="n">1.150</div><div class="t">Tin OTP đã gửi (ZBS)</div></div>
+        <div class="tablemock">
+          <div class="row"><b>Cấu hình &amp; quản lý</b><span>Thao tác</span></div>
+          <div class="row"><span>Kho quà / số lượng giải (Prize Inventory)</span><span>Sửa</span></div>
+          <div class="row"><span>Tỷ lệ trúng theo từng quà (Payout Rate)</span><span>Sửa</span></div>
+          <div class="row"><span>Danh sách cửa hàng tham gia</span><span>Quản lý</span></div>
+          <div class="row"><span>Nhật ký giao dịch (Transaction Logs)</span><span>Xem</span></div>
+          <div class="row"><span>Danh sách người trúng + trạng thái nhận quà</span><span>Xuất Excel</span></div>
+          <div class="row"><span>Báo cáo &amp; biểu đồ theo thời gian</span><span>Xuất / In</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDGE -->
+  <div class="sectitle">C · Trạng thái ngoại lệ (Edge cases) cần xử lý</div>
+  <div class="edge">
+    <div class="e bad"><h4>Hóa đơn không hợp lệ</h4><p>Bill mờ / không đọc được / sai định dạng → yêu cầu chụp lại.</p></div>
+    <div class="e bad"><h4>Hóa đơn đã sử dụng</h4><p>Chống gian lận: 1 bill = 1 lượt; cảnh báo nếu trùng.</p></div>
+    <div class="e"><h4>Hết lượt quay</h4><p>SĐT/bill đã chơi đủ số lượt cho phép trong ngày/chiến dịch.</p></div>
+    <div class="e"><h4>Hết quà</h4><p>Khi kho quà = 0 → tự chuyển sang "chưa trúng" hoặc quà an ủi.</p></div>
+    <div class="e"><h4>OTP sai / hết hạn</h4><p>Giới hạn số lần nhập sai; nút gửi lại sau 60s.</p></div>
+    <div class="e"><h4>Mất kết nối khi quay</h4><p>Đảm bảo kết quả ghi nhận đúng 1 lần (idempotent), không trừ quà 2 lần.</p></div>
+  </div>
+
+  <footer>Blue Coral · bluecoral.vn · Wireframe concept Mini Game · Tài liệu nội bộ phục vụ thống nhất phạm vi với khách hàng.</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fico di Amalfi La Riserva vs Ganymede — So sánh head-to-head</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#fff; --ink:#1f2430; --muted:#6b7280; --line:#e7e2d8;
+    --accent:#7c5e3c; --accent-soft:#f1eadf;
+    --good:#1f8a4c; --good-bg:#e7f6ec;
+    --warn:#b97c12; --warn-bg:#fdf3e0;
+    --bad:#c0392b;  --bad-bg:#fbeae8;
+    --gold:#caa14a;
+    --fico:#1f7a6d; --fico-bg:#e6f4f1;
+    --gany:#4a5a9e; --gany-bg:#edf0fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 22px 80px;}
+  header.hero{background:linear-gradient(135deg,#2c2620,#4a3c2a);color:#f6f1e7;
+    border-radius:18px;padding:34px 34px 30px;margin-bottom:26px;}
+  header.hero .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:12px;opacity:.7}
+  header.hero h1{margin:.35em 0 .15em;font-size:30px;line-height:1.25}
+  header.hero .meta{font-size:13px;opacity:.78;margin-top:10px}
+  .verdict{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0 30px}
+  .verdict .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .verdict .box.fico{border-top:4px solid var(--fico)}
+  .verdict .box.gany{border-top:4px solid var(--gany)}
+  .verdict .box h3{margin:0 0 8px;font-size:15px}
+  .verdict .box.fico h3{color:var(--fico)}
+  .verdict .box.gany h3{color:var(--gany)}
+  .verdict .box p{margin:0;font-size:14.5px;color:#333}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:6px}
+  .pill.win{background:var(--good-bg);color:var(--good)}
+  .pill.part{background:var(--warn-bg);color:var(--warn)}
+  .pill.no{background:var(--bad-bg);color:var(--bad)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 30px;margin-bottom:22px}
+  h2{font-size:22px;margin:.1em 0 .7em;padding-bottom:.35em;border-bottom:2px solid var(--accent-soft);color:#3a2f20}
+  h3{font-size:17px;margin:1.3em 0 .5em;color:var(--accent)}
+  p,li{font-size:15px}
+  .note{font-size:13.5px;color:var(--muted);font-style:italic}
+  .src{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .src a{color:#8a7350}
+  blockquote{margin:16px 0;padding:14px 18px;background:var(--accent-soft);
+    border-left:4px solid var(--accent);border-radius:0 8px 8px 0;font-size:14.5px}
+  .callout{background:#fff8ec;border:1px solid #f0dcb6;border-radius:10px;padding:14px 18px;font-size:14px;margin:16px 0}
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:13.6px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f3eee3;font-weight:700;color:#3a2f20}
+  tbody tr:nth-child(even){background:#fbf9f4}
+  td strong{color:#2a2218}
+  th.col-fico{background:var(--fico-bg);color:var(--fico)}
+  th.col-gany{background:var(--gany-bg);color:var(--gany)}
+  .badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .b-best{background:var(--good-bg);color:var(--good)}
+  .b-part{background:var(--warn-bg);color:var(--warn)}
+  .b-no{background:var(--bad-bg);color:var(--bad)}
+  .b-fico{background:var(--fico-bg);color:var(--fico)}
+  .b-gany{background:var(--gany-bg);color:var(--gany)}
+  .profiles{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+  .profile{border-radius:14px;padding:20px 22px;border:1px solid var(--line)}
+  .profile.fico{background:linear-gradient(180deg,#f2faf8,#fff 70%);border-top:4px solid var(--fico)}
+  .profile.gany{background:linear-gradient(180deg,#f0f3fb,#fff 70%);border-top:4px solid var(--gany)}
+  .profile h3{margin:0 0 2px;font-size:17px}
+  .profile.fico h3{color:var(--fico)}
+  .profile.gany h3{color:var(--gany)}
+  .profile .sub{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+  .profile dl{margin:0;font-size:13.8px}
+  .profile dt{font-weight:700;color:#3a2f20;margin-top:9px;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+  .profile dd{margin:1px 0 0}
+  .pick-card{background:#fff8ec;border:2px solid #d9b76b;border-radius:12px;padding:18px 22px;margin:16px 0}
+  .pick-card .pick-title{font-size:18px;font-weight:800;color:#3d2f20;margin:0 0 6px}
+  .scorerow td:first-child{font-weight:700}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:30px}
+  @media (max-width:680px){.verdict,.profiles{grid-template-columns:1fr}.wrap{padding:18px 14px 60px}header.hero{padding:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Head-to-Head · Niche Fragrance</div>
+  <h1>Acqua di Parma Fico di Amalfi La Riserva<br>vs Marc-Antoine Barrois Ganymede</h1>
+  <div>So sánh trực tiếp 2 chai — mùi · cộng đồng · phê bình · hiệu suất · khí hậu Sài Gòn</div>
+  <div class="meta">Tác giả: Rom · Ngày: 05/06/2026 · Thước đo: điểm cộng đồng (Fragrantica/Parfumo) + giới phê bình · Bổ sung cho báo cáo market-research-2026-05-19</div>
+</header>
+
+<div class="verdict">
+  <div class="box fico">
+    <h3>🌿 Fico di Amalfi La Riserva — tóm tắt</h3>
+    <p><span class="pill win">PICK AN TOÀN</span> Fig-citrus Địa Trung Hải nắng, <strong>dễ ưa ngay lần đầu</strong>, hiệu suất được nâng cấp rõ so với bản gốc. Điểm trừ: ra mắt 2025, <strong>chưa đủ vote cộng đồng</strong> để kiểm chứng, và editorial chê collection "an toàn đến mức nhàm".</p>
+  </div>
+  <div class="box gany">
+    <h3>🪐 Ganymede — tóm tắt</h3>
+    <p><span class="pill part">PICK TÁO BẠO</span> Mineral-suede futuristic, <strong>danh tiếng phê bình + cộng đồng thuộc hàng cao nhất thập kỷ</strong>. Điểm trừ: cực phân hoá theo da (có thể đọc "inky/metallic"), hiệu suất hên-xui, và đã bị viral + clone nhiều → mất tính kín tiếng.</p>
+  </div>
+</div>
+
+<section id="profiles">
+  <h2>Hồ sơ 2 chai</h2>
+  <div class="profiles">
+    <div class="profile fico">
+      <h3>Acqua di Parma — Fico di Amalfi La Riserva</h3>
+      <div class="sub">EDP · 2025 · Dòng Blu Mediterraneo La Riserva</div>
+      <dl>
+        <dt>Top</dt><dd>Blood orange, grapefruit, lemon, Italian mandarin</dd>
+        <dt>Heart</dt><dd><strong>Fig</strong>, orris, lemon</dd>
+        <dt>Base</dt><dd>Tonka bean, ambrettolide, Orcanox™</dd>
+        <dt>Character</dt><dd>Fig xanh mọng + citrus rực nắng Địa Trung Hải, đáy tonka ấm-mượt — <em>kỳ nghỉ biển Amalfi đóng chai, bản "trưởng thành" của một classic mùa hè</em></dd>
+        <dt>Liên tưởng</dt><dd>Vườn sung ven biển giữa trưa, vỏ cam vừa bóc, khăn lanh trắng</dd>
+        <dt>Giá</dt><dd>≈ $250 / 100ml <em>(ước tính — kiểm tra giá hiện hành)</em></dd>
+      </dl>
+    </div>
+    <div class="profile gany">
+      <h3>Marc-Antoine Barrois — Ganymede</h3>
+      <div class="sub">EDP · 2019 · Nose: Quentin Bisch</div>
+      <dl>
+        <dt>Top</dt><dd>Saffron, Italian mandarin</dd>
+        <dt>Heart</dt><dd>Chinese osmanthus, immortelle, violet leaf</dd>
+        <dt>Base</dt><dd><strong>Mineral notes, suede</strong>, akigalawood, musk, cedar, patchouli</dd>
+        <dt>Character</dt><dd>Lạnh, khoáng, suede mềm — <em>futuristic / metallic, "mặt trăng của Jupiter"</em>; một trong những sáng tạo độc đáo nhất của niche thập kỷ qua</dd>
+        <dt>Liên tưởng</dt><dd>Đá hoa cương ướt, không khí núi lạnh, suede sang chảnh</dd>
+        <dt>Giá</dt><dd>≈ $270 / 100ml</dd>
+      </dl>
+    </div>
+  </div>
+  <p class="note">Điểm chung duy nhất: <strong>Italian mandarin</strong> ở tầng mở — sau đó 2 chai rẽ về 2 thái cực: <em>nắng-hữu cơ-trái cây</em> (Fico LR) vs <em>lạnh-khoáng-trừu tượng</em> (Ganymede).</p>
+</section>
+
+<section id="compare">
+  <h2>Bảng so sánh trực tiếp</h2>
+  <table>
+    <thead><tr>
+      <th style="width:18%">Tiêu chí</th>
+      <th class="col-fico">🌿 Fico di Amalfi La Riserva</th>
+      <th class="col-gany">🪐 Ganymede</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Điểm cộng đồng</strong></td>
+        <td>🟡 <strong>Chưa đủ vote</strong> (ra 2025). Proxy: bản gốc Fico di Amalfi 2006 đạt <strong>4.32/5, ~7.400 vote</strong> — chai được yêu nhất của hãng · <em>tin cậy: trung bình</em></td>
+        <td>✅ <strong>Rất cao, hàng chục nghìn vote</strong> trên Fragrantica — thuộc nhóm nước hoa niche được chấm cao &amp; nhiều vote nhất 2019–nay · <em>tin cậy: cao</em></td>
+      </tr>
+      <tr>
+        <td><strong>Giới phê bình</strong></td>
+        <td>🟡 Phân hoá: review khen <em>"fig chân thực, longevity above average — sửa đúng điểm yếu bản gốc"</em>; nhưng Fragrantica editorial chê cả collection La Riserva <em>"boring — lần đầu hãng nhạt trong nhiều năm"</em></td>
+        <td>✅ Đồng thuận đỉnh: <strong>Bois de Jasmin</strong> review riêng, <strong>CaFleureBon "winner"</strong>, Fragrantica editorial <em>"The Most Beautiful of Aromas"</em> — chai đưa Marc-Antoine Barrois lên bản đồ niche</td>
+      </tr>
+      <tr>
+        <td><strong>Longevity</strong></td>
+        <td>✅ <strong>Trên trung bình, ổn định</strong> — fig bám lâu hơn hẳn các fig-citrus thông thường (điểm bán chính của bản La Riserva)</td>
+        <td>⚠️ <strong>Cực phân hoá theo da</strong>: người chỉ 4–6h skin scent, người claim 24h+ beast-mode — hên-xui đúng nghĩa</td>
+      </tr>
+      <tr>
+        <td><strong>Projection / Sillage</strong></td>
+        <td>Vừa-khá, lịch sự — không gây ngộp trong văn phòng/trời nóng</td>
+        <td>Trên trung bình khi "ăn da"; aura suede-mineral đặc trưng, dễ nhận ra từ xa</td>
+      </tr>
+      <tr>
+        <td><strong>Rủi ro trên da</strong></td>
+        <td><span class="badge b-best">Thấp</span> — fig-citrus dễ ưa, gần như không có note gây sốc</td>
+        <td><span class="badge b-no">Cao</span> — note mineral có thể đọc thành <em>"inky / giấy mực / electronics"</em> trên một số da; yêu hoặc ghét rõ rệt</td>
+      </tr>
+      <tr>
+        <td><strong>Khí hậu Sài Gòn nóng ẩm</strong></td>
+        <td>✅✅ <strong>Sinh ra cho thời tiết này</strong> — fig-citrus biển, càng nóng càng đẹp; mùa mưa vẫn ổn</td>
+        <td>✅ Mát-khoáng, chịu nóng tốt hơn đa số niche woody — nhưng nắng gắt có thể khuếch đại cạnh metallic</td>
+      </tr>
+      <tr>
+        <td><strong>Dịp dùng</strong></td>
+        <td>Daily, văn phòng, cuối tuần, du lịch biển — <em>casual-sang, mặc được mỗi ngày không chán</em></td>
+        <td>Statement: hẹn hò, sự kiện, khi muốn được hỏi "anh đang dùng mùi gì?" — <em>chữ ký gây nhớ</em></td>
+      </tr>
+      <tr>
+        <td><strong>Tính độc đáo</strong></td>
+        <td>🟡 Đẹp nhưng <em>quen thuộc</em> — fig-citrus là thể loại đông đúc; La Riserva làm tốt hơn chứ không làm khác</td>
+        <td>✅✅ <strong>Một-không-hai</strong> — accord mineral-suede chưa ai làm được tương đương trước 2019</td>
+      </tr>
+      <tr>
+        <td><strong>Độ "kín tiếng"</strong></td>
+        <td>✅ Dòng La Riserva còn mới &amp; ít người biết; Acqua di Parma sang nhưng không viral</td>
+        <td>❌ Đã <strong>viral mạnh + bị clone tràn lan</strong> (Zara, các dupe house) — từ niche-bí-mật thành "chai niche nhập môn ai cũng có"</td>
+      </tr>
+      <tr>
+        <td><strong>Giá / 100ml</strong></td>
+        <td>≈ $250 <em>(ước tính)</em></td>
+        <td>≈ $270</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="scorecard">
+  <h2>Scorecard — ai thắng trục nào</h2>
+  <table>
+    <thead><tr><th style="width:30%">Trục</th><th style="width:35%">Thắng</th><th>Vì sao</th></tr></thead>
+    <tbody>
+      <tr class="scorerow"><td>Dễ ưa ngay / an toàn</td><td><span class="badge b-fico">🌿 Fico LR</span></td><td>Fig-citrus thân thiện vs mineral polarizing</td></tr>
+      <tr class="scorerow"><td>Danh tiếng cộng đồng (đã kiểm chứng)</td><td><span class="badge b-gany">🪐 Ganymede</span></td><td>Hàng chục nghìn vote điểm cao vs chai 2025 chưa đủ dữ liệu</td></tr>
+      <tr class="scorerow"><td>Đẳng cấp phê bình</td><td><span class="badge b-gany">🪐 Ganymede</span></td><td>Bois de Jasmin + CaFleureBon winner vs editorial chê "boring"</td></tr>
+      <tr class="scorerow"><td>Hiệu suất ổn định, dễ đoán</td><td><span class="badge b-fico">🌿 Fico LR</span></td><td>Above average &amp; nhất quán vs hên-xui theo da</td></tr>
+      <tr class="scorerow"><td>Hợp Sài Gòn nóng ẩm</td><td><span class="badge b-fico">🌿 Fico LR</span> <span class="note">(sát nút)</span></td><td>Cả 2 đều chịu nóng tốt; fig-citrus biển nhỉnh hơn về độ thoải mái</td></tr>
+      <tr class="scorerow"><td>Độc đáo / gây nhớ</td><td><span class="badge b-gany">🪐 Ganymede</span></td><td>Accord mineral-suede one-of-a-kind vs thể loại fig-citrus đông đúc</td></tr>
+      <tr class="scorerow"><td>Kín tiếng, không đụng hàng</td><td><span class="badge b-fico">🌿 Fico LR</span></td><td>Line mới ít người biết vs đã viral + clone tràn lan</td></tr>
+      <tr class="scorerow"><td>Giá trị/đồng tiền</td><td><span class="badge b-fico">🌿 Fico LR</span> <span class="note">(nhẹ)</span></td><td>Rẻ hơn ~$20, rủi ro "không hợp da" thấp hơn</td></tr>
+    </tbody>
+  </table>
+  <blockquote><strong>Tỷ số 5–3 nghiêng Fico La Riserva</strong> — nhưng đếm trục là chưa đủ: 3 trục Ganymede thắng (<em>cộng đồng đã kiểm chứng · phê bình · độc đáo</em>) chính là 3 trục <strong>nặng ký nhất theo thước đo bạn đã chọn</strong> trong báo cáo gốc. Đây là trận <em>"an toàn được việc" vs "high-risk high-reward"</em>, không phải trận hơn-kém tuyệt đối.</blockquote>
+</section>
+
+<section id="verdict-final">
+  <h2>Verdict — chọn theo use case</h2>
+  <div class="pick-card">
+    <p class="pick-title">Bạn chọn chai nào, khi nào?</p>
+    <table>
+      <thead><tr><th style="width:30%">Bạn chọn…</th><th>Khi điều bạn cần là…</th></tr></thead>
+      <tbody>
+        <tr><td><strong>🌿 Fico di Amalfi La Riserva</strong></td><td>Một chai <strong>đeo mỗi ngày ở Sài Gòn</strong>, dễ ưa, hiệu suất dự đoán được, không sợ đụng hàng, không cần "hiểu" nó — xịt là đẹp. Chấp nhận việc nó <em>đẹp theo cách quen thuộc</em> và dữ liệu cộng đồng còn mỏng.</td></tr>
+        <tr><td><strong>🪐 Ganymede</strong></td><td>Một chai <strong>chữ ký gây nhớ</strong>, đẳng cấp phê bình đã được đóng dấu, mùi không giống bất kỳ ai — và bạn <em>sẵn sàng sample 2 tuần</em> để xác nhận da mình đọc nó thành "suede sang chảnh" chứ không phải "mực in", đồng thời không bận tâm chuyện nó đã phổ biến.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Quy tắc quyết định (không blind-buy):</strong> order <strong>2 decant 5ml cùng lúc (~$45–55 total)</strong> từ Scent Split / The Perfumed Court — Acqua di Parma có counter tại VN nên có thể thử La Riserva trực tiếp trước.
+    <ul>
+      <li><strong>Test A/B 2 cổ tay cùng ngày</strong>, check mốc 2h / 6h / 10h, lặp lại 3–4 lần trong 2 tuần.</li>
+      <li>Ganymede đọc <em>"metallic-inky"</em> trên da bạn → loại ngay, chọn Fico LR không cần lăn tăn.</li>
+      <li>Ganymede đọc <em>"suede mát sang"</em> + còn rõ sau 8h → nó thắng về chiều sâu; lúc đó chỉ còn câu hỏi duy nhất: bạn có ngại độ phổ biến của nó không.</li>
+      <li>Trước khi mua full Fico LR: <strong>kiểm tra lại điểm Fragrantica của đúng bản La Riserva</strong> (không phải bản gốc) — nếu đã đủ &gt;500 vote mà vẫn ≥4.0 thì yên tâm xuống tiền.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="method">
+  <h2>Phương pháp &amp; nguồn</h2>
+  <p class="note">Điểm số định lượng lấy từ snippet tìm kiếm &amp; trích dẫn cộng đồng (Fragrantica/Parfumo chặn truy cập tự động) — tin cậy <em>trung bình</em> cho con số, <em>cao</em> cho nhận định định tính. Giá là ước tính, kiểm tra lại trước khi mua. Quyết định cuối luôn thuộc về da của bạn.</p>
+  <p class="src"><strong>Fico di Amalfi La Riserva:</strong>
+    <a href="https://www.fragrantica.com/perfume/Acqua-di-Parma/Fico-di-Amalfi-La-Riserva-107110.html">Fragrantica – Fico di Amalfi La Riserva</a> ·
+    <a href="https://www.fragrantica.com/perfume/Acqua-di-Parma/Acqua-di-Parma-Blu-Mediterraneo-Fico-di-Amalfi-1687.html">Fragrantica – Fico di Amalfi (gốc, 2006)</a> ·
+    <a href="https://www.fragrantica.com/news/Acqua-Di-Parma-Fico-Di-Amalfi-A-Figgy-Favourite-In-Context-22723.html">Fragrantica – A Figgy Favourite In Context</a> ·
+    <a href="https://www.fragrantica.com/news/Acqua-Di-Parma-La-Riserva-Collection-The-First-Time-the-Brand-Has-Been-Boring-in-Years-23249.html">Fragrantica – La Riserva Collection column</a> ·
+    <a href="https://www.parfumo.com/Perfumes/Acqua_di_Parma/fico-di-amalfi-la-riserva">Parfumo – La Riserva</a>
+  </p>
+  <p class="src"><strong>Ganymede:</strong>
+    <a href="https://www.fragrantica.com/perfume/Marc-Antoine-Barrois/Ganymede-54720.html">Fragrantica – Ganymede</a> ·
+    <a href="https://boisdejasmin.com/2025/10/marc-antoine-barrois-ganymede-perfume-review.html">Bois de Jasmin – Ganymede review</a> ·
+    <a href="https://cafleurebon.com/marc-antoine-barrois-ganymede-winner/">CaFleureBon – Ganymede Winner</a> ·
+    <a href="https://basenotes.com/fragrances/ganymede-by-marc-antoine-barrois.26158937/reviews/">Basenotes – Ganymede reviews</a> ·
+    <a href="https://scentgrail.com/holy-grail-scents/ganymede-review/">Scent Grail – Ganymede review</a>
+  </p>
+</section>
+
+<footer>So sánh head-to-head · 05/06/2026 · Bổ sung cho <em>market-research-2026-05-19.html</em> · Tham chiếu để order decant — không thay thế việc thử trên da</footer>
+</div>
+</body>
+</html>

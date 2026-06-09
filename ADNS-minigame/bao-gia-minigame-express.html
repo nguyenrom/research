@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Báo giá Express (02 tuần) · Mini Game Quét Hóa Đơn – Quay Số Trúng Thưởng</title>
+<style>
+  body{background:#d9dce0;margin:0;padding:0;
+       font-family:"Times New Roman",Times,serif;color:#000;font-size:15px;line-height:1.5;}
+  .page{width:794px;min-height:1123px;margin:22px auto;background:#fff;padding:64px 70px;
+        box-shadow:0 1px 6px rgba(0,0,0,.25);}
+  .head{display:flex;justify-content:space-between;align-items:flex-start;}
+  .head .co .nm{font-size:17px;font-weight:bold;}
+  .head .co div{font-size:13px;line-height:1.45;}
+  .head .ref{font-size:13px;text-align:right;}
+  hr{border:0;border-top:1.5px solid #000;margin:10px 0 0;}
+  h1{text-align:center;font-size:20px;margin:26px 0 4px;text-transform:uppercase;letter-spacing:.02em;}
+  .proj{text-align:center;font-size:15px;font-style:italic;margin-bottom:20px;}
+  p{margin:0 0 11px;text-align:justify;}
+  .kg{margin:0 0 12px;}
+  h2{font-size:15px;font-weight:bold;margin:22px 0 9px;text-transform:uppercase;}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:4px 0 6px;}
+  th,td{border:1px solid #000;padding:7px 9px;vertical-align:top;}
+  th{background:#e8e8e8;text-align:center;font-weight:bold;}
+  td.c{text-align:center;}
+  td.r,th.r{text-align:right;white-space:nowrap;}
+  tr.sub td{font-weight:bold;background:#f3f3f3;}
+  tr.tot td{font-weight:bold;background:#dcdcdc;}
+  .words{font-style:italic;font-size:13.5px;margin:6px 0 4px;}
+  ol.terms{margin:0;padding-left:20px;}
+  ol.terms li{margin:0 0 8px;text-align:justify;}
+  .signs{display:flex;justify-content:space-between;margin-top:38px;text-align:center;}
+  .signs .s{width:46%;}
+  .signs .r{font-weight:bold;text-transform:uppercase;font-size:14px;}
+  .signs .h{font-style:italic;font-size:12.5px;}
+  .signs .sp{height:80px;}
+  .foot{text-align:center;font-size:12px;margin-top:34px;border-top:1px solid #999;padding-top:10px;color:#333;}
+  @media print{body{background:#fff}.page{box-shadow:none;margin:0;width:auto;min-height:auto;padding:0;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="head">
+    <div class="co">
+      <div class="nm">ADNS CO., LTD</div>
+      <div>8/7D Phan Huy Ích, Phường Tân Sơn, TP. Hồ Chí Minh</div>
+      <div>Mã số thuế: 0313209465</div>
+    </div>
+    <div class="ref">
+      <div>Số: EST-01118/05/2026-EXP</div>
+      <div>Ngày: 26/05/2026</div>
+      <div>Hiệu lực đến: 26/06/2026</div>
+      <div>Phụ trách: Nguyen Le</div>
+    </div>
+  </div>
+  <hr>
+
+  <h1>Báo giá Express — Triển khai 02 tuần</h1>
+  <div class="proj">Phát triển Mini Game tương tác "Quét Hóa Đơn – Quay Số Trúng Thưởng"</div>
+
+  <p class="kg"><b>Kính gửi:</b> Quý Khách Hàng</p>
+  <p>Đây là báo giá riêng cho phương án triển khai nhanh trong <b>02 tuần</b>. Để rút thời gian từ 1,5 tháng xuống 02
+     tuần, ADNS huy động đội ngũ làm việc song song nhiều luồng và ưu tiên tuyệt đối nguồn lực cho dự án. Vì vậy, chi phí
+     phát triển (Mục 1 – 4) áp dụng hệ số <b>×2,5</b> so với lộ trình tiêu chuẩn; chi phí tích hợp Zalo ZBS (Mục 5) giữ
+     nguyên do là thiết lập với bên thứ ba. Phạm vi công việc, sản phẩm bàn giao và chế độ bảo hành <b>giữ nguyên</b> như
+     báo giá tiêu chuẩn.</p>
+
+  <h2>I. Bảng báo giá Express</h2>
+  <table>
+    <thead>
+      <tr><th style="width:34px">STT</th><th>Hạng mục</th><th class="r" style="width:115px">Giá tiêu chuẩn</th><th class="r" style="width:115px">Express ×2,5</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="c">1</td><td>Mục 1 — Thiết kế trải nghiệm &amp; giao diện (UI/UX)</td><td class="r">8.537.400</td><td class="r">21.343.500</td></tr>
+      <tr><td class="c">2</td><td>Mục 2 — Ứng dụng người chơi (Player Web-App)</td><td class="r">22.134.000</td><td class="r">55.335.000</td></tr>
+      <tr><td class="c">3</td><td>Mục 3 — Hệ thống game engine &amp; quản trị (Back-end)</td><td class="r">25.296.000</td><td class="r">63.240.000</td></tr>
+      <tr><td class="c">4</td><td>Mục 4 — Kiểm thử, bảo mật &amp; triển khai vận hành</td><td class="r">3.794.400</td><td class="r">9.486.000</td></tr>
+      <tr class="sub"><td class="c"></td><td>Tạm tính — Phát triển hệ thống (×2,5)</td><td class="r">59.761.800</td><td class="r">149.404.500</td></tr>
+      <tr><td class="c">5</td><td>Mục 5 — Tích hợp Zalo ZBS (giữ nguyên)</td><td class="r">12.375.000</td><td class="r">12.375.000</td></tr>
+      <tr class="tot"><td class="c" colspan="2">TỔNG CỘNG (chi phí một lần, chưa gồm thuế GTGT &amp; phí tin nhắn ZBS)</td><td class="r">72.136.800</td><td class="r">161.779.500</td></tr>
+      <tr><td class="c"></td><td>Phí tin nhắn Zalo ZBS (vận hành, theo lượng thực gửi)</td><td class="r">—</td><td class="r">450 / tin</td></tr>
+    </tbody>
+  </table>
+  <div class="words">Bằng chữ: Một trăm sáu mươi mốt triệu bảy trăm bảy mươi chín nghìn năm trăm đồng (chưa bao gồm thuế GTGT).</div>
+
+  <h2>II. Hạng mục tùy chọn (Optional)</h2>
+  <p>Không bao gồm trong tổng chi phí ở Mục I; triển khai khi Quý Khách Hàng có nhu cầu.</p>
+  <table>
+    <thead><tr><th style="width:42px">STT</th><th>Hạng mục tùy chọn</th><th class="r" style="width:150px">Chi phí (VNĐ)</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="c">O1</td>
+        <td><b>Nâng cấp thành nền tảng tạo sự kiện nội bộ (multi-event)</b>
+          <ul>
+            <li>Cho phép đội ngũ tự tạo, cấu hình và quản lý nhiều chương trình/sự kiện trên cùng một hệ thống.</li>
+            <li>Tái sử dụng cho các chiến dịch về sau, không phải xây mới từng lần.</li>
+          </ul>
+        </td>
+        <td class="r">47.430.000</td>
+      </tr>
+      <tr>
+        <td class="c">O2</td>
+        <td><b>Quản trị &amp; vận hành hệ thống</b>
+          <ul>
+            <li>Miễn phí tháng đầu tiên.</li>
+            <li>Từ tháng thứ 2: 4 giờ/tháng — theo dõi vận hành, hỗ trợ và chỉnh sửa nhỏ.</li>
+          </ul>
+        </td>
+        <td class="r">2.097.500 / tháng<br><span style="font-style:italic;font-size:12.5px;white-space:normal">(miễn phí tháng đầu)</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>III. Thời gian triển khai (02 tuần — 10 ngày làm việc)</h2>
+  <table>
+    <thead><tr><th style="width:140px">Ngày làm việc</th><th>Hạng mục công việc</th></tr></thead>
+    <tbody>
+      <tr><td class="c">Ngày 1 – 3</td><td>Thiết kế UI/UX và phê duyệt giao diện (Mục 1)</td></tr>
+      <tr><td class="c">Ngày 2 – 8</td><td>Phát triển ứng dụng người chơi và hệ thống game engine — làm song song (Mục 2, 3)</td></tr>
+      <tr><td class="c">Ngày 4 – 6</td><td>Tích hợp và kiểm thử Zalo ZBS (Mục 5)</td></tr>
+      <tr><td class="c">Ngày 8 – 10</td><td>Kiểm thử tổng thể, cấu hình bảo mật và Go-Live (Mục 4)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13.5px"><b>Điều kiện đạt tiến độ 02 tuần:</b> Quý Khách Hàng bàn giao đầy đủ tài liệu đầu vào ngay
+     ngày đầu (thể lệ, danh sách quà &amp; tỷ lệ, bộ nhận diện thương hiệu, Zalo OA đã xác thực) và quy trình duyệt mẫu tin
+     nhắn OTP phía Zalo được đẩy nhanh. Mọi chậm trễ đầu vào sẽ làm dời mốc Go-Live.</p>
+
+  <h2>IV. Điều khoản và điều kiện</h2>
+  <ol class="terms">
+    <li><b>Bảo hành:</b> miễn phí <b>09 tháng</b> kể từ ngày nghiệm thu — giữ nguyên như lộ trình tiêu chuẩn.</li>
+    <li><b>Thanh toán (đề xuất):</b> 60% tạm ứng khi ký hợp đồng; 40% khi Go-Live (rút gọn theo tiến độ nhanh).</li>
+    <li><b>Hiệu lực báo giá:</b> 30 ngày kể từ ngày phát hành.</li>
+    <li><b>Thuế và chi phí ngoài phạm vi:</b> chưa gồm thuế GTGT, phí tin nhắn Zalo ZBS (450 đ/tin), tên miền và hosting/máy chủ vận hành.</li>
+    <li><b>Điều kiện tiên quyết:</b> Quý Khách Hàng cung cấp toàn bộ đầu vào và tài khoản Zalo OA đã xác thực ngay ngày khởi động.</li>
+  </ol>
+
+  <div class="signs">
+    <div class="s"><div class="r">Đại diện Bên cung cấp</div><div class="h">(Ký, ghi rõ họ tên)</div><div class="sp"></div><div>ADNS CO., LTD</div></div>
+    <div class="s"><div class="r">Đại diện Quý Khách Hàng</div><div class="h">(Ký, ghi rõ họ tên)</div><div class="sp"></div><div>&nbsp;</div></div>
+  </div>
+
+</div>
+</body>
+</html>

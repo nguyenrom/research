@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAWEE 2025 đến 2030 · Nền tảng Hội viên xây riêng</title>
+<style>
+  :root{
+    --navy:#0f2747;--navy2:#1d3f63;--ink:#15273d;--muted:#5d6b7e;
+    --line:#e4e9f0;--bg:#fff;--soft:#f5f7fb;--accent:#1c6fb8;--accent2:#3f9bd6;
+    --gold:#b7892f;--green:#1f9d6b;--amber:#c98a2e;--teal:#1f8a8a;--violet:#6b54b8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Inter",Roboto,Arial,sans-serif;background:var(--soft);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+  .slide{position:absolute;inset:0;display:none;flex-direction:column;padding:4.6vh 5.4vw;background:var(--bg);overflow:auto;animation:fade .3s ease}
+  .slide.active{display:flex}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .kicker{font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:.6rem}
+  .kicker.now{color:var(--amber)} .kicker.good{color:var(--green)}
+  h1{font-size:3.3rem;line-height:1.08;color:var(--navy);font-weight:800;letter-spacing:-.02em}
+  h2{font-size:2.05rem;line-height:1.15;color:var(--navy);font-weight:800;letter-spacing:-.01em;margin-bottom:.25rem}
+  h2 .em{color:var(--accent)}
+  .sub{font-size:1.22rem;color:var(--muted);margin-top:.9rem;font-weight:400;line-height:1.5}
+  ul{list-style:none;margin-top:1.2rem;display:flex;flex-direction:column;gap:.75rem;max-width:76ch}
+  li{position:relative;padding-left:1.5rem;font-size:1.15rem;line-height:1.5;color:var(--ink)}
+  li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;background:var(--accent);border-radius:2px}
+  li b{color:var(--navy)}
+  .quote{margin-top:1.3rem;font-size:1.28rem;line-height:1.5;color:var(--navy);font-weight:600;border-left:4px solid var(--gold);padding-left:1.1rem;max-width:68ch}
+  .quote.sm{font-size:1.08rem}
+  .src{font-size:.76rem;color:#9aa7b6;margin-top:auto;padding-top:1.1rem}
+  .tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#fff;background:var(--navy);padding:.26rem .65rem;border-radius:99px}
+  .tag.acc{background:var(--accent)}.tag.gd{background:var(--gold)}.tag.gr{background:var(--green)}.tag.am{background:var(--amber)}
+
+  .row{display:flex;gap:1.6rem;align-items:flex-start;margin-top:1.1rem;flex:1;min-height:0}
+  .row>.col{flex:1;min-width:0}
+  .grid{display:grid;gap:.9rem;margin-top:1.1rem}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+
+  .card{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem}
+  .card .n{font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+  .card h3{font-size:1.08rem;color:var(--navy);margin:.35rem 0;font-weight:700}
+  .card p{font-size:.95rem;color:var(--muted);line-height:1.45}
+  .kpis{display:flex;gap:2.4rem;flex-wrap:wrap;margin-top:1.5rem}
+  .kpi .v{font-size:2.6rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1}
+  .kpi .v.acc{color:var(--accent)}.kpi .v.gd{color:var(--gold)}.kpi .v.gr{color:var(--green)}.kpi .v.am{color:var(--amber)}
+  .kpi .l{font-size:.9rem;color:var(--muted);margin-top:.3rem;max-width:21ch}
+
+  /* now / future panels (optimistic) */
+  .ba{display:grid;grid-template-columns:1fr 52px 1fr;align-items:stretch;margin-top:1.2rem;flex:1}
+  .ba .pane{border:1px solid var(--line);border-radius:12px;padding:1.3rem}
+  .ba .pane.now{background:#fbf6ee;border-color:#ecdcc2}
+  .ba .pane.fut{background:#eef8f3;border-color:#cfe9dd}
+  .ba .pane h4{font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.7rem}
+  .ba .pane.now h4{color:var(--amber)} .ba .pane.fut h4{color:var(--green)}
+  .ba .pane li{font-size:1.02rem;padding-left:1.3rem}
+  .ba .pane.now li::before{background:var(--amber)} .ba .pane.fut li::before{background:var(--green)}
+  .ba .arrow{display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:var(--gold);font-weight:800}
+
+  /* app / crm mockup */
+  .mock{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff;box-shadow:0 14px 36px rgba(15,39,71,.11);flex:1;display:flex;flex-direction:column;min-height:0}
+  .mock .bar{display:flex;align-items:center;gap:.45rem;padding:.55rem .85rem;background:#eef1f6;border-bottom:1px solid var(--line)}
+  .mock .bar i{width:10px;height:10px;border-radius:50%;background:#cdd5df}
+  .mock .bar i:nth-child(1){background:#e98b7d}.mock .bar i:nth-child(2){background:#e9c97d}.mock .bar i:nth-child(3){background:#9bd2ab}
+  .mock .bar .url{margin-left:.6rem;background:#fff;border:1px solid var(--line);border-radius:99px;font-size:.76rem;color:var(--muted);padding:.26rem .85rem;flex:1;max-width:360px}
+  .mock .body{display:flex;flex:1;min-height:0}
+  .mock .side{width:166px;background:var(--navy);color:#c7d8ea;padding:.9rem .7rem;font-size:.8rem;display:flex;flex-direction:column;gap:.42rem}
+  .mock .side .logo{color:#fff;font-weight:800;letter-spacing:.15em;font-size:.86rem;margin-bottom:.5rem}
+  .mock .side a{color:#a6c3dd;padding:.36rem .5rem;border-radius:6px}
+  .mock .side a.on{background:var(--accent);color:#fff}
+  .mock .main{flex:1;padding:1rem 1.1rem;overflow:auto;background:#fafcfe}
+
+  /* CRM record header (Salesforce-like) */
+  .rec{display:flex;align-items:center;gap:.9rem;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;margin-bottom:.7rem}
+  .rec .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;flex-shrink:0}
+  .rec .meta{flex:1;min-width:0}
+  .rec .meta h5{font-size:1.05rem;color:var(--navy);font-weight:800}
+  .rec .meta p{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+  .rec .badges{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.35rem}
+  .pill{font-size:.68rem;font-weight:700;padding:.18rem .55rem;border-radius:99px}
+  .pill.g{background:#e3f3eb;color:var(--green)}.pill.a{background:#f7ead2;color:var(--amber)}.pill.b{background:#e2eef9;color:var(--accent)}.pill.v{background:#ece7f8;color:var(--violet)}.pill.gd{background:#f6ecd6;color:var(--gold)}
+
+  .wgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+  .w{background:#fff;border:1px solid var(--line);border-radius:9px;padding:.7rem .8rem;display:flex;flex-direction:column;gap:.35rem}
+  .w .wt{font-size:.68rem;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .w .wv{font-size:1.45rem;font-weight:800;color:var(--navy);line-height:1}
+  .w.sm .wv{font-size:1.15rem}
+  .w .wfoot{font-size:.7rem;color:var(--muted)}
+  .w.up{border-color:#cfe9dd;background:#f3fbf7}.w.up .wv{color:var(--green)}
+  .w.warn{border-color:#ecdcc2;background:#fbf6ee}.w.warn .wv{color:var(--amber)}
+  .w.cell{align-items:center;justify-content:center}
+
+  /* donut (conic) */
+  .donut{width:84px;height:84px;border-radius:50%;position:relative;flex-shrink:0}
+  .donut::after{content:"";position:absolute;inset:13px;background:#fff;border-radius:50%}
+  .donut .dc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy);font-size:.95rem;z-index:1}
+  .wrow{display:flex;align-items:center;gap:.9rem}
+  .legend{font-size:.72rem;color:var(--muted);display:flex;flex-direction:column;gap:.25rem}
+  .legend span{display:flex;align-items:center;gap:.4rem}
+  .legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+
+  /* mini bar chart */
+  .bars{display:flex;align-items:flex-end;gap:.5rem;height:74px}
+  .bars .bb{flex:1;background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:5px 5px 0 0;min-height:6px;position:relative}
+  .bars .bb.gd{background:linear-gradient(180deg,var(--gold),#d6a847)}
+  .bars .bb.gr{background:linear-gradient(180deg,var(--green),#46b98c)}
+  .bars-x{display:flex;gap:.5rem;margin-top:.3rem}
+  .bars-x span{flex:1;text-align:center;font-size:.64rem;color:var(--muted)}
+
+  /* progress + sparkline */
+  .prog{height:9px;background:#e9eef4;border-radius:99px;overflow:hidden}
+  .prog i{display:block;height:100%;background:linear-gradient(90deg,var(--green),#46b98c);border-radius:99px}
+  .prog.b i{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+  svg.spark{width:100%;height:34px;display:block}
+
+  /* timeline / activity feed */
+  .feed{display:flex;flex-direction:column;gap:.55rem}
+  .fitem{display:flex;gap:.6rem;font-size:.8rem}
+  .fitem .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:.35rem;flex-shrink:0}
+  .fitem .dot.gr{background:var(--green)}.fitem .dot.gd{background:var(--gold)}.fitem .dot.v{background:var(--violet)}
+  .fitem .ft{color:var(--muted);font-size:.72rem}
+  .fitem .fb{color:var(--ink)}
+
+  /* leaderboard */
+  .lead{display:flex;flex-direction:column;gap:.45rem}
+  .lr{display:flex;align-items:center;gap:.7rem;background:#fff;border:1px solid var(--line);border-radius:9px;padding:.55rem .8rem}
+  .lr .rk{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;color:#fff;background:var(--muted);flex-shrink:0}
+  .lr .rk.g1{background:#d4af37}.lr .rk.g2{background:#9aa7b6}.lr .rk.g3{background:#c08457}
+  .lr .lav{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#8c79d6);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem}
+  .lr .ln{flex:1;font-size:.86rem;color:var(--navy);font-weight:600}
+  .lr .ln small{display:block;color:var(--muted);font-weight:400;font-size:.72rem}
+  .lr .lp{font-weight:800;color:var(--gold);font-size:.95rem}
+
+  table.t{width:100%;border-collapse:collapse;font-size:.8rem;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  table.t th{background:#eef2f7;color:var(--navy);text-align:left;padding:.5rem .65rem;font-size:.7rem;letter-spacing:.04em;text-transform:uppercase}
+  table.t td{padding:.5rem .65rem;border-top:1px solid var(--line);color:var(--ink)}
+
+  /* flow / steps */
+  .flow{display:flex;align-items:stretch;margin-top:1.2rem}
+  .flow .st{flex:1;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:.9rem;text-align:center}
+  .flow .st .si{font-size:.7rem;font-weight:700;color:var(--accent);letter-spacing:.07em;text-transform:uppercase}
+  .flow .st h4{font-size:.98rem;color:var(--navy);margin:.35rem 0}
+  .flow .st p{font-size:.82rem;color:var(--muted);line-height:1.4}
+  .flow .ar{display:flex;align-items:center;padding:0 .5rem;color:var(--gold);font-size:1.3rem;font-weight:800}
+
+  /* phone / zalo */
+  .phone{width:262px;border:9px solid #1c1c22;border-radius:32px;background:#dfe7ef;overflow:hidden;flex-shrink:0;box-shadow:0 14px 34px rgba(15,39,71,.18)}
+  .phone .ztop{background:#0068ff;color:#fff;padding:.65rem .85rem;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:.45rem}
+  .phone .ztop .za{width:24px;height:24px;border-radius:50%;background:#fff;color:#0068ff;display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:800}
+  .phone .zbody{padding:.8rem;display:flex;flex-direction:column;gap:.55rem;min-height:290px;background:#dfe7ef}
+  .bub{background:#fff;border-radius:12px;padding:.65rem .8rem;font-size:.8rem;line-height:1.45;color:var(--ink);max-width:94%;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+  .bub .bt{font-weight:800;color:var(--navy);font-size:.78rem;margin-bottom:.15rem}
+  .bub.cta{background:#eaf2ff;border:1px solid #c5dbff}
+  .bub .btn{display:inline-block;margin-top:.45rem;background:#0068ff;color:#fff;font-size:.76rem;font-weight:700;padding:.38rem .75rem;border-radius:99px}
+  .ztime{align-self:center;font-size:.66rem;color:#7c8a98}
+
+  .chatui{display:flex;flex-direction:column;gap:.6rem;flex:1;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:1.2rem;overflow:auto}
+  .msg{max-width:76%;font-size:.98rem;line-height:1.5;padding:.65rem .95rem;border-radius:13px}
+  .msg.u{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px}
+  .msg.a{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:4px}
+  .msg.a b{color:var(--accent)}
+
+  /* timeline phases */
+  .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.3rem;flex:1}
+  .tl .ph{border:1px solid var(--line);border-radius:13px;padding:1.3rem;background:#fff;display:flex;flex-direction:column}
+  .tl .ph .bn{align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#fff;background:var(--navy);padding:.28rem .65rem;border-radius:99px}
+  .tl .ph.m .bn{background:var(--accent)}.tl .ph.l .bn{background:var(--gold)}
+  .tl .ph h3{margin:.7rem 0 .45rem;color:var(--navy);font-size:1.15rem}
+  .tl .ph li{font-size:.94rem;padding-left:1.2rem}
+
+  /* illustration */
+  .illu{display:flex;align-items:center;justify-content:center;flex:1;gap:2.5rem;flex-wrap:wrap}
+  .illu svg{filter:drop-shadow(0 12px 24px rgba(15,39,71,.12))}
+
+  .cover{background:linear-gradient(135deg,#0f2747 0%,#1d3f63 58%,#26527f 100%);color:#fff;justify-content:center}
+  .cover .kicker{color:#9ec7e8}.cover h1{color:#fff;font-size:3.8rem}.cover .sub{color:#cfdded}
+  .cover .meta{margin-top:2.6rem;font-size:.92rem;color:#9fb6ce;display:flex;gap:1.8rem;border-top:1px solid rgba(255,255,255,.18);padding-top:1.2rem}
+  .cover .brand{font-weight:800;letter-spacing:.18em;font-size:1rem;color:#fff}
+  .div{background:var(--navy);color:#fff;justify-content:center}
+  .div .kicker{color:#9ec7e8}.div h1{color:#fff;font-size:2.8rem}.div .sub{color:#cfdded;max-width:62ch}
+  .note{font-size:.8rem;color:var(--gold);margin-top:.6rem;font-style:italic}
+
+  .progress{position:fixed;top:0;left:0;height:4px;background:var(--gold);transition:width .3s;z-index:30}
+  .nav{position:fixed;bottom:1.6vh;right:2.2vw;display:flex;align-items:center;gap:.85rem;z-index:30}
+  .nav button{background:var(--navy);color:#fff;border:0;width:38px;height:38px;border-radius:50%;font-size:1rem;cursor:pointer;opacity:.85}
+  .nav button:hover{opacity:1}
+  .counter{font-size:.86rem;color:var(--muted);font-variant-numeric:tabular-nums;min-width:64px;text-align:center}
+  .dots{position:fixed;bottom:1.9vh;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:30;max-width:62vw;flex-wrap:wrap;justify-content:center}
+  .dots i{width:6px;height:6px;border-radius:50%;background:#cfd8e3;cursor:pointer}
+  .dots i.on{background:var(--navy);transform:scale(1.4)}
+  .hint{position:fixed;bottom:1.7vh;left:2.2vw;font-size:.74rem;color:#aab4c2;z-index:30}
+  @media(max-width:980px){h1,.cover h1{font-size:2.1rem}h2{font-size:1.55rem}.row{flex-direction:column}
+    .g2,.g3,.g4,.g5,.tl{grid-template-columns:1fr}.ba{display:flex;flex-direction:column}.flow{flex-direction:column}.wgrid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="progress" id="bar"></div>
+<div class="deck" id="deck">
+
+<!-- 1 COVER -->
+<section class="slide active cover">
+  <div class="kicker">Đề xuất chiến lược · Nhiệm kỳ III 2025 đến 2030</div>
+  <h1>HAWEE: Từ Mạng lưới<br>đến Nền tảng</h1>
+  <p class="sub">Một nền tảng số <b style="color:#fff">xây riêng cho HAWEE</b>, hiện thực hóa<br>tinh thần “Hội tụ, Kết nối, Vươn tầm”.</p>
+  <div class="meta"><span class="brand">HAWEE</span><span>Bản trình bày giải pháp</span><span>2026</span></div>
+</section>
+
+<!-- 2 CONTEXT -->
+<section class="slide">
+  <div class="kicker">Bối cảnh nhiệm kỳ III</div>
+  <h2>HAWEE đang ở <span class="em">thời điểm vàng để bứt phá</span></h2>
+  <div class="kpis">
+    <div class="kpi"><div class="v">500+</div><div class="l">hội viên nữ lãnh đạo</div></div>
+    <div class="kpi"><div class="v acc">4 hạng</div><div class="l">Cơ Bản đến Lan Tỏa</div></div>
+    <div class="kpi"><div class="v">45</div><div class="l">thành viên Ban Chấp hành</div></div>
+    <div class="kpi"><div class="v gd">10 năm</div><div class="l">hành trình 2015 đến 2025</div></div>
+  </div>
+  <ul>
+    <li>Định hướng hành động mới: <b>thúc đẩy giao thương, mở rộng thị trường, kết nối đối tác cho hội viên</b></li>
+    <li>Mở rộng HAWEE Mentoring theo chiều sâu ngành nghề</li>
+  </ul>
+  <div class="quote">Tầm nhìn đã rõ. Việc còn lại là chọn <b>công cụ vận hành xứng tầm</b> với 500+ hội viên.</div>
+  <div class="src">Nguồn: hawee.vn; Đại hội nhiệm kỳ III (theleader.vn, phunuvietnam.vn) 03/2025</div>
+</section>
+
+<!-- 3 MARKET -->
+<section class="slide">
+  <div class="kicker good">Cơ hội thị trường</div>
+  <h2>HAWEE đứng trên một <span class="em">làn sóng đang lên</span></h2>
+  <div class="row">
+    <div class="col">
+      <div class="bars" style="height:200px">
+        <div class="bb" style="height:62%"></div>
+        <div class="bb" style="height:74%"></div>
+        <div class="bb gd" style="height:92%"></div>
+      </div>
+      <div class="bars-x"><span>2015 · ~21%</span><span>2025 · ~25%</span><span>2030 · 30%</span></div>
+      <p class="note" style="text-align:center">Tỷ lệ doanh nghiệp Việt do nữ làm chủ</p>
+    </div>
+    <div class="col">
+      <ul>
+        <li><b>~25%</b> doanh nghiệp Việt do nữ làm chủ, hướng tới <b>30% vào 2030</b></li>
+        <li><b>97%</b> doanh nghiệp do nữ làm chủ còn nhỏ, đang rất cần kết nối và cố vấn</li>
+        <li>Mạng lưới nữ doanh nhân Việt Nam thuộc nhóm hiệu quả nhất ASEAN</li>
+      </ul>
+      <div class="quote sm">HAWEE có vị thế dẫn dắt. Nền tảng số sẽ biến mạng lưới ấy thành <b>giá trị nhìn thấy được</b>.</div>
+    </div>
+  </div>
+  <div class="src">Nguồn: VCCI, WISE Vietnam, VietnamPlus (2025). Cột 2015 mang tính minh họa xu hướng.</div>
+</section>
+
+<!-- 4 SINGLE SOLUTION THESIS -->
+<section class="slide">
+  <div class="kicker">Định hướng giải pháp</div>
+  <h2>Một nền tảng <span class="em">xây riêng cho HAWEE</span></h2>
+  <div class="grid g3">
+    <div class="card"><div class="n">Của HAWEE</div><h3>Sở hữu trọn vẹn</h3><p>Dữ liệu và sản phẩm thuộc về Hội, không phụ thuộc bên thứ ba.</p></div>
+    <div class="card"><div class="n">Đúng bản sắc</div><h3>May đo theo Hội</h3><p>Thiết kế đúng 4 hạng hội viên, chương trình Mentoring và định hướng giao thương.</p></div>
+    <div class="card"><div class="n">Sát người Việt</div><h3>Gắn liền Zalo</h3><p>Nhắc nhở và chăm sóc qua Zalo, thanh toán nội địa quen thuộc.</p></div>
+  </div>
+  <div class="quote">Đây không phải phần mềm thuê sẵn. Đây là <b>tài sản số riêng của HAWEE</b>, lớn lên cùng Hội qua từng nhiệm kỳ.</div>
+</section>
+
+<!-- DIVIDER I -->
+<section class="slide div">
+  <div class="kicker">Phần I</div>
+  <h1>Điểm nghẽn và cơ hội</h1>
+  <p class="sub">Nhìn thẳng vào nút thắt hôm nay, để thấy rõ dư địa tăng trưởng ngày mai.</p>
+</section>
+
+<!-- 6 PAIN MAP: 7 core + 3 extended -->
+<section class="slide">
+  <div class="kicker">Bản đồ điểm nghẽn</div>
+  <h2>Không chỉ 7, mà là <span class="em">7 cốt lõi và 3 mở rộng</span></h2>
+  <div class="grid g5" style="gap:.6rem;margin-top:1rem">
+    <div class="card"><div class="n">01</div><h3 style="font-size:.98rem">Dữ liệu phân tán</h3></div>
+    <div class="card"><div class="n">02</div><h3 style="font-size:.98rem">Gia hạn thủ công</h3></div>
+    <div class="card"><div class="n">03</div><h3 style="font-size:.98rem">Tương tác theo nhịp sự kiện</h3></div>
+    <div class="card"><div class="n">04</div><h3 style="font-size:.98rem">Chưa đo được giá trị</h3></div>
+    <div class="card"><div class="n">05</div><h3 style="font-size:.98rem">Giao thương rời rạc</h3></div>
+    <div class="card"><div class="n">06</div><h3 style="font-size:.98rem">Mentoring thủ công</h3></div>
+    <div class="card"><div class="n">07</div><h3 style="font-size:.98rem">Hồ sơ hội viên sơ sài</h3></div>
+    <div class="card" style="background:#eef6fb;border-color:#cfe2f0"><div class="n" style="color:var(--teal)">08 · mở rộng</div><h3 style="font-size:.98rem">Hội viên mới ít gắn kết 90 ngày đầu</h3></div>
+    <div class="card" style="background:#eef6fb;border-color:#cfe2f0"><div class="n" style="color:var(--teal)">09 · mở rộng</div><h3 style="font-size:.98rem">Chưa ghi nhận hội viên năng động</h3></div>
+    <div class="card" style="background:#eef6fb;border-color:#cfe2f0"><div class="n" style="color:var(--teal)">10 · mở rộng</div><h3 style="font-size:.98rem">Chi hội &amp; truyền thông phân tán</h3></div>
+  </div>
+  <div class="quote sm">Mỗi điểm nghẽn đều có một lời giải cụ thể. Các slide sau sẽ đi sâu kèm <b>mô phỏng giao diện</b>.</div>
+  <div class="src">Điểm nghẽn 08 đến 10 được bổ sung từ nghiên cứu thị trường và đặc thù cơ cấu HAWEE.</div>
+</section>
+
+<!-- 7 GROWTH ROOM (optimistic reframe of cost-of-inaction) -->
+<section class="slide">
+  <div class="kicker good">Dư địa đang chờ khai mở</div>
+  <h2>Mỗi hội viên ở lại là <span class="em">một giá trị nhân lên</span></h2>
+  <div class="row">
+    <div class="col">
+      <div class="flow">
+        <div class="st"><div class="si">Hôm nay</div><h4>500 hội viên</h4><p>Cơ sở hội viên hiện tại</p></div>
+        <div class="ar">›</div>
+        <div class="st" style="background:#eef8f3;border-color:#cfe9dd"><div class="si" style="color:var(--green)">Khi có nền tảng</div><h4>Giữ chân vững hơn</h4><p>Nhắc nhở &amp; chăm sóc tự động</p></div>
+        <div class="ar">›</div>
+        <div class="st" style="background:#eef6fb;border-color:#cfe2f0"><div class="si" style="color:var(--teal)">Kết quả</div><h4>Mạng lưới mạnh thêm</h4><p>Giá trị giao thương lớn dần</p></div>
+      </div>
+      <div class="kpis" style="margin-top:1.5rem">
+        <div class="kpi"><div class="v gr">+12 điểm %</div><div class="l">tỷ lệ hội viên tiếp tục đồng hành</div></div>
+        <div class="kpi"><div class="v">+1,2 tỷ</div><div class="l">VND/năm hội phí được giữ lại (mô hình minh họa)</div></div>
+        <div class="kpi"><div class="v acc">Bền vững</div><div class="l">mạng lưới &amp; uy tín tích lũy qua nhiệm kỳ</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="quote sm">Khi hội viên thấy giá trị rõ ràng, việc tiếp tục đồng hành trở thành lựa chọn tự nhiên.</div>
+  <div class="src">Mô hình minh họa: giả định 500 hội viên, hội phí 20 triệu/người. Thay số thực khi khảo sát.</div>
+</section>
+
+<!-- 8 PROVEN MODEL -->
+<section class="slide">
+  <div class="kicker good">Vững tâm khi quyết định</div>
+  <h2>Mô hình này đã được <span class="em">kiểm chứng ngay tại Việt Nam</span></h2>
+  <div class="row">
+    <div class="col">
+      <div class="wrow">
+        <div class="donut" style="background:conic-gradient(var(--green) 0 82%,#e7ecf3 82% 100%)"><span class="dc">82%</span></div>
+        <div>
+          <div style="font-size:1.05rem;font-weight:800;color:var(--navy)">Tỷ lệ hội viên tiếp tục đồng hành</div>
+          <div style="font-size:.86rem;color:var(--muted);margin-top:.3rem">Mức trung bình của các tổ chức có nền tảng quản lý hội viên, so với khoảng 55% khi làm thủ công.</div>
+        </div>
+      </div>
+      <ul style="margin-top:1.4rem">
+        <li><b>EuroCham Việt Nam</b> (khoảng 1.400 hội viên) đã vận hành trên một nền tảng quản lý hội viên</li>
+        <li>Hàng nghìn hội &amp; hiệp hội trên thế giới dùng mô hình tương tự</li>
+      </ul>
+      <div class="quote sm">Mô hình đã được chứng minh. HAWEE chỉ cần một bản <b>may đo theo bản sắc của mình</b>.</div>
+    </div>
+  </div>
+  <div class="src">Nguồn: tham chiếu nền tảng quản lý hội viên (Glue Up); EuroCham VN. Mức 55% mang tính minh họa.</div>
+</section>
+
+<!-- 9 SOLUTION OVERVIEW -->
+<section class="slide">
+  <div class="kicker">Giải pháp tổng quan</div>
+  <h2>Một nền tảng, <span class="em">ba lớp giá trị</span></h2>
+  <div class="tl">
+    <div class="ph"><span class="bn">Lớp 1 · Nền móng</span><h3>Dữ liệu &amp; Hội viên</h3><ul><li>Kho dữ liệu hội viên tập trung</li><li>Hồ sơ hội viên 360°</li><li>Quản lý 4 hạng &amp; gia hạn tự động</li><li>Nhắc nhở qua Zalo &amp; email</li></ul></div>
+    <div class="ph m"><span class="bn">Lớp 2 · Giá trị</span><h3>Gắn kết &amp; Giao thương</h3><ul><li>Sự kiện, vé &amp; quét QR</li><li>Sàn kết nối giao thương</li><li>Quản lý Mentoring</li><li>Tích điểm &amp; vinh danh hội viên</li></ul></div>
+    <div class="ph l"><span class="bn">Lớp 3 · Vươn tầm</span><h3>Thông minh &amp; Mở rộng</h3><ul><li>Bảng điều hành sức khỏe Hội</li><li>Chăm sóc hội viên cần quan tâm</li><li>Trợ lý ảo (AI)</li><li>Quản lý &amp; hiệu quả tài trợ</li></ul></div>
+  </div>
+  <div class="quote sm">Một nơi duy nhất cho <b>hội viên</b>, <b>Ban Chấp hành</b> và <b>đối tác</b>.</div>
+</section>
+
+<!-- 10 MAP -->
+<section class="slide">
+  <div class="kicker">Bản đồ điểm nghẽn đến giải pháp</div>
+  <h2>Mỗi nút thắt, <span class="em">một lời giải rõ ràng</span></h2>
+  <table class="t" style="margin-top:1.1rem;font-size:.9rem">
+    <tr><th>#</th><th>Điểm nghẽn</th><th>Giải pháp</th><th>Kết quả nhìn thấy</th></tr>
+    <tr><td>1</td><td>Dữ liệu phân tán</td><td>Kho dữ liệu tập trung &amp; Hồ sơ 360°</td><td><span class="pill b">Một nguồn duy nhất</span></td></tr>
+    <tr><td>2</td><td>Gia hạn thủ công</td><td>Quản lý hạng &amp; gia hạn tự động</td><td><span class="pill g">Giữ chân vững</span></td></tr>
+    <tr><td>3</td><td>Tương tác theo nhịp</td><td>Sự kiện, quét QR &amp; bảng tin cộng đồng</td><td><span class="pill b">Gắn kết liên tục</span></td></tr>
+    <tr><td>4</td><td>Chưa đo được giá trị</td><td>Bảng điều hành sức khỏe Hội</td><td><span class="pill gd">Quyết định bằng số</span></td></tr>
+    <tr><td>5</td><td>Giao thương rời rạc</td><td>Sàn kết nối giao thương nội bộ</td><td><span class="pill g">Cơ hội kinh doanh</span></td></tr>
+    <tr><td>6</td><td>Mentoring thủ công</td><td>Quản lý ghép cặp &amp; hành trình</td><td><span class="pill b">Mở rộng quy mô</span></td></tr>
+    <tr><td>7</td><td>Hồ sơ sơ sài</td><td>Hồ sơ &amp; thẻ hội viên số</td><td><span class="pill b">Danh thiếp số</span></td></tr>
+    <tr><td>8</td><td>90 ngày đầu</td><td>Hành trình chào đón tự động</td><td><span class="pill v">Gắn bó sớm</span></td></tr>
+    <tr><td>9</td><td>Chưa ghi nhận năng động</td><td>Tích điểm &amp; bảng vinh danh</td><td><span class="pill gd">Khích lệ tham gia</span></td></tr>
+    <tr><td>10</td><td>Chi hội &amp; truyền thông</td><td>Quản lý chi hội &amp; hub nội dung</td><td><span class="pill b">Gắn kết toàn Hội</span></td></tr>
+  </table>
+</section>
+
+<!-- DIVIDER II -->
+<section class="slide div">
+  <div class="kicker">Phần II</div>
+  <h1>Đi sâu từng giải pháp</h1>
+  <p class="sub">Mỗi điểm nghẽn: hiện trạng, cách giải, mô phỏng giao diện thật, kết quả.</p>
+</section>
+
+<!-- 12 ISSUE 1 -->
+<section class="slide">
+  <div class="kicker now">Điểm nghẽn 01</div>
+  <h2>Dữ liệu hội viên <span class="em">đang nằm rải rác nhiều nơi</span></h2>
+  <div class="ba">
+    <div class="pane now"><h4>Hiện tại</h4><ul>
+      <li>Danh sách nằm ở nhiều file Excel khác nhau</li>
+      <li>Lịch sử tương tác trôi trên Facebook, Zalo</li>
+      <li>Bàn giao nhiệm kỳ dễ thất lạc thông tin</li>
+      <li>Khó trả lời nhanh “hội viên này đã tham gia gì”</li>
+    </ul></div>
+    <div class="arrow">›</div>
+    <div class="pane fut"><h4>Khi có nền tảng</h4><ul>
+      <li>Một kho dữ liệu hội viên duy nhất</li>
+      <li>Mọi hoạt động được ghi lại tự động</li>
+      <li>Bàn giao nhiệm kỳ trọn vẹn dữ liệu</li>
+      <li>Tra cứu hồ sơ 360° trong vài giây</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 13 SOLUTION 1: SALESFORCE-STYLE 360 PROFILE -->
+<section class="slide">
+  <div class="kicker good">Giải pháp 01 · Mô phỏng giao diện</div>
+  <h2>Hồ sơ hội viên <span class="em">360°</span></h2>
+  <div class="mock">
+    <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/quan-tri/hoi-vien/nguyen-thi-an</span></div>
+    <div class="body">
+      <div class="side"><div class="logo">HAWEE</div><a>Tổng quan</a><a class="on">Hội viên</a><a>Sự kiện</a><a>Giao thương</a><a>Mentoring</a><a>Tài trợ</a><a>Báo cáo</a></div>
+      <div class="main">
+        <div class="rec">
+          <div class="av">NA</div>
+          <div class="meta"><h5>Nguyễn Thị An</h5><p>CEO · Công ty An Phát · Ngành F&amp;B · Hội viên từ 2019</p>
+            <div class="badges"><span class="pill gd">Hạng Tỏa Sáng</span><span class="pill g">Đang hoạt động</span><span class="pill v">Hội viên năng động</span><span class="pill b">2.480 điểm</span></div>
+          </div>
+        </div>
+        <div class="wgrid">
+          <div class="w cell"><div class="wt">Mức độ gắn kết</div><div class="donut" style="width:74px;height:74px;background:conic-gradient(var(--green) 0 88%,#e7ecf3 88% 100%)"><span class="dc" style="font-size:.82rem">88</span></div></div>
+          <div class="w"><div class="wt">Hoạt động 6 tháng</div><div class="bars" style="height:54px"><div class="bb" style="height:40%"></div><div class="bb" style="height:62%"></div><div class="bb" style="height:55%"></div><div class="bb gr" style="height:90%"></div><div class="bb" style="height:70%"></div><div class="bb gr" style="height:82%"></div></div></div>
+          <div class="w up"><div class="wt">Hạn gia hạn</div><div class="wv">02/2027</div><div class="wfoot">Còn hiệu lực</div></div>
+          <div class="w"><div class="wt">Sự kiện đã dự</div><div class="wv">12</div><div class="wfoot">Năm nay: 5</div></div>
+          <div class="w"><div class="wt">Kết nối giao thương</div><div class="wv">8</div><div class="wfoot">2 đang trao đổi</div></div>
+          <div class="w"><div class="wt">Vai trò Mentoring</div><div class="wv" style="font-size:1.05rem">Mentor</div><div class="wfoot">Đang dẫn 3 mentee</div></div>
+        </div>
+        <div class="row" style="margin-top:.7rem;gap:.7rem">
+          <div class="col">
+            <div class="wt" style="font-size:.7rem;color:var(--muted);margin-bottom:.4rem;text-transform:uppercase">Dòng thời gian hoạt động</div>
+            <div class="feed">
+              <div class="fitem"><div class="dot gr"></div><div><div class="ft">04/2026</div><div class="fb">Diễn giả tại HAWEE Connect Q2</div></div></div>
+              <div class="fitem"><div class="dot"></div><div><div class="ft">02/2026</div><div class="fb">Gia hạn hội phí hạng Tỏa Sáng</div></div></div>
+              <div class="fitem"><div class="dot v"></div><div><div class="ft">11/2025</div><div class="fb">Nhận ghép 1 mentee mới ngành F&amp;B</div></div></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="wt" style="font-size:.7rem;color:var(--muted);margin-bottom:.4rem;text-transform:uppercase">Quyền lợi theo hạng Tỏa Sáng</div>
+            <table class="t"><tr><th>Quyền lợi</th><th>Trạng thái</th></tr>
+              <tr><td>Vé sự kiện ưu tiên</td><td><span class="pill g">Đang mở</span></td></tr>
+              <tr><td>Ưu đãi đối tác</td><td><span class="pill g">8 ưu đãi</span></td></tr>
+              <tr><td>Gian hàng giao thương</td><td><span class="pill b">Khả dụng</span></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa: bố cục kiểu hồ sơ khách hàng (CRM), dữ liệu mẫu để khách hình dung.</div>
+</section>
+
+<!-- 14 ISSUE 2 -->
+<section class="slide">
+  <div class="kicker now">Điểm nghẽn 02</div>
+  <h2>Gia hạn thủ công khiến <span class="em">hội viên dễ rời tổ chức vì lãng quên</span></h2>
+  <div class="row">
+    <div class="col"><ul>
+      <li>Văn phòng Hội rà Excel, nhắn từng người khi tới hạn</li>
+      <li>Hội viên bận, lỡ nhắc rồi vô tình rời tổ chức</li>
+      <li>Chưa có cảnh báo sớm ai sắp hết hạn, ai cần quan tâm</li>
+      <li>Mỗi nhiệm kỳ lặp lại bài toán cũ, không tích lũy</li>
+    </ul>
+    <div class="quote sm">Phần lớn việc rời tổ chức không phải vì hết yêu mến Hội, mà chỉ vì <b>quên gia hạn</b>. Điều này hoàn toàn ngăn được.</div>
+    </div>
+    <div class="col">
+      <div class="flow" style="flex-direction:column;gap:.45rem">
+        <div class="st" style="text-align:left"><div class="si">Trước hạn 30 ngày</div><h4>Hệ thống tự phát hiện sắp hết hạn</h4></div>
+        <div class="ar" style="justify-content:center">↓</div>
+        <div class="st" style="text-align:left;background:#eaf2ff;border-color:#c5dbff"><div class="si">Trước 30, 7, 1 ngày</div><h4>Tự nhắc qua Zalo &amp; email</h4></div>
+        <div class="ar" style="justify-content:center">↓</div>
+        <div class="st" style="text-align:left;background:#eef8f3;border-color:#cfe9dd"><div class="si">Cần quan tâm</div><h4>Báo Ban Chấp hành chăm sóc tận tình</h4></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 SOLUTION 2 -->
+<section class="slide">
+  <div class="kicker good">Giải pháp 02 · Mô phỏng giao diện</div>
+  <h2>Gia hạn tự động <span class="em">và lời nhắc ấm áp qua Zalo</span></h2>
+  <div class="row">
+    <div class="col">
+      <div class="mock">
+        <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/quan-tri/gia-han</span></div>
+        <div class="body"><div class="main" style="padding:1rem 1.1rem">
+          <div class="wt" style="font-size:.95rem;color:var(--navy);font-weight:800;margin-bottom:.6rem">Theo dõi gia hạn · Quý 2/2026</div>
+          <div class="wgrid" style="grid-template-columns:repeat(3,1fr)">
+            <div class="w"><div class="wt">Sắp đến hạn</div><div class="wv">63</div><div class="wfoot">trong 30 ngày</div></div>
+            <div class="w up"><div class="wt">Đã tự gia hạn</div><div class="wv">41</div><div class="wfoot">65% tự động</div></div>
+            <div class="w warn"><div class="wt">Cần quan tâm</div><div class="wv">7</div><div class="wfoot">Ban Chấp hành chăm sóc</div></div>
+          </div>
+          <div class="wt" style="font-size:.7rem;color:var(--muted);margin:.6rem 0 .35rem;text-transform:uppercase">Tỷ lệ tiếp tục đồng hành theo tháng</div>
+          <div class="bars" style="height:60px"><div class="bb" style="height:70%"></div><div class="bb" style="height:74%"></div><div class="bb gr" style="height:80%"></div><div class="bb gr" style="height:86%"></div></div>
+          <div class="bars-x"><span>T1</span><span>T2</span><span>T3</span><span>T4</span></div>
+        </div></div>
+      </div>
+    </div>
+    <div class="phone">
+      <div class="ztop"><span class="za">H</span> HAWEE · Zalo</div>
+      <div class="zbody">
+        <span class="ztime">Hôm nay 09:00</span>
+        <div class="bub"><div class="bt">HAWEE thân gửi chị Mai Phương 💐</div>Quyền lợi hội viên hạng <b>Tỏa Sáng</b> của chị sẽ làm mới vào ngày <b>25/06/2026</b>.</div>
+        <div class="bub cta">Tiếp tục đồng hành chỉ với 1 phút, giữ trọn quyền lợi &amp; ưu đãi đối tác.<span class="btn">Gia hạn ngay ›</span></div>
+        <div class="bub" style="font-size:.76rem;color:var(--muted)">Cần hỗ trợ? Nhắn lại tin này, Văn phòng Hội sẽ liên hệ chị.</div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa giao diện vận hành &amp; tin nhắn Zalo tự động.</div>
+</section>
+
+<!-- 16 IMPACT 2 -->
+<section class="slide">
+  <div class="kicker good">Kết quả 02</div>
+  <h2>Giữ chân vững hơn <span class="em">là doanh thu &amp; mạng lưới được nhân lên</span></h2>
+  <div class="kpis">
+    <div class="kpi"><div class="v gr">+12 điểm %</div><div class="l">tỷ lệ hội viên tiếp tục đồng hành</div></div>
+    <div class="kpi"><div class="v">+1,2 tỷ</div><div class="l">VND/năm hội phí giữ lại (mô hình minh họa)</div></div>
+    <div class="kpi"><div class="v acc">−80%</div><div class="l">thời gian Văn phòng Hội xử lý gia hạn</div></div>
+  </div>
+  <div class="quote">Khi không còn ai rời tổ chức chỉ vì lãng quên, mỗi nhiệm kỳ Hội đều <b>khởi đầu trên nền tảng vững hơn</b>.</div>
+  <div class="src">Mô hình minh họa. Thay giả định bằng số thực của HAWEE khi khảo sát.</div>
+</section>
+
+<!-- 17 ISSUE 3 -->
+<section class="slide">
+  <div class="kicker now">Điểm nghẽn 03</div>
+  <h2>Gắn kết chỉ <span class="em">rộn ràng quanh sự kiện rồi lắng xuống</span></h2>
+  <div class="ba">
+    <div class="pane now"><h4>Hiện tại</h4><ul>
+      <li>Đăng ký qua form rời rạc hoặc nhắn tin tay</li>
+      <li>Điểm danh bằng giấy, không khớp dữ liệu hội viên</li>
+      <li>Sau sự kiện thiếu kết nối lại, khó đo hiệu quả</li>
+      <li>Giữa hai kỳ sự kiện, hội viên ít chạm tới Hội</li>
+    </ul></div>
+    <div class="arrow">›</div>
+    <div class="pane fut"><h4>Khi có nền tảng</h4><ul>
+      <li>Tạo sự kiện, bán vé theo hạng hội viên</li>
+      <li>Quét QR điểm danh, gắn thẳng vào hồ sơ</li>
+      <li>Tự động cảm ơn &amp; khảo sát sau sự kiện</li>
+      <li>Bảng tin cộng đồng giữ kết nối liên tục</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 18 SOLUTION 3 -->
+<section class="slide">
+  <div class="kicker good">Giải pháp 03 · Mô phỏng giao diện</div>
+  <h2>Sự kiện, quét QR <span class="em">và bảng tin cộng đồng</span></h2>
+  <div class="row">
+    <div class="col"><div class="mock">
+      <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/su-kien/hawee-connect-q3</span></div>
+      <div class="body"><div class="main">
+        <div class="wt" style="font-size:.95rem;color:var(--navy);font-weight:800">HAWEE Connect Q3 · Kết nối Giao thương</div>
+        <p style="font-size:.78rem;color:var(--muted);margin:.25rem 0 .7rem">18/07/2026 · 18:00 · Khách sạn Rex, TP.HCM</p>
+        <div class="wgrid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="w"><div class="wt">Đã đăng ký</div><div class="wv">142</div></div>
+          <div class="w up"><div class="wt">Đã thanh toán vé</div><div class="wv">98</div></div>
+          <div class="w cell"><div class="wt">Điểm danh</div><div style="font-weight:800;color:var(--accent)">Quét QR</div></div>
+        </div>
+        <table class="t" style="margin-top:.5rem"><tr><th>Loại vé</th><th>Quyền lợi</th><th>Trạng thái</th></tr>
+          <tr><td>Hạng Lan Tỏa</td><td>Miễn phí + bàn ưu tiên</td><td><span class="pill g">Mở</span></td></tr>
+          <tr><td>Hạng Cơ Bản</td><td>Ưu đãi 50%</td><td><span class="pill g">Mở</span></td></tr>
+          <tr><td>Khách mời</td><td>Vé tiêu chuẩn</td><td><span class="pill a">Còn 20</span></td></tr>
+        </table>
+      </div></div>
+    </div></div>
+    <div class="col"><div class="mock">
+      <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/cong-dong</span></div>
+      <div class="body"><div class="main" style="background:#fff">
+        <div class="wt" style="font-size:.95rem;color:var(--navy);font-weight:800;margin-bottom:.5rem">Bảng tin cộng đồng HAWEE</div>
+        <div class="card" style="margin-bottom:.55rem;padding:.8rem"><h3 style="font-size:.92rem">⭐ Gương mặt hội viên: chị Nguyễn Thị An</h3><p>Hành trình đưa thương hiệu F&amp;B ra thị trường khu vực</p></div>
+        <div class="card" style="margin-bottom:.55rem;padding:.8rem"><h3 style="font-size:.92rem">🤝 Tìm đối tác phân phối ngành mỹ phẩm</h3><p>Hội viên hạng Hội Tụ đăng nhu cầu · 6 lượt quan tâm</p></div>
+        <div class="card" style="padding:.8rem"><h3 style="font-size:.92rem">📅 Sắp diễn ra: HAWEE Mentoring Talk #12</h3><p>Đăng ký 1 chạm, đã gắn lịch của bạn</p></div>
+      </div></div>
+    </div></div>
+  </div>
+  <div class="src">Mô phỏng minh họa: trang sự kiện &amp; bảng tin giữ tương tác giữa các kỳ.</div>
+</section>
+
+<!-- 19 QR ILLUSTRATION -->
+<section class="slide">
+  <div class="kicker good">Trải nghiệm tại sự kiện</div>
+  <h2>Quét QR <span class="em">là vào ngay, không xếp hàng</span></h2>
+  <div class="illu">
+    <svg width="220" height="240" viewBox="0 0 220 240" fill="none">
+      <rect x="34" y="14" width="120" height="212" rx="20" fill="#0f2747"/>
+      <rect x="42" y="30" width="104" height="180" rx="8" fill="#eaf1f8"/>
+      <rect x="60" y="52" width="68" height="68" rx="6" fill="#fff" stroke="#1c6fb8" stroke-width="2"/>
+      <g fill="#0f2747">
+        <rect x="66" y="58" width="16" height="16"/><rect x="106" y="58" width="16" height="16"/><rect x="66" y="98" width="16" height="16"/>
+        <rect x="90" y="58" width="6" height="6"/><rect x="90" y="82" width="10" height="10"/><rect x="108" y="92" width="14" height="14"/><rect x="92" y="104" width="8" height="8"/>
+      </g>
+      <rect x="56" y="60" width="76" height="4" rx="2" fill="#1f9d6b"><animate attributeName="y" values="60;112;60" dur="2.2s" repeatCount="indefinite"/></rect>
+      <rect x="60" y="134" width="68" height="9" rx="4" fill="#1d3f63"/>
+      <rect x="60" y="150" width="48" height="7" rx="3" fill="#9fb6ce"/>
+      <circle cx="95" cy="186" r="14" fill="#1f9d6b"/><path d="M89 186l4 4 8-8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div style="max-width:34ch">
+      <ul style="margin-top:0">
+        <li>Hội viên đưa <b>QR trên điện thoại</b>, điểm danh trong 2 giây</li>
+        <li>Tự động ghi vào <b>hồ sơ 360°</b> và cộng <b>điểm hoạt động</b></li>
+        <li>Ban tổ chức thấy <b>ai đã đến</b> theo thời gian thực</li>
+        <li>Không sổ giấy, không nhầm lẫn danh sách</li>
+      </ul>
+    </div>
+  </div>
+  <div class="src">Minh họa khái niệm trải nghiệm quét QR điểm danh tại sự kiện.</div>
+</section>
+
+<!-- 20 ISSUE 4 -->
+<section class="slide">
+  <div class="kicker now">Điểm nghẽn 04</div>
+  <h2>Ban Chấp hành <span class="em">chưa có bức tranh số để nhìn toàn cảnh</span></h2>
+  <div class="row"><div class="col"><ul>
+    <li>Câu hỏi quan trọng “hội viên nhận được gì từ hội phí” đang trả lời bằng cảm nhận</li>
+    <li>Khó biết sớm ai đang xa dần để chăm sóc kịp thời</li>
+    <li>Khó thuyết phục nhà tài trợ vì thiếu số liệu</li>
+    <li>Quyết định nhiệm kỳ dựa nhiều vào trực giác</li>
+  </ul>
+  <div class="quote sm">Khi nhìn được bằng số, Ban Chấp hành <b>chủ động dẫn dắt</b> thay vì phản ứng theo sự việc.</div>
+  </div></div>
+</section>
+
+<!-- 21 SOLUTION 4: RICH DASHBOARD -->
+<section class="slide">
+  <div class="kicker good">Giải pháp 04 · Mô phỏng giao diện</div>
+  <h2>Bảng điều hành <span class="em">Sức khỏe Hội</span></h2>
+  <div class="mock">
+    <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/quan-tri/tong-quan</span></div>
+    <div class="body">
+      <div class="side"><div class="logo">HAWEE</div><a class="on">Tổng quan</a><a>Hội viên</a><a>Gia hạn</a><a>Sự kiện</a><a>Giao thương</a><a>Tài trợ</a></div>
+      <div class="main">
+        <div class="wgrid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="w"><div class="wt">Hội viên hoạt động</div><div class="wv">512</div><div class="wfoot">+18 quý này</div></div>
+          <div class="w up"><div class="wt">Tiếp tục đồng hành</div><div class="wv">81%</div><div class="wfoot">↑ 6 điểm %</div></div>
+          <div class="w"><div class="wt">Sự kiện 12 tháng</div><div class="wv">68</div><div class="wfoot">14.000+ lượt dự</div></div>
+          <div class="w warn"><div class="wt">Cần quan tâm</div><div class="wv">9</div><div class="wfoot">đã gợi ý chăm sóc</div></div>
+        </div>
+        <div class="row" style="margin-top:.6rem;gap:.6rem">
+          <div class="col">
+            <div class="w" style="height:100%"><div class="wt">Cơ cấu hội viên theo hạng</div>
+              <div class="wrow" style="margin-top:.4rem">
+                <div class="donut" style="background:conic-gradient(var(--accent) 0 22%,var(--accent2) 22% 50%,var(--gold) 50% 78%,var(--violet) 78% 100%)"><span class="dc" style="font-size:.78rem">512</span></div>
+                <div class="legend"><span><i style="background:var(--accent)"></i>Cơ Bản 22%</span><span><i style="background:var(--accent2)"></i>Hội Tụ 28%</span><span><i style="background:var(--gold)"></i>Tỏa Sáng 28%</span><span><i style="background:var(--violet)"></i>Lan Tỏa 22%</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="w" style="height:100%"><div class="wt">Mức gắn kết theo hạng</div>
+              <div class="bars" style="height:78px;margin-top:.5rem"><div class="bb" style="height:55%"></div><div class="bb" style="height:70%"></div><div class="bb gd" style="height:86%"></div><div class="bb gd" style="height:95%"></div></div>
+              <div class="bars-x"><span>Cơ Bản</span><span>Hội Tụ</span><span>Tỏa Sáng</span><span>Lan Tỏa</span></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="w" style="height:100%"><div class="wt">Tăng trưởng hội viên</div>
+              <svg class="spark" viewBox="0 0 120 34" preserveAspectRatio="none"><polyline points="0,28 20,24 40,25 60,18 80,14 100,9 120,5" fill="none" stroke="#1f9d6b" stroke-width="2.5"/></svg>
+              <div class="wfoot">12 tháng · xu hướng tăng</div>
+              <div class="prog" style="margin-top:.5rem"><i style="width:81%"></i></div>
+              <div class="wfoot">Mục tiêu giữ chân 90%</div>
+            </div>
+          </div>
+        </div>
+        <div class="w warn" style="margin-top:.55rem"><div class="wt">Hội viên cần quan tâm sớm</div>
+          <table class="t" style="margin-top:.35rem"><tr><th>Hội viên</th><th>Tín hiệu</th><th>Gợi ý</th></tr>
+            <tr><td>Phạm Anh T.</td><td>Chưa dự sự kiện 6 tháng</td><td><span class="pill b">Mời cà phê kết nối</span></td></tr>
+            <tr><td>Vũ Hồng L.</td><td>Chưa mở 3 thông báo</td><td><span class="pill b">Gọi hỏi thăm</span></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa: 9+ widget gồm biểu đồ tròn, cột, đường xu hướng, tiến độ.</div>
+</section>
+
+<!-- 22 ISSUE 5 -->
+<section class="slide">
+  <div class="kicker now">Điểm nghẽn 05 · <span style="color:var(--gold)">trọng tâm nhiệm kỳ III</span></div>
+  <h2>Giao thương giữa hội viên <span class="em">còn dựa nhiều vào quan hệ cá nhân</span></h2>
+  <div class="ba">
+    <div class="pane now"><h4>Hiện tại</h4><ul>
+      <li>Kết nối chủ yếu qua gặp gỡ trực tiếp tại sự kiện</li>
+      <li>Chưa có nơi để đăng nhu cầu hay chào năng lực</li>
+      <li>Hội chưa ghi nhận được giá trị giao thương tạo ra</li>
+      <li>Định hướng giao thương thiếu công cụ thực thi</li>
+    </ul></div>
+    <div class="arrow">›</div>
+    <div class="pane fut"><h4>Khi có nền tảng</h4><ul>
+      <li>Sàn kết nối giao thương, tìm theo ngành &amp; nhu cầu</li>
+      <li>Đăng nhu cầu, gửi yêu cầu kết nối chỉ 1 chạm</li>
+      <li>Gợi ý đối tác phù hợp tự động</li>
+      <li>Ghi nhận kết nối &amp; câu chuyện thành công</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 23 SOLUTION 5: VIVID B2B MARKETPLACE -->
+<section class="slide">
+  <div class="kicker good">Giải pháp 05 · Mô phỏng giao diện</div>
+  <h2>Sàn kết nối <span class="em">Giao thương nội bộ</span></h2>
+  <div class="mock">
+    <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/giao-thuong</span></div>
+    <div class="body">
+      <div class="side"><div class="logo">HAWEE</div><a>Tổng quan</a><a>Hội viên</a><a class="on">Giao thương</a><a>Sự kiện</a><a>Mentoring</a></div>
+      <div class="main">
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem">
+          <span class="pill b">🔍 Tất cả ngành</span><span class="pill" style="background:#eef2f7;color:var(--muted)">F&amp;B</span><span class="pill" style="background:#eef2f7;color:var(--muted)">Bán lẻ</span><span class="pill" style="background:#eef2f7;color:var(--muted)">Logistics</span><span class="pill" style="background:#eef2f7;color:var(--muted)">Mỹ phẩm</span><span class="pill" style="background:#eef2f7;color:var(--muted)">Bất động sản</span>
+        </div>
+        <div class="wgrid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="w"><div class="wt">DN hội viên</div><div class="wv">214</div></div>
+          <div class="w"><div class="wt">Nhu cầu đang mở</div><div class="wv">37</div></div>
+          <div class="w up"><div class="wt">Kết nối Q2</div><div class="wv">28</div></div>
+          <div class="w"><div class="wt">Đang trao đổi</div><div class="wv">15</div></div>
+        </div>
+        <div class="row" style="gap:.6rem;margin-top:.55rem">
+          <div class="col">
+            <div class="wt" style="font-size:.7rem;color:var(--muted);text-transform:uppercase;margin-bottom:.35rem">Nhu cầu nổi bật</div>
+            <div class="card" style="padding:.7rem;margin-bottom:.45rem;display:flex;gap:.6rem;align-items:flex-start">
+              <div class="rec" style="padding:0;border:0;background:none"><div class="av" style="width:36px;height:36px;font-size:.85rem">TB</div></div>
+              <div style="flex:1"><h3 style="font-size:.9rem">Tìm nhà cung cấp bao bì xanh</h3><p style="font-size:.78rem;color:var(--muted)">Trần Bích H. · Hạng Tỏa Sáng · 50k sp/tháng</p></div>
+              <span class="pill b">Kết nối ›</span>
+            </div>
+            <div class="card" style="padding:.7rem;display:flex;gap:.6rem;align-items:flex-start">
+              <div class="rec" style="padding:0;border:0;background:none"><div class="av" style="width:36px;height:36px;font-size:.85rem;background:linear-gradient(135deg,var(--gold),#d6a847)">LP</div></div>
+              <div style="flex:1"><h3 style="font-size:.9rem">Giải pháp kho vận chặng cuối</h3><p style="font-size:.78rem;color:var(--muted)">Lê M. Phương · Hạng Hội Tụ · ưu đãi nội bộ</p></div>
+              <span class="pill b">Xem hồ sơ ›</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="w" style="background:#eef6fb;border-color:#cfe2f0;height:100%">
+              <div class="wt" style="color:var(--teal)">✦ Gợi ý kết nối thông minh</div>
+              <div class="feed" style="margin-top:.45rem">
+                <div class="fitem"><div class="dot"></div><div><div class="fb" style="font-weight:600">An Phát (F&amp;B) ✕ Bao bì Minh Long</div><div class="ft">Khớp nhu cầu 92%</div></div></div>
+                <div class="fitem"><div class="dot gr"></div><div><div class="fb" style="font-weight:600">Mỹ phẩm Hạ ✕ Chuỗi bán lẻ Vy</div><div class="ft">Khớp nhu cầu 87%</div></div></div>
+                <div class="fitem"><div class="dot gd"></div><div><div class="fb" style="font-weight:600">Logistics P. ✕ An Phát</div><div class="ft">Khớp nhu cầu 81%</div></div></div>
+              </div>
+              <div class="wt" style="margin-top:.6rem">Câu chuyện thành công</div>
+              <p style="font-size:.76rem;color:var(--muted);margin-top:.25rem">“Qua sàn HAWEE, chúng tôi chốt hợp đồng phân phối trong 3 tuần.”</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa: bộ lọc ngành, thẻ doanh nghiệp, gợi ý kết nối thông minh, câu chuyện thành công.</div>
+</section>
+
+<!-- 24 IMPACT 5 -->
+<section class="slide">
+  <div class="kicker good">Kết quả 05</div>
+  <h2>Từ “hội networking” thành <span class="em">nơi tạo ra cơ hội kinh doanh</span></h2>
+  <div class="kpis">
+    <div class="kpi"><div class="v acc">Mọi lúc</div><div class="l">kết nối không chờ tới kỳ sự kiện</div></div>
+    <div class="kpi"><div class="v gr">Đo được</div><div class="l">số kết nối &amp; giá trị giao thương nội bộ</div></div>
+    <div class="kpi"><div class="v gd">Lý do ở lại</div><div class="l">hội viên thấy lợi ích kinh doanh rõ ràng</div></div>
+  </div>
+  <div class="quote">Khi hội viên tìm được đối tác và đơn hàng từ HAWEE, câu hỏi “hội phí để làm gì” <b>tự có câu trả lời</b>.</div>
+</section>
+
+<!-- 25 ISSUE 6 + SOL -->
+<section class="slide">
+  <div class="kicker">Điểm nghẽn 06 › Giải pháp · Mô phỏng</div>
+  <h2>Số hóa “viên ngọc” <span class="em">HAWEE Mentoring</span></h2>
+  <div class="row">
+    <div class="col"><ul>
+      <li>Hiện tại: ghép cặp, theo dõi 12 tháng, nhắc lịch còn làm thủ công qua Facebook</li>
+      <li>Khó mở rộng theo chiều sâu ngành nghề như định hướng nhiệm kỳ III</li>
+      <li>Giải pháp: ghép cặp theo ngành, theo dõi hành trình, nhắc lịch tự động, thu phản hồi</li>
+    </ul>
+    <div class="quote sm">Mở rộng chương trình điểm <b>mà không tăng tải vận hành</b> cho Ban Mentoring.</div>
+    </div>
+    <div class="col"><div class="mock">
+      <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/mentoring</span></div>
+      <div class="body"><div class="main">
+        <div class="wt" style="font-size:.95rem;color:var(--navy);font-weight:800">HAWEE Mentoring · Khóa 2026</div>
+        <div class="wgrid" style="grid-template-columns:repeat(3,1fr);margin-top:.5rem">
+          <div class="w"><div class="wt">Cặp đang hoạt động</div><div class="wv">48</div></div>
+          <div class="w up"><div class="wt">Tiến độ TB</div><div class="wv">7/12</div></div>
+          <div class="w"><div class="wt">Buổi đúng lịch</div><div class="wv">92%</div></div>
+        </div>
+        <table class="t" style="margin-top:.5rem"><tr><th>Mentor</th><th>Mentee</th><th>Ngành</th><th>Tiến độ</th></tr>
+          <tr><td>Nguyễn T. An</td><td>Lê M. Chi</td><td>F&amp;B</td><td><span class="pill g">8/12</span></td></tr>
+          <tr><td>Trần B. Hà</td><td>Vũ K. Linh</td><td>Bán lẻ</td><td><span class="pill a">3/12</span></td></tr>
+        </table>
+        <p style="font-size:.76rem;color:var(--muted);margin-top:.5rem">Gợi ý ghép cặp theo ngành &amp; mục tiêu, tự động nhắc lịch &amp; nhật ký buổi gặp.</p>
+      </div></div>
+    </div></div>
+  </div>
+  <div class="src">Mô phỏng minh họa module Mentoring.</div>
+</section>
+
+<!-- 26 ISSUE 7 + SOL -->
+<section class="slide">
+  <div class="kicker">Điểm nghẽn 07 › Giải pháp · Mô phỏng</div>
+  <h2>Hồ sơ doanh nhân &amp; <span class="em">thẻ hội viên số</span></h2>
+  <div class="row">
+    <div class="col"><ul>
+      <li>Hiện tại: hội viên chưa có “danh thiếp số” để thể hiện năng lực &amp; tìm thấy nhau</li>
+      <li>Quyền lợi 4 hạng chưa hiển thị rõ ràng</li>
+      <li>Giải pháp: hồ sơ doanh nhân (tùy quyền riêng tư) + thẻ số QR theo hạng + ưu đãi đối tác</li>
+    </ul>
+    <div class="quote sm">Thẻ số là nhận diện tại sự kiện, cổng vào quyền lợi, và danh thiếp giao thương.</div>
+    </div>
+    <div class="col" style="display:flex;justify-content:center">
+      <div class="phone" style="border-radius:26px">
+        <div class="ztop" style="background:var(--navy)"><span class="za" style="color:var(--navy)">H</span> Thẻ hội viên HAWEE</div>
+        <div class="zbody" style="background:#0f2747;justify-content:center;align-items:center;gap:.9rem">
+          <div style="background:linear-gradient(135deg,#1d3f63,#2a578a);border:1px solid rgba(255,255,255,.2);border-radius:15px;padding:1.2rem;width:90%;color:#fff">
+            <div style="font-size:.7rem;letter-spacing:.18em;color:#9ec7e8">HAWEE · HẠNG TỎA SÁNG</div>
+            <div style="font-size:1.1rem;font-weight:800;margin:.45rem 0">Nguyễn Thị An</div>
+            <div style="font-size:.76rem;color:#cfdded">CEO · An Phát F&amp;B · từ 2019</div>
+            <div style="margin-top:.8rem;background:#fff;width:58px;height:58px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#0f2747;font-weight:800;font-size:.66rem">QR</div>
+          </div>
+          <div style="font-size:.72rem;color:#9ec7e8;text-align:center">Quét để điểm danh &amp; mở quyền lợi đối tác</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa thẻ hội viên số theo 4 hạng.</div>
+</section>
+
+<!-- 27 ISSUE 8: ONBOARDING 90 DAYS -->
+<section class="slide">
+  <div class="kicker">Điểm nghẽn 08 (mở rộng) › Giải pháp</div>
+  <h2>90 ngày đầu <span class="em">quyết định hội viên có gắn bó lâu dài</span></h2>
+  <div class="row">
+    <div class="col"><ul>
+      <li>Hội viên mới nếu không gắn kết sớm thì rất dễ rời tổ chức về sau</li>
+      <li>Hiện tại việc chào đón còn tùy hứng, chưa thành quy trình</li>
+      <li>Giải pháp: hành trình chào đón tự động trong 90 ngày, gợi ý sự kiện &amp; kết nối phù hợp</li>
+    </ul>
+    <div class="quote sm">Một khởi đầu ấm áp, có lộ trình, biến hội viên mới thành <b>hội viên gắn bó</b>.</div>
+    </div>
+    <div class="col">
+      <div class="flow" style="flex-direction:column;gap:.45rem">
+        <div class="st" style="text-align:left"><div class="si">Ngày 1</div><h4>Lời chào &amp; cẩm nang quyền lợi theo hạng (Zalo)</h4></div>
+        <div class="ar" style="justify-content:center">↓</div>
+        <div class="st" style="text-align:left;background:#eaf2ff;border-color:#c5dbff"><div class="si">Tuần 2 đến 4</div><h4>Mời sự kiện đầu tiên &amp; gợi ý 3 hội viên nên kết nối</h4></div>
+        <div class="ar" style="justify-content:center">↓</div>
+        <div class="st" style="text-align:left;background:#eef8f3;border-color:#cfe9dd"><div class="si">Ngày 90</div><h4>Điểm lại hành trình &amp; mời tham gia chuyên sâu</h4></div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Cơ sở: nghiên cứu cho thấy hội viên không gắn kết trong 90 ngày đầu rời tổ chức nhiều hơn đáng kể.</div>
+</section>
+
+<!-- 28 ISSUE 9: GAMIFICATION / POINTS -->
+<section class="slide">
+  <div class="kicker good">Điểm nghẽn 09 (mở rộng) › Giải pháp · Mô phỏng</div>
+  <h2>Tích điểm <span class="em">và vinh danh hội viên năng động</span></h2>
+  <div class="row">
+    <div class="col">
+      <ul style="margin-top:.4rem">
+        <li>Dự sự kiện, làm mentor, giới thiệu hội viên mới, kết nối giao thương đều <b>được cộng điểm</b></li>
+        <li>Hội nhìn rõ <b>ai là hạt nhân năng động</b> để ghi nhận &amp; mời dẫn dắt</li>
+        <li>Hạng hoạt động: Kim Cương, Vàng, Bạc, kèm quyền lợi &amp; vinh danh tại đại hội</li>
+      </ul>
+      <div class="wgrid" style="grid-template-columns:repeat(3,1fr);margin-top:.5rem">
+        <div class="w cell"><div class="wt">Hạng hoạt động</div><div style="font-weight:800;color:var(--gold)">💎 Kim Cương</div></div>
+        <div class="w"><div class="wt">Điểm tháng này</div><div class="wv">2.480</div></div>
+        <div class="w up"><div class="wt">Thứ hạng</div><div class="wv">#3</div><div class="wfoot">trên 512</div></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mock">
+        <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/vinh-danh</span></div>
+        <div class="body"><div class="main">
+          <div class="wt" style="font-size:.95rem;color:var(--navy);font-weight:800;margin-bottom:.5rem">Bảng vinh danh hội viên năng động · Q2</div>
+          <div class="lead">
+            <div class="lr"><div class="rk g1">1</div><div class="lav">LH</div><div class="ln">Lê Thanh Hà<small>Mentor · 9 sự kiện · 5 kết nối</small></div><div class="lp">3.120</div></div>
+            <div class="lr"><div class="rk g2">2</div><div class="lav" style="background:linear-gradient(135deg,var(--accent),var(--accent2))">TM</div><div class="ln">Trần Mỹ<small>8 sự kiện · 4 giới thiệu</small></div><div class="lp">2.760</div></div>
+            <div class="lr"><div class="rk g3">3</div><div class="lav" style="background:linear-gradient(135deg,var(--gold),#d6a847)">NA</div><div class="ln">Nguyễn Thị An<small>Mentor · 7 sự kiện</small></div><div class="lp">2.480</div></div>
+            <div class="lr"><div class="rk">4</div><div class="lav" style="background:linear-gradient(135deg,var(--teal),#3fb3b3)">VK</div><div class="ln">Vũ Kim<small>6 sự kiện · 3 kết nối</small></div><div class="lp">2.050</div></div>
+            <div class="lr"><div class="rk">5</div><div class="lav">PH</div><div class="ln">Phạm Hoa<small>5 sự kiện · 2 giới thiệu</small></div><div class="lp">1.890</div></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa: hệ thống tích điểm &amp; bảng vinh danh hội viên năng động.</div>
+</section>
+
+<!-- 29 ISSUE 10: CHAPTERS + CONTENT -->
+<section class="slide">
+  <div class="kicker">Điểm nghẽn 10 (mở rộng) › Giải pháp</div>
+  <h2>Gắn kết <span class="em">cả chi hội &amp; ban chuyên môn</span></h2>
+  <div class="row">
+    <div class="col"><ul>
+      <li>HAWEE có các câu lạc bộ &amp; ban chuyên môn, hiện vận hành khá tách biệt</li>
+      <li>Truyền thông &amp; nội dung phân tán nhiều kênh, khó đo hiệu quả</li>
+      <li>Giải pháp: trang riêng cho từng chi hội/ban + hub nội dung tập trung của Hội</li>
+    </ul>
+    <div class="quote sm">Mỗi chi hội có không gian riêng, nhưng tất cả <b>cùng một mái nhà dữ liệu</b>.</div>
+    </div>
+    <div class="col">
+      <div class="grid g2" style="margin-top:0">
+        <div class="card"><div class="n">Chi hội &amp; ban</div><h3>Trang riêng</h3><p>CLB Phong cách, ban Mentoring, ban Giao thương: lịch, thành viên, hoạt động riêng.</p></div>
+        <div class="card"><div class="n">Nội dung</div><h3>Hub tập trung</h3><p>Bản tin, gương mặt hội viên, thư viện tài liệu, đo lượt xem &amp; quan tâm.</p></div>
+        <div class="card"><div class="n">Khảo sát</div><h3>Lấy ý kiến</h3><p>Khảo sát, biểu quyết, đo mức hài lòng theo từng nhóm.</p></div>
+        <div class="card"><div class="n">Tổng hợp</div><h3>Một bức tranh</h3><p>Mọi hoạt động chi hội đều đổ về bảng điều hành chung của Hội.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER III -->
+<section class="slide div">
+  <div class="kicker">Phần III</div>
+  <h1>Tự động hóa, AI &amp; Website</h1>
+  <p class="sub">Những trải nghiệm hội viên chạm vào mỗi ngày.</p>
+</section>
+
+<!-- 31 AUTOMATION JOURNEY -->
+<section class="slide">
+  <div class="kicker good">Trụ cột tự động hóa</div>
+  <h2>Một hành trình chăm sóc <span class="em">tự động qua Zalo &amp; email</span></h2>
+  <div class="flow">
+    <div class="st"><div class="si">Gia nhập</div><h4>Chào đón</h4><p>Onboarding hội viên mới, cẩm nang quyền lợi theo hạng</p></div>
+    <div class="ar">›</div>
+    <div class="st"><div class="si">Trong kỳ</div><h4>Gắn kết</h4><p>Mời sự kiện đúng mối quan tâm, gợi ý kết nối</p></div>
+    <div class="ar">›</div>
+    <div class="st"><div class="si">Trước hạn</div><h4>Nhắc gia hạn</h4><p>Tự động qua Zalo &amp; email, gia hạn 1 chạm</p></div>
+    <div class="ar">›</div>
+    <div class="st"><div class="si">Cần quan tâm</div><h4>Chăm sóc</h4><p>Gợi ý Ban Chấp hành quan tâm kịp thời</p></div>
+  </div>
+  <div class="quote sm">Zalo là kênh người Việt mở tin nhiều &amp; tin tưởng nhất. Đây là <b>lợi thế riêng</b> khi xây nền tảng cho HAWEE.</div>
+  <div class="src">Nguồn: Zalo có hơn 75 triệu người dùng/tháng tại Việt Nam (Adsota 2025).</div>
+</section>
+
+<!-- AI VERIFY NEW MEMBER -->
+<section class="slide">
+  <div class="kicker good">Trụ cột trợ lý ảo · Khi có hội viên mới</div>
+  <h2>Xác minh hội viên mới <span class="em">bằng AI, duyệt nhanh trong vài phút</span></h2>
+  <div class="row">
+    <div class="col"><div class="mock">
+      <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/quan-tri/ket-nap/ho-so-23</span></div>
+      <div class="body"><div class="main">
+        <div class="rec">
+          <div class="av" style="background:linear-gradient(135deg,var(--teal),#3fb3b3)">AI</div>
+          <div class="meta"><h5>Báo cáo xác minh tự động</h5><p>Công ty TNHH Mỹ phẩm Hạ Vy · Hồ sơ đăng ký #23</p>
+            <div class="badges"><span class="pill g">Độ tin cậy 92%</span><span class="pill b">5 nguồn đối chiếu</span><span class="pill v">Sẵn sàng duyệt</span></div>
+          </div>
+        </div>
+        <div class="wgrid">
+          <div class="w"><div class="wt">Mã số thuế</div><div class="wv" style="font-size:1rem">0312•••456</div><div class="wfoot">Đang hoạt động</div></div>
+          <div class="w"><div class="wt">Ngành</div><div class="wv" style="font-size:1rem">Mỹ phẩm</div><div class="wfoot">Sản xuất &amp; phân phối</div></div>
+          <div class="w"><div class="wt">Thành lập</div><div class="wv" style="font-size:1rem">2017</div><div class="wfoot">9 năm hoạt động</div></div>
+          <div class="w"><div class="wt">Quy mô ước tính</div><div class="wv" style="font-size:1rem">50 đến 100</div><div class="wfoot">nhân sự</div></div>
+          <div class="w up"><div class="wt">Khớp tiêu chí hội viên</div><div class="wv" style="font-size:1rem">Đạt</div><div class="wfoot">nữ lãnh đạo, có pháp nhân</div></div>
+          <div class="w"><div class="wt">Đề xuất hạng</div><div class="wv" style="font-size:1rem">Hội Tụ</div><div class="wfoot">theo quy mô &amp; ngành</div></div>
+        </div>
+        <div class="w" style="margin-top:.55rem"><div class="wt">AI tổng hợp</div>
+          <p style="font-size:.8rem;color:var(--ink);line-height:1.5;margin-top:.25rem">Doanh nghiệp có website &amp; fanpage hoạt động đều, từng được nhắc trên báo ngành về dòng sản phẩm thiên nhiên. Không phát hiện dấu hiệu rủi ro pháp lý công khai. Phù hợp định hướng giao thương ngành tiêu dùng của HAWEE.</p>
+          <div style="display:flex;gap:.4rem;margin-top:.6rem"><span class="pill g">✓ Phê duyệt</span><span class="pill a">Yêu cầu bổ sung</span><span class="pill" style="background:#eef2f7;color:var(--muted)">Xem chi tiết nguồn</span></div>
+        </div>
+      </div></div>
+    </div></div>
+    <div class="col"><ul>
+      <li>Thay vì Văn phòng Hội tự tìm kiếm &amp; tổng hợp thủ công, <b>AI lập sẵn báo cáo doanh nghiệp</b></li>
+      <li>Đối chiếu nhiều nguồn công khai: pháp nhân, ngành, quy mô, hiện diện truyền thông</li>
+      <li>Ban Chấp hành chỉ <b>xem &amp; bấm duyệt</b>, rút ngắn thời gian kết nạp</li>
+      <li>Hồ sơ hội viên được chuẩn hóa &amp; làm giàu ngay từ ngày đầu</li>
+      <li>Con người vẫn là người ra quyết định cuối cùng</li>
+    </ul>
+    <div class="quote sm">Kết nạp nhanh, ấn tượng chuyên nghiệp ngay từ lần chạm đầu tiên với hội viên mới.</div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa. AI tổng hợp từ nguồn công khai; quyết định kết nạp thuộc về Ban Chấp hành.</div>
+</section>
+
+<!-- COMMUNITY + NEWSLETTER -->
+<section class="slide">
+  <div class="kicker good">Cộng đồng &amp; bản tin</div>
+  <h2>Trang cộng đồng sôi nổi <span class="em">và bản tin định kỳ tự động</span></h2>
+  <div class="row">
+    <div class="col"><div class="mock">
+      <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/cong-dong</span></div>
+      <div class="body"><div class="main" style="background:#f3f6fb">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem">
+          <span class="pill b">Bảng tin</span><span class="pill" style="background:#fff;color:var(--muted)">Cơ hội giao thương</span><span class="pill" style="background:#fff;color:var(--muted)">Hỏi đáp</span><span class="pill" style="background:#fff;color:var(--muted)">Chi hội của tôi</span>
+        </div>
+        <div class="card" style="background:#fff;padding:.8rem;margin-bottom:.5rem">
+          <div style="display:flex;gap:.55rem;align-items:center"><div class="av" style="width:34px;height:34px;font-size:.78rem;background:linear-gradient(135deg,var(--violet),#8c79d6)">LH</div><div><div style="font-weight:700;font-size:.86rem;color:var(--navy)">Lê Thanh Hà</div><div style="font-size:.7rem;color:var(--muted)">Hạng Lan Tỏa · 2 giờ trước</div></div></div>
+          <p style="font-size:.82rem;color:var(--ink);margin:.5rem 0">Vừa kết nối thành công với 2 hội viên ngành logistics qua sàn giao thương. Cảm ơn HAWEE 💛</p>
+          <div style="font-size:.74rem;color:var(--muted)">❤ 38 · 💬 12 · ↗ 5 chia sẻ</div>
+        </div>
+        <div class="card" style="background:#fff;padding:.8rem">
+          <div style="display:flex;gap:.55rem;align-items:center"><div class="av" style="width:34px;height:34px;font-size:.78rem;background:linear-gradient(135deg,var(--gold),#d6a847)">TM</div><div><div style="font-weight:700;font-size:.86rem;color:var(--navy)">Trần Mỹ</div><div style="font-size:.7rem;color:var(--muted)">Ban Mentoring · hôm qua</div></div></div>
+          <p style="font-size:.82rem;color:var(--ink);margin:.5rem 0">Mở 5 suất mentor ngành bán lẻ cho khóa 2026, đăng ký trong tuần này nhé các chị.</p>
+          <div style="font-size:.74rem;color:var(--muted)">❤ 54 · 💬 20</div>
+        </div>
+      </div></div>
+    </div></div>
+    <div class="col"><div class="mock">
+      <div class="bar"><i></i><i></i><i></i><span class="url">Hộp thư · Bản tin HAWEE</span></div>
+      <div class="body"><div class="main" style="background:#fff">
+        <div style="background:linear-gradient(135deg,#0f2747,#26527f);color:#fff;border-radius:8px;padding:.9rem 1rem;margin-bottom:.6rem">
+          <div style="font-size:.7rem;letter-spacing:.14em;color:#9ec7e8">BẢN TIN HAWEE · THÁNG 7/2026</div>
+          <div style="font-weight:800;font-size:1rem;margin-top:.3rem">Một tháng sôi nổi của cộng đồng</div>
+        </div>
+        <div class="feed">
+          <div class="fitem"><div class="dot"></div><div><div class="fb" style="font-weight:700">Sự kiện sắp tới</div><div class="ft">HAWEE Connect Q3 · 18/07, đăng ký &amp; nhận vé QR</div></div></div>
+          <div class="fitem"><div class="dot gd"></div><div><div class="fb" style="font-weight:700">Gương mặt hội viên</div><div class="ft">Câu chuyện chị Nguyễn Thị An</div></div></div>
+          <div class="fitem"><div class="dot gr"></div><div><div class="fb" style="font-weight:700">Cơ hội giao thương</div><div class="ft">12 nhu cầu mới đang chờ kết nối</div></div></div>
+          <div class="fitem"><div class="dot v"></div><div><div class="fb" style="font-weight:700">Chào mừng 8 hội viên mới</div><div class="ft">Cùng kết nối &amp; đồng hành</div></div></div>
+        </div>
+        <div style="text-align:center;margin-top:.7rem"><span class="pill" style="background:var(--gold);color:#fff">Xem bản tin đầy đủ ›</span></div>
+      </div></div>
+    </div></div>
+  </div>
+  <ul style="margin-top:.7rem">
+    <li><b>Có</b> trang cộng đồng riêng: bảng tin, nhóm chi hội, gương mặt hội viên, hỏi đáp, tương tác</li>
+    <li><b>Có</b> bản tin định kỳ <b>tự động tổng hợp</b> hoạt động cộng đồng, gửi hằng tháng qua email &amp; Zalo</li>
+  </ul>
+  <div class="src">Mô phỏng minh họa trang cộng đồng &amp; bản tin tự động.</div>
+</section>
+
+<!-- 32 AI -->
+<section class="slide">
+  <div class="kicker good">Trụ cột trợ lý ảo</div>
+  <h2>Trợ lý ảo <span class="em">đồng hành cùng hội viên 24/7</span></h2>
+  <div class="row">
+    <div class="col"><div class="chatui">
+      <div class="msg u">HAWEE Connect Q3 khi nào? Mình hạng Tỏa Sáng có vé miễn phí không?</div>
+      <div class="msg a"><b>Trợ lý HAWEE:</b> Dạ, sự kiện diễn ra <b>18/07/2026, 18:00 tại KS Rex</b>. Hạng <b>Tỏa Sáng</b> của chị được <b>vé miễn phí + bàn ưu tiên</b>. Em giữ chỗ cho chị nhé?</div>
+      <div class="msg u">Giữ giúp mình. Cho mình xem hạn gia hạn luôn.</div>
+      <div class="msg a"><b>Trợ lý HAWEE:</b> Đã giữ chỗ. Quyền lợi của chị làm mới vào <b>25/06/2026</b>, em gửi liên kết gia hạn qua Zalo nha. Cần kết nối đối tác ngành nào em chuyển tới Ban Giao thương ạ.</div>
+    </div></div>
+    <div class="col"><ul>
+      <li>Trả lời tức thì: sự kiện, quyền lợi theo hạng, hạn gia hạn</li>
+      <li>Chuyển đúng người: Văn phòng Hội, Ban Giao thương, Ban Mentoring</li>
+      <li>Giảm tải hỏi đáp lặp lại cho Văn phòng Hội</li>
+      <li>Định vị đúng: trợ lý &amp; điều hướng, không thay vai trò con người</li>
+    </ul></div>
+  </div>
+  <div class="src">Mô phỏng minh họa hội thoại. Triển khai ở Giai đoạn 3.</div>
+</section>
+
+<!-- 33 WEBSITE DEMO (vibrant community) -->
+<section class="slide">
+  <div class="kicker good">Bộ mặt đối ngoại</div>
+  <h2>Website chính thức <span class="em">sôi nổi như một cộng đồng sống</span></h2>
+  <div class="mock">
+    <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn</span></div>
+    <div class="body"><div class="main" style="padding:0;background:#fff">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:.7rem 1.3rem;border-bottom:1px solid var(--line)">
+        <b style="letter-spacing:.16em;font-size:.95rem;color:var(--navy)">HAWEE</b>
+        <span style="font-size:.76rem;color:var(--muted)">Về Hội · Hội viên · Sự kiện · Giao thương · Mentoring · Cộng đồng · Tin tức</span>
+        <span class="pill" style="background:var(--gold);color:#fff">Tham gia HAWEE</span>
+      </div>
+      <div style="position:relative;background:linear-gradient(135deg,#0f2747,#26527f 70%,#2f6aa0);color:#fff;padding:1.5rem 1.6rem;overflow:hidden">
+        <div style="position:absolute;right:-30px;top:-30px;width:170px;height:170px;border-radius:50%;background:rgba(183,137,47,.25)"></div>
+        <div style="position:absolute;right:90px;bottom:-50px;width:120px;height:120px;border-radius:50%;background:rgba(63,155,214,.28)"></div>
+        <div style="position:relative;max-width:62%">
+          <span class="pill" style="background:rgba(255,255,255,.16);color:#fff">● 18 hội viên đang trực tuyến</span>
+          <div style="font-size:1.7rem;font-weight:800;line-height:1.18;margin-top:.6rem">Hội tụ. Kết nối.<br>Vươn tầm.</div>
+          <div style="font-size:.86rem;color:#d6e3ef;margin-top:.5rem">Cộng đồng nữ doanh nhân TP.HCM, nơi mỗi kết nối mở ra một cơ hội.</div>
+          <div style="display:flex;gap:.5rem;margin-top:.9rem">
+            <span class="pill" style="background:var(--gold);color:#fff">Trở thành hội viên ›</span>
+            <span class="pill" style="background:rgba(255,255,255,.15);color:#fff">Khám phá cộng đồng</span>
+          </div>
+        </div>
+        <div style="position:absolute;right:1.6rem;bottom:1.1rem;display:flex;align-items:center">
+          <div class="av" style="width:38px;height:38px;border:2px solid #fff;font-size:.8rem;background:linear-gradient(135deg,var(--violet),#8c79d6)">LH</div>
+          <div class="av" style="width:38px;height:38px;border:2px solid #fff;font-size:.8rem;margin-left:-12px;background:linear-gradient(135deg,var(--gold),#d6a847)">TM</div>
+          <div class="av" style="width:38px;height:38px;border:2px solid #fff;font-size:.8rem;margin-left:-12px;background:linear-gradient(135deg,var(--teal),#3fb3b3)">NA</div>
+          <div class="av" style="width:38px;height:38px;border:2px solid #fff;font-size:.72rem;margin-left:-12px;background:rgba(255,255,255,.22)">+500</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;padding:.9rem 1.3rem;background:#f6f9fc">
+        <div class="w cell" style="border:0;background:none"><div class="wv" style="font-size:1.25rem;color:var(--gold)">500+</div><div class="wt">Hội viên</div></div>
+        <div class="w cell" style="border:0;background:none"><div class="wv" style="font-size:1.25rem;color:var(--accent)">200+</div><div class="wt">Chương trình</div></div>
+        <div class="w cell" style="border:0;background:none"><div class="wv" style="font-size:1.25rem;color:var(--teal)">14.000+</div><div class="wt">Lượt tham dự</div></div>
+        <div class="w cell" style="border:0;background:none"><div class="wv" style="font-size:1.25rem;color:var(--violet)">105 tỷ</div><div class="wt">Vì cộng đồng</div></div>
+      </div>
+      <div style="padding:1rem 1.3rem">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.55rem">
+          <b style="color:var(--navy);font-size:.95rem">Đang sôi nổi trong cộng đồng</b><span style="font-size:.74rem;color:var(--accent)">Xem tất cả ›</span>
+        </div>
+        <div class="row" style="gap:.6rem;margin-top:0">
+          <div class="col"><div class="card" style="padding:0;overflow:hidden"><div style="height:46px;background:linear-gradient(135deg,var(--accent),var(--accent2))"></div><div style="padding:.7rem"><div class="n">Sự kiện sắp tới</div><h3 style="font-size:.9rem">HAWEE Connect Q3</h3><p>18/07 · 142 đã đăng ký</p></div></div></div>
+          <div class="col"><div class="card" style="padding:0;overflow:hidden"><div style="height:46px;background:linear-gradient(135deg,var(--gold),#d6a847)"></div><div style="padding:.7rem"><div class="n">Gương mặt hội viên</div><h3 style="font-size:.9rem">Chị Nguyễn Thị An</h3><p>Hành trình vươn ra khu vực</p></div></div></div>
+          <div class="col"><div class="card" style="padding:0;overflow:hidden"><div style="height:46px;background:linear-gradient(135deg,var(--teal),#3fb3b3)"></div><div style="padding:.7rem"><div class="n">Cơ hội giao thương</div><h3 style="font-size:.9rem">37 nhu cầu đang mở</h3><p>Kết nối ngay hôm nay</p></div></div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.7rem;background:#f3f6fb;border-radius:10px;padding:.7rem .9rem;margin-top:.7rem">
+          <b style="font-size:.82rem;color:var(--navy);white-space:nowrap">Nhận bản tin HAWEE</b>
+          <div style="flex:1;background:#fff;border:1px solid var(--line);border-radius:99px;font-size:.76rem;color:var(--muted);padding:.4rem .8rem">email@cuaban.com</div>
+          <span class="pill" style="background:var(--navy);color:#fff">Đăng ký</span>
+        </div>
+      </div>
+    </div></div>
+  </div>
+  <div class="src">Mô phỏng minh họa trang chủ: hero sống động, hội viên trực tuyến, hoạt động cộng đồng, đăng ký bản tin.</div>
+</section>
+
+<!-- 33b ANALYTICS & REPORTING DASHBOARD -->
+<section class="slide">
+  <div class="kicker good">Sau khi có website · Báo cáo &amp; phân tích</div>
+  <h2>Bảng điều hành <span class="em">Báo cáo &amp; Phân tích chuyên sâu</span></h2>
+  <div class="mock">
+    <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/quan-tri/bao-cao</span></div>
+    <div class="body">
+      <div class="side"><div class="logo">HAWEE</div><a>Tổng quan</a><a>Hội viên</a><a>Sự kiện</a><a>Giao thương</a><a class="on">Báo cáo</a><a>Tài trợ</a></div>
+      <div class="main">
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.6rem">
+          <span class="pill b">📅 12 tháng gần nhất</span><span class="pill" style="background:#eef2f7;color:var(--muted)">Theo hạng</span><span class="pill" style="background:#eef2f7;color:var(--muted)">Theo chi hội</span><span class="pill" style="background:#eef2f7;color:var(--muted)">Theo ngành</span><span class="pill" style="background:#eef2f7;color:var(--muted)">⬇ Xuất Excel</span><span class="pill" style="background:#eef2f7;color:var(--muted)">⬇ PDF</span>
+        </div>
+        <div class="wgrid" style="grid-template-columns:repeat(4,1fr)">
+          <div class="w"><div class="wt">Hội viên</div><div class="wv">512</div><div class="wfoot">+18 quý</div></div>
+          <div class="w up"><div class="wt">Giữ chân</div><div class="wv">81%</div><div class="wfoot">↑ 6 điểm</div></div>
+          <div class="w"><div class="wt">Doanh thu hội phí</div><div class="wv" style="font-size:1.15rem">9,8 tỷ</div><div class="wfoot">YTD</div></div>
+          <div class="w up"><div class="wt">Hài lòng (NPS)</div><div class="wv">+58</div><div class="wfoot">↑ tốt</div></div>
+        </div>
+        <div class="row" style="gap:.55rem;margin-top:.55rem">
+          <div class="col"><div class="w" style="height:100%"><div class="wt">Tăng trưởng &amp; Giữ chân (đường)</div>
+            <svg class="spark" viewBox="0 0 120 38" preserveAspectRatio="none" style="height:62px">
+              <polyline points="0,30 20,27 40,28 60,21 80,16 100,11 120,7" fill="none" stroke="#1c6fb8" stroke-width="2.5"/>
+              <polyline points="0,24 20,22 40,20 60,19 80,15 100,12 120,10" fill="none" stroke="#1f9d6b" stroke-width="2.5" stroke-dasharray="4 3"/>
+            </svg>
+            <div class="wfoot"><span style="color:var(--accent)">— Hội viên</span> · <span style="color:var(--green)">-- Giữ chân</span></div>
+          </div></div>
+          <div class="col"><div class="w" style="height:100%"><div class="wt">Doanh thu theo nguồn (cột chồng)</div>
+            <div style="display:flex;align-items:flex-end;gap:.6rem;height:64px;margin-top:.4rem">
+              <div style="flex:1;display:flex;flex-direction:column-reverse"><div style="height:34px;background:var(--accent)"></div><div style="height:14px;background:var(--gold)"></div><div style="height:10px;background:var(--teal)"></div></div>
+              <div style="flex:1;display:flex;flex-direction:column-reverse"><div style="height:40px;background:var(--accent)"></div><div style="height:18px;background:var(--gold)"></div><div style="height:12px;background:var(--teal)"></div></div>
+              <div style="flex:1;display:flex;flex-direction:column-reverse"><div style="height:46px;background:var(--accent)"></div><div style="height:22px;background:var(--gold)"></div><div style="height:16px;background:var(--teal)"></div></div>
+              <div style="flex:1;display:flex;flex-direction:column-reverse"><div style="height:52px;background:var(--accent)"></div><div style="height:26px;background:var(--gold)"></div><div style="height:18px;background:var(--teal)"></div></div>
+            </div>
+            <div class="wfoot"><span style="color:var(--accent)">■ Hội phí</span> <span style="color:var(--gold)">■ Sự kiện</span> <span style="color:var(--teal)">■ Tài trợ</span></div>
+          </div></div>
+          <div class="col"><div class="w cell" style="height:100%"><div class="wt">Cơ cấu theo hạng</div>
+            <div class="donut" style="width:78px;height:78px;background:conic-gradient(var(--accent) 0 22%,var(--accent2) 22% 50%,var(--gold) 50% 78%,var(--violet) 78% 100%)"><span class="dc" style="font-size:.74rem">4 hạng</span></div>
+          </div></div>
+        </div>
+        <div class="row" style="gap:.55rem;margin-top:.55rem">
+          <div class="col"><div class="w" style="height:100%"><div class="wt">Phễu kết nạp hội viên</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:.4rem">
+              <div style="width:100%;background:var(--accent);color:#fff;font-size:.68rem;text-align:center;padding:.2rem;border-radius:3px">Quan tâm 240</div>
+              <div style="width:78%;background:var(--accent2);color:#fff;font-size:.68rem;text-align:center;padding:.2rem;border-radius:3px">Đăng ký 150</div>
+              <div style="width:55%;background:var(--teal);color:#fff;font-size:.68rem;text-align:center;padding:.2rem;border-radius:3px">AI xác minh 132</div>
+              <div style="width:40%;background:var(--green);color:#fff;font-size:.68rem;text-align:center;padding:.2rem;border-radius:3px">Kết nạp 118</div>
+            </div>
+          </div></div>
+          <div class="col"><div class="w" style="height:100%"><div class="wt">Giữ chân theo nhóm gia nhập (cohort)</div>
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-top:.4rem">
+              <div style="background:#1f9d6b;height:15px;border-radius:2px"></div><div style="background:#1f9d6b;height:15px;border-radius:2px"></div><div style="background:#3fb98c;height:15px;border-radius:2px"></div><div style="background:#7fcfae;height:15px;border-radius:2px"></div><div style="background:#a9ddc7;height:15px;border-radius:2px"></div><div style="background:#cdeadd;height:15px;border-radius:2px"></div>
+              <div style="background:#1f9d6b;height:15px;border-radius:2px"></div><div style="background:#3fb98c;height:15px;border-radius:2px"></div><div style="background:#7fcfae;height:15px;border-radius:2px"></div><div style="background:#a9ddc7;height:15px;border-radius:2px"></div><div style="background:#cdeadd;height:15px;border-radius:2px"></div><div style="background:#e3f3eb;height:15px;border-radius:2px"></div>
+              <div style="background:#3fb98c;height:15px;border-radius:2px"></div><div style="background:#7fcfae;height:15px;border-radius:2px"></div><div style="background:#a9ddc7;height:15px;border-radius:2px"></div><div style="background:#cdeadd;height:15px;border-radius:2px"></div><div style="background:#e3f3eb;height:15px;border-radius:2px"></div><div style="background:#eef8f3;height:15px;border-radius:2px"></div>
+            </div>
+            <div class="wfoot">Đậm = giữ chân cao · theo tháng gia nhập</div>
+          </div></div>
+          <div class="col"><div class="w" style="height:100%"><div class="wt">Top ngành hội viên</div>
+            <div style="display:flex;flex-direction:column;gap:5px;margin-top:.4rem;font-size:.7rem;color:var(--muted)">
+              <div>F&amp;B<div class="prog b" style="margin-top:2px"><i style="width:88%"></i></div></div>
+              <div>Bán lẻ<div class="prog b" style="margin-top:2px"><i style="width:72%"></i></div></div>
+              <div>Mỹ phẩm<div class="prog b" style="margin-top:2px"><i style="width:60%"></i></div></div>
+              <div>Bất động sản<div class="prog b" style="margin-top:2px"><i style="width:45%"></i></div></div>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa: đường xu hướng, cột chồng, biểu đồ tròn, phễu, cohort, xếp hạng. Lọc &amp; xuất báo cáo cho nhiều tình huống phân tích.</div>
+</section>
+
+<!-- 34 SPONSOR ROI -->
+<section class="slide">
+  <div class="kicker good">Đòn bẩy ngân sách</div>
+  <h2>Quản lý &amp; <span class="em">đo hiệu quả tài trợ</span></h2>
+  <div class="row">
+    <div class="col"><div class="mock">
+      <div class="bar"><i></i><i></i><i></i><span class="url">hawee.vn/quan-tri/tai-tro</span></div>
+      <div class="body"><div class="main">
+        <div class="wt" style="font-size:.95rem;color:var(--navy);font-weight:800">Hiệu quả Nhà tài trợ · Quý 2</div>
+        <p style="font-size:.78rem;color:var(--muted);margin:.2rem 0 .6rem">Nhà tài trợ Kim Cương · Ngân hàng ABC</p>
+        <div class="wgrid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="w"><div class="wt">Sự kiện hiện diện</div><div class="wv">7</div></div>
+          <div class="w"><div class="wt">Lượt tiếp cận</div><div class="wv">2.100</div></div>
+          <div class="w up"><div class="wt">Khách quan tâm</div><div class="wv">34</div></div>
+        </div>
+        <div class="wt" style="margin:.55rem 0 .3rem;font-size:.7rem;color:var(--muted);text-transform:uppercase">Hoàn thành cam kết quyền lợi</div>
+        <div class="prog b"><i style="width:86%"></i></div>
+        <table class="t" style="margin-top:.5rem"><tr><th>Quyền lợi</th><th>Cam kết</th><th>Thực hiện</th></tr>
+          <tr><td>Logo cổng sự kiện</td><td>7</td><td><span class="pill g">7</span></td></tr>
+          <tr><td>Bài viết cộng đồng</td><td>4</td><td><span class="pill g">4</span></td></tr>
+          <tr><td>Gian hàng giao thương</td><td>2</td><td><span class="pill a">1/2</span></td></tr>
+        </table>
+      </div></div>
+    </div></div>
+    <div class="col"><ul>
+      <li>Theo dõi cam kết &amp; quyền lợi từng nhà tài trợ</li>
+      <li>Báo cáo tiếp cận &amp; khách quan tâm, nhà tài trợ <b>thấy rõ hiệu quả</b></li>
+      <li>Dễ tái ký &amp; nâng gói, <b>tăng nguồn lực cho Hội</b></li>
+    </ul>
+    <div class="quote sm">Tài trợ là nguồn lực quan trọng. Đo được hiệu quả là cách giữ &amp; mở rộng nguồn lực ấy.</div>
+    </div>
+  </div>
+  <div class="src">Mô phỏng minh họa báo cáo tài trợ.</div>
+</section>
+
+<!-- DIVIDER IV -->
+<section class="slide div">
+  <div class="kicker">Phần IV</div>
+  <h1>Tổng hợp &amp; lộ trình</h1>
+  <p class="sub">Từ bức tranh tính năng đến kế hoạch có thể ra quyết định.</p>
+</section>
+
+<!-- 36 FEATURE MAP -->
+<section class="slide">
+  <div class="kicker">Bản đồ tính năng đầy đủ</div>
+  <h2>Tất cả gói gọn trong <span class="em">một nền tảng</span></h2>
+  <div class="grid g3">
+    <div class="card"><div class="n">Nền móng</div><h3>Dữ liệu &amp; Hội viên</h3><p>Kho dữ liệu tập trung · Hồ sơ 360° · 4 hạng · Gia hạn tự động · Nhắc qua Zalo</p></div>
+    <div class="card"><div class="n">Giá trị</div><h3>Gắn kết &amp; Giao thương</h3><p>Sự kiện + QR · Sàn giao thương · Mentoring · Tích điểm &amp; vinh danh · Cộng đồng · Thẻ số</p></div>
+    <div class="card"><div class="n">Vươn tầm</div><h3>Thông minh &amp; Mở rộng</h3><p>Bảng điều hành sức khỏe · Chăm sóc hội viên cần quan tâm · Trợ lý ảo · Hiệu quả tài trợ</p></div>
+  </div>
+  <div class="quote sm">7 trụ cột HAWEE đề ra, cùng các tính năng mở rộng, trên một nền dữ liệu duy nhất.</div>
+</section>
+
+<!-- 37 ROADMAP -->
+<section class="slide">
+  <div class="kicker">Lộ trình triển khai</div>
+  <h2>Làm chắc gốc trước, <span class="em">không ôm tất cả cùng lúc</span></h2>
+  <div class="tl">
+    <div class="ph"><span class="bn">Giai đoạn 1 · Nền tảng</span><h3>Một nguồn duy nhất</h3><ul><li>Website &amp; cổng hội viên</li><li>Kho dữ liệu &amp; Hồ sơ 360°</li><li>4 hạng &amp; gia hạn tự động</li><li>Nhắc qua Zalo &amp; email</li></ul><p style="margin-top:auto;font-size:.84rem;color:var(--green);font-weight:700">› Thắng nhanh, đo được</p></div>
+    <div class="ph m"><span class="bn">Giai đoạn 2 · Giá trị</span><h3>Kết nối tạo giá trị</h3><ul><li>Sự kiện + QR + cộng đồng</li><li>Sàn giao thương</li><li>Mentoring</li><li>Tích điểm &amp; vinh danh</li></ul><p style="margin-top:auto;font-size:.84rem;color:var(--accent);font-weight:700">› Gắn kết liên tục</p></div>
+    <div class="ph l"><span class="bn">Giai đoạn 3 · Vươn tầm</span><h3>Dữ liệu dẫn dắt</h3><ul><li>Bảng điều hành &amp; chăm sóc sớm</li><li>Trợ lý ảo</li><li>Hiệu quả tài trợ</li><li>Ứng dụng &amp; Zalo Mini App</li></ul><p style="margin-top:auto;font-size:.84rem;color:var(--gold);font-weight:700">› Tăng giữ chân &amp; tài trợ</p></div>
+  </div>
+</section>
+
+<!-- 38 PHASE MATRIX -->
+<section class="slide">
+  <div class="kicker">Ma trận tính năng theo giai đoạn</div>
+  <h2>Cái gì làm <span class="em">trước, cái gì làm sau</span></h2>
+  <table class="t" style="margin-top:1rem;font-size:.9rem">
+    <tr><th>Nhóm tính năng</th><th>GĐ 1</th><th>GĐ 2</th><th>GĐ 3</th></tr>
+    <tr><td>Kho dữ liệu &amp; Hồ sơ 360°</td><td><span class="pill g">●</span></td><td></td><td></td></tr>
+    <tr><td>4 hạng &amp; gia hạn tự động</td><td><span class="pill g">●</span></td><td></td><td></td></tr>
+    <tr><td>Nhắc qua Zalo &amp; email</td><td><span class="pill g">●</span></td><td></td><td></td></tr>
+    <tr><td>Sự kiện + QR + cộng đồng</td><td></td><td><span class="pill b">●</span></td><td></td></tr>
+    <tr><td>Sàn giao thương</td><td></td><td><span class="pill b">●</span></td><td></td></tr>
+    <tr><td>Mentoring &amp; Tích điểm vinh danh</td><td></td><td><span class="pill b">●</span></td><td></td></tr>
+    <tr><td>Bảng điều hành &amp; chăm sóc sớm</td><td></td><td></td><td><span class="pill gd">●</span></td></tr>
+    <tr><td>Trợ lý ảo · Hiệu quả tài trợ · Ứng dụng</td><td></td><td></td><td><span class="pill gd">●</span></td></tr>
+  </table>
+</section>
+
+<!-- 39 VALUE -->
+<section class="slide">
+  <div class="kicker good">Giá trị mang lại</div>
+  <h2>Mỗi bên đều <span class="em">được lợi</span></h2>
+  <div class="grid g4">
+    <div class="card"><div class="n">Hội</div><h3>Vững &amp; minh bạch</h3><p>Giữ chân tốt hơn, dữ liệu chứng minh giá trị, tăng tài trợ</p></div>
+    <div class="card"><div class="n">Hội viên</div><h3>Lợi ích thật</h3><p>Tìm đúng đối tác, quyền lợi rõ ràng, ít thao tác</p></div>
+    <div class="card"><div class="n">Ban Chấp hành</div><h3>Quyết định bằng số</h3><p>Bảng điều hành thay cảm tính, hành động kịp thời</p></div>
+    <div class="card"><div class="n">Đối tác</div><h3>Thấy hiệu quả</h3><p>Dễ tái ký &amp; nâng gói tài trợ</p></div>
+  </div>
+  <div class="quote">Tầm nhìn của HAWEE đã rõ. Nền tảng này biến tầm nhìn ấy thành <b>vận hành mỗi ngày</b>.</div>
+</section>
+
+<!-- 40 WHY BUILD FOR HAWEE (single solution) -->
+<section class="slide">
+  <div class="kicker good">Vì sao xây riêng cho HAWEE</div>
+  <h2>Một tài sản số <span class="em">thuộc về Hội, lớn lên cùng Hội</span></h2>
+  <div class="grid g2">
+    <div class="card"><div class="n">Chủ quyền</div><h3>Dữ liệu của HAWEE</h3><p>Thông tin hội viên (đặc biệt là nữ lãnh đạo) nằm trong tầm kiểm soát của Hội, không phụ thuộc bên thứ ba.</p></div>
+    <div class="card"><div class="n">Bản sắc</div><h3>May đo trọn vẹn</h3><p>Đúng 4 hạng, đúng Mentoring, đúng định hướng giao thương. Không gò Hội theo khuôn phần mềm có sẵn.</p></div>
+    <div class="card"><div class="n">Người Việt</div><h3>Gắn liền Zalo</h3><p>Nhắc nhở &amp; chăm sóc qua Zalo, thanh toán nội địa, trải nghiệm quen thuộc với hội viên.</p></div>
+    <div class="card"><div class="n">Bền vững</div><h3>Chi phí hợp lý dài hạn</h3><p>Đầu tư một lần &amp; bảo trì hợp lý, không phát sinh chi phí tăng theo từng hội viên khi Hội lớn lên.</p></div>
+  </div>
+  <div class="quote sm">Đây là lựa chọn được dữ liệu thị trường ủng hộ: với HAWEE, vận hành hội viên là <b>lợi thế cần sở hữu</b>, không phải thứ đi thuê.</div>
+</section>
+
+<!-- 41 RISKS -->
+<section class="slide">
+  <div class="kicker">Lường trước để đi chắc</div>
+  <h2>Mọi rủi ro <span class="em">đều có cách hóa giải</span></h2>
+  <table class="t" style="margin-top:1rem;font-size:.92rem">
+    <tr><th>Điều cần lưu tâm</th><th>Cách hóa giải</th></tr>
+    <tr><td>Hội viên bận, ngại công cụ mới</td><td>Giao diện tối giản, mọi nhắc nhở qua Zalo, không bắt học hệ thống</td></tr>
+    <tr><td>Dữ liệu nhạy cảm của nữ lãnh đạo</td><td>Hội sở hữu dữ liệu, phân quyền chặt, tuân thủ quy định bảo vệ dữ liệu cá nhân</td></tr>
+    <tr><td>Lo “làm xong rồi để đó”</td><td>Bàn giao kèm quy trình vận hành &amp; người phụ trách cộng đồng</td></tr>
+    <tr><td>Triển khai lớn dễ rủi ro</td><td>Lộ trình chia 3 giai đoạn, Giai đoạn 1 nhỏ, chắc, đo được trước</td></tr>
+    <tr><td>Kỳ vọng trợ lý ảo quá cao</td><td>Định vị đúng là trợ lý &amp; điều hướng, đặt kỳ vọng phù hợp</td></tr>
+  </table>
+</section>
+
+<!-- 42 NEXT STEPS / CLOSE -->
+<section class="slide">
+  <div class="kicker good">Bước tiếp theo</div>
+  <h2>Khởi đầu <span class="em">nhỏ, chắc, đo được</span></h2>
+  <div class="flow">
+    <div class="st"><div class="si">Bước 1</div><h4>Khảo sát nhu cầu</h4><p>Trao đổi Văn phòng Hội &amp; nhóm hội viên, xác nhận điểm nghẽn, lấy số thực</p></div>
+    <div class="ar">›</div>
+    <div class="st"><div class="si">Bước 2</div><h4>Chốt phạm vi Giai đoạn 1</h4><p>Tính năng nền tảng &amp; mốc thắng nhanh đo được</p></div>
+    <div class="ar">›</div>
+    <div class="st"><div class="si">Bước 3</div><h4>Lộ trình &amp; đồng hành</h4><p>Kế hoạch 3 giai đoạn &amp; hợp tác dài hạn</p></div>
+  </div>
+  <div class="quote">HAWEE đã có tầm nhìn. Hãy bắt đầu từ Giai đoạn 1, để <b>tầm nhìn ấy thành hiện thực mỗi ngày</b>.</div>
+  <div class="src">Có thể kèm bộ câu hỏi khảo sát nhu cầu hội viên &amp; Ban Chấp hành theo yêu cầu.</div>
+</section>
+
+<!-- 43 END -->
+<section class="slide cover">
+  <div class="kicker">HAWEE 2025 đến 2030</div>
+  <h1>Hội tụ. Kết nối.<br>Vươn tầm.</h1>
+  <p class="sub">Một nền tảng xây riêng cho HAWEE, vận hành tầm nhìn ấy mỗi ngày.</p>
+  <div class="meta"><span class="brand">HAWEE</span><span>Cảm ơn &amp; sẵn sàng trao đổi</span><span>2026</span></div>
+</section>
+
+</div>
+
+<div class="hint">‹ › di chuyển · Home/End đầu cuối</div>
+<div class="dots" id="dots"></div>
+<div class="nav">
+  <button id="prev" aria-label="Trước">‹</button>
+  <span class="counter"><span id="cur">1</span> / <span id="tot">46</span></span>
+  <button id="next" aria-label="Sau">›</button>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const tot=slides.length,bar=document.getElementById('bar');
+  const cur=document.getElementById('cur'),dotsW=document.getElementById('dots');
+  document.getElementById('tot').textContent=tot;
+  let i=0;
+  slides.forEach((_,k)=>{const d=document.createElement('i');d.onclick=()=>go(k);dotsW.appendChild(d)});
+  const dots=[...dotsW.children];
+  function go(n){
+    i=Math.max(0,Math.min(tot-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+    cur.textContent=i+1;bar.style.width=((i+1)/tot*100)+'%';
+    const a=document.querySelector('.slide.active');if(a)a.scrollTop=0;
+  }
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown'].includes(e.key))go(i+1);
+    if(['ArrowLeft','PageUp'].includes(e.key))go(i-1);
+    if(e.key==='Home')go(0);if(e.key==='End')go(tot-1);
+  });
+  let sx=0;
+  document.addEventListener('touchstart',e=>sx=e.touches[0].clientX);
+  document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?i+1:i-1)});
+  go(0);
+</script>
+</body>
+</html>

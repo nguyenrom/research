@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoW/JD Dịch Vụ Điều Phối Triển Khai Loyalty</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f5f1;
+      --paper: #ffffff;
+      --ink: #202124;
+      --muted: #62666f;
+      --line: #ddd8cf;
+      --accent: #126b5f;
+      --accent-soft: #e4f3f0;
+      --table-head: #f1eee8;
+      --shadow: 0 18px 55px rgba(36, 31, 24, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.62;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 920px);
+      gap: 28px;
+      width: min(1280px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    aside {
+      align-self: start;
+      position: sticky;
+      top: 24px;
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      padding: 22px 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .toc-title {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      padding: 6px 0 6px 10px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .toc-l3 { padding-left: 22px; font-size: 13px; }
+
+    main {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: clamp(28px, 5vw, 64px);
+    }
+
+    .source-note {
+      margin: 0 0 28px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      background: #fbfaf7;
+      font-size: 13px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--ink);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      max-width: 760px;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.08;
+    }
+
+    h2 {
+      margin: 46px 0 14px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-size: 26px;
+    }
+
+    h3 { margin: 30px 0 10px; font-size: 20px; }
+    h4 { margin: 24px 0 8px; font-size: 17px; }
+
+    p { margin: 0 0 16px; }
+
+    ul {
+      margin: 0 0 18px;
+      padding-left: 24px;
+    }
+
+    li { margin: 4px 0; }
+    li > ul { margin-top: 6px; margin-bottom: 8px; }
+
+    strong { font-weight: 700; }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #f0eee8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    blockquote {
+      margin: 22px 0;
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      background: var(--accent-soft);
+      color: #16483f;
+      font-weight: 600;
+    }
+
+    blockquote p { margin: 0; }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: var(--table-head);
+      color: #37332d;
+      font-weight: 700;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    @media (max-width: 940px) {
+      .layout {
+        display: block;
+        width: min(100% - 24px, 920px);
+        padding: 18px 0 36px;
+      }
+
+      aside {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      main { padding: 24px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 23px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .layout { display: block; width: 100%; padding: 0; }
+      aside { display: none; }
+      main { border: 0; box-shadow: none; padding: 0; }
+      a { color: inherit; }
+      h2 { break-after: avoid; }
+      .table-wrap { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside aria-label="Mục lục">
+      <p class="toc-title">Mục lục</p>
+      <nav><a class="toc-l2" href="#1-inh-vi-dich-vu">1. Định Vị Dịch Vụ</a>
+<a class="toc-l2" href="#2-muc-tieu-dich-vu">2. Mục Tiêu Dịch Vụ</a>
+<a class="toc-l2" href="#3-pham-vi-cung-cap">3. Phạm Vi Cung Cấp</a>
+<a class="toc-l3" href="#31-bao-gom">3.1 Bao Gồm</a>
+<a class="toc-l3" href="#32-khong-bao-gom">3.2 Không Bao Gồm</a>
+<a class="toc-l2" href="#4-vai-tro-cung-cap">4. Vai Trò Cung Cấp</a>
+<a class="toc-l3" href="#41-loyalty-implementation-pm-operations-lead">4.1 Loyalty Implementation PM / Operations Lead</a>
+<a class="toc-l3" href="#42-loyalty-business-analyst">4.2 Loyalty Business Analyst</a>
+<a class="toc-l3" href="#43-hotel-operations-consultant-fo-fb-process-lead">4.3 Hotel Operations Consultant / FO-F&amp;B Process Lead</a>
+<a class="toc-l3" href="#44-training-change-enablement-lead">4.4 Training &amp; Change Enablement Lead</a>
+<a class="toc-l2" href="#5-pham-vi-cong-viec-chi-tiet">5. Phạm Vi Công Việc Chi Tiết</a>
+<a class="toc-l2" href="#51-project-governance">5.1 Project Governance</a>
+<a class="toc-l2" href="#52-loyalty-business-rules-scenario-design">5.2 Loyalty Business Rules &amp; Scenario Design</a>
+<a class="toc-l2" href="#53-vendor-crmloyalty-coordination">5.3 Vendor CRM/Loyalty Coordination</a>
+<a class="toc-l2" href="#54-fofb-operational-sop">5.4 FO/F&amp;B Operational SOP</a>
+<a class="toc-l3" href="#fo-sop">FO SOP</a>
+<a class="toc-l3" href="#reservation-sop">Reservation SOP</a>
+<a class="toc-l3" href="#fb-sop">F&amp;B SOP</a>
+<a class="toc-l3" href="#cashier-sop">Cashier SOP</a>
+<a class="toc-l2" href="#55-uat-go-live-readiness">5.5 UAT &amp; Go-Live Readiness</a>
+<a class="toc-l2" href="#56-training-change-management">5.6 Training &amp; Change Management</a>
+<a class="toc-l2" href="#57-go-live-hypercare">5.7 Go-Live &amp; Hypercare</a>
+<a class="toc-l2" href="#6-kpi-trien-khai-nen-cam-ket">6. KPI Triển Khai Nên Cam Kết</a>
+<a class="toc-l2" href="#7-acceptance-criteria">7. Acceptance Criteria</a>
+<a class="toc-l2" href="#8-trach-nhiem-cua-khach-san">8. Trách Nhiệm Của Khách Sạn</a>
+<a class="toc-l2" href="#9-trach-nhiem-cua-vendor-crmloyalty">9. Trách Nhiệm Của Vendor CRM/Loyalty</a>
+<a class="toc-l2" href="#10-assumptions-dependencies">10. Assumptions &amp; Dependencies</a>
+<a class="toc-l2" href="#11-out-of-scope">11. Out Of Scope</a>
+<a class="toc-l2" href="#12-timeline-mau">12. Timeline Mẫu</a>
+<a class="toc-l2" href="#13-pricing-unit-goi-y">13. Pricing Unit Gợi Ý</a>
+<a class="toc-l2" href="#14-cau-mo-ta-ban-hang-ngan">14. Câu Mô Tả Bán Hàng Ngắn</a></nav>
+    </aside>
+    <main>
+      <p class="source-note">Nguồn: loyalty/loyalty-implementation-operations-sow.md · Tạo HTML: 14:52 28 thg 5, 2026</p>
+      <h1 id="sowjd-dich-vu-ieu-phoi-trien-khai-loyalty-cho-khach-san-nha-hang">SoW/JD Dịch Vụ Điều Phối Triển Khai Loyalty Cho Khách Sạn &amp; Nhà Hàng</h1>
+<h2 id="1-inh-vi-dich-vu">1. Định Vị Dịch Vụ</h2>
+<p>Dịch vụ này là <strong>Loyalty Implementation Operations Service</strong>: cung cấp nhân sự vận hành triển khai, đứng giữa khách sạn và vendor CRM/loyalty để đảm bảo chương trình loyalty được triển khai thành công trong thực tế.</p>
+<p>Dịch vụ không bán phần mềm, không phát triển hệ thống, không sở hữu CRM/loyalty platform. Trọng tâm là biến yêu cầu kinh doanh thành rule, kịch bản vận hành, SOP, UAT, training và go-live readiness cho các bộ phận liên quan, đặc biệt là FO, Reservation, F&amp;B, Cashier và CRM/Admin.</p>
+<p>Định vị ngắn gọn:</p>
+<blockquote><p>Chúng tôi đại diện khách sạn để quản lý triển khai loyalty từ business rules, kịch bản vận hành, phối hợp vendor, UAT, training đến go-live và hypercare.</p></blockquote>
+<h2 id="2-muc-tieu-dich-vu">2. Mục Tiêu Dịch Vụ</h2>
+<ul>
+<li>Đảm bảo chương trình loyalty được thiết kế đủ rõ để vendor CRM/loyalty cấu hình chính xác.
+</li><li>Đảm bảo các tình huống vận hành thực tế tại FO, Reservation, F&amp;B và Cashier được xử lý trước khi go-live.
+</li><li>Giảm rủi ro triển khai sai do khoảng cách giữa business, hotel operation và vendor kỹ thuật.
+</li><li>Chuẩn hóa SOP, training và checklist để nhân viên khách sạn có thể vận hành loyalty nhất quán.
+</li><li>Theo dõi issue, bug, dependency và blocker trong quá trình triển khai.
+</li><li>Đưa hệ thống loyalty vào vận hành với tiêu chí nghiệm thu rõ ràng.
+</li></ul>
+<h2 id="3-pham-vi-cung-cap">3. Phạm Vi Cung Cấp</h2>
+<h3 id="31-bao-gom">3.1 Bao Gồm</h3>
+<ul>
+<li>Implementation PM / Operations Lead.
+</li><li>Loyalty Business Analyst.
+</li><li>Người điều phối vendor CRM/loyalty.
+</li><li>Người điều phối với PMS/POS vendor nếu dự án có tích hợp.
+</li><li>Người thiết kế kịch bản vận hành FO/F&amp;B.
+</li><li>Người viết SOP, UAT script, checklist và training material.
+</li><li>Người hỗ trợ go-live và hypercare trong phạm vi đã thỏa thuận.
+</li></ul>
+<h3 id="32-khong-bao-gom">3.2 Không Bao Gồm</h3>
+<ul>
+<li>License CRM/loyalty platform.
+</li><li>Phí vendor PMS/POS/CRM/loyalty.
+</li><li>Phát triển API, middleware hoặc custom software.
+</li><li>Cấu hình kỹ thuật thuộc trách nhiệm vendor, trừ khi được thống nhất riêng.
+</li><li>Vận hành marketing campaign dài hạn sau go-live.
+</li><li>Nhập liệu thủ công toàn bộ dữ liệu khách hàng cũ nếu không có scope riêng.
+</li><li>Chịu trách nhiệm với lỗi kỹ thuật thuộc hệ thống hoặc vendor.
+</li><li>Cam kết doanh thu trực tiếp nếu không kiểm soát marketing, pricing, sales và hệ thống.
+</li></ul>
+<h2 id="4-vai-tro-cung-cap">4. Vai Trò Cung Cấp</h2>
+<h3 id="41-loyalty-implementation-pm-operations-lead">4.1 Loyalty Implementation PM / Operations Lead</h3>
+<p>Trách nhiệm:</p>
+<ul>
+<li>Quản lý kế hoạch triển khai tổng thể.
+</li><li>Điều phối khách sạn, vendor CRM/loyalty, PMS/POS vendor và các bộ phận vận hành.
+</li><li>Theo dõi timeline, milestone, dependency, issue và risk.
+</li><li>Tổ chức kickoff, weekly meeting, UAT review, go-live readiness review.
+</li><li>Escalate blocker cho Project Sponsor, GM hoặc Owner.
+</li><li>Đảm bảo các deliverables được hoàn tất và sign-off đúng thời điểm.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>Project charter.
+</li><li>Implementation timeline.
+</li><li>RACI matrix.
+</li><li>Weekly status report.
+</li><li>Risk, issue, action log.
+</li><li>Go-live readiness report.
+</li></ul>
+<h3 id="42-loyalty-business-analyst">4.2 Loyalty Business Analyst</h3>
+<p>Trách nhiệm:</p>
+<ul>
+<li>Thu thập yêu cầu loyalty từ khách sạn.
+</li><li>Làm rõ business rules: earn, burn, tier, voucher, benefit, expiry, exception.
+</li><li>Chuyển yêu cầu thành kịch bản cấu hình cho vendor.
+</li><li>Review cấu hình vendor so với rule đã sign-off.
+</li><li>Viết scenario book, UAT script và exception matrix.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>Loyalty rules document.
+</li><li>Tier &amp; benefit matrix.
+</li><li>Earn/burn scenario book.
+</li><li>Exception handling matrix.
+</li><li>Vendor configuration checklist.
+</li><li>UAT script.
+</li></ul>
+<h3 id="43-hotel-operations-consultant-fo-fb-process-lead">4.3 Hotel Operations Consultant / FO-F&amp;B Process Lead</h3>
+<p>Trách nhiệm:</p>
+<ul>
+<li>Thiết kế SOP cho FO, Reservation, F&amp;B và Cashier.
+</li><li>Xây dựng kịch bản xử lý tại điểm chạm khách hàng.
+</li><li>Viết script cho nhân viên khi giới thiệu loyalty, tra cứu member, giải thích benefit và xử lý khiếu nại.
+</li><li>Tổ chức role-play theo tình huống vận hành thật.
+</li><li>Đề xuất điều chỉnh quy trình nếu rule loyalty gây vướng tại hiện trường.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>FO SOP.
+</li><li>Reservation SOP.
+</li><li>F&amp;B SOP.
+</li><li>Cashier SOP.
+</li><li>Guest complaint / missing point SOP.
+</li><li>Member enrollment script.
+</li><li>FO/F&amp;B quick reference sheet.
+</li></ul>
+<h3 id="44-training-change-enablement-lead">4.4 Training &amp; Change Enablement Lead</h3>
+<p>Trách nhiệm:</p>
+<ul>
+<li>Chuẩn bị tài liệu đào tạo theo từng vai trò.
+</li><li>Đào tạo FO, Reservation, F&amp;B, Cashier, CRM/Admin và Manager.
+</li><li>Tổ chức kiểm tra readiness trước go-live.
+</li><li>Ghi nhận câu hỏi, lỗi hiểu sai, điểm nghẽn trong quá trình training.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>Training deck.
+</li><li>Role-based user guide.
+</li><li>Training attendance record.
+</li><li>Staff readiness checklist.
+</li><li>Internal FAQ.
+</li></ul>
+<h2 id="5-pham-vi-cong-viec-chi-tiet">5. Phạm Vi Công Việc Chi Tiết</h2>
+<h2 id="51-project-governance">5.1 Project Governance</h2>
+<p>Công việc:</p>
+<ul>
+<li>Xác định sponsor, owner và nhóm triển khai.
+</li><li>Lập timeline triển khai.
+</li><li>Xác định milestone: kickoff, rule sign-off, configuration review, UAT, training, go-live, hypercare.
+</li><li>Thiết lập cơ chế họp định kỳ.
+</li><li>Quản lý action list, risk log, issue log và decision log.
+</li><li>Theo dõi tiến độ vendor CRM/loyalty.
+</li><li>Điều phối escalation khi có blocker.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>Project plan.
+</li><li>RACI matrix.
+</li><li>Meeting cadence.
+</li><li>Weekly status report.
+</li><li>Risk/issue/action/decision log.
+</li></ul>
+<h2 id="52-loyalty-business-rules-scenario-design">5.2 Loyalty Business Rules &amp; Scenario Design</h2>
+<p>Công việc:</p>
+<ul>
+<li>Làm rõ nhóm khách được tham gia loyalty:
+<ul>
+<li>Khách lưu trú trực tiếp.
+</li><li>Khách OTA.
+</li><li>Khách corporate.
+</li><li>Khách walk-in nhà hàng.
+</li><li>Khách local dining.
+</li><li>Khách VIP/Owner/Partner nếu có.
+</li></ul>
+</li><li>Làm rõ rule tích điểm:
+<ul>
+<li>Room revenue.
+</li><li>F&amp;B spend.
+</li><li>Spa hoặc dịch vụ phụ trợ nếu có.
+</li><li>Thuế, service charge, minibar, banquet, corporate rate.
+</li></ul>
+</li><li>Làm rõ rule đổi điểm:
+<ul>
+<li>Voucher F&amp;B.
+</li><li>Discount.
+</li><li>Room upgrade.
+</li><li>Late checkout.
+</li><li>Breakfast.
+</li><li>Amenities.
+</li></ul>
+</li><li>Làm rõ tier:
+<ul>
+<li>Điều kiện lên hạng.
+</li><li>Điều kiện giữ hạng.
+</li><li>Downgrade.
+</li><li>Expiry.
+</li></ul>
+</li><li>Làm rõ exception:
+<ul>
+<li>Khách quên báo member.
+</li><li>Thiếu điểm sau check-out.
+</li><li>Bill POS không sync.
+</li><li>Sai số điện thoại.
+</li><li>Duplicate profile.
+</li><li>Voucher hết hạn.
+</li><li>Khách tranh chấp quyền lợi.
+</li></ul>
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>Loyalty business rules document.
+</li><li>Tier &amp; benefit matrix.
+</li><li>Earn/burn scenario book.
+</li><li>Exception handling matrix.
+</li><li>FAQ cho vận hành.
+</li></ul>
+<h2 id="53-vendor-crmloyalty-coordination">5.3 Vendor CRM/Loyalty Coordination</h2>
+<p>Công việc:</p>
+<ul>
+<li>Gửi requirement, rule và scenario cho vendor.
+</li><li>Tổ chức walkthrough để vendor hiểu logic khách sạn.
+</li><li>Review cấu hình do vendor demo.
+</li><li>Theo dõi bug, defect và change request.
+</li><li>Điều phối với vendor PMS/POS nếu cần tích hợp hoặc đối soát dữ liệu.
+</li><li>Đảm bảo vendor bàn giao đúng các rule đã sign-off.
+</li><li>Phân loại lỗi: business rule gap, configuration issue, integration issue, data issue, training issue.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>Vendor requirement tracker.
+</li><li>Configuration review notes.
+</li><li>Bug/defect log.
+</li><li>Change request log.
+</li><li>Vendor sign-off checklist.
+</li></ul>
+<h2 id="54-fofb-operational-sop">5.4 FO/F&amp;B Operational SOP</h2>
+<h3 id="fo-sop">FO SOP</h3>
+<p>Cần bao phủ:</p>
+<ul>
+<li>Đăng ký member mới.
+</li><li>Tra cứu member bằng số điện thoại, email hoặc member ID.
+</li><li>Gắn member vào booking/stay.
+</li><li>Xác nhận tier và benefit khi check-in.
+</li><li>Xử lý upgrade, early check-in, late check-out, welcome amenity.
+</li><li>Giới thiệu loyalty cho khách chưa là member.
+</li><li>Ghi nhận khách OTA có/không được tích điểm.
+</li><li>Xử lý missing point.
+</li><li>Xử lý duplicate profile.
+</li><li>Xử lý khi khách khiếu nại quyền lợi.
+</li></ul>
+<h3 id="reservation-sop">Reservation SOP</h3>
+<p>Cần bao phủ:</p>
+<ul>
+<li>Nhận diện member khi đặt phòng qua phone, email, website hoặc direct channel.
+</li><li>Ghi nhận member ID vào booking.
+</li><li>Tư vấn benefit khi khách đặt trực tiếp.
+</li><li>Escalate booking có benefit đặc biệt.
+</li><li>Ghi chú loyalty request cho FO trước arrival.
+</li></ul>
+<h3 id="fb-sop">F&amp;B SOP</h3>
+<p>Cần bao phủ:</p>
+<ul>
+<li>Tra cứu member trước khi thanh toán.
+</li><li>Áp dụng discount hoặc voucher.
+</li><li>Ghi nhận điểm F&amp;B.
+</li><li>Xử lý khách nhà hàng không lưu trú.
+</li><li>Xử lý bill room charge.
+</li><li>Xử lý split bill.
+</li><li>Xử lý khách báo member sau khi bill đã đóng.
+</li><li>Xử lý voucher đã dùng, hết hạn hoặc không hợp lệ.
+</li></ul>
+<h3 id="cashier-sop">Cashier SOP</h3>
+<p>Cần bao phủ:</p>
+<ul>
+<li>Kiểm tra member trước khi finalize bill.
+</li><li>Đối chiếu discount/voucher trên POS.
+</li><li>Xử lý void/refund liên quan đến điểm hoặc voucher.
+</li><li>Ghi nhận lỗi khi POS không sync.
+</li><li>Escalate bill có tranh chấp.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>FO SOP.
+</li><li>Reservation SOP.
+</li><li>F&amp;B SOP.
+</li><li>Cashier SOP.
+</li><li>Quick reference sheet cho từng bộ phận.
+</li><li>Guest-facing script.
+</li><li>Internal escalation flow.
+</li></ul>
+<h2 id="55-uat-go-live-readiness">5.5 UAT &amp; Go-Live Readiness</h2>
+<p>Công việc:</p>
+<ul>
+<li>Viết test case theo tình huống vận hành thật.
+</li><li>Tổ chức UAT với FO, Reservation, F&amp;B, Cashier và CRM/Admin.
+</li><li>Ghi nhận kết quả pass/fail.
+</li><li>Phân loại lỗi theo mức độ nghiêm trọng.
+</li><li>Làm việc với vendor để xử lý defect.
+</li><li>Kiểm tra go-live readiness trước ngày launch.
+</li></ul>
+<p>Test case mẫu:</p>
+<ul>
+<li>Khách mới đăng ký tại FO.
+</li><li>Khách member check-in.
+</li><li>Khách member được áp dụng tier benefit.
+</li><li>Khách OTA có/không được tích điểm.
+</li><li>Khách nhà hàng không lưu trú muốn tích điểm.
+</li><li>Khách đổi voucher tại nhà hàng.
+</li><li>Bill POS sync lỗi.
+</li><li>Staff nhập sai số điện thoại.
+</li><li>Khách báo thiếu điểm sau check-out.
+</li><li>Duplicate guest profile.
+</li><li>Voucher hết hạn.
+</li><li>Member upgrade/downgrade tier.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>UAT script.
+</li><li>UAT result report.
+</li><li>Defect tracker.
+</li><li>Go-live checklist.
+</li><li>Go/no-go recommendation.
+</li></ul>
+<h2 id="56-training-change-management">5.6 Training &amp; Change Management</h2>
+<p>Công việc:</p>
+<ul>
+<li>Chuẩn bị tài liệu đào tạo theo vai trò.
+</li><li>Tổ chức training cho từng nhóm:
+<ul>
+<li>FO Manager.
+</li><li>Receptionist.
+</li><li>Reservation.
+</li><li>F&amp;B Manager.
+</li><li>Restaurant host/server.
+</li><li>Cashier.
+</li><li>CRM/Admin.
+</li><li>GM/Manager.
+</li></ul>
+</li><li>Tổ chức role-play theo case thực tế.
+</li><li>Ghi nhận câu hỏi và cập nhật FAQ.
+</li><li>Đánh giá readiness trước go-live.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>Training deck.
+</li><li>Role-based user guide.
+</li><li>Internal FAQ.
+</li><li>Attendance record.
+</li><li>Staff readiness checklist.
+</li></ul>
+<h2 id="57-go-live-hypercare">5.7 Go-Live &amp; Hypercare</h2>
+<p>Công việc:</p>
+<ul>
+<li>Hỗ trợ launch theo mô hình onsite hoặc remote đã thống nhất.
+</li><li>Theo dõi issue phát sinh trong ngày go-live.
+</li><li>Làm đầu mối điều phối xử lý nhanh với vendor.
+</li><li>Tổng hợp issue theo severity.
+</li><li>Cập nhật SOP hoặc FAQ nếu phát sinh case mới.
+</li><li>Báo cáo sau go-live.
+</li><li>Đề xuất tối ưu sau giai đoạn hypercare.
+</li></ul>
+<p>Deliverables:</p>
+<ul>
+<li>Go-live support log.
+</li><li>Daily hypercare report.
+</li><li>Issue resolution tracker.
+</li><li>Post-launch review.
+</li><li>Optimization recommendations.
+</li></ul>
+<h2 id="6-kpi-trien-khai-nen-cam-ket">6. KPI Triển Khai Nên Cam Kết</h2>
+<p>Không nên cam kết doanh thu trực tiếp nếu dịch vụ không kiểm soát marketing, pricing, hệ thống và ngân sách bán hàng. Nên cam kết các KPI triển khai và readiness.</p>
+<p>KPI đề xuất:</p>
+<ul>
+<li>100% business rules được document và sign-off.
+</li><li>100% critical scenarios được đưa vào UAT.
+</li><li>100% nhóm FO, Reservation, F&amp;B, Cashier, CRM/Admin được training trước go-live.
+</li><li>Go-live checklist hoàn tất trước ngày launch.
+</li><li>Critical defect được phân loại và có owner xử lý.
+</li><li>SOP được bàn giao theo từng bộ phận.
+</li><li>Vendor delivery được review theo checklist.
+</li><li>Hypercare report được gửi theo lịch đã thống nhất.
+</li><li>Issue log được cập nhật và phân loại đầy đủ trong giai đoạn hypercare.
+</li></ul>
+<h2 id="7-acceptance-criteria">7. Acceptance Criteria</h2>
+<p>Dự án được xem là hoàn tất khi:</p>
+<ul>
+<li>Loyalty rules đã được khách sạn sign-off.
+</li><li>Vendor configuration đã được review dựa trên rule và scenario đã thống nhất.
+</li><li>UAT hoàn tất với tỷ lệ pass theo ngưỡng nghiệm thu.
+</li><li>Critical defects không còn mở, hoặc có workaround được khách sạn chấp nhận.
+</li><li>FO, Reservation, F&amp;B, Cashier và CRM/Admin đã được training.
+</li><li>SOP và quick reference sheet đã được bàn giao.
+</li><li>Go-live checklist đã được Project Sponsor hoặc người được ủy quyền xác nhận.
+</li><li>Hypercare period hoàn tất và post-launch review đã được bàn giao.
+</li></ul>
+<h2 id="8-trach-nhiem-cua-khach-san">8. Trách Nhiệm Của Khách Sạn</h2>
+<p>Khách sạn cần:</p>
+<ul>
+<li>Chỉ định Project Sponsor và Project Owner.
+</li><li>Cử đại diện các bộ phận FO, Reservation, F&amp;B, Cashier, Sales/Marketing, IT tham gia đúng lịch.
+</li><li>Cung cấp chính sách kinh doanh, loyalty concept, benefit mong muốn và các quyết định cần thiết.
+</li><li>Làm việc với vendor hiện tại để cung cấp quyền truy cập, demo, tài liệu hoặc dữ liệu cần thiết.
+</li><li>Phê duyệt rule, SOP, UAT và go-live theo timeline.
+</li><li>Đảm bảo nhân viên tham gia training đầy đủ.
+</li><li>Chịu trách nhiệm với quyết định kinh doanh cuối cùng về reward, discount, tier và exception policy.
+</li></ul>
+<h2 id="9-trach-nhiem-cua-vendor-crmloyalty">9. Trách Nhiệm Của Vendor CRM/Loyalty</h2>
+<p>Vendor CRM/loyalty cần:</p>
+<ul>
+<li>Tư vấn khả năng cấu hình trên hệ thống.
+</li><li>Cấu hình rule, tier, point, voucher, campaign theo requirement đã sign-off.
+</li><li>Cung cấp demo và hướng dẫn admin nếu thuộc phạm vi vendor.
+</li><li>Xử lý bug, defect hoặc configuration issue.
+</li><li>Hỗ trợ UAT và go-live trong phạm vi hợp đồng vendor.
+</li><li>Cung cấp tài liệu kỹ thuật hoặc API/file specification nếu có tích hợp.
+</li></ul>
+<h2 id="10-assumptions-dependencies">10. Assumptions &amp; Dependencies</h2>
+<ul>
+<li>Khách sạn đã chọn hoặc đang làm việc với một vendor CRM/loyalty.
+</li><li>Vendor CRM/loyalty có năng lực cấu hình các rule loyalty đã thống nhất, hoặc sẽ xác nhận giới hạn hệ thống trước khi sign-off.
+</li><li>Nếu cần tích hợp PMS/POS, vendor liên quan phải cung cấp API, file export/import hoặc phương án vận hành thay thế.
+</li><li>Dữ liệu khách hàng hiện tại có thể cần cleansing trước khi import.
+</li><li>Các quyết định về chính sách loyalty phải được khách sạn phê duyệt đúng hạn.
+</li><li>Go-live phụ thuộc vào readiness của vendor, dữ liệu, SOP và training.
+</li></ul>
+<h2 id="11-out-of-scope">11. Out Of Scope</h2>
+<ul>
+<li>Phát triển phần mềm, API, middleware hoặc mobile app.
+</li><li>Mua license phần mềm.
+</li><li>Đàm phán hợp đồng thương mại với vendor.
+</li><li>Thiết kế brand identity hoặc creative campaign cho loyalty.
+</li><li>Vận hành campaign CRM dài hạn sau hypercare.
+</li><li>Chịu trách nhiệm doanh thu, repeat rate hoặc member revenue sau go-live nếu không có scope vận hành tăng trưởng riêng.
+</li><li>Chỉnh sửa hệ thống PMS/POS/CRM ngoài quyền hạn hoặc phạm vi vendor.
+</li><li>Nhập liệu thủ công dữ liệu khách hàng cũ ở quy mô lớn nếu không có phụ lục riêng.
+</li></ul>
+<h2 id="12-timeline-mau">12. Timeline Mẫu</h2>
+<p>Timeline thực tế phụ thuộc độ phức tạp hệ thống và vendor.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Giai đoạn</th><th>Thời lượng tham khảo</th><th>Kết quả chính</th></tr></thead>
+<tbody>
+<tr><td>Kickoff &amp; Discovery</td><td>1 tuần</td><td>Project plan, stakeholder map, current-state notes</td></tr>
+<tr><td>Rule &amp; Scenario Design</td><td>1-2 tuần</td><td>Loyalty rulebook, scenario book, exception matrix</td></tr>
+<tr><td>Vendor Configuration Coordination</td><td>2-4 tuần</td><td>Requirement tracker, configuration review, issue log</td></tr>
+<tr><td>SOP &amp; Training Material</td><td>1-2 tuần</td><td>FO/F&amp;B/Cashier SOP, training deck</td></tr>
+<tr><td>UAT</td><td>1-2 tuần</td><td>UAT script, defect log, UAT report</td></tr>
+<tr><td>Go-Live</td><td>1 tuần</td><td>Go-live checklist, launch support</td></tr>
+<tr><td>Hypercare</td><td>1-4 tuần</td><td>Issue tracker, daily/weekly report, post-launch review</td></tr>
+</tbody></table></div>
+<h2 id="13-pricing-unit-goi-y">13. Pricing Unit Gợi Ý</h2>
+<p>Có thể đóng gói thương mại theo một trong các cách:</p>
+<ul>
+<li>Fixed fee theo dự án.
+</li><li>Monthly retainer trong thời gian triển khai.
+</li><li>Day-rate cho Implementation PM / BA / Trainer.
+</li><li>Package theo số outlet, số property hoặc số hệ thống cần phối hợp.
+</li><li>Hypercare add-on sau go-live.
+</li></ul>
+<p>Gợi ý phân tầng:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Gói</th><th>Phù hợp với</th><th>Phạm vi</th></tr></thead>
+<tbody>
+<tr><td>Basic</td><td>1 khách sạn, ít tích hợp</td><td>Rule, SOP, vendor coordination, UAT, training</td></tr>
+<tr><td>Standard</td><td>Khách sạn + nhà hàng</td><td>Thêm F&amp;B SOP, cashier flow, go-live support</td></tr>
+<tr><td>Advanced</td><td>Multi-outlet hoặc có PMS/POS integration</td><td>Thêm integration coordination, expanded UAT, hypercare dài hơn</td></tr>
+</tbody></table></div>
+<h2 id="14-cau-mo-ta-ban-hang-ngan">14. Câu Mô Tả Bán Hàng Ngắn</h2>
+<p>Chúng tôi cung cấp đội triển khai vận hành loyalty cho khách sạn và nhà hàng, làm đầu mối giữa business, FO/F&amp;B và vendor CRM/loyalty. Phạm vi bao gồm chuẩn hóa rule, viết kịch bản vận hành, điều phối vendor, UAT, training, go-live và hypercare để chương trình loyalty không chỉ được cấu hình trên hệ thống mà còn chạy được trong vận hành thực tế.</p>
+    </main>
+  </div>
+</body>
+</html>

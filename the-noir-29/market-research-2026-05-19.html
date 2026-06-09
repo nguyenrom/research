@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nước hoa thay thế &amp; đồng hành Le Labo Thé Noir 29 — Báo cáo so sánh</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#fff; --ink:#1f2430; --muted:#6b7280; --line:#e7e2d8;
+    --accent:#7c5e3c; --accent-soft:#f1eadf;
+    --good:#1f8a4c; --good-bg:#e7f6ec;
+    --warn:#b97c12; --warn-bg:#fdf3e0;
+    --bad:#c0392b;  --bad-bg:#fbeae8;
+    --gold:#caa14a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 22px 80px;}
+  header.hero{background:linear-gradient(135deg,#2c2620,#4a3c2a);color:#f6f1e7;
+    border-radius:18px;padding:34px 34px 30px;margin-bottom:26px;}
+  header.hero .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:12px;opacity:.7}
+  header.hero h1{margin:.35em 0 .15em;font-size:30px;line-height:1.25}
+  header.hero .meta{font-size:13px;opacity:.78;margin-top:10px}
+  .verdict{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0 30px}
+  .verdict .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .verdict .box h3{margin:0 0 8px;font-size:15px;color:var(--accent)}
+  .verdict .box p{margin:0;font-size:14.5px;color:#333}
+  .pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;margin-right:6px}
+  .pill.win{background:var(--good-bg);color:var(--good)}
+  .pill.no{background:var(--bad-bg);color:var(--bad)}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 20px;margin-bottom:30px;font-size:14px}
+  nav.toc b{display:block;margin-bottom:6px;color:var(--accent);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  nav.toc a{color:var(--ink);text-decoration:none;margin-right:18px;line-height:2.1;border-bottom:1px dotted #bbb}
+  nav.toc a:hover{color:var(--accent)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 30px;margin-bottom:22px}
+  h2{font-size:22px;margin:.1em 0 .7em;padding-bottom:.35em;border-bottom:2px solid var(--accent-soft);color:#3a2f20}
+  h3{font-size:17px;margin:1.3em 0 .5em;color:var(--accent)}
+  h4{font-size:15px;margin:1.1em 0 .4em;color:#5a4a32;letter-spacing:.01em}
+  p,li{font-size:15px}
+  .note{font-size:13.5px;color:var(--muted);font-style:italic}
+  .src{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .src a{color:#8a7350}
+  blockquote{margin:16px 0;padding:14px 18px;background:var(--accent-soft);
+    border-left:4px solid var(--accent);border-radius:0 8px 8px 0;font-size:14.5px}
+  .callout{background:#fff8ec;border:1px solid #f0dcb6;border-radius:10px;padding:14px 18px;font-size:14px;margin:16px 0}
+  .addendum-banner{background:linear-gradient(135deg,#3d2f20,#7c5e3c);color:#fdf6e8;border-radius:14px;padding:18px 22px;margin:0 0 26px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid #5c4830}
+  .addendum-banner .tag{background:#fdf6e8;color:#3d2f20;font-weight:800;font-size:11px;letter-spacing:.12em;padding:4px 10px;border-radius:6px;text-transform:uppercase}
+  .addendum-banner .text{font-size:14.5px;flex:1;min-width:240px}
+  .addendum-banner a{color:#ffe9b8;font-weight:700;text-decoration:underline}
+  section.addendum{border:2px solid var(--accent);background:linear-gradient(180deg,#fffdf7 0%,#fff 60%)}
+  section.addendum h2{color:var(--accent);border-bottom-color:var(--accent)}
+  .pick-card{background:#fff8ec;border:2px solid #d9b76b;border-radius:12px;padding:18px 22px;margin:16px 0}
+  .pick-card .pick-title{font-size:18px;font-weight:800;color:#3d2f20;margin:0 0 6px}
+  .pick-card .pick-sub{font-size:13px;color:var(--muted);margin:0 0 12px}
+  table{border-collapse:collapse;width:100%;margin:16px 0;font-size:13.6px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f3eee3;font-weight:700;color:#3a2f20}
+  tbody tr:nth-child(even){background:#fbf9f4}
+  td strong{color:#2a2218}
+  .rank{white-space:nowrap;font-weight:800}
+  .m-best{background:var(--good-bg) !important}
+  .m-good td{}
+  .badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .b-best{background:var(--good-bg);color:var(--good)}
+  .b-part{background:var(--warn-bg);color:var(--warn)}
+  .b-no{background:var(--bad-bg);color:var(--bad)}
+  .star{color:var(--gold)}
+  ol li,ul li{margin:.3em 0}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:30px}
+  @media (max-width:680px){.verdict{grid-template-columns:1fr}.wrap{padding:18px 14px 60px}header.hero{padding:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Market Research · Niche Fragrance</div>
+  <h1>Có nước hoa nào đánh giá cao hơn để thay thế<br>Le Labo Thé Noir 29 không?</h1>
+  <div>Ứng viên cần thẩm định: <strong>Diptyque Philosykos EDP</strong></div>
+  <div class="meta">Tác giả: Rom · Ngày: 19/05/2026 · Cập nhật: 21/05/2026 (addendum "pick đồng hành") · Thước đo: điểm cộng đồng (Fragrantica/Parfumo) + giới phê bình · Ngân sách: không giới hạn</div>
+</header>
+
+<div class="addendum-banner">
+  <span class="tag">🎯 Addendum 21/05</span>
+  <div class="text"><strong>Brief tinh chỉnh:</strong> companion + gift cho nữ thích unisex. Layers: <strong>B683 vs Ganymede</strong> · <strong>🎁 gift lens</strong> · <strong>📅 cross-ref Fragrantica top unisex 2020–2025</strong> · <strong>🌧️ pick mùa hè/mưa SG</strong> → <a href="#addendum">đi tới khuyến nghị cập nhật ↓</a></div>
+</div>
+
+<div class="verdict">
+  <div class="box">
+    <h3>❓ Có ứng viên tốt hơn không?</h3>
+    <p><span class="pill win">CÓ</span> Dẫn đầu là <strong>BDK Gris Charnel</strong> — khớp cả <em>fig + trà đen</em>, điểm cộng đồng cao &amp; ổn định (4.23/5, ~4.090 vote), bám tốt hơn Thé Noir 29. Kế đến: <strong>Guerlain Néroli Outrenoir</strong>, <strong>L'Artisan Tea for Two</strong>.</p>
+  </div>
+  <div class="box">
+    <h3>❓ Philosykos EDP có tốt cho bạn?</h3>
+    <p><span class="pill no">CHỈ MỘT PHẦN</span> Danh tiếng rất cao ("best fig" – Marie Claire 2025) nhưng <strong>thuần fig — không trà đen, không khói</strong> và <strong>longevity ~4h</strong>. Chỉ khớp ~½ DNA bạn cần ⟹ không phải bản nâng cấp tối ưu.</p>
+  </div>
+</div>
+
+<nav class="toc">
+  <b>Mục lục</b>
+  <a href="#addendum" style="color:var(--accent);font-weight:700">🎯 Addendum: Pick đồng hành</a>
+  <a href="#overview">Tổng quan</a>
+  <a href="#ranking">★ Bảng xếp hạng cuối</a>
+  <a href="#groups">So sánh theo nhóm</a>
+  <a href="#philo">Thẩm định Philosykos</a>
+  <a href="#wardrobe">🥊 Đối thủ &amp; 🤝 Đồng hành</a>
+  <a href="#season">❄️☀️ Theo mùa</a>
+  <a href="#behavior">Hành vi người dùng</a>
+  <a href="#pain">Điểm đau Thé Noir 29</a>
+  <a href="#journey">Hành vi mua</a>
+  <a href="#action">Kế hoạch decant</a>
+  <a href="#decantplan">📦 Lịch sample 4 chai</a>
+  <a href="#method">Phương pháp &amp; nguồn</a>
+</nav>
+
+<section id="overview">
+  <h2>Tổng quan</h2>
+  <p>Nghiên cứu trả lời: <em>liệu có nước hoa nào được đánh giá cao hơn / thay thế tốt cho Le Labo Thé Noir 29 không, và Diptyque Philosykos EDP có phải ứng viên phù hợp.</em> Phương pháp: tổng hợp điểm cộng đồng (Fragrantica/Parfumo) + nhận định giới phê bình (CaFleureBon, Bois de Jasmin, Now Smell This, Marie Claire), lọc theo DNA bạn yêu cầu — <strong>fig + trà đen khói + khí chất unisex sang–sạch</strong> — không giới hạn ngân sách.</p>
+  <h3>Hồ sơ chuẩn — Le Labo Thé Noir 29 (mốc so sánh)</h3>
+  <ul>
+    <li><strong>Notes:</strong> Fig, Bay Leaf, Bergamot / Cedar, Vetiver, Musk / Tobacco, Hay — <em>cảm hứng trà đen, fig trội</em></li>
+    <li><strong>Fragrantica:</strong> ~4.0–4.1/5 (hàng nghìn vote — rất được yêu thích) · <span class="note">độ tin cậy: trung bình</span></li>
+    <li><strong>Hiệu suất:</strong> longevity 6–8h, projection vừa (phân hoá theo da/batch)</li>
+    <li><strong>Phê bình:</strong> CaFleureBon ví như <em>"To Have and Have Not"</em> — khen sự dao động sáng/tối thanh lịch; điểm yếu công nhận: note trà mờ, fig lấn át</li>
+  </ul>
+</section>
+
+<section id="ranking">
+  <h2>★ Bảng xếp hạng cuối — theo tiêu chí của bạn</h2>
+  <table>
+    <thead><tr><th>Hạng</th><th>Nước hoa</th><th>Điểm cộng đồng</th><th>Khớp DNA<br>(fig + trà + sang)</th><th>Hiệu suất vs Thé Noir 29</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td class="rank"><span class="star">🥇</span> #1</td><td><strong>BDK Gris Charnel (EdP)</strong></td><td>4.23/5 (~4.090) — <em>cao, ổn định</em></td><td><span class="badge b-best">✅✅ Cả fig + trà đen + sang</span></td><td>✅ Tốt hơn (~7.5h)</td><td><strong>Thay thế &amp; nâng cấp tốt nhất</strong></td></tr>
+      <tr><td class="rank">🥈 #2</td><td><strong>Guerlain Néroli Outrenoir</strong></td><td>"Masterpiece/best tea" (cộng đồng tôn sùng)</td><td><span class="badge b-part">🟡 Trà khói + sang, fig mờ</span></td><td>✅ Tốt (8h+, intimate)</td><td>Tốt nếu nghiêng <em>vế trà</em></td></tr>
+      <tr><td class="rank">🥉 #3</td><td><strong>L'Artisan Tea for Two</strong></td><td>Cult, điểm cá nhân cao (9.x/10)</td><td><span class="badge b-part">🟡 Trà–tobacco ấm, không fig</span></td><td>➖ Tương đương</td><td>Kinh điển, giá trị tốt</td></tr>
+      <tr><td class="rank">#4</td><td><strong>Diptyque Philosykos EDP</strong></td><td>~4.0/5; "best fig" Marie Claire</td><td><span class="badge b-no">⚠️ Chỉ fig, không trà/khói</span></td><td>❌ Kém hơn (~4h)</td><td>Chỉ hợp nếu ưu tiên <em>fig thuần</em></td></tr>
+      <tr><td class="rank">#5</td><td><strong>Bvlgari Eau Parfumée au Thé Noir</strong></td><td>Mixed-positive</td><td><span class="badge b-part">🟡 Trà + hồng + oud (lệch oriental)</span></td><td>➖ 4–5h</td><td>Phương án trà-oriental</td></tr>
+      <tr><td class="rank">Dự bị</td><td>Premier Figuier Extrême / Fig Infusion / Le Labo Another 13</td><td>Khá–cao</td><td><span class="badge b-part">🟡 Lệch (kem-dừa / sạch-musky)</span></td><td>Đa dạng</td><td>Sample thêm nếu thích nhánh phụ</td></tr>
+    </tbody>
+  </table>
+  <blockquote><strong>Insight chốt:</strong> điểm yếu lớn nhất của Thé Noir 29 (<em>note trà quá mờ</em>) chính là tiêu chí lọc — ứng viên lý tưởng phải <strong>cân bằng fig + trà đen tốt hơn bản gốc</strong>, không chỉ "fig đẹp". Đây là lý do Philosykos (thuần fig) không tối ưu, còn Gris Charnel (fig + trà) thắng.</blockquote>
+</section>
+
+<section id="groups">
+  <h2>So sánh chi tiết theo nhóm</h2>
+
+  <h3>Nhóm A — Trục FIG (sung), gần "vế fig" của Thé Noir 29</h3>
+  <table>
+    <thead><tr><th>Ứng viên</th><th>Notes lõi</th><th>Điểm cộng đồng</th><th>Phê bình</th><th>Khớp DNA của bạn</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Diptyque Philosykos EDP</strong></td><td>Fig leaf, fig sap, black pepper, cedar</td><td>~4.0/5 Fragrantica; FragranceNet 4.2; bản LE 4.25 (110) · <em>tin cậy TB</em></td><td>Marie Claire: <strong>"Best fig overall"</strong>; CaFleureBon "modern masterpiece". <strong>NHƯNG</strong> Now Smell This/Scentaur: longevity ~<strong>4h</strong>, "powdery như đồ em bé"</td><td><span class="badge b-part">⚠️ Một phần</span> fig đẹp &amp; thanh lịch nhưng <strong>không trà, không khói</strong>; hiệu suất yếu hơn</td></tr>
+      <tr><td><strong>L'Artisan Premier Figuier Extrême</strong></td><td>Fig, coconut, almond milk, sandalwood</td><td>Cult class.; Bois de Jasmin kính trọng</td><td>Fig kem/dừa, hè, ngọt hơn</td><td><span class="badge b-part">⚠️ Lệch fig-kem-dừa</span> mất nét khói/trà</td></tr>
+      <tr><td><strong>Hermès Un Jardin en Méditerranée</strong></td><td>Fig leaf, citrus, oleander, cedar</td><td>Khá cao, designer-niche</td><td>"Massive citrus", xanh-sắc</td><td><span class="badge b-no">❌ Quá citrus/xanh</span> thiếu chiều sâu</td></tr>
+      <tr><td><strong>Essential Parfums Fig Infusion</strong></td><td>Fig, bergamot, woody</td><td>Tốt, giá trị cao</td><td>"Bản eau nhẹ của Gris Charnel"</td><td><span class="badge b-part">🟡 Nhẹ hơn</span> hợp làm bản ngày</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Nhóm B — Trục TRÀ ĐEN (đáp đúng điểm đau lớn nhất)</h3>
+  <table>
+    <thead><tr><th>Ứng viên</th><th>Notes lõi</th><th>Điểm cộng đồng</th><th>Phê bình</th><th>Khớp DNA của bạn</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Guerlain Néroli Outrenoir</strong></td><td>Neroli, <strong>smoky black tea</strong>, ambrette, woods</td><td>Ca ngợi <strong>"masterpiece / best tea fragrance"</strong></td><td>Cộng đồng cực kỳ tôn sùng; longevity 8h+ (intimate)</td><td><span class="badge b-best">✅ Rất mạnh</span> vế trà đen khói + sang; thiếu fig rõ</td></tr>
+      <tr><td><strong>Bvlgari Eau Parfumée au Thé Noir</strong></td><td>Black tea, rose, oud, leather, tobacco</td><td>Mixed-positive</td><td>NST tích cực; oriental trà–hồng–oud</td><td><span class="badge b-part">🟡 Trà rõ + tobacco</span> nhưng thêm hồng/oud; 4–5h</td></tr>
+      <tr><td><strong>L'Artisan Tea for Two</strong></td><td>Black tea, spices, tobacco, honey, gingerbread</td><td>Cult classic, điểm cá nhân cao (9.x/10)</td><td>Được yêu lâu năm; ấm, gia vị, khói</td><td><span class="badge b-part">🟡 Trà–tobacco ấm</span> ngọt-gia vị, không fig</td></tr>
+      <tr><td><strong>Byredo Night Veils / Dear Polly</strong></td><td>Black tea, leather (Night Veils)</td><td>Khá</td><td>"Earl Grey trong mưa" — tối, da thuộc</td><td><span class="badge b-part">🟡 Tối/da hơn</span> đáng sample</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Nhóm C — HYBRID fig + trà đen (gần DNA Thé Noir 29 NHẤT)</h3>
+  <table>
+    <thead><tr><th>Ứng viên</th><th>Notes lõi</th><th>Điểm cộng đồng</th><th>Phê bình</th><th>Khớp DNA của bạn</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td><strong>★ BDK Parfums Gris Charnel (EdP)</strong></td><td>Cardamom, <strong>fig, black tea</strong>, iris, vetiver, <strong>sandalwood</strong>, tonka</td><td><strong>4.23/5 Fragrantica, ~4.090 vote</strong> · <em>tin cậy CAO</em></td><td>"Masterclass in balance"; longevity ~<strong>7.5h</strong>; diễn đàn xếp <strong>top-2 nước hoa trà cùng Thé Noir 29</strong></td><td><span class="badge b-best">✅✅ Khớp nhất</span> cả fig + trà đen, sang unisex, bám tốt hơn</td></tr>
+      <tr><td><strong>Gris Charnel Extrait</strong></td><td>đậm đặc hơn</td><td>Cao</td><td>Bản extrait đậm/ngọt hơn</td><td><span class="badge b-best">✅ Nếu thích đậm</span> có thể hơi ngọt với gu "sạch"</td></tr>
+      <tr><td><strong>Le Labo Another 13</strong></td><td>ambroxan, musk, fig nhẹ</td><td>Rất cao, bán chạy</td><td>Sạch–musky–fig thoáng, "da sạch"</td><td><span class="badge b-part">🟡 Sạch/musky</span> mất vế trà &amp; khói</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="philo">
+  <h2>Thẩm định riêng — Diptyque Philosykos EDP</h2>
+  <p><strong>Có phải "ứng viên tốt" không? → Phụ thuộc bạn ưu tiên vế nào của Thé Noir 29.</strong></p>
+  <table>
+    <thead><tr><th>Tiêu chí</th><th>Đánh giá Philosykos EDP</th></tr></thead>
+    <tbody>
+      <tr><td>Điểm cộng đồng</td><td>Cao &amp; kinh điển (~4.0/5; "best fig overall" – Marie Claire 2025) — về <strong>danh tiếng</strong> xứng đáng</td></tr>
+      <tr><td>Giới phê bình</td><td>Rất được trọng vọng (CaFleureBon "modern masterpiece", Bois de Jasmin) — <strong>điểm cộng lớn</strong></td></tr>
+      <tr><td>Khớp "fig sung"</td><td><span class="badge b-best">✅ Xuất sắc</span> fig lá/sữa-xanh chân thực nhất thị trường</td></tr>
+      <tr><td>Khớp "trà đen khói"</td><td><span class="badge b-no">❌ Không có</span> thuần fig xanh, không trà, không tobacco/khói</td></tr>
+      <tr><td>Khớp "unisex sang sạch"</td><td><span class="badge b-best">✅ Có</span> tối giản, thanh, "free spirit"</td></tr>
+      <tr><td>Hiệu suất</td><td><span class="badge b-no">❌ Yếu hơn rõ</span> ~4h, projection mờ, rủi ro "powdery như đồ em bé"</td></tr>
+      <tr><td>Độc đáo / giá trị</td><td><span class="badge b-best">✅ Biểu tượng</span> dễ kiếm decant; <strong>không</strong> nâng cấp độ phức tạp so với Thé Noir 29</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Kết luận về Philosykos:</strong> là lựa chọn thay thế tốt <strong>CHỈ KHI</strong> điều bạn yêu ở Thé Noir 29 chủ yếu là <em>nét fig xanh thanh lịch</em> và bạn sẵn lòng bỏ vế trà đen/khói + chấp nhận longevity kém hơn. Vì bạn muốn giữ <em>cả</em> fig <strong>lẫn</strong> trà đen khói trong tổng thể sang–sạch, Philosykos chỉ đáp ứng ~½ DNA và còn thua về hiệu suất ⟹ <strong>không phải ứng viên tối ưu</strong>. Nên xem nó là "một nhánh fig thuần để sample", không phải "bản nâng cấp".</div>
+  <p class="src">Nguồn: <a href="https://www.marieclaire.com/beauty/best-fig-perfumes/">Marie Claire – Best Fig Perfumes 2025</a> · <a href="https://thescentaur.com/philosykos-eau-de-parfum-by-diptyque-review/">The Scentaur – Philosykos EDP</a> · <a href="https://cafleurebon.com/cafleurebon-moderm-masterpieces-diptyque-philosykos-the-elements-of-style/">CaFleureBon – Philosykos</a> · <a href="https://www.fragrantica.com/perfume/BDK-Parfums/Gris-Charnel-57038.html">Fragrantica – Gris Charnel</a> · <a href="https://nstperfume.com/2020/10/28/bvlgari-eau-parfumee-au-the-noir-fragrance-review/">Now Smell This – Bvlgari Thé Noir</a> · <a href="https://www.fragrantica.com/perfume/Guerlain/Neroli-Outrenoir-40345.html">Fragrantica – Néroli Outrenoir</a> · <a href="https://beta.fragrantica.com/board/viewtopic.php?id=310826">Fragrantica forum – Similar to Thé Noir 29</a></p>
+</section>
+
+<section id="wardrobe">
+  <h2>🥊 Đối thủ cạnh tranh &amp; 🤝 Bạn đồng hành</h2>
+  <p>Hai vai trò khác nhau hoàn toàn trong tủ của người dùng Thé Noir 29:</p>
+  <ul>
+    <li><strong>🥊 Đối thủ cạnh tranh</strong> — cùng phân khúc, cùng concept, trận A/B trong đầu khách (chọn 1 trong 2). Mục tiêu: <em>thay thế / nâng cấp</em>.</li>
+    <li><strong>🤝 Bạn đồng hành</strong> — cùng tribe khách, đi hướng mùi <em>khác hẳn</em>. Dùng song song, bổ trợ mood/dịp/mùa khác. Mục tiêu: <em>lấp khoảng trống</em>, không đụng slot.</li>
+  </ul>
+
+  <h3>🥊 Đối thủ cạnh tranh — BDK Parfums Gris Charnel (EdP)</h3>
+  <table>
+    <thead><tr><th>Tiêu chí</th><th>Lý do là đối thủ trực tiếp</th></tr></thead>
+    <tbody>
+      <tr><td>Cùng concept</td><td><span class="badge b-best">✅</span> Fig + trà đen — gần như bản sao DNA, khác phối hợp</td></tr>
+      <tr><td>Cùng phân khúc</td><td><span class="badge b-best">✅</span> Niche cao cấp (~$245/100ml, ngang Le Labo)</td></tr>
+      <tr><td>Cùng tribe khách</td><td><span class="badge b-best">✅</span> Niche unisex sang, gu tinh tế</td></tr>
+      <tr><td>Vị thế cộng đồng</td><td>Diễn đàn xếp <strong>top-2 nước hoa trà cùng Thé Noir 29</strong></td></tr>
+      <tr><td>Khác biệt cốt lõi</td><td>Điểm cộng đồng cao hơn &amp; ổn định hơn (4.23/5, ~4.090 vote); bám tốt hơn (~7.5h)</td></tr>
+      <tr><td>Vai trò</td><td><strong>Thay thế / nâng cấp</strong>, không phải bổ trợ</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🤝 Bạn đồng hành — Options quiet brand ≤ $250</h3>
+  <p class="note">Tuyển chọn quiet brand <strong>dưới radar, không bị "basic-ified"</strong> — cố ý loại Santal 33 (đã mainstream), Baccarat Rouge 540 (viral TikTok), By the Fireplace (mainstream-cool).</p>
+  <table>
+    <thead><tr><th>⭐</th><th>Thương hiệu / Mùi</th><th>Giá</th><th>Hướng mùi (complement)</th><th>Vì sao hợp người dùng Thé Noir 29</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td class="rank">⭐⭐</td><td><strong>Maison Louis Marie No.04 Bois de Balincourt</strong></td><td><strong>$65/50ml</strong></td><td>Sandalwood, cedar, vetiver — "ancient forest at golden hour", ấm-kem-trầm</td><td><strong>Quiet luxury hot nhất hiện nay</strong> — cult dưới radar; <em>"woody không hung hăng, spicy không sắc, ấm không gắt"</em>. Vai trò: <strong>chữ ký hằng ngày woody</strong>. Giá ~1/5 Le Labo.</td></tr>
+      <tr class="m-best"><td class="rank">⭐⭐</td><td><strong>Aesop Hwyl</strong></td><td>~$195</td><td>Cedar, cypress, vetiver, incense — rừng Nhật, "stirring emotion" (Welsh)</td><td><strong>"Quiet, intellectual cousin"</strong> của niche storytelling. Cùng <em>nghi lễ trầm tư</em> như Thé Noir 29 ở register <strong>rừng/trầm hương</strong> thay vì tách trà. Cặp mood đẹp nhất.</td></tr>
+      <tr><td class="rank">⭐</td><td><strong>D.S. &amp; Durga Debaser</strong></td><td>~$210</td><td>Green fig, blond woods, tonka — fig hằng ngày</td><td>Marie Claire 2025: <strong>"Best everyday fig"</strong>. Brooklyn indie quiet cult. Fig sibling tránh Philosykos quen thuộc.</td></tr>
+      <tr><td class="rank">⭐</td><td><strong>Imaginary Authors Yesterday Haze</strong></td><td>$129</td><td>Fig + tree bark + orchard dust</td><td>Marie Claire 2025: <strong>"Most complex fig"</strong>. Ultra-indie, mỗi chai là 1 cuốn tiểu thuyết tưởng tượng — <em>cực kỳ quiet</em>, khách tri thức.</td></tr>
+      <tr><td class="rank">⭐</td><td><strong>D.S. &amp; Durga I Don't Know What</strong></td><td>~$210</td><td>Trừu tượng — "mùi của không có gì cụ thể"</td><td>Indie cực quiet, ý niệm — hợp người yêu khía cạnh <em>kể chuyện</em> của Le Labo.</td></tr>
+      <tr><td class="rank">Bonus</td><td><strong>Marc-Antoine Barrois B683</strong></td><td><strong>$270/100ml</strong> <em>(vượt $20)</em></td><td>Saffron, pepper, leather, ambroxan, sandalwood</td><td><em>"Jude Law in The Holiday — quiet luxury man, old money British"</em>; cộng đồng ngầm chê Le Labo đã quá phổ biến. Paris quiet-luxury chuẩn nhất.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Khuyến nghị Top-2 cho vai trò đồng hành</h3>
+  <table>
+    <thead><tr><th>Vai trò</th><th>Lựa chọn</th><th>Logic</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td class="rank"><span class="star">🥇</span> Daily quiet warm woody</td><td><strong>Maison Louis Marie No.04 Bois de Balincourt</strong> ($65)</td><td>Giá tuyệt vời, cult thật sự, woody-ấm bổ trợ hoàn hảo cho khoảng trống "không phải tea/fig". Vai trò <em>chữ ký hằng ngày</em>.</td></tr>
+      <tr><td class="rank">🥈 Evening contemplative</td><td><strong>Aesop Hwyl</strong> ($195)</td><td>Nếu bạn yêu Thé Noir 29 vì <em>cảm giác nghi lễ trầm tư</em>, Hwyl mở hướng <em>rừng/incense</em> cùng mood nhưng khác palette. Vai trò <em>evening/đặc biệt</em>.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>🌲 Forest tươi–ấm — Slot thứ 4 trong tủ</h3>
+  <p>Để phủ thêm trải nghiệm <em>"rừng + tươi mát + ấm áp"</em> — một mood độc lập với 3 slot đã có. Top 3 ứng viên forest niche được so sánh:</p>
+  <table>
+    <thead><tr><th>#</th><th>Nước hoa</th><th>Giá</th><th>Tươi (top)</th><th>Ấm (base)</th><th>Rừng (chất)</th><th>Hiệu suất</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td class="rank"><span class="star">🥇</span></td><td><strong>Diptyque Tam Dao EDP</strong></td><td>~$220 / 75ml</td><td>✅ Italian cypress + myrtle</td><td>✅ Mysore sandalwood + cedar + amber</td><td>✅ "Holy forests of Indochina" — rừng tu viện</td><td>✅ Tốt (7–8h, toả rộng)</td></tr>
+      <tr><td class="rank">🥈</td><td><strong>Heretic Dirty Hinoki</strong></td><td>~$225 / 50ml</td><td>✅ Lemon + thyme + nutmeg</td><td>✅ Resin + cashmere + cedar Himalaya</td><td>✅ "Shinrin-yoku / forest bathing" — hinoki Nhật, 97% tự nhiên</td><td><span class="badge b-no">❌ Yếu (3–4h)</span></td></tr>
+      <tr><td class="rank">🥉</td><td><strong>Slumberhouse Norne</strong></td><td>~$160 / 30ml extrait</td><td>🟡 Greenery nhẹ</td><td>✅✅ Spruce/fir balsamic + clove + burnt wood</td><td>✅ Resinous conifer sâu/đông</td><td><span class="badge b-best">✅✅ Extrait (10h+)</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Chọn Tam Dao EDP làm slot 4</strong> vì: (1) <strong>cân bằng tốt nhất giữa tươi (cypress/myrtle) và ấm (Mysore sandalwood)</strong> — đúng brief; (2) hiệu suất vượt trội so với Hwyl/Hinoki (cộng đồng: <em>"fresher, cleaner version with much more projection"</em>); (3) niche classic — <strong>không thua Thé Noir 29 về đẳng cấp</strong>; Tam Dao là <em>pick connoisseur</em> của Diptyque, không bị "basic-ified" như Santal 33; (4) <strong>bổ trợ Hwyl</strong>: Hwyl đi <em>dry-smoky-incense</em>, Tam Dao đi <em>fresh-warm-balanced</em> — 2 mood rừng khác hẳn, không đụng nhau.</div>
+
+  <h3>★ Tóm tắt phân vai cuối — Cấu trúc tủ 4 chai</h3>
+  <table>
+    <thead><tr><th>Slot</th><th>Lựa chọn</th><th>Giá</th><th>Vai trò trong tủ</th><th>Mood</th></tr></thead>
+    <tbody>
+      <tr><td class="rank">🥊 Đối thủ cạnh tranh</td><td><strong>BDK Gris Charnel</strong></td><td>$245/100ml</td><td>Nâng cấp / A-B với Thé Noir 29</td><td>Statement fig + trà đen</td></tr>
+      <tr><td class="rank">🤝 Đồng hành — daily woody</td><td><strong>Maison Louis Marie No.04</strong></td><td>$65/50ml</td><td>Chữ ký hằng ngày, khác palette</td><td>Ấm-kem, daily</td></tr>
+      <tr><td class="rank">🤝 Đồng hành — evening contemplative</td><td><strong>Aesop Hwyl</strong></td><td>$195/50ml</td><td>Nghi lễ trầm tư, dry-smoky</td><td>Rừng dry/incense — tối</td></tr>
+      <tr class="m-best"><td class="rank">🌲 Đồng hành — forest tươi-ấm</td><td><strong>Diptyque Tam Dao EDP</strong></td><td>$220/75ml</td><td>Rừng cân bằng, niche classic</td><td>Rừng fresh + sandalwood — day/evening</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Tổng chi:</strong> ~$725 cho 4 chai (vs $310 cho riêng 1 chai Thé Noir 29 100ml). Phủ <strong>4 mood/dịp khác biệt</strong> — <em>statement · daily · evening dark-rừng · day-rừng tươi-ấm</em>. Bộ tủ niche hoàn chỉnh, không có 2 chai nào trùng vai trò.<br><br><strong>Logic 2 chai rừng song song:</strong> Hwyl = "<em>rừng tối, khói trầm hương, evening một mình</em>"; Tam Dao = "<em>rừng tu viện sáng, sandalwood ấm, day/social</em>". Cộng đồng đã xác nhận 2 hướng khác hẳn → <strong>cộng tác chứ không cạnh tranh</strong>.</div>
+  <p class="src">Nguồn forest bổ sung: <a href="https://www.fragrantica.com/perfume/Diptyque/Tam-Dao-Eau-de-Parfum-49104.html">Fragrantica – Tam Dao EDP</a> · <a href="https://www.fragrantica.com/perfume/Heretic-Parfum/Dirty-Hinoki-69481.html">Fragrantica – Dirty Hinoki</a> · <a href="https://www.fragrantica.com/perfume/Slumberhouse/Norne-17418.html">Fragrantica – Norne</a> · <a href="https://hereticparfum.com/products/dirty-hinoki">Heretic – Dirty Hinoki</a> · <a href="https://www.fragrantica.com/board/viewtopic.php?id=334538">Fragrantica Club – Hwyl vs Hinoki</a> · <a href="https://www.fragrantica.com/news/Meet-the-Norns-Norne-Slumberhouse-24964.html">Fragrantica – Meet the Norns</a></p>
+  <p class="src">Nguồn: <a href="https://aromaauthority.com/alternatives/santal-33-dupe/">Aroma Authority – No.04 vs Santal 33</a> · <a href="https://stylecaster.com/beauty/skin-care/1180430/maison-louis-marie-no-4-vs-santal-33/">StyleCaster – Maison Louis Marie No.04</a> · <a href="https://www.fragrantica.com/news/B683-by-Marc-Antoine-Barrois-The-Little-Prince-of-Perfume-8592.html">Fragrantica – B683 Little Prince</a> · <a href="https://nosey.substack.com/p/aesop-diptyque-le-labo-ds-durga">Nosey – Aesop, Diptyque, Le Labo, DS &amp; Durga</a> · <a href="https://thecandyperfumeboy.com/2017/12/12/perfume-review-hwyl-by-aesop/">Candy Perfume Boy – Hwyl</a> · <a href="https://www.marieclaire.com/beauty/best-fig-perfumes/">Marie Claire – Best Fig Perfumes 2025</a> · <a href="https://www.apartstyle.com/post/brands-like-imaginary-authors">Apartstyle – Brands like Imaginary Authors</a></p>
+</section>
+
+<section id="season">
+  <h2>❄️ ☀️ Khuyến nghị theo mùa</h2>
+  <p class="note">Xếp theo "season voting" cộng đồng + cấu trúc note. Nguyên tắc: ấm–ngọt–khói–gia vị → mùa lạnh; xanh–citrus–fig lá–nhẹ → mùa nóng.</p>
+
+  <h3>❄️ Ưu tiên MÙA ĐÔNG — ấm, cozy, đậm, bám lâu</h3>
+  <table>
+    <thead><tr><th>Ưu tiên</th><th>Nước hoa</th><th>Vì sao hợp mùa đông</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td class="rank"><span class="star">★</span> #1</td><td><strong>BDK Gris Charnel (EdP)</strong></td><td>"Warm, cozy, ideal for fall &amp; winter" — fig + trà đen + sandalwood/tonka kem-ấm, cardamom; bám ~7.5h. <strong>Vừa khớp DNA vừa là vua mùa lạnh</strong></td></tr>
+      <tr><td class="rank">#2</td><td><strong>Gris Charnel Extrait</strong></td><td>Đậm/kem hơn — "cashmere coat"; mùa đông sâu, tối</td></tr>
+      <tr><td class="rank">#3</td><td><strong>L'Artisan Tea for Two</strong></td><td>Trà đen + gừng/mật ong/tobacco/gingerbread — ấm-gia vị kinh điển cho lạnh</td></tr>
+      <tr><td class="rank">#4</td><td><strong>Bvlgari Eau Parfumée au Thé Noir</strong></td><td>Trà–hồng–oud–leather oriental, ấm tối — đẹp cho đông</td></tr>
+      <tr><td class="rank">Tham chiếu</td><td><em>Le Labo Thé Noir 29 (gốc)</em></td><td>Bản thân vốn lệch thu/đông (fig-tobacco-cedar)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>☀️ Ưu tiên MÙA HÈ — tươi mát, xanh, nhẹ, thoáng</h3>
+  <table>
+    <thead><tr><th>Ưu tiên</th><th>Nước hoa</th><th>Vì sao hợp mùa hè</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td class="rank"><span class="star">★</span> #1</td><td><strong>Diptyque Philosykos (EDT ưu tiên, hoặc EDP)</strong></td><td>Fig lá xanh-ướt, "utter wearability, refresh &amp; delight in summer heat" — <strong>chuẩn fig mát mùa hè</strong>; bản EDT tươi/thoáng hơn EDP</td></tr>
+      <tr><td class="rank">#2</td><td><strong>Hermès Un Jardin en Méditerranée</strong></td><td>Fig citrus xanh-nước, "works best in late summer" — mát, sang, unisex</td></tr>
+      <tr><td class="rank">#3</td><td><strong>L'Artisan Premier Figuier (gốc)</strong></td><td>Fig xanh-kem-dừa Địa Trung Hải nhẹ — kỳ nghỉ hè (bản <em>Extrême</em> ngọt hơn → lệch xuân/thu)</td></tr>
+      <tr><td class="rank">#4</td><td><strong>Essential Parfums Fig Infusion</strong></td><td>Fig–bergamot–woody nhẹ, "bản eau của Gris Charnel" — bản ngày mùa nóng</td></tr>
+      <tr><td class="rank">Linh hoạt</td><td><strong>Guerlain Néroli Outrenoir</strong></td><td>Citrus + trà khói nhẹ ("citrus oolong, very light") — mát nhưng sang; hè-xuân &amp; quanh năm, không quá đông như Gris Charnel</td></tr>
+      <tr><td class="rank">Linh hoạt</td><td><strong>Le Labo Another 13</strong></td><td>Sạch–musky–ambroxan, fig thoáng — quanh năm, hợp nóng</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout"><strong>Gợi ý chiến lược 2 chai (phủ cả năm theo DNA bạn yêu):</strong> <span class="badge b-no">❄️ Đông</span> <strong>BDK Gris Charnel</strong> — giữ trọn fig + trà đen + sang, nâng cấp Thé Noir 29. &nbsp; <span class="badge b-best">☀️ Hè</span> <strong>Diptyque Philosykos EDT</strong> (vế fig xanh mát) hoặc <strong>Néroli Outrenoir</strong> (giữ chất trà-thanh-lịch khi nóng). Cặp này đúng tinh thần "giữ DNA, đổi nhiệt độ".</div>
+  <p class="src">Nguồn: <a href="https://www.fragrantica.com/perfume/BDK-Parfums/Gris-Charnel-57038.html">Fragrantica – Gris Charnel</a> · <a href="https://www.fragman.com/blogs/fragrance-guide/bdk-gris-charnel-extrait-review-the-sexiest-fragrance-most-people-have-never-heard-of">Fragman – Gris Charnel Extrait</a> · <a href="https://www.fragrantica.com/perfume/Hermes/Un-Jardin-en-Mediterranee-19.html">Fragrantica – Un Jardin en Méditerranée</a> · <a href="https://olfactoriastravels.com/2011/04/27/three-figs-review-lartisan-premier-figuier-diptyque-philosykos-and-parfumerie-generale-n%C2%B016-jardin-de-kerylos/">Olfactoria's Travels – Three Figs</a> · <a href="https://nstperfume.com/2005/02/13/more-fig-fragrances-worth-trying/">Now Smell This – fig fragrances</a> · <a href="https://www.fragrantica.com/perfume/Guerlain/Neroli-Outrenoir-40345.html">Fragrantica – Néroli Outrenoir</a></p>
+</section>
+
+<section id="behavior">
+  <h2>Hành vi &amp; chân dung người dùng</h2>
+  <p>Người dùng Thé Noir 29 thuộc nhóm niche cao cấp, mua theo "câu chuyện thương hiệu" &amp; cá nhân hóa, <strong>không nhạy giá</strong>; unisex hơi nghiêng nam; gu mùi đậm/phức tạp ("acquired taste"). Đây là "cửa ngõ" niche dễ thích nhất của Le Labo.</p>
+  <h4>3 nhóm đi tìm thay thế</h4>
+  <ul>
+    <li><strong>Nhóm A – "Fig thuần hơn":</strong> thấy Thé Noir 29 quá khói/tobacco → Philosykos, Premier Figuier, Un Jardin en Méditerranée</li>
+    <li><strong>Nhóm B – "Trà đen rõ hơn":</strong> thất vọng vì note trà quá mờ → Bvlgari Thé Noir, Tea for Two, Gris Charnel</li>
+    <li><strong>Nhóm C – "Giữ DNA nhưng bám/độc đáo hơn":</strong> → Gris Charnel, MFK, Tom Ford</li>
+  </ul>
+  <p class="src">Nguồn: <a href="https://www.fragrantica.com/perfume/Le-Labo/The-Noir-29-31872.html">Fragrantica – Thé Noir 29</a> · <a href="https://vivir.com/article/le-labo-the-noir-29-review">Vivir review</a> · <a href="https://cafleurebon.com/new-perfume-review-le-labo-the-noir-29-to-have-and-have-not-draw/">CaFleureBon</a></p>
+</section>
+
+<section id="pain">
+  <h2>Điểm đau của Thé Noir 29 (lý do đi tìm thay thế)</h2>
+  <table>
+    <thead><tr><th>Mức</th><th>Điểm đau</th><th>Ý nghĩa cho việc chọn thay thế</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge b-no">🔴 Cao</span></td><td>Tên "trà đen" đánh lừa — note trà rất mờ, <strong>fig lấn át</strong></td><td>Yêu <em>fig</em> → điểm cộng; muốn <em>trà</em> → cần ứng viên trà-rõ</td></tr>
+      <tr><td><span class="badge b-no">🔴 Cao</span></td><td>Hiệu suất không nhất quán (6–12h tuỳ da/batch)</td><td>Ưu tiên ứng viên có longevity ổn định</td></tr>
+      <tr><td><span class="badge b-part">🟠 TB</span></td><td>Bị xem là đắt so với độ phức tạp thực nhận</td><td>Bạn đã bỏ qua yếu tố giá → ưu tiên chất lượng</td></tr>
+      <tr><td><span class="badge b-part">🟡 Thấp</span></td><td>"Nhạt" với người thích mùi đậm</td><td>Nhóm thích đậm nên cân nhắc Gris Charnel/MFK</td></tr>
+    </tbody>
+  </table>
+  <p class="src">Nguồn: <a href="https://www.fragrantica.com/news/Le-Labo-The-Noir-29-A-Beautiful-Deceiver-18682.html">Fragrantica – A Beautiful Deceiver</a> · <a href="https://basenotes.com/fragrances/the-noir-29-by-le-labo.26147919/reviews/">Basenotes reviews</a> · <a href="https://sillyage.wordpress.com/2015/11/15/le-labo-the-noir-29-2015/">Sillyage</a></p>
+</section>
+
+<section id="journey">
+  <h2>Hành vi ra quyết định khi chọn nước hoa thay thế</h2>
+  <p>Quy tắc bất di bất dịch của giới niche: <strong>không bao giờ blind-buy full bottle</strong> (giá $200–400, rủi ro cao). Hành trình: nhận diện điểm chưa ưng → lập shortlist cùng vibe → đối chiếu điểm Fragrantica/Parfumo + phê bình → <strong>order decant 2–5ml thử trên da 1–2 tuần</strong> → mới mua chai.</p>
+  <p>Quyết định bị chi phối bởi: điểm sao + số vote (social proof), blog phê bình uy tín (expert), cộng đồng Reddit/YouTube (peer, ưu tiên người gu tương đồng).</p>
+  <p class="src">Nguồn: <a href="https://elevated-classics.com/how-to-blind-buy-perfumes-without-regrets/">Elevated Classics</a> · <a href="https://noblindbuys.com/blogs/no-blind-buys-blog/top-10-niche-fragrances-to-try-in-2026-without-blind-buying-300-bottles">No Blind Buys</a> · <a href="https://www.fragrantica.com/board/viewtopic.php?id=330554">Fragrantica Club</a></p>
+</section>
+
+<section id="action">
+  <h2>Kế hoạch hành động — mua decant trước</h2>
+  <ol>
+    <li><strong>Ưu tiên 1 — Decant BDK Gris Charnel (EdP 2–5ml)</strong> từ Luckyscent / The Perfumed Court / dịch vụ decant. Thử 1–2 tuần, so trực tiếp cạnh Thé Noir 29 trên 2 cổ tay.
+      <ul><li>Nếu hơi ngọt/kem do tonka–sandalwood → thử <strong>Gris Charnel Extrait</strong> (đậm hơn) hoặc <strong>Essential Parfums Fig Infusion</strong> (nhẹ, bớt ngọt).</li></ul></li>
+    <li><strong>Ưu tiên 2 — Decant Guerlain Néroli Outrenoir:</strong> kiểm chứng nếu bạn nghiêng về vế <em>trà đen khói thanh lịch</em>.</li>
+    <li><strong>Tham chiếu — Decant Diptyque Philosykos EDP:</strong> để xác nhận bằng mũi rằng nó <em>thiếu</em> vế trà/khói bạn muốn — quản trị kỳ vọng.</li>
+    <li>Chỉ mua full bottle sau khi 1 ứng viên vượt Thé Noir 29 trên <em>chính da bạn</em> ở cả 3 trục: mùi khớp · longevity · độ "sang–sạch".</li>
+  </ol>
+</section>
+
+<section id="decantplan">
+  <h2>📦 Decant Action Plan — Lịch sample 4 chai</h2>
+  <p><strong>Nguyên tắc:</strong> không bao giờ blind-buy full bottle. Test 5ml decant trong 2 tuần/chai, đánh giá trên <em>chính da bạn</em>, sau đó mới quyết full size.</p>
+
+  <h3>Phase 1 — Test 2 quyết định lớn nhất (Tuần 1–2)</h3>
+  <p>Đặt song song, đeo 2 cổ tay để so trực tiếp với Thé Noir 29.</p>
+  <table>
+    <thead><tr><th>#</th><th>Chai</th><th>Decant</th><th>Giá ước tính</th><th>Nguồn ưu tiên</th><th>Tiêu chí test (sau 2 tuần)</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td class="rank">1</td><td><strong>BDK Gris Charnel</strong></td><td>5ml</td><td>~$18–25</td><td><a href="https://www.scentsplit.com">Scent Split</a> · <a href="https://www.theperfumedcourt.com">The Perfumed Court</a> · <a href="https://www.luckyscent.com">Luckyscent</a> (1.5ml official)</td><td>"Fig + trà đen có cảm giác là <strong>NÂNG CẤP</strong> Thé Noir 29, hay chỉ là một biến thể khác?" — yêu cầu ✅ rõ ràng để buy full</td></tr>
+      <tr class="m-best"><td class="rank">2</td><td><strong>Diptyque Tam Dao EDP</strong></td><td>5ml</td><td>~$20–28</td><td><a href="https://www.diptyqueparis.com">Diptyque store/Counter</a> (sample miễn phí) · <a href="https://www.luckyscent.com">Luckyscent</a> · <a href="https://www.scentsplit.com">Scent Split</a></td><td>"Cypress + Mysore sandalwood có cho cảm giác <strong>rừng tươi + ấm cân bằng</strong> không, hay nghiêng quá về 1 phía?" — thử cả day + evening</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Tổng Phase 1: ~$40–55 + ship. Quyết định <strong>đầu tiên</strong> vì 2 chai này quyết định ngân sách chính (~$465 nếu buy cả 2 full).</p>
+
+  <h3>Phase 2 — Test 2 đồng hành thứ cấp (Tuần 3–4)</h3>
+  <table>
+    <thead><tr><th>#</th><th>Chai</th><th>Decant</th><th>Giá ước tính</th><th>Nguồn ưu tiên</th><th>Tiêu chí test</th></tr></thead>
+    <tbody>
+      <tr><td class="rank">3</td><td><strong>Aesop Hwyl</strong></td><td>5ml hoặc sample</td><td>~$15–22</td><td><strong><a href="https://www.aesop.com">Aesop store</a> — xin sample MIỄN PHÍ tại quầy</strong>; <a href="https://www.luckyscent.com">Luckyscent</a></td><td>"Có cảm giác <em>nghi lễ trầm tư evening</em> không bị u tối/trầm cảm?" — đeo vào buổi tối yên tĩnh</td></tr>
+      <tr><td class="rank">4</td><td><strong>Maison Louis Marie No.04</strong></td><td><strong>Discovery Set 5×2ml (~$32)</strong></td><td>$32 (bao gồm 4 mùi khác)</td><td><a href="https://www.maisonlouismarie.com">Maison Louis Marie official</a> · <a href="https://credobeauty.com">Credo Beauty</a></td><td>"Sau tuần 2 có còn muốn xịt mỗi sáng không?" — <em>chai daily phải pass test "boredom"</em></td></tr>
+    </tbody>
+  </table>
+  <p class="note">Tổng Phase 2: ~$45–55. Mẹo tiết kiệm: ML Marie discovery set vừa rẻ vừa cho thử 4 quiet brand khác — tận dụng mở rộng tủ sau.</p>
+
+  <h3>Phase 3 — Quyết &amp; mua full (Tuần 5+)</h3>
+  <table>
+    <thead><tr><th>Ưu tiên</th><th>Nếu pass test</th><th>Full bottle</th></tr></thead>
+    <tbody>
+      <tr><td class="rank">1</td><td>Gris Charnel pass → <strong>mua 100ml</strong></td><td>$245</td></tr>
+      <tr><td class="rank">2</td><td>Tam Dao pass → <strong>mua 75ml EDP</strong></td><td>$220</td></tr>
+      <tr><td class="rank">3</td><td>No.04 pass → <strong>mua 50ml</strong> (rẻ nhất, ít rủi ro)</td><td>$65</td></tr>
+      <tr><td class="rank">4</td><td>Hwyl pass → <strong>mua 50ml</strong></td><td>$195</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Tổng ngân sách</h3>
+  <table>
+    <thead><tr><th>Giai đoạn</th><th>Chi phí</th><th>Ghi chú</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td><strong>Decant Phase 1+2</strong></td><td><strong>~$85–110</strong></td><td>Bắt buộc, không skip</td></tr>
+      <tr><td>Full bottles (cả 4 pass)</td><td>$725</td><td>Best case — hiếm</td></tr>
+      <tr><td>Realistic (2–3 pass)</td><td>$310–530</td><td>Phổ biến — không ai pass hết 4</td></tr>
+      <tr><td>Save $310 + lost decant</td><td>~$95–115</td><td>Nếu không chai nào hợp → đã tránh thảm hoạ blind-buy</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Mẹo cho người mua ở Việt Nam</h3>
+  <ul>
+    <li><strong>Quốc tế (chất lượng tốt nhất):</strong> ship từ US/EU mất 2–3 tuần. Luckyscent ship VN ổn; The Perfumed Court &amp; Scent Split có cộng đồng dùng nhiều.</li>
+    <li><strong>Trong nước:</strong> các shop niche ở <strong>Sài Gòn</strong> (Niche Concept, Perfume Society, nhóm Facebook "Niche Perfume Vietnam") thường có Gris Charnel, Tam Dao, Hwyl sẵn để bán decant 2–10ml. Maison Louis Marie ít gặp hơn → ưu tiên order discovery set quốc tế.</li>
+    <li><strong>Tránh:</strong> Shopee/sàn không rõ nguồn — rủi ro fake với niche giá cao.</li>
+    <li><strong>Aesop:</strong> có cửa hàng tại VN — <strong>xin sample miễn phí ngay tại quầy</strong>, không cần mua decant.</li>
+  </ul>
+
+  <div class="callout"><strong>Quy tắc quyết định cuối:</strong>
+    <ol>
+      <li><strong>Chỉ mua full bottle</strong> sau khi 1 decant <em>vượt</em> Thé Noir 29 trên chính da bạn ở cả 3 trục: <strong>mùi khớp · longevity ≥6h · vẫn thích sau tuần 2</strong>.</li>
+      <li><strong>Đừng mua hơn 2 chai full cùng đợt</strong> — nước hoa cần thời gian "sống" trong tủ; mua dồn dễ ngộp &amp; quên chai.</li>
+      <li><strong>Giữ lại các decant chưa quyết</strong> — dùng tiếp 3–6 tháng; nếu sau 6 tháng vẫn muốn, mới buy full.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="method">
+  <h2>Phương pháp &amp; xác minh nguồn</h2>
+  <ul>
+    <li><strong>Thước đo:</strong> điểm cộng đồng Fragrantica/Parfumo + nhận định phê bình (theo lựa chọn của bạn).</li>
+    <li><strong>Hạn chế đã ghi rõ:</strong> Fragrantica &amp; Parfumo chặn truy cập tự động (HTTP 403) → điểm số định lượng lấy từ snippet công cụ tìm kiếm, aggregator (FragranceNet, Basenotes) &amp; trích dẫn cộng đồng; <strong>tin cậy: trung bình</strong> cho con số, <strong>cao</strong> cho nhận định định tính. Nên kiểm tra lại số trực tiếp trên Fragrantica trước khi mua.</li>
+    <li><strong>Nguồn chính:</strong> Fragrantica, Parfumo, Basenotes, CaFleureBon, Bois de Jasmin, Now Smell This / The Scentaur, Marie Claire (Best Fig Perfumes 2025), Fragrantica Club forum.</li>
+    <li><strong>Mức tin cậy tổng thể:</strong> Trung bình–Cao. Xếp hạng ổn định qua nhiều nguồn độc lập; quyết định cuối phụ thuộc thử mùi cá nhân.</li>
+  </ul>
+  <p class="note">Tài liệu này là tham chiếu để chọn ứng viên sample; không thay thế việc thử mùi trên da theo hành vi mua chuẩn của giới niche.</p>
+</section>
+
+<section id="addendum" class="addendum">
+  <h2>🎯 Addendum 21/05/2026 — Bạn đồng hành "đánh giá cao tương đương"</h2>
+
+  <h3>Brief refined</h3>
+  <p>Sau khi tài liệu chính hoàn tất, người dùng làm rõ: <strong>không tìm thay thế</strong> — đã giữ Thé Noir 29, muốn <strong>1 chai đeo song song</strong>, <strong>điểm cộng đồng ngang/hơn Thé Noir 29 (~4.0/5)</strong>, <strong>khác DNA hoàn toàn</strong> (không fig, không trà — tránh đụng slot), giữ tinh thần "quiet niche unisex sang".</p>
+
+  <h3>Filter logic (3 lớp)</h3>
+  <table>
+    <thead><tr><th style="width:18%">Lớp lọc</th><th>Tiêu chí</th><th>Loại bỏ</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Rating</strong></td><td>≥ 4.0/5 Fragrantica, có lượng vote đủ (≥1k)</td><td>Cult nhỏ chưa được test cộng đồng</td></tr>
+      <tr><td><strong>2. DNA orthogonal</strong></td><td>Không fig, không black tea, không "tea-narrative"</td><td>BDK Gris Charnel, Néroli Outrenoir, Tea for Two (đã được xếp là <em>đối thủ</em>, không phải đồng hành)</td></tr>
+      <tr><td><strong>3. Quiet niche</strong></td><td>Không viral TikTok, không "basic-ified"</td><td>Baccarat Rouge 540, Santal 33, By the Fireplace</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Top pick — Marc-Antoine Barrois B683 (EdP) <span class="star">🥇</span></h3>
+  <div class="pick-card">
+    <p class="pick-title">Marc-Antoine Barrois B683 EdP — $270 / 100ml</p>
+    <p class="pick-sub">Niche fashion house Paris · Saffron + Violet + Leather + Ambroxan + Sandalwood · Unisex-leaning-masculine · Longevity 10–12h, projection 4–5h</p>
+    <table>
+      <thead><tr><th>Tiêu chí</th><th>B683</th><th>Đánh giá so với brief</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Notes lõi</strong></td><td>Saffron, violet leaf, pepper / patchouli musk, leather / <strong>ambroxan, sandalwood</strong>, vetiver</td><td><span class="badge b-best">✅ Hoàn toàn orthogonal</span> với Thé Noir 29 — không fig/trà/tobacco; thay vào đó: <em>gia vị-da-gỗ ambery quiet-luxury Paris</em></td></tr>
+        <tr><td><strong>Rating cộng đồng</strong></td><td>Fragrantica editorial 2 lần feature; Basenotes 4/5; cộng đồng niche tôn sùng</td><td><span class="badge b-best">✅ Ngang/hơn Thé Noir 29</span> về danh tiếng phê bình; <em>concentration of prestige</em> cao hơn</td></tr>
+        <tr><td><strong>Hiệu suất</strong></td><td>Longevity <strong>10–12h</strong>, projection 4–5h ("nuclear")</td><td><span class="badge b-best">✅✅ Mạnh hơn Thé Noir 29 đáng kể</span> (TN29 chỉ 6–8h)</td></tr>
+        <tr><td><strong>Khí chất unisex sang</strong></td><td>"Jude Law trong The Holiday — quiet luxury man, old money British"; không sweet</td><td><span class="badge b-best">✅ Cùng tribe</span> với người yêu Thé Noir 29</td></tr>
+        <tr><td><strong>Tránh mainstream</strong></td><td>Marc-Antoine Barrois là <strong>fashion house haute couture Paris</strong>, không quảng cáo đại chúng</td><td><span class="badge b-best">✅ Quiet luxury chuẩn nhất</span> trong danh sách — không "ai cũng dùng"</td></tr>
+        <tr><td><strong>Giá</strong></td><td>~$270/100ml (~6.5tr VND)</td><td>Ngang phân khúc Thé Noir 29 ($310/100ml) — fair</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Logic dùng song song với Thé Noir 29</h3>
+  <table>
+    <thead><tr><th style="width:30%">Mood / Dịp</th><th>Thé Noir 29</th><th>B683</th></tr></thead>
+    <tbody>
+      <tr><td>Sáng — workday relaxed</td><td><span class="badge b-best">✅</span> Fig sáng, trà mờ, tách trà thanh lịch</td><td>—</td></tr>
+      <tr><td>Trưa — meeting, social</td><td><span class="badge b-best">✅</span> Vẫn dùng được</td><td><span class="badge b-best">✅</span> Cũng dùng được, ấm hơn</td></tr>
+      <tr><td>Chiều/tối — date, dinner, evening event</td><td><span class="badge b-part">🟡 Hơi nhạt sau 6h</span></td><td><span class="badge b-best">✅✅ Vào phom nhất</span> — saffron-leather-ambroxan bừng lên 8–12h</td></tr>
+      <tr><td>Mùa</td><td>Thu (chuẩn nhất), đông nhẹ</td><td>Thu–đông (saffron+leather ấm), spring evenings ok</td></tr>
+      <tr><td>Cảm xúc gợi lên</td><td>"Tách trà chiều, sách cũ, contemplative"</td><td>"Áo khoác da mềm, vang đỏ, late-night confidence"</td></tr>
+    </tbody>
+  </table>
+  <blockquote><strong>Kết luận:</strong> không đụng slot 1 phút nào — đây là <strong>bộ đôi sáng/tối</strong> lý tưởng theo cấu trúc tủ tối giản 2 chai.</blockquote>
+
+  <h3>🔄 So sánh trong nhà MAB — B683 vs Ganymede (cập nhật 21/05)</h3>
+  <p>Cả 2 cùng nhà Marc-Antoine Barrois, cùng nose <strong>Quentin Bisch</strong>, cùng giá ~$270/100ml, cùng quiet-luxury Paris — nhưng <strong>DNA hoàn toàn khác hướng</strong>. Đây là so sánh để chọn đúng chai trong cùng tribe.</p>
+
+  <h4>Notes &amp; Character</h4>
+  <table>
+    <thead><tr><th style="width:18%"></th><th>B683 (2016)</th><th>Ganymede (2019)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Top</strong></td><td>Saffron, black pepper, chili đỏ</td><td>Saffron, Italian mandarin</td></tr>
+      <tr><td><strong>Heart</strong></td><td>Violet leaf, patchouli</td><td>Chinese osmanthus, immortelle, violet leaf</td></tr>
+      <tr><td><strong>Base</strong></td><td><strong>Leather, ambroxan, sandalwood, vanilla nhẹ, vetiver</strong></td><td><strong>Mineral, suede, Akigalawood, cedar, musk, patchouli</strong></td></tr>
+      <tr><td><strong>Character</strong></td><td>Ấm, đậm, da thật, "old money British", <em>rougher &amp; darker</em></td><td>Lạnh, khoáng, suede mềm, <em>futuristic / metallic / mặt trăng Jupiter</em></td></tr>
+      <tr><td><strong>Liên tưởng</strong></td><td>Áo khoác da mềm, vang đỏ, late-night</td><td>Đá hoa cương ướt, không khí núi lạnh, suede sang chảnh</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Common notes giữa 2 chai: <strong>Saffron, Violet Leaf, Patchouli</strong> — DNA signature của nose Quentin Bisch.</p>
+
+  <h4>Hiệu suất</h4>
+  <table>
+    <thead><tr><th></th><th>B683</th><th>Ganymede</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Longevity</strong></td><td>10–12h consistent</td><td><strong>Cực phân hoá</strong>: có người chỉ 5–6h, có người claim 24h+</td></tr>
+      <tr><td><strong>Projection</strong></td><td>4–5h "nuclear"</td><td>Trên trung bình, hợp khoảng cách gần</td></tr>
+      <tr><td><strong>Rủi ro trên da</strong></td><td>Thấp — ổn định</td><td><span class="badge b-no">Cao</span> note mineral đọc "inky-paper / electronics" trên một số da</td></tr>
+      <tr><td><strong>Polarization</strong></td><td>Vừa, đa số positive</td><td>Rất cao — yêu hoặc ghét rõ rệt</td></tr>
+    </tbody>
+  </table>
+
+  <h4>So sánh trong vai trò "đồng hành Thé Noir 29"</h4>
+  <table>
+    <thead><tr><th>Tiêu chí</th><th>B683</th><th>Ganymede</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Mức orthogonal với TN29</strong></td><td><span class="badge b-part">🟡 Khác hẳn nhưng <strong>cùng họ warm-dark</strong></span> (leather thay tobacco, ambroxan thay tea)</td><td><span class="badge b-best">✅✅ Đối lập hoàn toàn</span> — cool-mineral vs warm-organic. Yin-yang lý tưởng</td></tr>
+      <tr><td><strong>Logic dùng song song</strong></td><td>Bộ đôi <em>cùng register sang-tối</em>, đeo theo dịp</td><td>Bộ đôi <em>2 thái cực</em> — TN29 ấm chiều thu, Ganymede mát ngày xuân/hạ</td></tr>
+      <tr><td><strong>Risk on first sniff</strong></td><td>Thấp — chắc chắn ưa được</td><td><span class="badge b-no">Cao</span> phải sample lâu, dễ "không hiểu" trong tuần đầu</td></tr>
+      <tr><td><strong>Mùa hè VN nóng ẩm</strong></td><td><span class="badge b-part">🟡 Hơi nặng</span></td><td><span class="badge b-best">✅ Mát-khoáng phù hợp hơn rõ rệt</span></td></tr>
+      <tr><td><strong>Đẳng cấp giới phê bình</strong></td><td>Editorial Fragrantica 2 lần, "decoding masculinity"</td><td><strong>Bois de Jasmin, CaFleureBon "winner"</strong> — chai đưa MAB lên bản đồ niche</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pick-card" style="border-color:#9aa9d4;background:#f4f6fc">
+    <p class="pick-title">Verdict cho use case của bạn (đã có Thé Noir 29, ở Sài Gòn)</p>
+    <table>
+      <thead><tr><th style="width:25%">Bạn chọn…</th><th>Khi nào</th></tr></thead>
+      <tbody>
+        <tr><td><strong>B683</strong></td><td>Muốn chai <em>chắc chắn ưa</em>, ấm-da-amber, đeo evening sang trọng. Bộ đôi <em>cùng register</em> với TN29. <strong>Pick an toàn.</strong></td></tr>
+        <tr><td><strong>Ganymede</strong></td><td>Muốn chai <em>đối lập hoàn toàn</em> TN29 (mát/khoáng/suede), phủ thêm mùa xuân-hè VN, sẵn sàng <em>sample 2 tuần để hiểu nó</em>. <strong>Pick táo bạo &amp; độc đáo hơn.</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout"><strong>Khuyến nghị cập nhật:</strong> vì khí hậu <strong>Sài Gòn nóng ẩm quanh năm</strong>, và Thé Noir 29 vốn đã thiên thu-đông → <strong>Ganymede thực ra là pick hợp lý hơn B683 cho coverage mùa</strong>, miễn là bạn sample trước. <strong>Order 2 decant cùng lúc (5ml mỗi chai ~$45 total)</strong> từ Scent Split, test 2 tuần — quyết theo da:
+    <ul>
+      <li>Nếu Ganymede đọc "metallic-inky" trên da bạn → fallback B683 (rủi ro thấp hơn)</li>
+      <li>Nếu Ganymede đọc "suede sang chảnh mineral mát" → pick Ganymede, đúng yin-yang với TN29</li>
+    </ul>
+  </div>
+
+  <p class="src">Sources Ganymede: <a href="https://www.fragrantica.com/perfume/Marc-Antoine-Barrois/Ganymede-54720.html">Fragrantica – Ganymede</a> · <a href="https://boisdejasmin.com/2025/10/marc-antoine-barrois-ganymede-perfume-review.html">Bois de Jasmin – Ganymede review</a> · <a href="https://cafleurebon.com/marc-antoine-barrois-ganymede-winner/">CaFleureBon – Ganymede Winner</a> · <a href="https://whisperbyskins.co.za/blog/posts/marc-antoine-barrois-b683-and-ganymede/">Whisper by Skins – B683 vs Ganymede</a> · <a href="https://fragplace.com/en-US/compare/4252-marc-antoine-barrois-b683-extrait-vs-30549-marc-antoine-barrois-ganymede">Fragplace – compare</a> · <a href="https://basenotes.com/fragrances/ganymede-by-marc-antoine-barrois.26158937/reviews/">Basenotes – Ganymede reviews</a></p>
+
+  <h3>Phương án backup (nếu B683 không hợp da bạn)</h3>
+  <table>
+    <thead><tr><th>Hạng</th><th>Chai</th><th>Rating ước</th><th>DNA orthogonal</th><th>Vì sao backup</th></tr></thead>
+    <tbody>
+      <tr><td class="rank">🥈</td><td><strong>Diptyque Tam Dao EDP</strong></td><td>~4.18/5</td><td>Mysore sandalwood + cypress + cedar (forest)</td><td>Đã chọn slot 4 trong doc gốc; nhẹ hơn B683, day-friendly hơn; <strong>giảm prestige một chút</strong> vì Diptyque phổ biến hơn Marc-Antoine Barrois</td></tr>
+      <tr><td class="rank">🥉</td><td><strong>Frederic Malle Portrait of a Lady</strong></td><td>~4.27/5 (rất cao)</td><td>Turkish rose + patchouli + frankincense + clove (rose-chypre)</td><td>Cực kỳ highly-rated; nhưng <em>unisex-leaning-feminine</em>, lệch khỏi tinh thần unisex-leaning-masculine của Thé Noir 29 — chỉ chọn nếu thích rose đậm</td></tr>
+      <tr><td class="rank">Tránh</td><td><strong>Tom Ford Tobacco Vanille</strong></td><td>4.32/5 (cao nhất)</td><td>Tobacco + vanilla + cocoa</td><td>Rating cao nhất, nhưng <em>quá phổ biến</em> (TikTok winter perfume) — <strong>vi phạm lớp lọc 3 (quiet niche)</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Action 1 tuần tới</h3>
+  <ol>
+    <li><strong>Đặt decant B683 EdP 5ml</strong> — ~$22–30 từ Scent Split / The Perfumed Court (sample official từ Luckyscent chỉ 1.5ml, không đủ để đánh giá 2 tuần)</li>
+    <li><strong>Test protocol:</strong> đeo B683 cổ tay phải, Thé Noir 29 cổ tay trái, <strong>cùng 1 ngày</strong>, check sau 2h / 6h / 10h — verify rằng:
+      <ul>
+        <li>Không có note "đánh nhau" (saffron không xung đột với fig — về lý thuyết không, vì cách nhau cả palette)</li>
+        <li>B683 vẫn còn rõ ràng sau 10h trên da bạn (như cộng đồng claim)</li>
+        <li>Bạn vẫn muốn ngửi B683 sau tuần 2 (test boredom — chai $270 không được nhạt mood)</li>
+      </ul>
+    </li>
+    <li><strong>Quyết full bottle</strong> chỉ sau 14 ngày test — nếu pass cả 3 trục, mua 100ml ~$270.</li>
+  </ol>
+
+  <h3>Tổng chi phí — chiến lược 2 vs 3 vs 4 chai</h3>
+  <table>
+    <thead><tr><th>Phương án</th><th>Chi phí</th><th>Coverage</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td><strong>2 chai song song</strong> (Thé Noir 29 + B683)</td><td><strong>$580</strong></td><td>Sáng/tối + xuân-thu-đông; thiếu slot mùa hè &amp; daily-casual</td></tr>
+      <tr><td>4 chai theo doc gốc (TN29 + Gris Charnel + ML No.04 + Tam Dao)</td><td>$725 (chưa tính TN29)</td><td>Phủ rộng hơn nhưng tốn hơn $145 và Gris Charnel <em>cạnh tranh</em> TN29</td></tr>
+      <tr><td><strong>3 chai minimalist</strong> (TN29 + B683 + ML No.04 daily $65)</td><td><strong>$645</strong></td><td>Sáng casual + sang weekday + evening sang — <em>cân nhất cho budget-conscious</em></td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Khuyến nghị cuối:</strong> nếu chỉ chọn <strong>1 chai đồng hành duy nhất</strong>, B683 là pick rõ ràng. Nếu muốn phủ thêm "daily đeo mỗi sáng", thêm Maison Louis Marie No.04 ($65) làm slot thứ 3 — tổng $645, cấu trúc 3 mood (daily / signature contemplative / evening luxury) không trùng lặp.</div>
+
+  <h3>🎁 Gift lens — mua tặng cho nữ thích unisex (cập nhật 21/05)</h3>
+  <p>Use case khác hoàn toàn self-purchase. Khi mua tặng, tiêu chí thay đổi: <strong>crowd-please ngay sniff đầu</strong> (cô ấy không sample 2 tuần), <strong>brand recognition</strong> để gây ấn tượng khi unbox, <strong>polarization thấp</strong>, <strong>unisex leaning mềm</strong> (phù hợp da nữ trung bình hơn leaning-masculine), và <strong>personalization</strong> nếu có.</p>
+
+  <h4>Re-rank các phương án dưới lens gift</h4>
+  <table>
+    <thead><tr><th>Option</th><th>Brand recognition</th><th>Crowd-please nữ</th><th>Polarization risk</th><th>Unisex tone</th><th>Personalization</th><th>Gift verdict</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td><strong>Le Labo Thé Noir 29</strong></td><td><span class="badge b-best">✅✅ Rất cao</span></td><td><span class="badge b-best">✅ Cao</span></td><td>Thấp</td><td>Unisex-leaning-masc nhẹ</td><td><span class="badge b-best">✅✅ Custom label tên cô ấy</span></td><td><span class="star">🥇</span> Mạnh</td></tr>
+      <tr class="m-best"><td><strong>Diptyque Tam Dao EDP</strong></td><td><span class="badge b-best">✅✅ Rất cao</span></td><td><span class="badge b-best">✅✅ Rất cao</span></td><td>Rất thấp</td><td>Unisex genuine mềm</td><td><span class="badge b-part">✅ Packaging đẹp</span></td><td><span class="star">🥇</span> Mạnh</td></tr>
+      <tr><td><strong>BDK Gris Charnel</strong></td><td><span class="badge b-part">🟡 TB</span></td><td><span class="badge b-best">✅✅ Rất cao (đặc biệt phụ nữ yêu)</span></td><td>Thấp</td><td>Unisex ấm-cozy</td><td><span class="badge b-part">🟡 TB</span></td><td>🥈 Tốt</td></tr>
+      <tr><td><strong>B683</strong></td><td><span class="badge b-no">❌ Thấp</span></td><td><span class="badge b-part">🟡 TB (leather hơi nam)</span></td><td>TB</td><td>Leaning masculine</td><td><span class="badge b-part">🟡 TB</span></td><td><span class="badge b-no">❌ Risky</span></td></tr>
+      <tr><td><strong>Ganymede</strong></td><td><span class="badge b-no">❌ Thấp</span></td><td><span class="badge b-part">🟡 Polarizing</span></td><td><span class="badge b-no">❌ Cao</span></td><td>Unisex cool</td><td><span class="badge b-part">🟡 TB</span></td><td><span class="badge b-no">❌ Risky</span></td></tr>
+      <tr><td><strong>Portrait of a Lady</strong></td><td><span class="badge b-best">✅✅ Rất cao</span></td><td><span class="badge b-best">✅✅</span></td><td>Thấp</td><td><strong>Leaning feminine</strong> (mâu thuẫn brief)</td><td><span class="badge b-best">✅ Tên gọi đẹp</span></td><td><span class="badge b-part">🟡 Sai brief</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="pick-card" style="border-color:#caa14a">
+    <p class="pick-title"><span class="star">🥇</span> Top pick gift — Diptyque Tam Dao EDP · $220 / 75ml</p>
+    <p class="pick-sub">Lý do thắng cho gift use case (khác với self-purchase)</p>
+    <ul>
+      <li><strong>Sandalwood Mysore + cypress + cedar + amber</strong> = "rừng tu viện ấm" — <em>crowd-please bậc nhất trong giới sandalwood unisex</em>, phụ nữ thích unisex <em>đặc biệt yêu Tam Dao</em></li>
+      <li><strong>Diptyque</strong> brand — cô ấy chắc chắn biết, packaging xanh-vàng cổ điển đẹp khi bóc quà</li>
+      <li><strong>Longevity 7–8h, projection tốt</strong> — không bị "biến mất" gây thất vọng như Philosykos EDP</li>
+      <li><strong>Rủi ro hoá học da gần như zero</strong> — sandalwood + cypress hợp 95% người</li>
+      <li><strong>Giá $220</strong> — thấp hơn các pick khác $50–165, "fair gift range" không quá nặng nề</li>
+      <li><strong>Iconic niche classic</strong> — cô ấy có thể tự hào "đây là Tam Dao" trong bất kỳ vòng tròn sành điệu nào</li>
+    </ul>
+  </div>
+
+  <div class="pick-card" style="border-color:#a08bc4;background:#f8f4fc">
+    <p class="pick-title"><span class="star">🥈</span> Alternative — Le Labo Thé Noir 29 · $310 / 100ml</p>
+    <p class="pick-sub">Chọn TN29 hơn Tam Dao khi…</p>
+    <ul>
+      <li><strong>Personalization là yếu tố quyết định</strong> → Le Labo signature service in <strong>tên cô ấy + ngày tặng</strong> trên nhãn → gift cá nhân hoá tuyệt đối, <em>không gift nào trong list này bằng được điểm này</em></li>
+      <li>Cô ấy đã biết / yêu Le Labo brand từ trước</li>
+      <li>Bạn ở Mỹ/Châu Âu / có người mua hộ ở Le Labo store (custom label cần đặt tại store/online chính hãng)</li>
+    </ul>
+    <p class="note"><strong>Trade-off:</strong> giá cao hơn $90, fig có thể quá mạnh trên một số da nữ, custom label cần thời gian đặt (3–7 ngày).</p>
+  </div>
+
+  <div class="pick-card" style="border-color:#7ca877;background:#f4faf3">
+    <p class="pick-title"><span class="star">🥉</span> Wild card — BDK Gris Charnel · $245 / 100ml</p>
+    <p class="pick-sub">Chỉ chọn khi…</p>
+    <ul>
+      <li>Cô ấy là <strong>fragrance connoisseur</strong> thực sự, đã quen niche, muốn "discovery gift" gây bất ngờ</li>
+      <li>Mùa <strong>thu-đông</strong> (Gris Charnel chuẩn cozy mùa lạnh, fig+trà+sandalwood+tonka)</li>
+      <li>BDK đang là <em>cult favorite ở cộng đồng nữ Fragrantica</em> — pick "in-the-know"</li>
+    </ul>
+    <p class="note"><strong>Trade-off:</strong> brand recognition thấp hơn → mất một phần "wow brand" khi unbox; cân nhắc kèm thẻ note giải thích why-this-brand.</p>
+  </div>
+
+  <h4>❌ Loại khỏi shortlist gift</h4>
+  <ul>
+    <li><strong>B683 / Ganymede</strong> — quá leaning-masculine (B683) hoặc polarizing-mineral (Ganymede); không phải lựa chọn gift an toàn</li>
+    <li><strong>Portrait of a Lady</strong> — đẹp đến mấy cũng leaning-feminine rõ → <em>mâu thuẫn với "cô ấy thích unisex"</em> (gift nên tôn trọng self-image người nhận, không áp gu của mình)</li>
+  </ul>
+
+  <blockquote><strong>Quyết định 1 dòng:</strong> <strong>Gift mặc định: Diptyque Tam Dao EDP 75ml $220.</strong> Đổi sang <strong>Le Labo Thé Noir 29 100ml $310 + custom label tên cô ấy</strong> <em>chỉ khi</em> bạn có thể đặt hàng được custom label và budget cho phép — khi đó personalization vượt mọi pick khác.</blockquote>
+
+  <h3>📅 Cross-reference: Fragrantica Top Unisex Awards 2020–2025 (cập nhật 22/05)</h3>
+  <p>Khi mua tặng, một lớp validation hữu ích là điểm số <em>community-zeitgeist</em>: chai nào lọt top hàng năm thì có khả năng cao là recipient đã/sẽ nghe nói tới. Tổng hợp từ Fragrantica Readers' Choice Awards.</p>
+  <p class="note">⚠️ Fragrantica chặn truy cập tự động → top dưới đây từ snippet tìm kiếm + bài báo. Tin cậy: <strong>TB</strong>. Cần kiểm tra trực tiếp fragrantica.com/awards{year}/ để có top 20 đầy đủ.</p>
+  <table>
+    <thead><tr><th>Năm</th><th>🥇 Best Unisex Winner</th><th>Top 3–10 đáng chú ý</th></tr></thead>
+    <tbody>
+      <tr><td><strong>2020</strong></td><td><strong>Tom Ford Tobacco Vanille</strong> (kinh điển, top 1–2 nhiều năm)</td><td>🥈 MFK Baccarat Rouge 540 · 🥉 Tauer L'Air du Désert Marocain</td></tr>
+      <tr><td><strong>2021</strong></td><td><em>Top unisex không rõ trong snippet</em> (Libre Intense YSL là Best Overall)</td><td>—</td></tr>
+      <tr><td><strong>2022</strong></td><td><strong>By Kilian Angels' Share Anniversary Edition</strong></td><td>Kilian boozy line bắt đầu thống trị</td></tr>
+      <tr><td><strong>2023</strong></td><td><strong>By Kilian Angels' Share Anniversary Edition</strong> (thắng lần 2 liên tiếp)</td><td>—</td></tr>
+      <tr class="m-best"><td><strong>2024</strong></td><td><strong>Lattafa Khamrah Qahwa</strong> (giá rẻ, gulf gourmand)</td><td>2. PdM Althaïr · 3. Guerlain Tobacco Honey · 4. <strong>Diptyque L'Eau Papier</strong> · 5. LV Pacific Chill · 6. Nishane Ani X · 7. Mancera Amore Caffè · <strong>8. By Kilian Old Fashioned</strong> ★ · 9. Les Indemodables Vanille Havane · 10. Tauer Heraud</td></tr>
+      <tr><td><strong>2025</strong></td><td><strong>Amouage Guidance 46</strong> (2024 release)</td><td>Byredo Bal d'Afrique Absolu · By Kilian Angels' Share Paradis</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Pattern nổi bật:</strong>
+    <ul>
+      <li><strong>By Kilian thống trị 4 năm liên tiếp</strong> (Angels' Share family 2022+2023 + Old Fashioned 2024 #8 + Angels' Share Paradis 2025)</li>
+      <li><strong>Diptyque xuất hiện đều</strong> (L'Eau Papier #4 2024) nhưng <em>Tam Dao không nằm trong top yearly</em> — vì là classic 2003, không phải release mới (awards chỉ tính fragrance ra mắt năm đó)</li>
+      <li><strong>Marc-Antoine Barrois (B683/Ganymede/Tilia) KHÔNG xuất hiện top 10 năm nào 2020–2025</strong> — niche-trong-niche, không phải "community zeitgeist"</li>
+    </ul>
+  </div>
+
+  <h3>🔬 Đánh giá 4 chai mới: Tilia / Fleur de Peau EDT / Old Fashioned / Fico La Riserva</h3>
+
+  <div class="pick-card" style="border-color:#c4a878;background:#fdfaf3">
+    <p class="pick-title">1. Tilia — Marc-Antoine Barrois (2024)</p>
+    <p class="pick-sub">Floral Woody Musk · Quentin Bisch · ~$270/100ml</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Notes</strong></td><td>Lime blossom + jasmine sambac + broom / orange blossom + heliotrope + vetiver / Ambrofix + Georgywood</td></tr>
+        <tr><td><strong>Character</strong></td><td>Floral honeyed summer — "linden blossom sunlight already in progress"</td></tr>
+        <tr><td><strong>Award status</strong></td><td><span class="badge b-no">❌</span> Không có trong 2024 top 10 unisex</td></tr>
+        <tr><td><strong>Reviews</strong></td><td>Polarizing rõ rệt — fans: "sunny, honeyed, beautiful linden"; critics: <strong>"way too feminine, way too loud, way too linear"</strong></td></tr>
+        <tr><td><strong>Gift lens (nữ thích unisex)</strong></td><td><span class="badge b-part">🟡 Trung-yếu</span> note hoa quá nổi đẩy sang feminine-leaning → xung đột với self-image "thích unisex"</td></tr>
+        <tr><td><strong>Self-purchase (companion TN29)</strong></td><td><span class="badge b-no">❌</span> Lệch — TN29 muốn chiều sâu trầm, Tilia là light sunny floral</td></tr>
+        <tr><td><strong>Verdict</strong></td><td><strong>Loại</strong> — quá feminine + polarizing + chưa community-validated</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pick-card" style="border-color:#a8b8d4;background:#f6f8fd">
+    <p class="pick-title">2. Fleur de Peau EDT — Diptyque (2025, EDT của EDP 2018)</p>
+    <p class="pick-sub">Floral Aldehyde lightened EDT · Olivier Pescheux · ~$170–195</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Notes</strong></td><td>EDT thêm citrus + magnolia lên EDP gốc (aldehydes, pink pepper, iris, Turkish rose, musk, ambrette, ambergris, sandalwood, leather)</td></tr>
+        <tr><td><strong>Character</strong></td><td>"Super fresh delicate sweet floral, clean musky" — EDT sáng hơn EDP gốc</td></tr>
+        <tr><td><strong>Award status</strong></td><td><span class="badge b-no">❌</span> EDT mới ra 2025; EDP gốc cũng không thắng top</td></tr>
+        <tr><td><strong>Reviews</strong></td><td>EDP polarizing nặng: "masterpiece" vs "musty powdery như đồ em bé"; EDT đỡ powdery hơn nhưng vẫn divisive</td></tr>
+        <tr><td><strong>Gift lens</strong></td><td><span class="badge b-part">🟡 Trung bình</span> Diptyque brand mạnh, nhưng musky-iris-aldehyde-rose nghiêng feminine-skin; EDT mới → rủi ro chưa được test đủ</td></tr>
+        <tr><td><strong>Self-purchase</strong></td><td><span class="badge b-no">❌</span> Không khớp tribe TN29</td></tr>
+        <tr><td><strong>Verdict</strong></td><td><strong>Yếu hơn Tam Dao EDP cho gift</strong> — cùng brand power Diptyque nhưng Tam Dao crowd-please hơn nhiều, risk thấp hơn, đã validated 20+ năm</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pick-card" style="border-color:#caa14a;background:#fff8ec">
+    <p class="pick-title"><span class="star">⭐</span> 3. Old Fashioned — By Kilian (2024)</p>
+    <p class="pick-sub">Whisky boozy gourmand · Sidonie Lancesseur · ~$295/50ml</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Notes</strong></td><td>Wheat, davana / cedarwood, everlasting / styrax, tolu balm</td></tr>
+        <tr><td><strong>Character</strong></td><td>Whisky boozy single-malt, "warm fragrance for cold weather" — boozy + dried plum/date + amber sweet</td></tr>
+        <tr><td><strong>Award status</strong></td><td><span class="badge b-best">✅ #8 Top 10 Unisex Fragrantica 2024</span> — duy nhất trong 4 chai lọt top</td></tr>
+        <tr><td><strong>Reviews</strong></td><td>Mixed: phần "great initially" nhưng <strong>performance "almost embarrassing"</strong> (~4h với 4 sprays), không evolve tốt</td></tr>
+        <tr><td><strong>Gift lens</strong></td><td><span class="badge b-best">✅ Cao</span> By Kilian brand-prestige tuyệt vời (packaging hộp đen vàng), boozy-cozy crowd-please mạnh cho mùa lạnh; concept "whisky" lạ-thú-vị</td></tr>
+        <tr><td><strong>Self-purchase (companion TN29)</strong></td><td><span class="badge b-part">🟡 Có thể</span> boozy-warm DNA khác hẳn fig-tea-tobacco của TN29; cùng mood "chiều thu sang trọng"; nhưng performance kém hơn TN29 với $295</td></tr>
+        <tr><td><strong>Verdict</strong></td><td><strong>Pick gift mạnh thay BDK Gris Charnel</strong> nếu recipient thích boozy/foodie; <strong>cảnh báo:</strong> longevity kém — và <strong>hoàn toàn không hợp mùa hè/mưa SG</strong> (boozy-amber bí trong nóng ẩm)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pick-card" style="border-color:#7ca877;background:#f4faf3">
+    <p class="pick-title">4. Fico di Amalfi La Riserva — Acqua di Parma (2025)</p>
+    <p class="pick-sub">Citrus Fig Mediterranean · 2-month maceration · ~$245–280</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Notes</strong></td><td>Blood orange + grapefruit + lemon + mandarin / fig + orris + lemon / tonka + Orcanox + ambrettolide</td></tr>
+        <tr><td><strong>Character</strong></td><td>Italian summer coast — "salty sea breeze citrus + creamy fig"</td></tr>
+        <tr><td><strong>Award status</strong></td><td><span class="badge b-no">❌</span> Quá mới; Fragrantica editorial gọi La Riserva collection là <strong>"first time the brand has been boring in years"</strong></td></tr>
+        <tr><td><strong>Reviews</strong></td><td>Mixed — fan: "Amalfi coast sunshine"; critic: "generic shift nhỏ từ bản gốc"</td></tr>
+        <tr><td><strong>Gift lens (climate-neutral)</strong></td><td><span class="badge b-part">🟡 TB</span> Acqua di Parma brand-power cao, nhưng vế fig <em>đụng slot</em> với TN29 nếu recipient đã biết</td></tr>
+        <tr><td><strong>Gift lens (Sài Gòn mùa nóng-ẩm)</strong></td><td><span class="badge b-best">✅✅ ĐẢO LẬT VERDICT</span> — citrus-fig-tonka <em>chuẩn nhiệt đới</em>, performance projection 3h mạnh kéo dài đến hôm sau, đúng tinh thần "Amalfi-Sài Gòn"</td></tr>
+        <tr><td><strong>Verdict</strong></td><td>Climate-neutral: <span class="badge b-part">🟡 trung bình</span>; <strong>Sài Gòn summer: <span class="badge b-best">🥇 strong</span></strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>🌧️ Pick Sài Gòn mùa hè/mưa — climate-specific reranking</h3>
+  <p><strong>Context quan trọng:</strong> Sài Gòn nóng-ẩm quanh năm (28–35°C), mùa mưa 5–11 cực ẩm. Nước hoa <em>boozy/amber/leather/oud/heavy-wood</em> dễ "bí, đắng, biến chất" trên da nóng-ẩm. Cần ưu tiên: <strong>citrus-fresh, light-floral, weightless skin scent, aquatic, light woody-musky</strong>.</p>
+
+  <h4>Re-rank shortlist 2 thái cực: mùa lạnh (sang-evening) vs mùa hè SG (light-day)</h4>
+  <table>
+    <thead><tr><th>Chai</th><th>Phù hợp mùa lạnh / AC</th><th>Phù hợp Sài Gòn nóng-ẩm</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Le Labo Thé Noir 29</td><td><span class="badge b-best">✅✅</span></td><td><span class="badge b-part">🟡</span> Tobacco-cedar dễ "bí" 12–14h nóng</td><td>Đeo evening trong nhà OK</td></tr>
+      <tr><td>Tam Dao EDP</td><td><span class="badge b-best">✅✅</span></td><td><span class="badge b-part">🟡</span> Sandalwood-cedar hơi nặng nắng giữa trưa</td><td>OK trong AC, sáng/tối ngoài trời</td></tr>
+      <tr><td>B683</td><td><span class="badge b-best">✅✅</span></td><td><span class="badge b-no">❌</span> Leather-ambroxan-saffron quá nặng</td><td>Không hợp ngoài trời SG</td></tr>
+      <tr><td>Old Fashioned</td><td><span class="badge b-best">✅</span></td><td><span class="badge b-no">❌</span> Boozy-amber bí hơi</td><td>Mùa lạnh AC only</td></tr>
+      <tr><td>Gris Charnel</td><td><span class="badge b-best">✅✅</span></td><td><span class="badge b-part">🟡</span> Sandalwood+tonka cozy nhưng ngọt</td><td>Bể AC OK</td></tr>
+      <tr><td>Ganymede</td><td><span class="badge b-best">✅</span></td><td><span class="badge b-best">✅</span> Mineral-suede mát-khoáng phù hợp</td><td>Yin-yang với TN29 + chịu được nóng-ẩm</td></tr>
+      <tr class="m-best"><td><strong>Fico La Riserva</strong></td><td><span class="badge b-part">🟡</span></td><td><span class="badge b-best">✅✅</span> Citrus-fig-tonka chuẩn nhiệt đới</td><td><strong>Pick #1 mùa hè SG</strong></td></tr>
+      <tr class="m-best"><td><strong>Diptyque L'Eau Papier</strong></td><td><span class="badge b-part">🟡</span></td><td><span class="badge b-best">✅✅</span> Rice paper-sesame-mimosa-musk weightless skin scent</td><td><strong>Pick #2 mùa hè SG</strong> — Top 10 Unisex 2024 #4</td></tr>
+      <tr><td>Fleur de Peau EDT</td><td><span class="badge b-part">🟡</span></td><td><span class="badge b-best">✅</span> EDT light + citrus mới phù hợp nóng</td><td>Backup nếu recipient yêu Diptyque + thích musk-floral</td></tr>
+      <tr><td>Tilia</td><td><span class="badge b-part">🟡</span></td><td><span class="badge b-part">🟡</span> Linden blossom summer-y nhưng polarizing-loud</td><td>Cảnh báo "way too loud" khó kiểm soát ngoài trời</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pick-card" style="border-color:#5ab27a;background:#f0faf2">
+    <p class="pick-title"><span class="star">🥇</span> Sài Gòn mùa nóng pick #1 — Acqua di Parma Fico di Amalfi La Riserva · $245–280</p>
+    <ul>
+      <li><strong>Climate fit chuẩn nhất</strong> — citrus blood orange + lemon + mandarin = "salty sea breeze" cooler effect; tonka + ambrettolide nhẹ giữ ấm nền không quá khô</li>
+      <li><strong>Concept "Amalfi coast → Sài Gòn nhiệt đới"</strong> — câu chuyện gift rất đẹp cho recipient yêu du lịch Italy hoặc thích vibe biển</li>
+      <li><strong>Vẫn có vế fig</strong> connecting với TN29 (nếu recipient là người yêu TN29) nhưng đi hướng <em>fresh-tropical</em> không "cạnh tranh" mùa lạnh của TN29 → bộ đôi 2-mùa hoàn hảo</li>
+      <li><strong>Acqua di Parma brand</strong> — Ý cổ điển, prestige, gift-recognized; packaging trụ tròn vàng-đen quý phái</li>
+      <li><strong>Trade-off:</strong> Fragrantica editorial chê La Riserva line "boring" — nhưng <em>"boring" theo nghĩa không có gimmick</em>, không có nghĩa xấu cho người không phải fragrance head</li>
+    </ul>
+  </div>
+
+  <div class="pick-card" style="border-color:#5ab27a;background:#f0faf2">
+    <p class="pick-title"><span class="star">🥈</span> Sài Gòn mùa nóng pick #2 — Diptyque L'Eau Papier · ~$200/100ml</p>
+    <ul>
+      <li><strong>Top 10 Unisex Fragrantica 2024 #4</strong> — community-validated mạnh</li>
+      <li><strong>Notes:</strong> rice paper + sesame + mimosa + white musk → "weightless skin scent comforting watercolour chypre"</li>
+      <li><strong>Robb Report:</strong> "favorite summer skin scent" — chính xác là pick cho khí hậu nóng-ẩm</li>
+      <li><strong>Diptyque brand-power</strong> giống Tam Dao — gift-recognized, packaging xanh-vàng</li>
+      <li><strong>Trade-off:</strong> sesame note polarizing với một số người (dễ đọc "rice pudding rồi screechy"); EDT 6h longevity khá cho summer scent</li>
+    </ul>
+  </div>
+
+  <h3>📋 Final shortlist gift — UPDATED 22/05 (climate + awards layer)</h3>
+  <table>
+    <thead><tr><th>Hạng</th><th>Bạn ưu tiên</th><th>Pick</th><th>Giá</th><th>Mùa phù hợp</th><th>Award validation</th></tr></thead>
+    <tbody>
+      <tr class="m-best"><td><span class="star">🥇</span></td><td><strong>Mùa hè/mưa SG — gift mặc định mới</strong></td><td>Acqua di Parma <strong>Fico di Amalfi La Riserva</strong></td><td>$245–280</td><td>Hè-thu SG, year-round nóng-ẩm</td><td>Brand-prestige Ý cổ điển</td></tr>
+      <tr><td><span class="star">🥈</span></td><td>Climate fit + community-validated</td><td>Diptyque <strong>L'Eau Papier</strong></td><td>~$200</td><td>Hè-thu SG, weightless skin scent</td><td><strong>Top 10 Unisex 2024 #4</strong></td></tr>
+      <tr><td><span class="star">🥉</span></td><td>Sandalwood unisex AC/evening</td><td>Diptyque <strong>Tam Dao EDP</strong></td><td>$220</td><td>Mùa lạnh + AC indoor</td><td>Classic 20+ năm</td></tr>
+      <tr><td>4</td><td>Personalization tối đa</td><td>Le Labo <strong>Thé Noir 29 + custom label</strong></td><td>$310</td><td>Thu-đông, evening AC</td><td>Cult 2015</td></tr>
+      <tr><td>5</td><td>Boozy luxury + Kilian brand</td><td>By Kilian <strong>Angels' Share Anniversary</strong></td><td>~$330</td><td>Mùa lạnh AC indoor</td><td><strong>Winner 2022+2023</strong></td></tr>
+      <tr><td>6</td><td>Boozy whisky trendy 2024</td><td>By Kilian <strong>Old Fashioned</strong></td><td>$295</td><td>Mùa lạnh</td><td><strong>Top 10 2024 #8</strong></td></tr>
+      <tr><td>❌</td><td>Loại khỏi shortlist gift</td><td>Tilia (quá feminine-loud) · Fleur de Peau EDT (polarizing-musty) · B683/Ganymede (leaning-masculine/polarizing)</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <blockquote><strong>Quyết định cuối — context Sài Gòn:</strong> Vì bạn ở Sài Gòn nóng-ẩm quanh năm, gift mặc định <strong>flip từ Tam Dao → Fico di Amalfi La Riserva</strong> nếu recipient sống cùng khí hậu. Bộ đôi gift hoàn hảo nếu budget cho phép: <strong>Fico La Riserva (ngày/hè) + Tam Dao EDP (evening/AC)</strong> = $465–500 cho 2 chai phủ trọn 2 thái cực mùa của SG.</blockquote>
+
+  <p class="src">Sources cập nhật 22/05: <a href="https://www.fragrantica.com/perfume/Marc-Antoine-Barrois/Tilia-91688.html">Fragrantica – Tilia</a> · <a href="https://www.fragrantica.com/perfume/Diptyque/Fleur-de-Peau-Eau-de-Toilette-112975.html">Fragrantica – Fleur de Peau EDT 2025</a> · <a href="https://www.fragrantica.com/perfume/By-Kilian/Old-Fashioned-96096.html">Fragrantica – Old Fashioned Kilian</a> · <a href="https://www.fragrantica.com/perfume/Acqua-di-Parma/Fico-di-Amalfi-La-Riserva-107110.html">Fragrantica – Fico La Riserva</a> · <a href="https://www.fragrantica.com/perfume/Diptyque/L-Eau-Papier-78658.html">Fragrantica – L'Eau Papier</a> · <a href="https://www.fragrantica.com/awards2024/category/Best-Unisex-Fragrance-2024">Fragrantica 2024 Top Unisex</a> · <a href="https://www.fragrantica.com/news/FRAGRANTICA-Readers-Choice-AWARDS-2025-WINNERS-24172.html">Fragrantica 2025 Winners</a> · <a href="https://www.fragrantica.com/news/FRAGRANTICA-Readers-Choice-AWARDS-2023-WINNERS-19526.html">2023 Winners (Angels' Share)</a> · <a href="https://www.fragrantica.com/awards2020/">2020 Awards</a> · <a href="https://www.fragrantica.com/news/Acqua-Di-Parma-La-Riserva-Collection-The-First-Time-the-Brand-Has-Been-Boring-in-Years-23249.html">Fragrantica editorial – La Riserva "boring"</a> · <a href="https://robbreport.com/style/grooming/review-diptyque-leau-papier-1234875800/">Robb Report – L'Eau Papier summer skin scent</a></p>
+
+  <p class="src">Sources bổ sung: <a href="https://www.fragrantica.com/news/B683-Decoding-Seduction-and-Masculinity-according-to-Marc-Antoine-Barrois-10344.html">Fragrantica – B683 Editorial</a> · <a href="https://www.fragrantica.com/news/Marc-Antoine-Barrois-B683-Extrait-Magnified-and-Improved-14753.html">Fragrantica – B683 Extrait</a> · <a href="https://basenotes.com/fragrances/b683-eau-de-parfum-by-marc-antoine-barrois.26151031/reviews/">Basenotes – B683 reviews</a> · <a href="https://www.luckyscent.com/product/822000/b683-by-marc-antoine-barrois">Luckyscent – B683</a></p>
+
+  <p class="note"><strong>Addendum trigger:</strong> user refined brief từ "thay thế" → "đồng hành đánh giá cao" · <strong>Confidence:</strong> Cao cho B683 (verified qua 4 nguồn độc lập); Trung bình cho Tam Dao/Portrait of a Lady backup (chưa stress-test với da người dùng)</p>
+</section>
+
+<footer>
+  Research Completion Date: 19/05/2026 · Addendum: 21/05/2026 · Confidence: Trung bình–Cao (định tính &gt; định lượng) · Tác giả: Rom
+</footer>
+
+</div>
+</body>
+</html>

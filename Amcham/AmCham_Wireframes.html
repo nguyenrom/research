@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AmCham Vietnam · Wireframe Concepts | Blue Coral (Powered by ADNS)</title>
+<style>
+  :root{
+    --ink:#2b2b2b; --mut:#8a8a8a; --line:#cfcfcf; --fill:#ececec; --fill2:#f6f6f6;
+    --brand:#1f3a93; --note:#c2410c; --noteb:#fff4ec; --ok:#15803d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#dadada;font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.45}
+  .sheet{width:1040px;margin:24px auto;background:#fff;padding:34px 40px;box-shadow:0 2px 14px rgba(0,0,0,.18);page-break-after:always;display:flex;flex-direction:column;min-height:735px}
+  h1{font-size:26px;margin:0 0 4px} h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin:0 0 14px;border-bottom:2px solid var(--brand);padding-bottom:6px}
+  h3{font-size:18px;margin:0 0 2px} .sub{color:var(--mut);font-size:13px;margin:0 0 18px}
+  .tag{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);border:1px solid var(--brand);border-radius:3px;padding:2px 8px;margin-bottom:10px}
+
+  /* wireframe primitives */
+  .frame{border:1.5px solid var(--ink);border-radius:6px;overflow:hidden;background:#fff}
+  .chrome{display:flex;align-items:center;gap:6px;background:var(--fill);border-bottom:1.5px solid var(--ink);padding:7px 10px;font-size:12px;color:var(--mut)}
+  .dot{width:9px;height:9px;border-radius:50%;background:#bbb;display:inline-block}
+  .url{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px 10px;color:#666;margin-left:6px}
+  .pad{padding:16px}
+  .row{display:flex;gap:14px} .col{flex:1}
+  .ph{background:var(--fill);border-radius:3px;height:10px;margin:6px 0}
+  .ph.s{width:55%} .ph.m{width:75%} .ph.l{width:100%} .ph.t{height:16px}
+  .img{background:repeating-linear-gradient(45deg,#eee,#eee 8px,#e3e3e3 8px,#e3e3e3 16px);border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#9a9a9a;font-size:12px}
+  .box{border:1px solid var(--line);border-radius:5px;padding:12px;background:#fff}
+  .box.fill{background:var(--fill2)}
+  .btn{display:inline-block;border:1.5px solid var(--brand);color:var(--brand);border-radius:4px;padding:5px 12px;font-size:12px;font-weight:600}
+  .btn.solid{background:var(--brand);color:#fff}
+  .btn.g{border-color:#999;color:#666}
+  .chip{display:inline-block;border:1px solid var(--line);border-radius:11px;padding:2px 10px;font-size:11px;color:#555;margin:2px 3px 2px 0;background:#fff}
+  .nav{display:flex;gap:18px;font-size:12px;color:#555;align-items:center}
+  .logo{font-weight:800;color:var(--brand);font-size:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .kpi{border:1px solid var(--line);border-radius:5px;padding:10px 12px;background:var(--fill2)}
+  .kpi b{font-size:22px;display:block} .kpi span{font-size:11px;color:var(--mut)}
+  .side{width:170px;border-right:1px solid var(--line);padding:12px;background:var(--fill2);font-size:12px}
+  .side .it{padding:7px 8px;border-radius:4px;color:#555;margin-bottom:2px}
+  .side .it.on{background:var(--brand);color:#fff;font-weight:600}
+  table{width:100%;border-collapse:collapse;font-size:12px}
+  th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left}
+  th{background:var(--fill);color:#555;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  .ai{border:1.5px dashed var(--note);border-radius:6px;background:var(--noteb);padding:12px}
+  .ai .h{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--note);font-weight:700;margin-bottom:6px}
+  .marker{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border-radius:50%;background:var(--note);color:#fff;font-size:11px;font-weight:700;vertical-align:middle}
+  .notes{margin-top:14px;border-top:1px dashed var(--note);padding-top:10px}
+  .notes .ttl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--note);font-weight:700;margin-bottom:6px}
+  .notes ul{margin:0;padding-left:0;list-style:none;font-size:12.5px;color:#444}
+  .notes li{margin:5px 0;display:flex;gap:8px} .notes li .marker{flex:0 0 19px}
+  .legend{display:flex;gap:26px;flex-wrap:wrap;font-size:12px;color:#555;margin-top:10px}
+  .legend .s{display:flex;align-items:center;gap:7px}
+  .swatch{width:26px;height:14px;border-radius:3px;border:1px solid var(--line)}
+  .footer{margin-top:auto;font-size:11px;color:var(--mut);display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:8px}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  .map .b{border:1px solid var(--line);border-radius:6px;padding:14px}
+  .map .b h4{margin:0 0 8px;font-size:14px;color:var(--brand)}
+  .map .b ul{margin:0;padding-left:18px;font-size:12.5px;color:#444} .map .b li{margin:3px 0}
+  @media print{
+    @page{size:A4 landscape;margin:0}
+    html,body{background:#fff}
+    .sheet{box-shadow:none;margin:0;width:auto;min-height:192mm;padding:9mm 12mm;page-break-after:always;break-inside:avoid}
+    .sheet:last-of-type{page-break-after:auto}
+    .pfit{zoom:.8;min-height:240mm}
+  }
+
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet{position:relative;overflow:hidden}
+  .sheet::before{content:"BLUE CORAL";position:absolute;top:44%;left:50%;transform:translate(-50%,-50%) rotate(-27deg);font-size:118px;font-weight:800;letter-spacing:.06em;color:rgba(31,58,147,.055);white-space:nowrap;pointer-events:none;z-index:0}
+  .sheet>*{position:relative;z-index:1}
+  .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:6px 0 2px}
+  .node{border:1.5px solid var(--ink);border-radius:6px;padding:7px 11px;font-size:11.5px;background:#fff;text-align:center}
+  .node small{display:block;color:var(--mut);font-size:10px;font-weight:400}
+  .node.ai{border-style:dashed;border-color:var(--note);background:var(--noteb);color:#7c2d12}
+  .node.start{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .node.start small{color:#cdd6f6}
+  .node.dec{border-radius:18px;background:var(--fill2)}
+  .arrow{color:#9a9a9a;font-weight:800;font-size:15px}
+  .flow-ttl{font-weight:700;font-size:13px;color:var(--brand);margin-top:15px}
+  .flow-note{font-size:11.5px;color:#555;margin:3px 0 0}
+  .intro{display:flex;gap:18px;margin:14px 0;border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--fill2)}
+  .intro .l{flex:1.5} .intro .r{flex:1;border-left:1px solid var(--line);padding-left:14px}
+  .intro h3{font-size:15px;color:var(--brand);margin:0 0 6px} .intro p{font-size:12px;margin:0 0 8px;color:#444}
+  .tc{font-size:12.5px;color:#3a3a3a;padding-left:18px} .tc li{margin:8px 0}
+  .tc .em{background:var(--noteb);border:1px solid var(--note);border-radius:6px;padding:10px 12px;color:#7c2d12;list-style:none;margin-left:-18px}
+
+  .exec-lead{border-left:4px solid var(--brand);background:var(--fill2);padding:12px 14px;font-size:14px;border-radius:0 6px 6px 0;margin:14px 0}
+  .persona h4{margin:0 0 8px;color:var(--brand);font-size:14px}
+  .persona ul{margin:0;padding-left:16px;font-size:12.5px;color:#3a3a3a} .persona li{margin:6px 0}
+  .diff{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+  .diff .chip{font-size:11.5px;border-color:var(--brand);color:var(--brand)}
+  .thanks{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:560px;flex:1}
+  .thanks h1{font-size:74px;font-weight:800;letter-spacing:-.02em;margin:0 0 12px;color:#111}
+  .thanks .lead{font-size:33px;font-weight:800;color:#111;margin:0 0 64px;letter-spacing:-.01em}
+  .thanks .c{font-size:15px;color:#333;margin:6px 0}
+
+  .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+  .caps .box{font-size:12px;color:#3a3a3a}
+  .caps .box b.t{color:var(--brand);font-size:13px;display:block;margin-bottom:5px}
+  .sheet.nowm::before{content:none}
+
+  .phones{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .phone{width:186px;border:2px solid var(--ink);border-radius:22px;padding:8px;background:#fff}
+  .phone .notch{width:54px;height:5px;background:#cfcfcf;border-radius:3px;margin:1px auto 7px}
+  .pscr{border:1px solid var(--line);border-radius:12px;overflow:hidden;height:322px;display:flex;flex-direction:column}
+  .ptop{background:var(--brand);color:#fff;font-size:10px;padding:7px 9px;font-weight:600}
+  .pbody{padding:9px;flex:1;font-size:10px;color:#444;overflow:hidden}
+  .pbody b{font-size:10px}
+  .ptab{display:flex;border-top:1px solid var(--line);font-size:9px;color:#999}
+  .ptab span{flex:1;text-align:center;padding:6px 0}
+  .ptab .on{color:var(--brand);font-weight:700}
+  .pcap{text-align:center;font-size:11px;font-weight:600;color:var(--brand);margin-top:8px}
+  .pcard{border:1px solid var(--line);border-radius:7px;padding:7px;margin-bottom:7px}
+  .pbtn{display:block;text-align:center;background:var(--brand);color:#fff;border-radius:6px;padding:6px;font-size:10px;font-weight:600;margin-top:5px}
+  .pbtn.o{background:#fff;color:var(--brand);border:1px solid var(--brand)}
+  .qr{width:80px;height:80px;margin:7px auto;background:repeating-linear-gradient(45deg,#222,#222 4px,#fff 4px,#fff 8px);border:3px solid #222;border-radius:6px}
+  .pph{background:var(--fill);border-radius:3px;height:7px;margin:4px 0}
+  .pchip{display:inline-block;border:1px solid var(--line);border-radius:9px;padding:1px 7px;font-size:9px;color:#555;margin:2px 2px 0 0}
+
+  .story{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+  .step{border:1px solid var(--line);border-radius:8px;padding:12px;position:relative;background:#fff}
+  .step .n{position:absolute;top:-11px;left:-11px;width:25px;height:25px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+  .step .ch{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+  .step h4{margin:3px 0 5px;font-size:13px;color:#222}
+  .step p{margin:0;font-size:12px;color:#3a3a3a}
+  .step .bts{margin-top:8px;border-top:1px dashed var(--note);padding-top:7px;font-size:11px;color:#7c2d12}
+  .step .bts b{color:var(--note)}
+  .outcome{margin-top:16px;background:var(--brand);color:#fff;border-radius:8px;padding:13px 16px;font-size:14px;text-align:center;font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<section class="sheet nowm pfit">
+  <span class="tag">Round 2 · Section 3 · System Mockup / Visual</span>
+  <h1>AmCham Vietnam · Website &amp; Member CRM/AMS</h1>
+  <p class="sub">Low-fidelity wireframe concepts · Blue Coral (Powered by ADNS) · for the selection committee</p>
+
+  <div class="intro">
+    <div class="l">
+      <h3>About Blue Coral (Powered by ADNS)</h3>
+      <p>Blue Coral is a full-service digital product agency based in Ho Chi Minh City, Vietnam. We design and build websites, web applications, member platforms and e-commerce systems, and support them end to end with UI/UX design, cloud hosting, IT maintenance and performance marketing.</p>
+      <p>Our work spans startups to established institutions, with a focus on building things the right way: products that are well-engineered, secure, and that simply work. For AmCham this means a member platform staff and members find effortless, with data ownership and compliance built in from day one.</p>
+    </div>
+    <div class="r">
+      <b style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)">Selected clients</b>
+      <div style="margin:6px 0 10px">
+        <span class="chip">VinaCapital</span><span class="chip">Talentnet Group</span><span class="chip">FE Credit &amp; VP Bank</span><span class="chip">Übank</span><span class="chip">Vikki</span><span class="chip">Aperia</span><span class="chip">and more...</span>
+      </div>
+      <b style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)">Capabilities</b>
+      <div style="margin-top:6px">
+        <span class="chip">Web &amp; App Development</span><span class="chip">UI/UX Design</span><span class="chip">ERP &amp; CRM Implementation</span><span class="chip">AI Solutions &amp; Automation</span><span class="chip">Data Platform &amp; Analytics</span><span class="chip">Cloud &amp; DevOps</span><span class="chip">Technology Operations</span><span class="chip">Systems Integration</span><span class="chip">Performance Marketing</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box fill" style="border-left:4px solid var(--brand)">
+    <b>Purpose of these wireframes.</b> They show <b>how we understand AmCham's needs</b> and how the
+    information would be structured for your two user types, not the final look. Colour, typography and
+    high-fidelity visuals are deliberately left out and are produced <b>after contract, in the design phase
+    (milestone M2)</b>. The intent here is to prove the solution is on-target, not to commit a visual direction prematurely.
+  </div>
+
+  <div class="map">
+    <div class="b">
+      <h4>① Member-facing · public website + self-service portal</h4>
+      <ul>
+        <li>Unified homepage for 2 chapters (HCMC + Hanoi)</li>
+        <li>Events: discovery, registration &amp; payment</li>
+        <li>Member portal: profile, renewal, invoices, events</li>
+        <li>Member / company directory (gated, PDPA-aware)</li>
+        <li>Mobile-first: the full experience on any phone</li>
+      </ul>
+    </div>
+    <div class="b">
+      <h4>② Internal admin / CRM · staff + AI workflow surfaces</h4>
+      <ul>
+        <li>Admin dashboard + AI assistant</li>
+        <li>Member 360 record</li>
+        <li><b>AI Workflow 1</b> · inactive-member re-engagement worklist</li>
+        <li><b>AI Workflow 2</b> · pre-meeting / renewal briefing</li>
+        <li><b>AI Workflow 3</b> · event recap &amp; follow-up drafting</li>
+        <li>Finance · QuickBooks sync &amp; e-invoice</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="s"><span class="swatch" style="background:#ececec"></span> content / text block</div>
+    <div class="s"><span class="swatch img"></span> image / media</div>
+    <div class="s"><span class="btn" style="padding:1px 8px">button</span> action</div>
+    <div class="s"><span class="swatch" style="background:var(--noteb);border-color:var(--note);border-style:dashed"></span> AI workflow surface</div>
+    <div class="s"><span class="marker">n</span> design rationale → AmCham need</div>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>Wireframe v1 · low-fidelity</span></div>
+</section>
+
+<!-- ============ EXECUTIVE VIEW ============ -->
+<section class="sheet">
+  <h2>Executive view · outcomes for AmCham</h2>
+  <p class="sub">What this platform and its AI workflows mean for the chamber's leadership.</p>
+  <div class="exec-lead"><b>The decision in one line:</b> one platform to retain members, grow non-dues revenue and run a lean team, with AmCham owning 100% of its data and code.</div>
+  <div class="grid2">
+    <div class="box persona">
+      <h4>For the President / Executive Director</h4>
+      <ul>
+        <li><b>Retain members.</b> The AI agent flags at-risk members early (Workflow 1) so renewals are saved, not lost to silence.</li>
+        <li><b>Grow non-dues revenue.</b> Events, sponsorship and upsell briefings (Workflow 2) live in one place; finance reconciles with QuickBooks.</li>
+        <li><b>Run lean.</b> Automation lets a small team do more; one platform replaces ChamberMaster, Constant Contact and spreadsheets.</li>
+        <li><b>Own it, lower the risk.</b> 100% source-code and data ownership, PDPA by design, no per-member SaaS fees, no vendor lock-in.</li>
+      </ul>
+    </div>
+    <div class="box persona">
+      <h4>For Marketing &amp; Membership</h4>
+      <ul>
+        <li><b>Engage members.</b> Unified, brand-consistent communications across both chapters (replaces Constant Contact).</li>
+        <li><b>Always-on follow-up.</b> Event recaps, thank-yous and re-engagement are drafted automatically (Workflows 3 &amp; 1); staff simply approve.</li>
+        <li><b>Better member experience.</b> Self-service portal, searchable directory and frictionless event registration.</li>
+        <li><b>Decide with data.</b> One member view plus dashboards for renewal, attendance and engagement.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="flow-ttl">Why Blue Coral</div>
+  <div class="diff">
+    <span class="chip">AI-first delivery</span><span class="chip">100% data &amp; code ownership</span><span class="chip">PDPA / GDPR by design</span><span class="chip">In-country team &amp; support</span><span class="chip">Lower TCO than SaaS (no per-member fees)</span><span class="chip">Lean, architecture-led delivery</span><span class="chip">Partnership mindset (barter-friendly)</span><span class="chip">12-month warranty + SLA</span>
+  </div>
+  <div class="flow-ttl">What success looks like <span style="font-weight:400;font-size:11px;color:var(--mut)">(illustrative; concrete targets agreed in discovery)</span></div>
+  <div class="grid4">
+    <div class="kpi"><b>&uarr; Renewals</b><span>Early at-risk detection saves renewals</span></div>
+    <div class="kpi"><b>Hours saved</b><span>Automation frees membership &amp; events staff</span></div>
+    <div class="kpi"><b>~70% lower</b><span>Bulk-email cost vs Constant Contact</span></div>
+    <div class="kpi"><b>Mins, not hrs</b><span>Briefing &amp; recap prep time</span></div>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>Executive view</span></div>
+</section>
+
+<!-- ============ F1 · PROCESS FLOWS ============ -->
+<section class="sheet">
+  <h2>Requirements overview · A · Key process flows</h2>
+  <p class="sub">How AmCham's core processes flow through the system, including where the AI agents act.</p>
+
+  <div class="flow-ttl">1 · Membership lifecycle &amp; renewal</div>
+  <div class="flow">
+    <div class="node start">Join / Apply</div><span class="arrow">&rarr;</span>
+    <div class="node">Onboarding<small>welcome, documents</small></div><span class="arrow">&rarr;</span>
+    <div class="node">Active member<small>events, directory</small></div><span class="arrow">&rarr;</span>
+    <div class="node">Renewal due<small>T-120 / 60 / 30</small></div><span class="arrow">&rarr;</span>
+    <div class="node ai">&#10022; AI WF1<small>re-engage if at-risk</small></div><span class="arrow">&rarr;</span>
+    <div class="node">Renew &amp; pay<small>Stripe / VNPay / Momo</small></div><span class="arrow">&rarr;</span>
+    <div class="node">E-invoice issued</div>
+  </div>
+  <p class="flow-note">Members flagged inactive (no events, no logins) are routed to the re-engagement agent before renewal; on payment a VAT e-invoice is issued and the member returns to Active.</p>
+
+  <div class="flow-ttl">2 · Event, from creation to recap</div>
+  <div class="flow">
+    <div class="node start">Create event</div><span class="arrow">&rarr;</span>
+    <div class="node">Publish<small>2 chapters</small></div><span class="arrow">&rarr;</span>
+    <div class="node">Register<small>member / non-member / table</small></div><span class="arrow">&rarr;</span>
+    <div class="node">Pay</div><span class="arrow">&rarr;</span>
+    <div class="node">E-invoice + QR ticket</div><span class="arrow">&rarr;</span>
+    <div class="node">Check-in<small>QR scan</small></div><span class="arrow">&rarr;</span>
+    <div class="node">Attendance recorded</div><span class="arrow">&rarr;</span>
+    <div class="node ai">&#10022; AI WF3<small>recap &amp; follow-up</small></div>
+  </div>
+  <p class="flow-note">Attendance feeds the member record; the recap agent drafts the website post, attendee thank-you, no-show follow-up and an internal ROI summary for staff approval.</p>
+
+  <div class="flow-ttl">3 · Pre-meeting / renewal briefing</div>
+  <div class="flow">
+    <div class="node start">Meeting upcoming</div><span class="arrow">&rarr;</span>
+    <div class="node dec">Staff "Generate briefing"<small>or auto at T-7</small></div><span class="arrow">&rarr;</span>
+    <div class="node ai">&#10022; AI WF2<small>compiles 360 + finance</small></div><span class="arrow">&rarr;</span>
+    <div class="node">One-page briefing<small>internal / member-facing</small></div>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>F1</span></div>
+</section>
+
+<!-- ============ F2 · SYSTEM & COMMS ============ -->
+<section class="sheet">
+  <h2>Requirements overview · B · System &amp; data, communications</h2>
+  <p class="sub">Conceptual view. The exact technology stack is confirmed in the design phase after contract; AmCham retains 100% data ownership.</p>
+
+  <div class="flow-ttl">4 · System &amp; data (conceptual)</div>
+  <div class="flow"><div class="node ai" style="font-weight:700">&#10022; AI agent layer<small>WF1 · WF2 · WF3 read member context</small></div></div>
+  <div class="flow"><span class="arrow">&darr;</span></div>
+  <div class="flow">
+    <div class="node">Public website / CMS<small>2 chapters, EN/VI</small></div><span class="arrow">&harr;</span>
+    <div class="node start">Member data &amp; AMS core<small>members · events · finance · audit</small></div><span class="arrow">&harr;</span>
+    <div class="node">Self-service portal<small>profile · renewal · invoices</small></div>
+  </div>
+  <div class="flow"><span class="arrow">&darr;</span> &nbsp;<small style="color:var(--mut)">integrations</small></div>
+  <div class="flow">
+    <div class="node">Payments<small>Stripe / VNPay / Momo</small></div>
+    <div class="node">E-invoice<small>Decree 123</small></div>
+    <div class="node">Accounting<small>QuickBooks sync</small></div>
+    <div class="node">Email / comms</div>
+  </div>
+  <p class="flow-note">Sensitive member data sits in the AMS core with audit logging (PDPA, Decree 13/2023); the public website is replaceable without touching member data.</p>
+
+  <div class="flow-ttl">5 · Communications (replaces Constant Contact)</div>
+  <div class="flow">
+    <div class="node start">Trigger<small>onboarding · renewal · event · campaign</small></div><span class="arrow">&rarr;</span>
+    <div class="node">Segment members</div><span class="arrow">&rarr;</span>
+    <div class="node">Brand-locked template</div><span class="arrow">&rarr;</span>
+    <div class="node">Send via email system</div><span class="arrow">&rarr;</span>
+    <div class="node">Track open / click</div><span class="arrow">&rarr;</span>
+    <div class="node">Feeds engagement back to AMS</div>
+  </div>
+  <p class="flow-note">Engagement signals (opens, clicks, attendance) flow back into the member record, which is what powers the AI agents above.</p>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>F2</span></div>
+</section>
+
+<!-- ============ A1 · PUBLIC HOMEPAGE ============ -->
+<section class="sheet">
+  <h2>Member-facing · A1 · Public homepage (unified, 2 chapters)</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">amchamvietnam.com</span><span>EN | VI &nbsp; <span class="marker">2</span></span></div>
+    <div class="pad">
+      <div class="nav" style="justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px">
+        <span class="logo">▣ AMCHAM VIETNAM</span>
+        <span class="nav">About · Membership · Events · Directory · News · Sponsorship</span>
+        <span><span class="chip">Chapter: HCMC ▾</span><span class="marker">1</span> <span class="btn solid">Join / Renew</span><span class="marker">5</span></span>
+      </div>
+      <div class="img" style="height:120px;margin-bottom:12px">HERO: value proposition + "Become a member" CTA</div>
+      <div class="row">
+        <div class="col box"><b style="font-size:13px">Upcoming events</b><div class="ph t"></div><div class="ph m"></div><div class="ph s"></div><span class="chip">HCMC</span><span class="chip">Hanoi</span><span class="chip">All</span><span class="marker">1</span></div>
+        <div class="col box"><b style="font-size:13px">Latest news &amp; insights</b><div class="ph t"></div><div class="ph l"></div><div class="ph m"></div></div>
+        <div class="col box"><b style="font-size:13px">Why join AmCham</b><div class="ph"></div><div class="ph m"></div><div class="btn">Membership tiers</div></div>
+      </div>
+      <div class="box fill" style="margin-top:12px;display:flex;align-items:center;gap:10px">
+        <b style="font-size:12px">Our sponsors &amp; partners</b>
+        <div class="img" style="height:34px;flex:1">logo &nbsp; logo &nbsp; logo &nbsp; logo &nbsp; logo</div><span class="marker">6</span>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">Design rationale → AmCham need</div>
+    <ul>
+      <li><span class="marker">1</span> <b>Two chapters, one brand.</b> A chapter switcher + per-chapter event/news filtering serves HCMC &amp; Hanoi from a single unified site (RFP: unified branding, 2 chapters).</li>
+      <li><span class="marker">2</span> <b>Bilingual EN / VI</b> toggle in the header, content and templates available in both languages.</li>
+      <li><span class="marker">5</span> <b>"Join / Renew" is the primary CTA</b>, it routes straight into the self-service membership flow (A3), the chamber's main conversion goal.</li>
+      <li><span class="marker">6</span> <b>Sponsor visibility</b> built into the homepage, supports AmCham's sponsorship &amp; advertising revenue.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>A1</span></div>
+</section>
+
+<!-- ============ A2 · EVENTS ============ -->
+<section class="sheet pfit">
+  <h2>Member-facing · A2 · Events: discovery, registration &amp; payment</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">amchamvietnam.com/events</span></div>
+    <div class="pad">
+      <div class="row">
+        <div class="side" style="border-right:1px solid var(--line)">
+          <b style="font-size:12px">Filters <span class="marker">1</span></b>
+          <div class="ph s"></div>
+          <span class="chip">Chapter ▾</span><span class="chip">Type ▾</span><span class="chip">Month ▾</span>
+          <div style="margin-top:10px"><span class="chip">List</span><span class="chip">Calendar</span></div>
+        </div>
+        <div class="col" style="padding-left:14px">
+          <div class="grid2">
+            <div class="box"><div class="img" style="height:56px">event image</div><div class="ph t"></div><span class="chip">HCMC · Gala</span><div class="ph s"></div><span class="btn solid">Register</span><span class="marker">3</span></div>
+            <div class="box"><div class="img" style="height:56px">event image</div><div class="ph t"></div><span class="chip">Hanoi · Workshop</span><div class="ph s"></div><span class="btn solid">Register</span></div>
+            <div class="box"><div class="img" style="height:56px">event image</div><div class="ph t"></div><span class="chip">HCMC · Networking</span><div class="ph s"></div><span class="btn">Member price ▾</span><span class="marker">4</span></div>
+            <div class="box"><div class="img" style="height:56px">event image</div><div class="ph t"></div><span class="chip">Both · Webinar</span><div class="ph s"></div><span class="btn solid">Register</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="box fill" style="margin-top:12px">
+        <b style="font-size:12px">Event detail (expanded)</b>
+        <div class="row" style="margin-top:8px">
+          <div class="col"><div class="ph l"></div><div class="ph m"></div><div class="ph s"></div></div>
+          <div class="col box" style="background:#fff"><b style="font-size:12px">Registration</b><div class="ph s"></div>Member ☐ · Non-member ☐ · Table of 10 ☐ <span class="marker">3</span><div class="ph s"></div><span class="btn solid">Pay: Stripe / VNPay / Momo</span><span class="marker">7</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">Design rationale → AmCham need</div>
+    <ul>
+      <li><span class="marker">1</span> <b>Filter by chapter, type, month</b> + calendar view, both chapters' programmes in one place.</li>
+      <li><span class="marker">3</span> <b>Self-registration with group / table-of-10 bookings</b>, matches the chamber's flagship galas &amp; dinners.</li>
+      <li><span class="marker">4</span> <b>Member vs non-member pricing</b> applied automatically from the member's tier.</li>
+      <li><span class="marker">7</span> <b>Integrated payment</b> (Stripe / VNPay / Momo) + automatic VAT e-invoice on completion.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>A2</span></div>
+</section>
+
+<!-- ============ A3 · MEMBER PORTAL ============ -->
+<section class="sheet">
+  <h2>Member-facing · A3 · Self-service member portal</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">member.amchamvietnam.com/dashboard</span><span>Logged in: ACME Corp ▾</span></div>
+    <div style="display:flex">
+      <div class="side">
+        <div class="it on">Dashboard</div>
+        <div class="it">My profile &amp; company</div>
+        <div class="it">Membership &amp; renewal</div>
+        <div class="it">Invoices &amp; receipts</div>
+        <div class="it">My events</div>
+        <div class="it">Member directory</div>
+        <div class="it">Data &amp; privacy <span class="marker">8</span></div>
+      </div>
+      <div class="col pad">
+        <div class="grid3">
+          <div class="kpi"><b>Active</b><span>Membership status · Gold tier</span></div>
+          <div class="kpi" style="border-color:var(--note)"><b>32 days</b><span>Until renewal due <span class="marker">5</span></span></div>
+          <div class="kpi"><b>3</b><span>Upcoming registrations</span></div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <div class="col box"><b style="font-size:13px">Renew membership</b><div class="ph m"></div><div class="ph s"></div><span class="btn solid">Renew &amp; pay now</span><span class="marker">5</span></div>
+          <div class="col box"><b style="font-size:13px">Invoices &amp; receipts</b>
+            <table><tr><th>Invoice</th><th>Date</th><th></th></tr><tr><td>INV-2026-014</td><td>05/2026</td><td><span class="btn g">PDF</span></td></tr><tr><td>INV-2025-221</td><td>05/2025</td><td><span class="btn g">PDF</span></td></tr></table><span class="marker">7</span>
+          </div>
+        </div>
+        <div class="box" style="margin-top:12px"><b style="font-size:13px">My profile &amp; company</b>: edit contacts, logo, industry, representatives <div class="ph m"></div><span class="btn">Edit profile</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">Design rationale → AmCham need</div>
+    <ul>
+      <li><span class="marker">5</span> <b>Self-service renewal &amp; payment</b>, members renew without staff effort; the renewal due date is front-and-centre (reduces manual chasing).</li>
+      <li><span class="marker">7</span> <b>Invoice / receipt self-download</b> (PDF, VAT-compliant), replaces email back-and-forth.</li>
+      <li><span class="marker">8</span> <b>"Data &amp; privacy" panel</b>, member self-service data export &amp; consent, supporting PDPA (Decree 13/2023) and GDPR for EU members.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>A3</span></div>
+</section>
+
+<!-- ============ A4 · DIRECTORY ============ -->
+<section class="sheet">
+  <h2>Member-facing · A4 · Member / company directory (gated)</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">member.amchamvietnam.com/directory</span><span>🔒 Members only <span class="marker">8</span></span></div>
+    <div class="pad">
+      <div class="box fill" style="display:flex;gap:8px;align-items:center"><span style="font-size:13px">🔎</span><div class="ph s" style="margin:0;flex:1"></div><span class="chip">Industry ▾</span><span class="chip">Chapter ▾</span><span class="chip">Tier ▾</span><span class="marker">1</span></div>
+      <div class="grid3" style="margin-top:12px">
+        <div class="box"><div class="img" style="height:40px;width:40px;border-radius:50%">logo</div><div class="ph t"></div><div class="ph s"></div><span class="chip">Manufacturing</span></div>
+        <div class="box"><div class="img" style="height:40px;width:40px;border-radius:50%">logo</div><div class="ph t"></div><div class="ph s"></div><span class="chip">Finance</span></div>
+        <div class="box"><div class="img" style="height:40px;width:40px;border-radius:50%">logo</div><div class="ph t"></div><div class="ph s"></div><span class="chip">Tech</span></div>
+        <div class="box"><div class="img" style="height:40px;width:40px;border-radius:50%">logo</div><div class="ph t"></div><div class="ph s"></div><span class="chip">Legal</span></div>
+        <div class="box"><div class="img" style="height:40px;width:40px;border-radius:50%">logo</div><div class="ph t"></div><div class="ph s"></div><span class="chip">F&amp;B</span></div>
+        <div class="box"><div class="img" style="height:40px;width:40px;border-radius:50%">logo</div><div class="ph t"></div><div class="ph s"></div><span class="chip">Logistics</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">Design rationale → AmCham need</div>
+    <ul>
+      <li><span class="marker">1</span> <b>Searchable &amp; filterable</b> by industry, chapter and tier · the networking value members pay for.</li>
+      <li><span class="marker">8</span> <b>Gated to logged-in members</b> · protects member PII; visibility honours each member's consent settings (PDPA).</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>A4</span></div>
+</section>
+
+<!-- ============ M1 · MOBILE MEMBER ============ -->
+<section class="sheet">
+  <h2>Member-facing · M1 · Mobile experience (members)</h2>
+  <p class="sub">Members do everything from their phone: renew, register, pay, show a ticket and find each other.</p>
+  <div class="phones">
+    <div><div class="phone"><div class="notch"></div><div class="pscr">
+      <div class="ptop">AmCham · My account</div>
+      <div class="pbody">
+        <div class="pcard">Membership: Active · Gold<div class="pph" style="width:55%"></div><div style="color:var(--note);font-weight:600;margin-top:3px">Renews in 32 days</div><span class="pbtn">Renew &amp; pay</span></div>
+        <b>Upcoming events</b>
+        <div class="pcard"><div class="pph"></div><div class="pph" style="width:70%"></div></div>
+        <div class="pcard"><div class="pph"></div><div class="pph" style="width:70%"></div></div>
+      </div>
+      <div class="ptab"><span class="on">Home</span><span>Events</span><span>Directory</span><span>Profile</span></div>
+    </div></div><div class="pcap">Member dashboard</div></div>
+
+    <div><div class="phone"><div class="notch"></div><div class="pscr">
+      <div class="ptop">Event · Charity Ball</div>
+      <div class="pbody">
+        <div class="pcard" style="padding:0"><div style="height:50px;background:repeating-linear-gradient(45deg,#eee,#eee 8px,#e3e3e3 8px,#e3e3e3 16px);border-radius:6px 6px 0 0"></div><div style="padding:7px"><div class="pph"></div><div class="pph" style="width:60%"></div></div></div>
+        <span class="pchip">Member price</span><span class="pchip">Single</span><span class="pchip">Table of 10</span>
+        <span class="pbtn">Register</span><span class="pbtn o">Pay: VNPay / Momo / card</span>
+      </div>
+      <div class="ptab"><span>Home</span><span class="on">Events</span><span>Directory</span><span>Profile</span></div>
+    </div></div><div class="pcap">Register &amp; pay</div></div>
+
+    <div><div class="phone"><div class="notch"></div><div class="pscr">
+      <div class="ptop">My ticket</div>
+      <div class="pbody" style="text-align:center">
+        <b>Charity Ball 2026</b><div class="pph" style="width:60%;margin:4px auto"></div>
+        <div class="qr"></div>
+        <div style="font-weight:600;color:var(--brand)">Show at check-in</div>
+        <div class="pph" style="width:70%;margin:6px auto"></div><div class="pph" style="width:50%;margin:0 auto"></div>
+      </div>
+      <div class="ptab"><span>Home</span><span class="on">Events</span><span>Directory</span><span>Profile</span></div>
+    </div></div><div class="pcap">Digital QR ticket</div></div>
+
+    <div><div class="phone"><div class="notch"></div><div class="pscr">
+      <div class="ptop">Member directory</div>
+      <div class="pbody">
+        <div class="pcard">&#128269; Search members</div>
+        <div class="pcard" style="display:flex;gap:7px;align-items:center"><div style="width:26px;height:26px;border-radius:50%;background:var(--fill);border:1px solid var(--line)"></div><div style="flex:1"><div class="pph"></div><div class="pph" style="width:60%"></div></div></div>
+        <div class="pcard" style="display:flex;gap:7px;align-items:center"><div style="width:26px;height:26px;border-radius:50%;background:var(--fill);border:1px solid var(--line)"></div><div style="flex:1"><div class="pph"></div><div class="pph" style="width:60%"></div></div></div>
+        <div class="pcard" style="display:flex;gap:7px;align-items:center"><div style="width:26px;height:26px;border-radius:50%;background:var(--fill);border:1px solid var(--line)"></div><div style="flex:1"><div class="pph"></div><div class="pph" style="width:60%"></div></div></div>
+      </div>
+      <div class="ptab"><span>Home</span><span>Events</span><span class="on">Directory</span><span>Profile</span></div>
+    </div></div><div class="pcap">Directory &amp; networking</div></div>
+  </div>
+  <div class="notes">
+    <div class="ttl">Why this matters</div>
+    <ul>
+      <li><span class="marker">1</span> <b>Frictionless for members.</b> Renew, register, pay and get a QR ticket in a few taps, no desktop needed.</li>
+      <li><span class="marker">2</span> <b>Self-service anywhere.</b> Membership status, invoices and event history are always in their pocket.</li>
+      <li><span class="marker">3</span> <b>Networking on the go.</b> The gated member directory is fully usable on mobile.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>M1</span></div>
+</section>
+
+<!-- ============ M2 · RESPONSIVE ============ -->
+<section class="sheet">
+  <h2>Member-facing · M2 · Responsive design &amp; access</h2>
+  <p class="sub">One build adapts from desktop to phone; reminders link members straight to the right mobile page.</p>
+
+  <div class="flow-ttl" style="margin-top:6px">Same site, every screen</div>
+  <div class="flow" style="align-items:flex-end;gap:20px">
+    <div style="text-align:center">
+      <div style="width:300px;height:150px;border:1.5px solid var(--ink);border-radius:8px;padding:8px">
+        <div class="pph" style="height:14px"></div><div class="row" style="gap:6px;margin-top:6px"><div class="col pph" style="height:62px"></div><div class="col pph" style="height:62px"></div><div class="col pph" style="height:62px"></div></div>
+      </div><div class="pcap">Desktop · 3 columns</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:168px;height:150px;border:1.5px solid var(--ink);border-radius:8px;padding:8px">
+        <div class="pph" style="height:12px"></div><div class="row" style="gap:6px;margin-top:6px"><div class="col pph" style="height:56px"></div><div class="col pph" style="height:56px"></div></div>
+      </div><div class="pcap">Tablet · 2 columns</div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:84px;height:150px;border:1.5px solid var(--ink);border-radius:10px;padding:7px">
+        <div class="pph" style="height:10px"></div><div class="pph" style="height:34px;margin-top:6px"></div><div class="pph" style="height:34px"></div>
+      </div><div class="pcap">Phone · 1 column</div>
+    </div>
+  </div>
+  <p class="flow-note">Mobile-first build, target Lighthouse mobile 90+, works in any browser with nothing to install, and WCAG 2.1 AA accessible.</p>
+
+  <div class="row" style="margin-top:14px;align-items:flex-start">
+    <div class="col">
+      <div class="flow-ttl" style="margin-top:0">From reminder to action, on the phone</div>
+      <div class="phones" style="justify-content:flex-start;gap:10px">
+        <div><div class="phone" style="width:150px"><div class="notch"></div><div class="pscr" style="height:240px">
+          <div class="ptop">Zalo / SMS</div>
+          <div class="pbody"><div class="pcard">Zalo ZNS<div class="pph"></div><div class="pph" style="width:80%"></div><span class="pbtn">Renew now</span></div><div class="pcard">SMS<div class="pph" style="width:85%"></div></div></div>
+        </div></div><div class="pcap">Notification</div></div>
+        <div style="display:flex;align-items:center;min-height:240px"><span class="arrow">&rarr;</span></div>
+        <div><div class="phone" style="width:150px"><div class="notch"></div><div class="pscr" style="height:240px">
+          <div class="ptop">Renew membership</div>
+          <div class="pbody"><div class="pcard">Gold · 12 months<div class="pph"></div><span class="pbtn">Pay: VNPay / Momo</span></div><div class="pph" style="width:70%"></div></div>
+        </div></div><div class="pcap">1-tap renewal</div></div>
+      </div>
+    </div>
+    <div class="col box fill">
+      <b style="font-size:13px;color:var(--brand)">Convenience built in</b>
+      <ul style="font-size:12.5px;color:#3a3a3a;padding-left:16px;margin:8px 0 0">
+        <li>Register, pay and get a QR ticket in a few taps.</li>
+        <li>View membership, invoices and event history anytime.</li>
+        <li>Email / Zalo ZNS / SMS reminders deep-link to the exact page.</li>
+        <li>Add to Home Screen (PWA) for an app-like shortcut, no install.</li>
+        <li>Optional native app (iOS + Android) on the roadmap when AmCham is ready.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>M2</span></div>
+</section>
+
+<!-- ============ STORY · MEMBER JOURNEY ============ -->
+<section class="sheet">
+  <h2>Member-facing · A day in the life of a member</h2>
+  <p class="sub">How the platform, automation and AI agents work together, so members stay engaged with almost no manual staff effort.</p>
+  <div class="exec-lead">Meet <b>Linh</b>, office manager at a member company. She never logs a support ticket, never misses an event she wants, and renews on time, because the system meets her where she is.</div>
+
+  <div class="story">
+    <div class="step"><div class="n">1</div><div class="ch">Zalo ZNS · automatic</div>
+      <h4>A timely nudge</h4>
+      <p>Monday morning, Linh gets a branded Zalo message: an upcoming HCMC event, and a note that renewal is near.</p>
+      <div class="bts"><b>Behind the scenes:</b> the automation journey fired on her renewal and event triggers (B7).</div>
+    </div>
+    <div class="step"><div class="n">2</div><div class="ch">Mobile web</div>
+      <h4>Registers in a few taps</h4>
+      <p>She taps through, picks a table of 10 and pays with VNPay, all on her phone in under a minute.</p>
+      <div class="bts"><b>Behind the scenes:</b> payment captured, VAT e-invoice issued automatically, finance synced to QuickBooks.</div>
+    </div>
+    <div class="step"><div class="n">3</div><div class="ch">Portal</div>
+      <h4>Instant digital ticket</h4>
+      <p>A QR ticket and confirmation land in her account and inbox right away.</p>
+      <div class="bts"><b>Behind the scenes:</b> ticket generated and stored in her member record; nothing for staff to send.</div>
+    </div>
+    <div class="step"><div class="n">4</div><div class="ch">Event night</div>
+      <h4>Checks in within seconds</h4>
+      <p>At the door she shows the QR; a staff member scans it and she is in.</p>
+      <div class="bts"><b>Behind the scenes:</b> attendance recorded straight to her Member 360 timeline (B2).</div>
+    </div>
+    <div class="step"><div class="n">5</div><div class="ch">Email · automatic</div>
+      <h4>A warm follow-up</h4>
+      <p>Next morning she gets a thank-you with event photos; people who missed it get a friendly note.</p>
+      <div class="bts"><b>Behind the scenes:</b> the event recap agent drafted it, a staff member approved with one click (WF3).</div>
+    </div>
+    <div class="step"><div class="n">6</div><div class="ch">AI · automatic</div>
+      <h4>Saved before she lapses</h4>
+      <p>Months later, if Linh goes quiet, she gets a personal re-engagement note before her membership ever lapses.</p>
+      <div class="bts"><b>Behind the scenes:</b> the re-engagement agent flagged her early and drafted the outreach (WF1).</div>
+    </div>
+  </div>
+
+  <div class="outcome">Engaged member, on-time renewal, near-zero manual effort, and a lean team that scales with the chamber.</div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>Member journey</span></div>
+</section>
+
+<!-- ============ B1 · ADMIN DASHBOARD ============ -->
+<section class="sheet">
+  <h2>Admin / CRM · B1 · Staff dashboard + AI assistant</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">admin.amchamvietnam.com</span><span>Staff: Membership team ▾ <span class="marker">9</span></span></div>
+    <div style="display:flex">
+      <div class="side">
+        <div class="it on">Dashboard</div>
+        <div class="it">Members &amp; companies</div>
+        <div class="it">Events</div>
+        <div class="it">Communications</div>
+        <div class="it">Finance</div>
+        <div class="it">AI workflows ✦</div>
+        <div class="it">Reports</div>
+        <div class="it">Audit log <span class="marker">8</span></div>
+      </div>
+      <div class="col pad">
+        <div class="grid4">
+          <div class="kpi"><b>1,240</b><span>Active members</span></div>
+          <div class="kpi" style="border-color:var(--note)"><b>86</b><span>Renewals due ≤30d</span></div>
+          <div class="kpi"><b>5</b><span>Events this month</span></div>
+          <div class="kpi"><b>₫1.2B</b><span>Revenue YTD</span></div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <div class="col ai">
+            <div class="h">✦ AI assistant · today's recommended actions</div>
+            <table>
+              <tr><th>Agent</th><th>Surfaced</th><th></th></tr>
+              <tr><td>Re-engagement (WF1)</td><td>23 at-risk members</td><td><span class="btn">Review</span><span class="marker">A</span></td></tr>
+              <tr><td>Renewal briefings (WF2)</td><td>11 due this week</td><td><span class="btn">Open</span><span class="marker">B</span></td></tr>
+              <tr><td>Event recap (WF3)</td><td>1 event awaiting recap</td><td><span class="btn">Draft</span><span class="marker">C</span></td></tr>
+            </table>
+          </div>
+          <div class="col box"><b style="font-size:13px">Chapter roll-up</b><div class="ph t"></div>HCMC · Hanoi split <div class="ph m"></div><div class="ph s"></div><span class="marker">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">Design rationale → AmCham need</div>
+    <ul>
+      <li><span class="marker">9</span> <b>Role-based views</b> · Admin / Editor / Membership / Events / Finance each see what they need (least-privilege).</li>
+      <li><span class="marker">8</span> <b>Audit log</b> of who viewed / edited member PII · PDPA accountability by design.</li>
+      <li><span class="marker">1</span> <b>Per-chapter scoping with roll-up reporting</b> · staff work their chapter; leadership sees the whole.</li>
+      <li><span class="marker">A</span><span class="marker">B</span><span class="marker">C</span> <b>The three agentic workflows are surfaced as concrete daily actions</b>, not buried features · see B3, B4, B5.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>B1</span></div>
+</section>
+
+<!-- ============ B2 · MEMBER 360 ============ -->
+<section class="sheet">
+  <h2>Admin / CRM · B2 · Member 360 record</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">admin.amchamvietnam.com/members/acme-corp</span></div>
+    <div class="pad">
+      <div class="row">
+        <div class="col box"><b style="font-size:14px">ACME Corporation</b> · Gold · HCMC<div class="ph s"></div>Member since 2019 · Renewal due 32d <div style="margin-top:6px"><span class="btn solid">✦ Generate briefing (WF2)</span><span class="marker">B</span></div></div>
+        <div class="col box fill"><b style="font-size:12px">Finance snapshot</b><div class="ph s"></div>Lifetime ₫ · Open invoices · Last payment <span class="marker">7</span><div class="ph s"></div><span class="chip">Synced with QuickBooks</span></div>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <div class="col box"><b style="font-size:12px">Engagement timeline <span class="marker">D</span></b>
+          <table><tr><th>Date</th><th>Interaction</th></tr><tr><td>04/2026</td><td>Attended Charity Ball (table of 10)</td></tr><tr><td>02/2026</td><td>Opened renewal email · clicked</td></tr><tr><td>11/2025</td><td>Sponsored Mid-Autumn Gala</td></tr></table>
+        </div>
+        <div class="col box"><b style="font-size:12px">Open opportunities</b><div class="ph t"></div><span class="chip">Tier upgrade</span><span class="chip">Event sponsorship</span><div class="ph s"></div><b style="font-size:12px">Representatives</b><div class="ph s"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">Design rationale → AmCham need</div>
+    <ul>
+      <li><span class="marker">D</span> <b>One unified record</b> for membership, events, finance &amp; interactions · replaces siloed ChamberMaster + spreadsheets, and is the data foundation every AI workflow draws on.</li>
+      <li><span class="marker">7</span> <b>Finance synced with QuickBooks</b> · invoices &amp; payments visible in context, no double entry.</li>
+      <li><span class="marker">B</span> <b>"Generate briefing"</b> launches Workflow 2 directly from the record (see B4).</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>B2</span></div>
+</section>
+
+<!-- ============ B3 · WORKFLOW 1 ============ -->
+<section class="sheet">
+  <h2>Admin / CRM · B3 · ✦ AI Workflow 1: Inactive-member re-engagement</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">admin.amchamvietnam.com/ai/re-engagement</span></div>
+    <div class="pad">
+      <div class="ai" style="margin-bottom:12px">
+        <div class="h">✦ Agent run · weekly · 23 at-risk members flagged</div>
+        <span class="chip">No event ≥ 9 months</span><span class="chip">No login ≥ 90 days</span><span class="chip">Renewal ≤ 120 days</span><span class="marker">A</span>
+      </div>
+      <table>
+        <tr><th>Risk</th><th>Member</th><th>Why flagged</th><th>Suggested action</th><th>Draft outreach</th><th>Owner</th></tr>
+        <tr><td>● High</td><td>Beta Ltd</td><td>0 events 11mo · renewal 18d</td><td>Personal call + event invite</td><td><span class="btn">Review draft</span><span class="marker">E</span></td><td>Membership</td></tr>
+        <tr><td>● High</td><td>Gamma JSC</td><td>No login 140d</td><td>Re-onboarding email</td><td><span class="btn">Review draft</span></td><td>Membership</td></tr>
+        <tr><td>◐ Med</td><td>Delta Co</td><td>Declining attendance</td><td>Invite to sector roundtable</td><td><span class="btn">Review draft</span></td><td>Events</td></tr>
+      </table>
+      <div class="box fill" style="margin-top:12px"><b style="font-size:12px">Draft outreach: Beta Ltd</b> <span class="marker">F</span><div class="ph l"></div><div class="ph m"></div><div class="ph s"></div><div style="margin-top:6px"><span class="btn solid">Approve &amp; send</span> <span class="btn g">Edit</span> <span class="btn g">Dismiss</span></div></div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">How the workflow maps to AmCham's example need</div>
+    <ul>
+      <li><span class="marker">A</span> <b>Trigger:</b> weekly + on-demand; threshold = no attendance 9mo AND no login 90d AND renewal ≤120d (exactly the "surface inactive members" example in the RFP).</li>
+      <li><span class="marker">E</span> <b>Action:</b> the agent scores risk and drafts a tailored re-engagement email + recommended action &amp; owner.</li>
+      <li><span class="marker">F</span> <b>Human-in-the-loop:</b> nothing is sent until staff <i>Approve</i>, the agent assists, staff decide. Full audit trail (PDPA).</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>B3</span></div>
+</section>
+
+<!-- ============ B4 · WORKFLOW 2 ============ -->
+<section class="sheet">
+  <h2>Admin / CRM · B4 · ✦ AI Workflow 2: Pre-meeting / renewal briefing</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">admin.amchamvietnam.com/ai/briefing/acme-corp</span><span>Generated just now <span class="marker">B</span></span></div>
+    <div class="pad">
+      <div class="ai">
+        <div class="h">✦ One-page briefing · ACME Corporation (renewal in 32 days)</div>
+        <div class="row">
+          <div class="col box" style="background:#fff"><b style="font-size:12px">Relationship summary</b><div class="ph l"></div><div class="ph m"></div>Member 7 yrs · Gold · 2 sponsorships</div>
+          <div class="col box" style="background:#fff"><b style="font-size:12px">Engagement &amp; finance</b><div class="ph m"></div>12 events · last payment on time · 0 open invoices <span class="marker">7</span></div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div class="col box" style="background:#fff"><b style="font-size:12px">Open opportunities</b><div class="ph s"></div>Tier upgrade · 2026 gala sponsorship</div>
+          <div class="col box" style="background:#fff"><b style="font-size:12px">Suggested talking points</b><div class="ph m"></div><div class="ph s"></div></div>
+        </div>
+        <div style="margin-top:10px"><span class="btn solid">Export PDF</span> <span class="btn">Internal version</span> <span class="btn">Member-facing version</span><span class="marker">G</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">How the workflow maps to AmCham's example need</div>
+    <ul>
+      <li><span class="marker">B</span> <b>Trigger:</b> staff click "Generate briefing" (from B2) or it auto-runs 7 days before a renewal, the RFP's "pre-meeting briefing" example.</li>
+      <li><span class="marker">7</span> <b>Data:</b> draws on the unified record: history, engagement, QuickBooks finance, sponsorships.</li>
+      <li><span class="marker">G</span> <b>Output:</b> a one-pager with talking points &amp; suggested asks; internal and member-facing versions on demand.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>B4</span></div>
+</section>
+
+<!-- ============ B5 · WORKFLOW 3 ============ -->
+<section class="sheet">
+  <h2>Admin / CRM · B5 · ✦ AI Workflow 3: Event recap &amp; follow-up</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">admin.amchamvietnam.com/ai/recap/charity-ball-2026</span><span>Trigger: event completed <span class="marker">C</span></span></div>
+    <div class="pad">
+      <div class="row">
+        <div class="col box fill"><b style="font-size:12px">Inputs</b><div class="img" style="height:44px">event photos</div>Bullet notes · attendance 312/350 · 4 sponsors <span class="marker">C</span></div>
+        <div class="col" style="flex:2">
+          <div class="ai">
+            <div class="h">✦ Drafted communications set · staff approval required</div>
+            <div class="grid2">
+              <div class="box" style="background:#fff"><b style="font-size:12px">(a) Website recap post</b><div class="ph m"></div><div class="ph s"></div><span class="btn">Review</span></div>
+              <div class="box" style="background:#fff"><b style="font-size:12px">(b) Attendee thank-you email</b><div class="ph m"></div><span class="btn">Review</span></div>
+              <div class="box" style="background:#fff"><b style="font-size:12px">(c) No-show follow-up</b><div class="ph s"></div><span class="btn">Review</span></div>
+              <div class="box" style="background:#fff"><b style="font-size:12px">(d) Internal ROI summary</b><div class="ph s"></div>turnout · prospects · sponsor mentions</div>
+            </div>
+            <div style="margin-top:8px"><span class="btn solid">Approve &amp; publish / send</span> <span class="btn g">Edit drafts</span><span class="marker">F</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">How the workflow maps to AmCham's example need</div>
+    <ul>
+      <li><span class="marker">C</span> <b>Trigger:</b> event marked complete (check-in closed) or staff upload photos + notes.</li>
+      <li><span class="marker">F</span> <b>Action &amp; output:</b> drafts the full post-event set (recap post, thank-you, no-show follow-up, internal ROI) using brand-locked templates, replaces Constant Contact's manual effort. Staff approve before anything goes out.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>B5</span></div>
+</section>
+
+<!-- ============ B6 · FINANCE ============ -->
+<section class="sheet">
+  <h2>Admin / CRM · B6 · Finance: QuickBooks sync &amp; e-invoice</h2>
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">admin.amchamvietnam.com/finance</span></div>
+    <div class="pad">
+      <div class="grid4">
+        <div class="kpi"><b>₫1.2B</b><span>Revenue YTD</span></div>
+        <div class="kpi"><b>86</b><span>Renewal invoices open</span></div>
+        <div class="kpi"><b>✓</b><span>QuickBooks: in sync <span class="marker">7</span></span></div>
+        <div class="kpi"><b>✓</b><span>E-invoice issued (Decree 123)</span></div>
+      </div>
+      <div class="box" style="margin-top:12px">
+        <b style="font-size:12px">Invoices</b>
+        <table>
+          <tr><th>Invoice</th><th>Member</th><th>Amount</th><th>Status</th><th>QuickBooks</th><th>E-invoice</th></tr>
+          <tr><td>INV-2026-014</td><td>ACME Corp</td><td>₫ 25,000,000</td><td>Paid</td><td>✓ synced</td><td>✓ issued</td></tr>
+          <tr><td>INV-2026-015</td><td>Beta Ltd</td><td>₫ 12,000,000</td><td>Sent</td><td>✓ synced</td><td>Pending</td></tr>
+          <tr><td>INV-2026-016</td><td>Gamma JSC</td><td>₫ 40,000,000</td><td>Overdue</td><td>✓ synced</td><td>Pending</td></tr>
+        </table>
+      </div>
+      <div class="box fill" style="margin-top:12px"><b style="font-size:12px">Reports</b>: revenue by chapter / event / sponsor tier · aging · budget vs actual <span class="marker">1</span></div>
+    </div>
+  </div>
+  <div class="notes">
+    <div class="ttl">Design rationale → AmCham need</div>
+    <ul>
+      <li><span class="marker">7</span> <b>2-way QuickBooks sync</b> · invoices, payments &amp; customers stay consistent; AmCham keeps its existing QuickBooks.</li>
+      <li><span class="marker">1</span> <b>Vietnam e-invoice (Decree 123/2020)</b> + reporting by chapter / event / sponsor tier.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>B6 · End of wireframe set</span></div>
+</section>
+
+<!-- ============ B7 · AUTOMATION ============ -->
+<section class="sheet pfit">
+  <h2>Admin / CRM · B7 · Marketing automation (Email + SMS / Zalo ZNS)</h2>
+  <p class="sub">Behaviour-triggered journeys across email, SMS and Zalo ZNS, built once and run automatically.</p>
+
+  <div class="frame">
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">admin.amchamvietnam.com/automation/journeys</span><span>Journey builder</span></div>
+    <div class="pad">
+      <div class="row">
+        <div class="side" style="border-right:1px solid var(--line)">
+          <b style="font-size:12px">Journey setup</b>
+          <div class="ph s"></div>
+          <span class="chip">Trigger: Renewal due &#9662;</span>
+          <span class="chip">Audience: chapter / tier &#9662;</span>
+          <span class="chip">Quiet hours &#9662;</span>
+          <div style="margin-top:10px"><b style="font-size:12px">Channels</b></div>
+          <span class="chip">Email · base</span>
+          <span class="chip">SMS · add-on</span>
+          <span class="chip">Zalo ZNS · add-on</span>
+          <div style="margin-top:8px;color:var(--mut);font-size:10.5px">Consent-aware (PDPA): only opted-in channels are used.</div>
+        </div>
+        <div class="col" style="padding-left:14px;flex:1.5">
+          <b style="font-size:12px">Journey canvas</b>
+          <div class="flow" style="flex-direction:column;align-items:flex-start;gap:5px;margin-top:6px">
+            <div class="node start">Trigger: renewal due in 30 days</div><span class="arrow">&darr;</span>
+            <div class="node">Email: renewal reminder + 1-click pay</div><span class="arrow">&darr;</span>
+            <div class="node dec">Wait 3 days · opened &amp; paid?</div><span class="arrow">&darr;</span>
+            <div class="node ai">Zalo ZNS: branded reminder (if not opened)</div><span class="arrow">&darr;</span>
+            <div class="node dec">Wait 2 days · paid?</div><span class="arrow">&darr;</span>
+            <div class="node ai">SMS: final reminder (if still unpaid)</div><span class="arrow">&darr;</span>
+            <div class="node">Goal: renewed &rarr; stop, else create staff task</div>
+          </div>
+        </div>
+        <div class="col box fill" style="max-width:205px">
+          <b style="font-size:12px">Performance</b>
+          <div class="ph t"></div>Sent · Delivered · Opened<div class="ph s"></div>Clicked · Converted<div class="ph s"></div>
+          <b style="font-size:12px">Open rate by channel</b>
+          <table><tr><th>Channel</th><th>Open</th></tr><tr><td>Email</td><td>~ 30%</td></tr><tr><td>Zalo ZNS</td><td>~ 80%</td></tr><tr><td>SMS</td><td>~ 95%</td></tr></table>
+          <div style="color:var(--mut);font-size:10px">Illustrative figures.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-ttl">Automation workflow · membership renewal (multi-channel)</div>
+  <div class="flow">
+    <div class="node start">Renewal due</div><span class="arrow">&rarr;</span>
+    <div class="node">Email reminder</div><span class="arrow">&rarr;</span>
+    <div class="node dec">Paid?</div><span class="arrow">&rarr;</span>
+    <div class="node ai">Zalo ZNS</div><span class="arrow">&rarr;</span>
+    <div class="node dec">Paid?</div><span class="arrow">&rarr;</span>
+    <div class="node ai">SMS final</div><span class="arrow">&rarr;</span>
+    <div class="node dec">Paid?</div><span class="arrow">&rarr;</span>
+    <div class="node">Renewed · receipt + e-invoice</div>
+  </div>
+  <p class="flow-note">A payment at any step ends the journey and triggers the receipt + e-invoice. The same engine powers onboarding, event reminders, post-event follow-up and win-back.</p>
+
+  <div class="notes">
+    <div class="ttl">Why this matters</div>
+    <ul>
+      <li><span class="marker">1</span> <b>Omni-channel reach.</b> Email for detail, Zalo ZNS for high open rates in Vietnam, SMS as the reliable last touch, one journey, no manual chasing.</li>
+      <li><span class="marker">2</span> <b>Behaviour-triggered.</b> Steps branch on opened / clicked / paid, so members only get what is still relevant.</li>
+      <li><span class="marker">3</span> <b>Brand-locked &amp; consent-aware.</b> Templates stay on-brand; only channels the member opted into are used (PDPA).</li>
+      <li><span class="marker">4</span> <b>Reusable.</b> Renewals, onboarding, event reminders, post-event follow-up and win-back run on the same engine.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>B7</span></div>
+</section>
+
+<!-- ============ CAPABILITY HIGHLIGHTS ============ -->
+<section class="sheet">
+  <h2>Platform capability highlights</h2>
+  <p class="sub">Key capabilities in the proposed build that make this more than a website.</p>
+  <div class="caps">
+    <div class="box"><b class="t">Non-dues revenue</b>Sponsor &amp; advertising module: tiered sponsor profiles, searchable ad inventory and an online RFP form; event sponsorship tracked per member. Turns the platform into a revenue engine, not a cost.</div>
+    <div class="box"><b class="t">Event operations</b>QR-code ticketing, a mobile staff check-in app, group and table-of-10 bookings, member vs non-member pricing and capacity control. Built for AmCham's galas and dinners.</div>
+    <div class="box"><b class="t">World-class public site</b>SEO-ready architecture (schema.org, sitemap, RankMath), sub-3s load, WCAG 2.1 AA accessibility, and a true EN / VI bilingual multisite for both chapters.</div>
+    <div class="box"><b class="t">Security &amp; reliability</b>WAF, 2FA for admins, login lockout, a third-party penetration test before go-live, daily encrypted backups, and an uptime SLA of 99.5%+. 12-month warranty.</div>
+    <div class="box"><b class="t">Finance, done right</b>Two-way QuickBooks sync, Vietnam e-invoice (Decree 123), reconciliation and revenue-by-chapter / event reports, and automated renewal billing.</div>
+    <div class="box"><b class="t">Data ownership &amp; compliance</b>100% source-code and data ownership transferred to AmCham, PDPA (Decree 13/2023) by design, GDPR alignment, data export / deletion APIs and a full PII audit log.</div>
+    <div class="box"><b class="t">Grows with you (optional)</b>A clear roadmap: member mobile app, AI recommendation engine, AI chatbot, executive BI dashboard, member-to-member networking and a job board, added when you are ready.</div>
+    <div class="box" style="background:var(--noteb);border-color:var(--note)"><b class="t" style="color:#7c2d12">In one platform</b>All of the above replaces ChamberMaster, Constant Contact and scattered spreadsheets with a single owned system, maintained by a lean in-country team.</div>
+  </div>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>Capabilities</span></div>
+</section>
+
+<!-- ============ TERMS ============ -->
+<section class="sheet">
+  <h2>Scope, terms &amp; conditions</h2>
+  <p class="sub">Please read alongside these wireframes to avoid any misunderstanding.</p>
+  <ul class="tc">
+    <li><b>Ideas, refined after discovery.</b> The screens, workflows and capabilities shown are proposed ideas. The final feature set, scope and costs may be adjusted to AmCham's actual needs after the discovery phase, and are confirmed in the SoW and contract.</li>
+    <li><b>Conceptual, low-fidelity wireframes.</b> These screens illustrate information structure and our understanding of requirements only. They are not the final user interface or visual design.</li>
+    <li><b>Placeholder content.</b> All names, companies, logos, figures and data shown are illustrative placeholders, not real AmCham data.</li>
+    <li><b>High-fidelity design follows after contract.</b> Visual design and a clickable prototype are produced in the design phase and signed off at milestone M2.</li>
+    <li><b>Not a binding commitment.</b> This document does not form a contract. Final scope, features, timeline and pricing are governed by the formal quotation, Statement of Work (SoW) and signed contract.</li>
+    <li class="em"><b>AI / agentic workflows are NOT included in the base implementation cost.</b> Workflows 1, 2 and 3 and the AI assistant shown here illustrate what is possible. They are optional add-ons, scoped and quoted separately (see the "Optional Enhancements" sheet of the quotation). Implementing any AI capability requires a separate scope and quotation.</li>
+    <li><b>Third-party and usage costs are excluded / pass-through.</b> AI / LLM API usage, email sending volume, payment gateway fees, e-invoice fees and the QuickBooks subscription are billed by the respective providers and borne by AmCham.</li>
+    <li><b>Technology stack not locked.</b> The conceptual architecture may be implemented with different technologies; the final stack is confirmed during design, with AmCham retaining 100% ownership of source code and data.</li>
+    <li><b>Compliance.</b> The solution is designed for PDPA (Decree 13/2023) and GDPR alignment; final compliance scope is confirmed in the SoW.</li>
+    <li><b>Confidentiality.</b> This document is confidential, prepared by Blue Coral (Powered by ADNS) for AmCham Vietnam's evaluation only, and must not be distributed without consent.</li>
+  </ul>
+  <div class="footer"><span>CONFIDENTIAL · Prepared by Blue Coral (ADNS) for AmCham Vietnam · Not for distribution</span><span>Terms</span></div>
+</section>
+
+<!-- ============ THANK YOU ============ -->
+<section class="sheet nowm">
+  <div class="thanks">
+    <h1>Thank you!</h1>
+    <p class="lead">Reach out, we'd love to hear from you.</p>
+    <p class="c">Le Thai Nguyen (Mr.)</p>
+    <p class="c">Email: nguyen@bluecoral.vn &nbsp;/&nbsp; Tel: (+84)979 477 101</p>
+    <p class="c">https://bluecoral.vn</p>
+    <p class="c">8/7D Phan Huy Ich St., Tan Son Ward, Ho Chi Minh City</p>
+  </div>
+</section>
+
+</body>
+</html>
