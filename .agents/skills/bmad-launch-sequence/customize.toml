@@ -1,0 +1,21 @@
+# DO NOT EDIT -- overwritten on every update.
+#
+# Workflow customization surface for bmad-launch-sequence.
+
+[workflow]
+
+# --- Configurable below. Overrides merge per BMad structural rules: ---
+#   scalars: override wins • arrays (persistent_facts, activation_steps_*): append
+#   arrays-of-tables with `code`/`id`: replace matching items, append new ones.
+
+activation_steps_prepend = []
+
+activation_steps_append = []
+
+# Persistent facts loaded on workflow activation.
+persistent_facts = [
+  "file:{project-root}/**/project-context.md",
+]
+
+# Executed at workflow completion. Leave empty for no custom behavior.
+on_complete = ""

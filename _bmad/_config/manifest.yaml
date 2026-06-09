@@ -1,30 +1,42 @@
 installation:
-  version: 6.2.1
+  version: 6.8.0
   installDate: 2026-03-25T09:38:44.047Z
-  lastUpdated: 2026-03-25T09:38:44.047Z
+  lastUpdated: 2026-06-09T18:13:31.191Z
 modules:
   - name: core
-    version: 6.2.1
+    version: 6.8.0
     installDate: 2026-03-25T09:38:43.531Z
-    lastUpdated: 2026-03-25T09:38:43.531Z
+    lastUpdated: 2026-06-09T18:13:31.188Z
+    source: built-in
+    npmPackage: null
+    repoUrl: null
+  - name: bmm
+    version: 6.8.0
+    installDate: 2026-03-25T09:38:42.059Z
+    lastUpdated: 2026-06-09T18:13:31.189Z
     source: built-in
     npmPackage: null
     repoUrl: null
   - name: cis
-    version: 0.1.9
+    version: v0.2.1
     installDate: 2026-03-25T09:38:41.890Z
-    lastUpdated: 2026-03-25T09:38:44.047Z
+    lastUpdated: 2026-06-09T18:13:31.190Z
     source: external
     npmPackage: bmad-creative-intelligence-suite
     repoUrl: https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite
-  - name: bmm
-    version: 6.2.1
-    installDate: 2026-03-25T09:38:42.059Z
-    lastUpdated: 2026-03-25T09:38:44.047Z
-    source: built-in
-    npmPackage: null
-    repoUrl: null
+    channel: stable
+    sha: 07a8dd03d196a762f21c241d985293fe5b0f90e7
+  - name: automator
+    version: main
+    installDate: 2026-06-09T18:13:31.134Z
+    lastUpdated: 2026-06-09T18:13:31.191Z
+    source: external
+    npmPackage: bmad-story-automator
+    repoUrl: https://github.com/bmad-code-org/bmad-automator
+    channel: next
+    sha: f332173a692ffbabb24734c31dedadfcf78b9ed1
 ides:
   - claude-code
   - cursor
+  - opencode
   - antigravity
