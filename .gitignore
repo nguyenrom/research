@@ -22,3 +22,6 @@ __pycache__/
 
 # Office temporary files
 ~$*
+
+# Tool lock files
+.claude/*.lock
