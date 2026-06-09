@@ -1,0 +1,172 @@
+--- Page 1 ---
+WORK EXPERIENCE
+KEY STRENGTHS INCLUDE
+SUMMARY
+Key Responsibilities & Core Competencies:
+Business Process Optimization: Expertly analyzed and re-engineered business
+workflows, implementing technical solutions to drive efficiency and productivity gains.
+Team Leadership: Successfully managed and developed a cross-functional team of 8
+skilled professionals, balancing implementation expertise with data analytics
+capabilities.
+CRM System Design & Implementation: Translated complex business requirements into
+robust technical solutions, ensuring seamless alignment with organizational goals.
+Optimized data flow between CRM and financial systems.
+Data Analytics & Business Intelligence: Leveraged CRM data to provide actionable
+insights, supporting informed decision-making across all organizational levels.
+Sales Performance Optimization: Developed innovative tools and dashboards to track
+and improve key sales metrics, directly contributing to revenue growth.
+Strategic Leadership: Led cross-functional teams to deliver high-impact CRM solutions,
+fostering a culture of innovation and continuous improvement.
+Stakeholder Management: Effectively collaborated with C-level executives to align
+CRM capabilities with overarching business strategies.
+Jan 2022 - Current
+Software & Analysis Manager
+Bridging the gap between business requirements and technical implementation.
+Applying data analytics to facilitate informed decision-making at all levels.
+Optimizing business processes through strategic application of technology.
+Delivering actionable insights to drive business growth and operational efficiency.
+Effective stakeholder management and cross-functional team collaboration.
+Implementing and optimizing ERP systems for manufacturing and retail environments.
+Versatile professional with a unique blend of technical expertise and business acumen, seeking roles
+such as Business Analyst, Product Owner, or Business Consultant. Possesses comprehensive
+understanding of business processes across diverse industries including manufacturing, education,
+fitness, and retail. Demonstrated ability to transform complex business needs into valuable technical
+solutions, with particular expertise in supply chain optimization, CRM development, and ERP
+implementation. Most recently worked as a Hubspot-based CRM developer in the education sector.
+PHAN NGUYEN LAM
+Address: 
+Phone:
+Email:
+DOB:
+Go Vap Distr., Ho Chi Minh City
++84 986 505 897
+phannguyenlam@gmail.com
+1987
+Asia - Strategic Holding Group ( WallStreetEnglish, Exera, Auston, Kids&Us,...
+Key Achievements
+Architected and implemented a scalable CRM solution that significantly reduced operational costs
+while markedly improving sales team efficiency.
+Led and mentored a diverse team of 8 professionals, including implementation specialists and data
+analysts, fostering a high-performance culture and delivering exceptional results.
+Developed innovative technical solutions to streamline business processes and optimize workflows,
+resulting in enhanced productivity and operational efficiency across departments.
+Created a comprehensive data analytics framework within the CRM system, empowering executive
+leadership to make informed, data-driven decisions and substantially enhance strategic planning
+accuracy.
+Build LMS for internal training and development staffs.
+
+--- Page 2 ---
+Betrimex E-bidding: Streamlined Agriculture and Procurement bidding processes and digital transform.
+BWID Tendering: Optimized construction industry pre-qualification and bidding.
+Rekochain Platform: Developed integrated supply chain visibility solution.
+Heinemann Singapore: Implemented Customer & Vendor Information System and digital transform.
+Business Analysis and Solution Design.
+Gather and analyze complex client requirements across various industries.
+Develop tailored solutions to address specific business needs.
+Create intuitive UX/UI designs and detailed mockups to visualize solutions.
+Utilize BPMN for process modeling and optimization.
+Client Engagement and Communication.
+Conduct compelling product demonstrations for potential clients.
+Build and maintain strong stakeholder relationships.
+Ensure clear communication and alignment throughout project lifecycles.
+Supply Chain Expertise.
+Implement targeted solutions in procurement, logistics, and inventory management.
+Optimize supply chain processes to enhance operational efficiency.
+Apply industry best practices to improve overall business performance.
+Cross-functional Collaboration and Technical Integration.
+Translate business requirements into actionable technical specifications.
+Coordinate with development teams to customize and implement solutions.
+Project Management and Execution.
+Oversee project lifecycles from inception to successful implementation.
+Ensure timely delivery and high-quality outcomes for client projects.
+Adapt strategies to meet changing project requirements and overcome challenges.
+Key Responsibilities & Core Competencies:
+Oct 2020 - Dec 2021
+Business Analysis
+Intelizest Consulting VN., Ltd.
+Key Projects:
+Key Responsibilities & Core Competencies:
+Digital Process Optimization and Transformation Strategy.
+Analyze existing operations to identify opportunities for digital enhancement.
+Design and implement digital solutions to reduce human error and improve performance.
+Develop and execute digital transformation strategies aligned with business objectives.
+Data-Driven Decision Making and Analytics.
+Develop systems to capture and analyze operational data.
+Translate data into actionable insights, supporting informed decision-making.
+Technology Integration and Systems Implementation.
+Oversee implementation of digital tools and systems across business operations.
+Create user-friendly interfaces and workflows to ensure smooth adoption.
+Stakeholder Engagement and Change Management.
+Collaborate with leadership to align digital strategies with business goals.
+Conduct training sessions to facilitate digital adoption across the organization.
+Manage change processes to ensure the successful implementation of new digital solutions.
+UX/UI Design.
+Design intuitive user interfaces to enhance user experience and adoption of digital tools.
+Apply UX/UI principles in the development of digital solutions.
+Business Analysis
+New Ocean IS Co., Ltd.
+Jul 2019 - Sep 2020 
+Key Projects:
+Friesland Campina: Digitalized manufacturing checklists, enhancing quality control and efficiency.
+Build the dashboard data to support the BoD easier to make decision.
+Asset Management: Implemented digital property management system, optimizing resource
+allocation based on Power Platform.
+
+--- Page 3 ---
+ERPNext for Retail: Mangii Shoes: Implemented tailored ERP solution to streamline retail operations
+and inventory management.
+ERPNext for Manufacturing: Yoshita Machining Co. Ltd.: Customized ERP system to optimize
+manufacturing processes and enhance production efficiency.
+SKILLS
+Operations and Facilities Management (2015-2018):
+Coordinated cross-functional operations at California Fitness & Yoga and NKID Investment Co.Ltd
+Conducted audits, managed inventories, and supervised facility maintenance.
+Developed expertise in process optimization and quality control.
+Service and Technical Management (2013-2014):
+Served as Service Engineer Supervisor at Jollibee Foods Vietnam.
+Managed technician teams, coordinated with suppliers, and oversaw equipment maintenance.
+Gained experience in scheduling, inventory management, and performance monitoring.
+Manufacturing and Process Engineering (2010-2013):
+Worked as Process Engineer at Pepperl+Fuchs Vietnam Co.
+Led engineering support, implemented improvement projects, and managed ERP systems.
+Developed skills in process yield improvement, staff training, and cross-functional collaboration.
+Key Responsibilities & Core Competencies:
+Business Analysis and Solution Design.
+Collaborated with clients to analyze business needs and design tailored ERP solutions.
+Developed comprehensive process flows to optimize business operations.
+System Customization and Integration.
+Worked closely with IT development teams to customize ERP systems.
+Ensured seamless integration of ERP solutions with existing business processes.
+Implementation and Training.
+Led ERP system implementations, guiding clients through the transition process.
+Conducted training sessions to facilitate user adoption and maximize system utilization.
+Continuous Support and Optimization.
+Provided ongoing consultancy to enhance ERP system performance.
+Recommended process improvements to align ERP capabilities with evolving business needs.
+ERP Consultant
+Blue Coral
+Apr 2018 - Jun 2019 
+Key Projects:
+Summary of Business Experience:
+2010 -2018
+Technical Proficiency:
+Proficient in ERP systems: Odoo ERP, ERPNext.
+Data analysis and visualization: SQL, Excel.
+Advanced proficiency in Microsoft Office Suite (Word, Excel, PowerPoint, Outlook, PowerPlatform)
+Business and Management:
+Strategic business analysis and process optimization.
+Cross-functional team leadership and project management.
+Change management and digital transformation implementation.
+Inventory and supply chain management.
+Communication and Interpersonal:
+Excellent verbal and written communication skills in English.
+Strong stakeholder engagement and client relationship management.
+Effective training and staff development capabilities.
+Problem-Solving and Analytics:
+Proven ability in complex problem-solving and analytical thinking.
+Experience in process engineering and continuous improvement methodologies.
+Skilled in translating business requirements into technical solutions.
+EDUCATION & QUALIFICATIONS:
+Da Nang University of Technology – Bachelor of Engineer degree
+2005-2010
+Specialization: Mechatronic

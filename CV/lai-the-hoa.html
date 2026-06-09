@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lai The Hoa - Executive CV</title>
+    <style>
+      :root {
+        --ink: #1f2933;
+        --muted: #5f6b7a;
+        --line: #d8dee8;
+        --panel: #f6f8fb;
+        --accent: #1c4e80;
+        --accent-soft: #edf5fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #eef2f6;
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 1.46;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 24px auto;
+        background: #fff;
+        box-shadow: 0 18px 60px rgba(31, 41, 51, 0.16);
+        padding: 17mm 17mm 16mm;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: 1fr 34mm;
+        gap: 12mm;
+        align-items: center;
+        padding-bottom: 13px;
+        border-bottom: 1.5px solid var(--ink);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 31px;
+        line-height: 1;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .headline {
+        margin-top: 7px;
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px 12px;
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .contact span {
+        white-space: nowrap;
+      }
+
+      .photo-slot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34mm;
+        height: 38mm;
+        background: linear-gradient(145deg, #f5f8fb, #e9f1f8);
+        border: 1px solid #d7e2ec;
+        color: #7d8fa3;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .summary {
+        margin-top: 14px;
+        padding: 2px 0 2px 13px;
+        border-left: 3px solid var(--accent);
+        font-size: 13.2px;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        margin-top: 14px;
+        padding: 10px 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .metric {
+        min-height: 46px;
+        padding: 2px 13px 2px 0;
+      }
+
+      .metric strong {
+        display: block;
+        color: var(--accent);
+        font-size: 16px;
+        line-height: 1.1;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 10.5px;
+        line-height: 1.25;
+        text-transform: uppercase;
+      }
+
+      .metric + .metric {
+        padding-left: 13px;
+        border-left: 1px solid var(--line);
+      }
+
+      .section {
+        margin-top: 15px;
+      }
+
+      h2 {
+        padding-bottom: 5px;
+        color: var(--accent);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .competencies {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px 14px;
+        margin-top: 7px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .competencies li {
+        position: relative;
+        padding: 0 0 0 11px;
+        font-size: 11.5px;
+      }
+
+      .competencies li::before {
+        content: "";
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 4px;
+        height: 4px;
+        background: var(--accent);
+      }
+
+      .role {
+        margin-top: 12px;
+        page-break-inside: avoid;
+      }
+
+      .role-heading {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: baseline;
+      }
+
+      h3 {
+        font-size: 14px;
+        line-height: 1.25;
+      }
+
+      .company {
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .date {
+        color: var(--muted);
+        font-size: 11.5px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      ul {
+        margin: 7px 0 0;
+        padding-left: 18px;
+      }
+
+      li {
+        margin: 3px 0;
+      }
+
+      .project-list {
+        margin-top: 8px;
+        padding: 2px 0 2px 12px;
+        border-left: 2px solid var(--line);
+      }
+
+      .project-list h4 {
+        margin: 0 0 5px;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 9px;
+      }
+
+      .compact-list {
+        margin-top: 6px;
+      }
+
+      .compact-list li {
+        margin: 2px 0;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          width: auto;
+          min-height: auto;
+          margin: 0;
+          padding: 13mm 14mm;
+          box-shadow: none;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+
+      @media screen and (max-width: 900px) {
+        .page {
+          width: auto;
+          min-height: auto;
+          margin: 0;
+          padding: 24px 18px;
+          box-shadow: none;
+        }
+
+        .header {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .metrics,
+        .competencies,
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .metric + .metric {
+          padding-left: 0;
+          border-left: 0;
+          margin-top: 8px;
+          padding-top: 8px;
+          border-top: 1px solid var(--line);
+        }
+
+        .role-heading {
+          grid-template-columns: 1fr;
+          gap: 3px;
+        }
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <div>
+          <h1>Lai The Hoa</h1>
+          <p class="headline">Executive Director | Real Estate Investment, Operations & Corporate Finance</p>
+          <div class="contact">
+            <span>+84 911 890 911</span>
+            <span>hoa.laithe@gmail.com</span>
+            <span>Long Bien District, Hanoi, Vietnam</span>
+          </div>
+        </div>
+        <div class="photo-slot">Photo</div>
+      </header>
+
+      <section class="summary" aria-label="Executive profile">
+        Senior real estate, investment and corporate finance executive with more than 15 years of experience across
+        real estate, investment, finance and banking. Combines project business execution, financial structuring,
+        banking coordination, legal handover processes and operating leadership across large-scale real estate
+        portfolios within the Him Lam / Truong Son Land system.
+      </section>
+
+      <section class="metrics" aria-label="Selected leadership scope">
+        <div class="metric">
+          <strong>15+ Years</strong>
+          <span>Real estate, investment, finance and banking experience</span>
+        </div>
+        <div class="metric">
+          <strong>40-50</strong>
+          <span>Staff managed in Hanoi branch operations</span>
+        </div>
+        <div class="metric">
+          <strong>VND 50 trillion</strong>
+          <span>System capital and assets managed</span>
+        </div>
+        <div class="metric">
+          <strong>Up to VND 30 trillion</strong>
+          <span>M&A transaction participation</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Core Executive Capabilities</h2>
+        <ul class="competencies">
+          <li>Real Estate Operations Leadership</li>
+          <li>Project Business Management</li>
+          <li>Investment & M&A Execution</li>
+          <li>Corporate Finance Structuring</li>
+          <li>Capital Raising & Bond Issuance</li>
+          <li>Banking Relationship Management</li>
+          <li>Project Legal & Title Handover</li>
+          <li>Sales & Marketing Planning</li>
+          <li>Problem Solving & Analysis</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Professional Experience</h2>
+
+        <article class="role">
+          <div class="role-heading">
+            <div>
+              <h3>Director, Hanoi Branch</h3>
+              <p class="company">Him Lam Real Estate Business JSC, now Truong Son Land</p>
+            </div>
+            <p class="date">Feb 2018 - Present</p>
+          </div>
+
+          <ul>
+            <li>
+              Lead full business and operating management for the Hanoi Branch, overseeing 40-50 staff across sales,
+              marketing, operations, banking coordination, legal execution, handover and title-certificate delivery.
+            </li>
+            <li>
+              Manage phase-by-phase marketing and business plans for real estate projects in Northern Vietnam.
+            </li>
+            <li>
+              Work with banks on lending policies, capital plans and asset management arrangements for real estate
+              projects.
+            </li>
+            <li>
+              Execute legal procedures supporting project sales, customer handover and land-use-right certificate
+              delivery.
+            </li>
+          </ul>
+
+          <div class="project-list">
+            <h4>Selected Project Portfolio</h4>
+            <ul class="compact-list">
+              <li>
+                <strong>Him Lam Thuong Tin (2023-2025):</strong> Commercialized all 159 units priced at VND 11-32
+                billion per unit, including 125 units received through transfer; completed full business handover and
+                100% title certificate delivery.
+              </li>
+              <li>
+                <strong>Him Lam Van Phuc (2021-2022):</strong> Led end-to-end execution for 222 units priced at
+                VND 14-38 billion per unit, from transfer intake to sales, home handover and title-certificate
+                delivery.
+              </li>
+              <li>
+                <strong>Him Lam Thuong Thanh (2020-2021):</strong> Executed auction and sales for 49 units priced at
+                VND 7-13 billion per unit; coordinated construction, handover and title-certificate delivery on
+                schedule.
+              </li>
+              <li>
+                <strong>Him Lam Dai Phuc (2019-2020):</strong> Managed sales for 666 units priced at VND 3.5-5.5
+                billion per unit and supported project handover.
+              </li>
+              <li>
+                <strong>Ba Thien 1 Industrial Park, Vinh Phuc (2024-2025):</strong> Managed customer sourcing,
+                negotiation, parcel separation, transfer execution and title-certificate delivery for a 10-hectare
+                transaction scope.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-heading">
+            <div>
+              <h3>Investment Director, Ho Chi Minh City</h3>
+              <p class="company">Him Lam Real Estate Business JSC, now Truong Son Land</p>
+            </div>
+            <p class="date">Sep 2011 - Feb 2018</p>
+          </div>
+
+          <ul>
+            <li>
+              Directed the Investment Department, managed system capital resources and developed financial structures
+              in direct coordination with banks and member companies.
+            </li>
+            <li>
+              Managed system capital and assets totaling VND 50 trillion across the Him Lam system.
+            </li>
+            <li>
+              Executed corporate bond issuances totaling VND 2 trillion through a joint-stock commercial bank and
+              VND 1 trillion through a Big Four state-owned bank.
+            </li>
+            <li>
+              Structured and coordinated loans including VND 1 trillion for a Build-Transfer project and VND 4 trillion
+              for compensation, site clearance and construction.
+            </li>
+            <li>
+              Supported capital allocation for golf course investment and urban area projects within the system.
+            </li>
+            <li>
+              Participated in enterprise M&A transactions, including VND 3 trillion in M&A execution and transactions up
+              to VND 30 trillion in scale.
+            </li>
+            <li>
+              Structured VND 12 trillion in capital raising for an urban area and executed debt sale/purchase
+              transactions between two joint-stock commercial banks.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section">
+        <h2>Education & Additional Information</h2>
+        <div class="details-grid">
+          <div>
+            <h3>National Economics University</h3>
+            <p class="company">Bachelor's Degree, Banking and Finance | Sep 2007 - Sep 2011</p>
+          </div>
+          <div>
+            <h3>Languages</h3>
+            <p class="company">English</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </body>
+</html>

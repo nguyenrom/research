@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Phan Nguyen Lam - Professional CV</title>
+    <style>
+      :root {
+        --ink: #1f2933;
+        --muted: #5f6b7a;
+        --line: #d8dee8;
+        --panel: #f6f8fb;
+        --accent: #1c4e80;
+        --accent-soft: #edf5fb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #eef2f6;
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 1.46;
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 24px auto;
+        background: #fff;
+        box-shadow: 0 18px 60px rgba(31, 41, 51, 0.16);
+        padding: 17mm 17mm 16mm;
+      }
+
+      .header {
+        display: grid;
+        grid-template-columns: 1fr 26mm;
+        gap: 12mm;
+        align-items: center;
+        padding-bottom: 13px;
+        border-bottom: 1.5px solid var(--ink);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 31px;
+        line-height: 1;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .headline {
+        max-width: 148mm;
+        margin-top: 7px;
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px 12px;
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .contact span {
+        white-space: nowrap;
+      }
+
+      .photo-slot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26mm;
+        aspect-ratio: 592 / 888;
+        background: linear-gradient(145deg, #f5f8fb, #e9f1f8);
+        border: 1px solid #d7e2ec;
+        border-radius: 2px;
+        box-shadow: 0 2px 6px rgba(31, 41, 51, 0.12);
+        color: #7d8fa3;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        overflow: hidden;
+      }
+
+      .photo-slot img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        border-radius: 2px;
+      }
+
+      .summary {
+        margin-top: 14px;
+        padding: 2px 0 2px 13px;
+        border-left: 3px solid var(--accent);
+        font-size: 13.2px;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        margin-top: 14px;
+        padding: 10px 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .metric {
+        min-height: 46px;
+        padding: 2px 13px 2px 0;
+      }
+
+      .metric strong {
+        display: block;
+        color: var(--accent);
+        font-size: 16px;
+        line-height: 1.1;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 10.5px;
+        line-height: 1.25;
+        text-transform: uppercase;
+      }
+
+      .metric + .metric {
+        padding-left: 13px;
+        border-left: 1px solid var(--line);
+      }
+
+      .section {
+        margin-top: 15px;
+      }
+
+      h2 {
+        padding-bottom: 5px;
+        color: var(--accent);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .competencies {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px 14px;
+        margin-top: 7px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .competencies li {
+        position: relative;
+        padding: 0 0 0 11px;
+        font-size: 11.5px;
+      }
+
+      .competencies li::before {
+        content: "";
+        position: absolute;
+        top: 0.65em;
+        left: 0;
+        width: 4px;
+        height: 4px;
+        background: var(--accent);
+      }
+
+      .role {
+        margin-top: 13px;
+        page-break-inside: avoid;
+      }
+
+      .role-heading {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: baseline;
+      }
+
+      h3 {
+        font-size: 14px;
+        line-height: 1.25;
+      }
+
+      .company {
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .date {
+        color: var(--muted);
+        font-size: 11.5px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      ul {
+        margin: 7px 0 0;
+        padding-left: 18px;
+      }
+
+      li {
+        margin: 3px 0;
+      }
+
+      .project-list {
+        margin-top: 8px;
+        padding: 2px 0 2px 12px;
+        border-left: 2px solid var(--line);
+      }
+
+      .project-list h4 {
+        margin: 0 0 5px;
+        font-size: 11.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .compact-list {
+        margin-top: 6px;
+      }
+
+      .compact-list li {
+        margin: 2px 0;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 8px;
+      }
+
+      .skill-group {
+        margin-top: 7px;
+      }
+
+      .skill-group strong {
+        display: block;
+        color: var(--ink);
+        font-size: 12px;
+      }
+
+      .skill-group p {
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          width: auto;
+          min-height: auto;
+          margin: 0;
+          padding: 13mm 14mm;
+          box-shadow: none;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+
+      @media screen and (max-width: 900px) {
+        .page {
+          width: auto;
+          min-height: auto;
+          margin: 0;
+          padding: 24px 18px;
+          box-shadow: none;
+        }
+
+        .header {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .metrics,
+        .competencies,
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .metric + .metric {
+          padding-left: 0;
+          border-left: 0;
+          margin-top: 8px;
+          padding-top: 8px;
+          border-top: 1px solid var(--line);
+        }
+
+        .role-heading {
+          grid-template-columns: 1fr;
+          gap: 3px;
+        }
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <div>
+          <h1>Phan Nguyen Lam</h1>
+          <p class="headline">
+            Business Analysis & Digital Transformation Manager | CRM, ERP, Data Analytics & Process Optimization
+          </p>
+          <div class="contact">
+            <span>+84 986 505 897</span>
+            <span>phannguyenlam@gmail.com</span>
+            <span>Go Vap District, Ho Chi Minh City, Vietnam</span>
+          </div>
+        </div>
+        <div class="photo-slot">
+          <img src="phan-nguyen-lam-photo.png" alt="Phan Nguyen Lam" />
+        </div>
+      </header>
+
+      <section class="summary" aria-label="Professional profile">
+        Versatile business analysis and technology implementation professional with a blend of technical expertise and
+        business acumen across manufacturing, education, fitness, retail and consulting environments. Bridges business
+        requirements and technical execution, translating complex operational needs into CRM, ERP, analytics, workflow
+        and digital transformation solutions. Most recently led HubSpot-based CRM development in the education sector.
+      </section>
+
+      <section class="metrics" aria-label="Selected professional scope">
+        <div class="metric">
+          <strong>2010-Present</strong>
+          <span>Business process, engineering and systems implementation experience</span>
+        </div>
+        <div class="metric">
+          <strong>8 Professionals</strong>
+          <span>Cross-functional implementation and data analytics team managed</span>
+        </div>
+        <div class="metric">
+          <strong>Multi-Industry</strong>
+          <span>Manufacturing, education, fitness, retail, procurement and supply chain</span>
+        </div>
+        <div class="metric">
+          <strong>CRM / ERP / BI</strong>
+          <span>HubSpot, Odoo, ERPNext, Power Platform, SQL and Excel</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Core Capabilities</h2>
+        <ul class="competencies">
+          <li>Business Analysis & Solution Design</li>
+          <li>CRM Architecture & Implementation</li>
+          <li>ERP Implementation & Optimization</li>
+          <li>Data Analytics & Business Intelligence</li>
+          <li>Process Optimization & BPMN</li>
+          <li>Stakeholder & C-Level Engagement</li>
+          <li>Team Leadership & Training</li>
+          <li>UX/UI Design & Prototyping</li>
+          <li>Supply Chain & Inventory Digitization</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Professional Experience</h2>
+
+        <article class="role">
+          <div class="role-heading">
+            <div>
+              <h3>Software & Analysis Manager</h3>
+              <p class="company">Asia Strategic Holdings Group - Wall Street English, Exera, Auston, Kids&Us</p>
+            </div>
+            <p class="date">Jan 2022 - Present</p>
+          </div>
+
+          <ul>
+            <li>
+              Lead business analysis, CRM development, data analytics and technical implementation work, bridging
+              business requirements with scalable technical solutions.
+            </li>
+            <li>
+              Manage and develop a cross-functional team of 8 professionals across implementation and data analytics
+              capabilities.
+            </li>
+            <li>
+              Architected and implemented a scalable CRM solution that reduced operational costs and improved sales
+              team efficiency.
+            </li>
+            <li>
+              Optimized data flow between CRM and financial systems, improving alignment between sales operations,
+              business reporting and financial workflows.
+            </li>
+            <li>
+              Built CRM-based analytics and sales performance dashboards to support C-level decision-making, strategic
+              planning and revenue-focused performance management.
+            </li>
+            <li>Built an LMS for internal staff training and development.</li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-heading">
+            <div>
+              <h3>Business Analyst</h3>
+              <p class="company">Intelizest Consulting VN., Ltd.</p>
+            </div>
+            <p class="date">Oct 2020 - Dec 2021</p>
+          </div>
+
+          <ul>
+            <li>
+              Gathered and analyzed complex client requirements across multiple industries, developing tailored
+              solutions aligned with business needs.
+            </li>
+            <li>
+              Created UX/UI designs, detailed mockups and BPMN process models to visualize and optimize business
+              workflows.
+            </li>
+            <li>
+              Conducted product demonstrations, built stakeholder relationships and maintained communication alignment
+              throughout project lifecycles.
+            </li>
+            <li>
+              Translated business requirements into actionable technical specifications and coordinated with development
+              teams to customize and implement solutions.
+            </li>
+            <li>
+              Supported procurement, logistics and inventory management solutions to enhance supply chain efficiency.
+            </li>
+          </ul>
+
+          <div class="project-list">
+            <h4>Selected Projects</h4>
+            <ul class="compact-list">
+              <li>
+                <strong>Betrimex E-bidding:</strong> Streamlined agriculture and procurement bidding processes through
+                digital transformation.
+              </li>
+              <li>
+                <strong>BWID Tendering:</strong> Optimized construction pre-qualification and bidding workflows.
+              </li>
+              <li>
+                <strong>Rekochain Platform:</strong> Developed an integrated supply chain visibility solution.
+              </li>
+              <li>
+                <strong>Heinemann Singapore:</strong> Implemented customer and vendor information systems through
+                digital transformation.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-heading">
+            <div>
+              <h3>Business Analyst</h3>
+              <p class="company">New Ocean IS Co., Ltd.</p>
+            </div>
+            <p class="date">Jul 2019 - Sep 2020</p>
+          </div>
+
+          <ul>
+            <li>
+              Analyzed existing operations to identify digital enhancement opportunities, reduce human error and improve
+              operational performance.
+            </li>
+            <li>
+              Developed systems to capture and analyze operational data, translating data into actionable insights for
+              business decision-making.
+            </li>
+            <li>
+              Oversaw implementation of digital tools and user-friendly workflows, supporting adoption through training
+              and change management.
+            </li>
+            <li>
+              Designed intuitive UX/UI interfaces to improve user experience and adoption of digital tools.
+            </li>
+          </ul>
+
+          <div class="project-list">
+            <h4>Selected Projects</h4>
+            <ul class="compact-list">
+              <li>
+                <strong>Friesland Campina:</strong> Digitalized manufacturing checklists, enhancing quality control and
+                efficiency; built dashboard data to support Board of Directors decision-making.
+              </li>
+              <li>
+                <strong>Asset Management:</strong> Implemented a digital property management system based on Power
+                Platform, optimizing resource allocation.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-heading">
+            <div>
+              <h3>ERP Consultant</h3>
+              <p class="company">Blue Coral</p>
+            </div>
+            <p class="date">Apr 2018 - Jun 2019</p>
+          </div>
+
+          <ul>
+            <li>
+              Collaborated with clients to analyze business needs, design tailored ERP solutions and develop process
+              flows for operational optimization.
+            </li>
+            <li>
+              Worked with IT development teams to customize ERP systems and ensure integration with existing business
+              processes.
+            </li>
+            <li>
+              Led ERP implementations, user training and ongoing consultancy to improve system performance and user
+              adoption.
+            </li>
+          </ul>
+
+          <div class="project-list">
+            <h4>Selected Projects</h4>
+            <ul class="compact-list">
+              <li>
+                <strong>ERPNext for Retail - Mangii Shoes:</strong> Implemented a tailored ERP solution to streamline
+                retail operations and inventory management.
+              </li>
+              <li>
+                <strong>ERPNext for Manufacturing - Yoshita Machining Co. Ltd.:</strong> Customized an ERP system to
+                optimize manufacturing processes and production efficiency.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role-heading">
+            <div>
+              <h3>Earlier Business, Operations & Engineering Experience</h3>
+              <p class="company">California Fitness & Yoga, NKID Investment, Jollibee Foods Vietnam, Pepperl+Fuchs Vietnam</p>
+            </div>
+            <p class="date">2010 - 2018</p>
+          </div>
+
+          <ul>
+            <li>
+              Coordinated cross-functional operations, audits, inventory management and facility maintenance in fitness
+              and investment environments.
+            </li>
+            <li>
+              Supervised service engineering teams, coordinated suppliers and managed equipment maintenance, scheduling,
+              inventory and performance monitoring.
+            </li>
+            <li>
+              Led engineering support, improvement projects and ERP system work in manufacturing, developing expertise
+              in process yield improvement, staff training and cross-functional collaboration.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section">
+        <h2>Technical & Business Skills</h2>
+        <div class="details-grid">
+          <div>
+            <div class="skill-group">
+              <strong>Systems & Tools</strong>
+              <p>HubSpot CRM, Odoo ERP, ERPNext, Power Platform, Microsoft Office Suite, SQL, Excel</p>
+            </div>
+            <div class="skill-group">
+              <strong>Business & Operations</strong>
+              <p>Business analysis, process optimization, project management, inventory and supply chain management</p>
+            </div>
+          </div>
+          <div>
+            <div class="skill-group">
+              <strong>Transformation & Analytics</strong>
+              <p>Digital transformation, data visualization, dashboarding, process engineering, continuous improvement</p>
+            </div>
+            <div class="skill-group">
+              <strong>Communication & Leadership</strong>
+              <p>English communication, stakeholder engagement, client relationship management, training and staff development</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Education</h2>
+        <div class="details-grid">
+          <div>
+            <h3>Da Nang University of Technology</h3>
+            <p class="company">Bachelor of Engineering, Mechatronics | 2005 - 2010</p>
+          </div>
+          <div>
+            <h3>Languages</h3>
+            <p class="company">English - verbal and written communication</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
