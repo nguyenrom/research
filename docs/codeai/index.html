@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code AI — Blog Archive (mirror)</title>
+<meta name="description" content="Bản lưu trữ offline của blog codeai.zone — 73 bài viết.">
+<style>
+  :root {
+    --bg: #18181b;
+    --bg-2: #1f1f23;
+    --bg-3: #27272a;
+    --fg: #f4f4f5;
+    --fg-2: #a1a1aa;
+    --fg-3: #71717a;
+    --accent: #fbbf24;
+    --border: #2e2e33;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 80rem; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+
+  /* Header */
+  header.site {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem 2rem;
+    text-align: center;
+  }
+  .logo {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.06em;
+    color: var(--fg);
+    margin: 0;
+  }
+  .logo i { font-style: italic; color: #52525b; font-weight: 300; }
+  .tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+    margin-top: 0.5rem;
+  }
+  .lead {
+    color: var(--fg-2);
+    max-width: 36rem;
+    text-align: center;
+    margin: 1.5rem auto 0;
+    font-size: 0.95rem;
+  }
+  .stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    color: var(--fg-3);
+    font-size: 0.85rem;
+  }
+  .stats b { color: var(--accent); font-weight: 600; }
+
+  /* Grid (desktop) */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform .2s, border-color .2s, background .2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: #52525b;
+    background: #222226;
+  }
+  .card-link { color: inherit; text-decoration: none; display: block; height: 100%; }
+  .cover {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, #27272a, #18181b);
+    overflow: hidden;
+  }
+  .cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s;
+  }
+  .card:hover .cover img { transform: scale(1.04); }
+  .cover.empty { background: repeating-linear-gradient(45deg, #27272a 0 12px, #1f1f23 12px 24px); }
+
+  .body { padding: 1rem 1.1rem 1.2rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.55rem; }
+  .chip {
+    background: var(--bg-3);
+    color: var(--fg-2);
+    font-size: 0.65rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 9999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--fg);
+    margin: 0 0 0.4rem;
+    font-weight: 600;
+  }
+  .subtitle {
+    color: var(--fg-2);
+    font-size: 0.85rem;
+    margin: 0 0 0.7rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .date {
+    color: var(--fg-3);
+    font-size: 0.75rem;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hidden { display: none !important; }
+  .empty-state {
+    color: var(--fg-3);
+    text-align: center;
+    padding: 4rem 1rem;
+    font-size: 0.9rem;
+    grid-column: 1 / -1;
+  }
+
+  footer.site {
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--fg-3);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  footer.site a { color: var(--fg-2); }
+
+  /* Floating action buttons (back-to-top + search) */
+  .fab-stack {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    z-index: 50;
+    align-items: flex-end;
+  }
+  .fab {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,.45);
+    transition: opacity .2s, transform .2s, background .15s, border-color .15s;
+    font-family: inherit;
+    padding: 0;
+  }
+  .fab:hover { background: #2a2a2f; border-color: #52525b; }
+  .fab svg { width: 1.1rem; height: 1.1rem; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .fab.hidden-fab { opacity: 0; pointer-events: none; transform: translateY(0.5rem); }
+
+  /* Search popover */
+  .search-pop {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 5.5rem;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.65rem;
+    box-shadow: 0 12px 32px rgba(0,0,0,.55);
+    z-index: 49;
+    display: none;
+    width: min(22rem, calc(100vw - 2.5rem));
+  }
+  .search-pop.open { display: block; }
+  .search-pop input {
+    width: 100%;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 0.6rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    outline: none;
+    font-family: inherit;
+  }
+  .search-pop input:focus { border-color: var(--accent); }
+  .search-pop .count {
+    color: var(--fg-3);
+    font-size: 0.7rem;
+    margin: 0.5rem 0.25rem 0.1rem;
+  }
+
+  /* Mobile: list view, image left / content right */
+  @media (max-width: 640px) {
+    .container { padding: 1.5rem 1rem 6rem; }
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .card-link {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+    .cover {
+      aspect-ratio: 1 / 1;
+      height: 100%;
+      min-height: 7rem;
+    }
+    .body { padding: 0.75rem 0.9rem; }
+    .chips { margin-bottom: 0.35rem; }
+    .chip { font-size: 0.6rem; padding: 0.12rem 0.45rem; }
+    h2 {
+      font-size: 0.92rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 0.3rem;
+    }
+    .subtitle {
+      font-size: 0.75rem;
+      -webkit-line-clamp: 2;
+      margin-bottom: 0.4rem;
+    }
+    .date { font-size: 0.68rem; }
+    .card:hover { transform: none; }
+    .fab-stack { right: 0.9rem; bottom: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+  <header class="site">
+    <h1 class="logo">CODE<i>_AI_</i></h1>
+    <p class="tagline">Music Producer + Programmer = Vibe-Coder</p>
+    <p class="lead">Bản lưu trữ offline của blog <a href="https://codeai.zone/blog" style="color:var(--accent)">codeai.zone/blog</a>. Tất cả nội dung thuộc về tác giả gốc.</p>
+    <div class="stats">
+      <span><b>73</b> bài viết</span>
+      <span><b>45</b> chủ đề</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid" id="grid">
+      <article class="card" data-title="phá đảo 150 dsa tập 1 - arrays &amp; hashing: contains duplicate">
+  <a class="card-link" href="150dsa-ep1-array-hashing-contains-duplicate-ver1.html">
+    <div class="cover"><img src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Phá đảo 150 DSA Tập 1 - Arrays &amp; Hashing: Contains Duplicate</h2>
+      <p class="subtitle">Bắt đầu hành trình 150 bài DSA bằng một bài toán tưởng như &quot;mẫu giáo&quot; nhưng lại chứa đựng một kiến thức cực kỳ quyền lực: Hashing</p>
+      <p class="date"><time datetime="2026-04-12">2026-04-12</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;atomic habits - thói quen nguyên tử&quot;">
+  <a class="card-link" href="summary-atomic-habits.html">
+    <div class="cover"><img src="images/summary-atomic-habits/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Knowledge</span></div>
+      <h2>Tóm tắt sách &quot;Atomic Habits - Thói Quen Nguyên Tử&quot;</h2>
+      <p class="subtitle">Câu hỏi thú vị nhất trong Atomic Habits không phải &quot;làm sao xây thói quen tốt&quot;, mà là &quot;tại sao người có ý chí mạnh lại không cần dùng đến ý chí?&quot;</p>
+      <p class="date"><time datetime="2026-03-14">2026-03-14</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;elon musk: tesla, spacex và sứ mệnh...&quot;">
+  <a class="card-link" href="summary-elon-musk-the-quest.html">
+    <div class="cover"><img src="images/summary-elon-musk-the-quest/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Technical</span></div>
+      <h2>Tóm tắt sách &quot;Elon Musk: Tesla, SpaceX và sứ mệnh...&quot;</h2>
+      <p class="subtitle">Đêm 23 tháng 12 năm 2008, khi cả thế giới đang chuẩn bị đón Giáng sinh, Elon Musk đang đếm từng giờ trước khi Tesla tuyên bố phá sản.</p>
+      <p class="date"><time datetime="2026-03-13">2026-03-13</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="grand slam offer - tóm tắt từ &quot;$100m offers&quot;">
+  <a class="card-link" href="grand-slam-offer.html">
+    <div class="cover"><img src="images/grand-slam-offer/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Startup</span><span class="chip">Business</span><span class="chip">Sales</span></div>
+      <h2>GRAND SLAM OFFER - Tóm tắt từ &quot;$100M Offers&quot;</h2>
+      <p class="subtitle">Bạn có bao giờ tự hỏi: tại sao cùng một sản phẩm, có người bán giá gấp 10 lần mà khách vẫn xếp hàng?</p>
+      <p class="date"><time datetime="2026-03-11">2026-03-11</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 11: circular linked list">
+  <a class="card-link" href="dsa-ep11-data-structures-linear-node-circular-linked-list.html">
+    <div class="cover"><img src="images/dsa-ep11-data-structures-linear-node-circular-linked-list/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 11: Circular Linked List</h2>
+      <p class="subtitle">Doubly Linked List thêm một sợi dây nữa: mỗi Node giờ nhớ cả quá khứ lẫn tương lai</p>
+      <p class="date"><time datetime="2026-03-10">2026-03-10</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 10: doubly linked list">
+  <a class="card-link" href="dsa-ep10-data-structures-linear-node-doubly-linked-list.html">
+    <div class="cover"><img src="images/dsa-ep10-data-structures-linear-node-doubly-linked-list/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 10: Doubly Linked List</h2>
+      <p class="subtitle">Doubly Linked List thêm một sợi dây nữa: mỗi Node giờ nhớ cả quá khứ lẫn tương lai</p>
+      <p class="date"><time datetime="2026-03-06">2026-03-06</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 9: singly linked list">
+  <a class="card-link" href="dsa-ep9-data-structures-linear-node-singly-linked-list.html">
+    <div class="cover"><img src="images/dsa-ep9-data-structures-linear-node-singly-linked-list/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 9: Singly Linked List</h2>
+      <p class="subtitle">Singly Linked List — một cấu trúc dữ liệu mà các phần tử không nằm cạnh nhau trong bộ nhớ.</p>
+      <p class="date"><time datetime="2026-03-03">2026-03-03</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;the hard thing about hard things&quot;">
+  <a class="card-link" href="summary-hard-thing-hard-things.html">
+    <div class="cover"><img src="images/summary-hard-thing-hard-things/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Business</span><span class="chip">Startup</span><span class="chip">SaaS</span></div>
+      <h2>Tóm tắt sách &quot;The Hard Thing About Hard Things&quot;</h2>
+      <p class="subtitle">Nếu bạn là người mới vào nghề data analyst hoặc đã đi làm một thời gian nhưng vẫn cảm thấy mình đang thiếu một mảnh ghép nào đó giữa kỹ năng kỹ thuật và khả năng deliver giá trị thật sự, thì đây là cuốn sách đáng đọc.</p>
+      <p class="date"><time datetime="2026-03-02">2026-03-02</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;effective data analysis&quot;">
+  <a class="card-link" href="summary-effective-data-analysis.html">
+    <div class="cover"><img src="images/summary-effective-data-analysis/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Analyst</span><span class="chip">Data Science</span><span class="chip">Book Summary</span></div>
+      <h2>Tóm tắt sách &quot;Effective Data Analysis&quot;</h2>
+      <p class="subtitle">Nếu bạn là người mới vào nghề data analyst hoặc đã đi làm một thời gian nhưng vẫn cảm thấy mình đang thiếu một mảnh ghép nào đó giữa kỹ năng kỹ thuật và khả năng deliver giá trị thật sự, thì đây là cuốn sách đáng đọc.</p>
+      <p class="date"><time datetime="2026-02-28">2026-02-28</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="reverse engineering là gì?">
+  <a class="card-link" href="reverse-engineering.html">
+    <div class="cover"><img src="images/reverse-engineering/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Technical</span><span class="chip">Knowledge</span></div>
+      <h2>Reverse Engineering là gì?</h2>
+      <p class="subtitle">Reverse Engineering là quá trình tìm ra các nguyên lý kỹ thuật của một phần mềm ứng dụng hay thiết bị cơ khí</p>
+      <p class="date"><time datetime="2026-02-27">2026-02-27</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="báo cáo xu hướng agentic coding năm 2026 từ anthropic">
+  <a class="card-link" href="anthropic-agentic-coding-trends-report-2026.html">
+    <div class="cover"><img src="images/anthropic-agentic-coding-trends-report-2026/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">AI Agents</span><span class="chip">Productivity</span></div>
+      <h2>Báo cáo xu hướng Agentic Coding năm 2026 từ Anthropic</h2>
+      <p class="subtitle">Mô tả ngắn gọn về nội dung bài viết (1-2 câu)</p>
+      <p class="date"><time datetime="2026-02-25">2026-02-25</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="giới thiệu về machine learning">
+  <a class="card-link" href="summary-introduction-to-machine-learning.html">
+    <div class="cover"><img src="images/summary-introduction-to-machine-learning/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">AI</span><span class="chip">Machine Learning</span><span class="chip">Book Summary</span></div>
+      <h2>Giới thiệu về Machine Learning</h2>
+      <p class="subtitle">Laurent Younes</p>
+      <p class="date"><time datetime="2026-02-25">2026-02-25</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 8: circular buffer">
+  <a class="card-link" href="dsa-ep8-data-structures-linear-array-circular-buffer.html">
+    <div class="cover"><img src="images/dsa-ep8-data-structures-linear-array-circular-buffer/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 8: Circular Buffer</h2>
+      <p class="subtitle">Tưởng tượng hình ảnh một bàn xoay sushi. Đầu bếp đặt đĩa mới lên, khách lấy đĩa cũ đi, băng chuyền không bao giờ dừng. Đó là Circular Buffer.</p>
+      <p class="date"><time datetime="2026-02-24">2026-02-24</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;the design of everyday things&quot;">
+  <a class="card-link" href="summary-the-design-everyday.html">
+    <div class="cover"><img src="images/summary-the-design-everyday/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Design</span><span class="chip">UX</span><span class="chip">UI</span></div>
+      <h2>Tóm tắt sách &quot;The Design of Everyday Things&quot;</h2>
+      <p class="subtitle">Một quyển sách về thiết kế trải nghiệm người dùng (UX) được viết từ những năm 8</p>
+      <p class="date"><time datetime="2026-02-22">2026-02-22</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;the embedded entrepreneur&quot;">
+  <a class="card-link" href="summary-the-embedded-entrepreneur.html">
+    <div class="cover"><img src="images/summary-the-embedded-entrepreneur/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Productivity</span><span class="chip">SaaS</span><span class="chip">Software Development</span></div>
+      <h2>Tóm tắt sách &quot;THE EMBEDDED ENTREPRENEUR&quot;</h2>
+      <p class="subtitle">Nghĩ ra ý tưởng, lao vào code, xây xong rồi mới đi tìm người mua. Kết quả là ngồi nhìn sản phẩm phủ bụi, tự hỏi tại sao không ai quan tâm?</p>
+      <p class="date"><time datetime="2026-02-22">2026-02-22</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;thinking in system&quot;">
+  <a class="card-link" href="summary-thinking-in-system.html">
+    <div class="cover"><img src="images/summary-thinking-in-system/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Productivity</span><span class="chip">Learning Method</span><span class="chip">Psychology</span></div>
+      <h2>Tóm tắt sách &quot;Thinking in System&quot;</h2>
+      <p class="subtitle">Tác giả Donella Meadows</p>
+      <p class="date"><time datetime="2026-02-20">2026-02-20</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 7: matrix &amp; 2d array">
+  <a class="card-link" href="dsa-ep7-data-structures-linear-array-matrix-2d-array.html">
+    <div class="cover"><img src="images/dsa-ep7-data-structures-linear-array-matrix-2d-array/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 7: Matrix &amp; 2D Array</h2>
+      <p class="subtitle">Ma trận, hay mảng hai chiều, không chỉ là một khái niệm toán học khô khan mà là cách máy tính nhìn nhận và tổ chức thực tại, từ những điểm ảnh RGB đến những bản đồ game rộng lớn.</p>
+      <p class="date"><time datetime="2026-02-19">2026-02-19</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;inspired&quot; của tác giả marty cagan">
+  <a class="card-link" href="summary-inspired-marty-cagan.html">
+    <div class="cover"><img src="images/summary-inspired-marty-cagan/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">SaaS</span><span class="chip">Software Development</span></div>
+      <h2>Tóm tắt sách &quot;INSPIRED&quot; của tác giả Marty Cagan</h2>
+      <p class="subtitle">Làm thế nào để tạo ra những sản phẩm công nghệ khiến khách hàng yêu mến?</p>
+      <p class="date"><time datetime="2026-02-15">2026-02-15</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="lời nguyền tri thức (curse of knowledge)">
+  <a class="card-link" href="curse-of-knowledge.html">
+    <div class="cover"><img src="images/curse-of-knowledge/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Psychology</span><span class="chip">Learning Method</span></div>
+      <h2>Lời Nguyền Tri Thức (Curse of Knowledge)</h2>
+      <p class="subtitle">một khi bạn đã BIẾT một điều gì đó, bộ não của bạn sẽ tự động &quot;xóa sạch&quot; ký ức về việc &quot;không biết&quot; nó là như thế nào</p>
+      <p class="date"><time datetime="2026-02-14">2026-02-14</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="lập trình hướng đối tượng (oop)">
+  <a class="card-link" href="python-object-oriented-programming.html">
+    <div class="cover"><img src="images/python-object-oriented-programming/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Programming</span><span class="chip">Python</span></div>
+      <h2>Lập trình hướng đối tượng (OOP)</h2>
+      <p class="subtitle">Một phương pháp tổ chức mã nguồn bằng cách mô phỏng các thực thể trong thế giới thực vào ngôn ngữ lập trình</p>
+      <p class="date"><time datetime="2026-02-13">2026-02-13</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 6: dynamic array">
+  <a class="card-link" href="dsa-ep6-data-structures-linear-array-dynamic-array.html">
+    <div class="cover"><img src="images/dsa-ep6-data-structures-linear-array-dynamic-array/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 6: Dynamic Array</h2>
+      <p class="subtitle">String không chỉ là kỹ thuật khô khan, nó là cách chúng ta dịch chuyển văn hóa loài người vào máy tính.</p>
+      <p class="date"><time datetime="2026-02-12">2026-02-12</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 5: string">
+  <a class="card-link" href="dsa-ep5-data-structures-linear-array-string.html">
+    <div class="cover"><img src="images/dsa-ep5-data-structures-linear-array-string/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 5: String</h2>
+      <p class="subtitle">String không chỉ là kỹ thuật khô khan, nó là cách chúng ta dịch chuyển văn hóa loài người vào máy tính.</p>
+      <p class="date"><time datetime="2026-02-11">2026-02-11</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 4: array">
+  <a class="card-link" href="dsa-ep4-data-structures-linear-array-array.html">
+    <div class="cover"><img src="images/dsa-ep4-data-structures-linear-array-array/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 4: Array</h2>
+      <p class="subtitle">Array giống như một dãy tủ locker trong trường học hay những hàng ghế liên tiếp trong rạp chiếu phim.</p>
+      <p class="date"><time datetime="2026-02-10">2026-02-10</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 3: space complexity">
+  <a class="card-link" href="dsa-ep3-complex-analyze-space-complex.html">
+    <div class="cover"><img src="images/dsa-ep3-complex-analyze-space-complex/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 3: Space Complexity</h2>
+      <p class="subtitle">Độ phức tạp không gian không phải là kích thước tệp code của bạn hay dung lượng file trên ổ cứng.</p>
+      <p class="date"><time datetime="2026-02-09">2026-02-09</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 1: big o notation">
+  <a class="card-link" href="dsa-ep1-complex-analyze-big-o-notation.html">
+    <div class="cover"><img src="images/dsa-ep1-complex-analyze-big-o-notation/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Computer Science</span><span class="chip">Comic</span><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 1: Big O Notation</h2>
+      <p class="subtitle">Thước đo cho sự tăng trưởng của Code</p>
+      <p class="date"><time datetime="2026-02-06">2026-02-06</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="data structures &amp; algorithms - tập 2: time complexity">
+  <a class="card-link" href="dsa-ep2-complex-analyze-time-complex.html">
+    <div class="cover"><img src="images/dsa-ep2-complex-analyze-time-complex/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span></div>
+      <h2>Data Structures &amp; Algorithms - Tập 2: Time Complexity</h2>
+      <p class="subtitle">Mô tả ngắn gọn về nội dung bài viết (1-2 câu)</p>
+      <p class="date"><time datetime="2026-02-06">2026-02-06</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="vibe coders | software development &amp; saas tập 6">
+  <a class="card-link" href="saas-ep6-code-review.html">
+    <div class="cover"><img src="images/saas-ep6-code-review/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">SaaS</span><span class="chip">Software Development</span></div>
+      <h2>VIBE CODERS | Software Development &amp; SaaS Tập 6</h2>
+      <p class="subtitle">Không khí trong các team Dev ngày cuối năm thường chia làm hai thái cực: Một bên là sự vội vã &quot;merge cho xong&quot; để về quê, một bên là nỗi lo &quot;deploy chiều 30 Tết&quot; rồi toang ngay mùng 1.</p>
+      <p class="date"><time datetime="2026-02-06">2026-02-06</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;algorithms to live by&quot; của brian christian">
+  <a class="card-link" href="summary-algorithms-to-live-by-brian-christian.html">
+    <div class="cover"><img src="images/summary-algorithms-to-live-by-brian-christian/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Algorithms</span><span class="chip">Book Summary</span></div>
+      <h2>Tóm tắt sách &quot;Algorithms to Live By&quot; của Brian Christian</h2>
+      <p class="subtitle">Computational Kindness (Sự bao dung thuật toán)....</p>
+      <p class="date"><time datetime="2026-02-05">2026-02-05</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="năng suất không đại diện cho sự tinh thông">
+  <a class="card-link" href="how-ai-impacts-skill-formation.html">
+    <div class="cover"><img src="images/how-ai-impacts-skill-formation/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Research</span><span class="chip">Productivity</span><span class="chip">Learning Method</span></div>
+      <h2>Năng suất không đại diện cho sự tinh thông</h2>
+      <p class="subtitle">Nghiên cứu của Judy Hanwen Shen, Alex Tamkin (2026) - &quot;How AI Impacts Skill Formation&quot;</p>
+      <p class="date"><time datetime="2026-02-02">2026-02-02</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="godel - định lý bất toàn (incompleteness theorems)">
+  <a class="card-link" href="interview-joel-david-hamkins-godel.html">
+    <div class="cover"><img src="images/interview-joel-david-hamkins-godel/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Mathematic</span><span class="chip">Computer Science</span></div>
+      <h2>Godel - Định lý Bất toàn (Incompleteness Theorems)</h2>
+      <p class="subtitle">Chúng ta thường nghĩ: &quot;Nếu nó đúng, nó phải chứng minh được.&quot;</p>
+      <p class="date"><time datetime="2026-02-01">2026-02-01</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="hướng dẫn về agent skills">
+  <a class="card-link" href="agent-skill-with-anthropic.html">
+    <div class="cover"><img src="images/agent-skill-with-anthropic/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Agent Skills</span><span class="chip">Prompt Engineering</span><span class="chip">Vibe Coding</span></div>
+      <h2>Hướng dẫn về Agent Skills</h2>
+      <p class="subtitle">Nếu coi Prompt là một tờ giấy A4 hướng dẫn công việc mà bạn đưa cho nhân viên AI mỗi sáng...</p>
+      <p class="date"><time datetime="2026-01-31">2026-01-31</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="thuật toán markov chain">
+  <a class="card-link" href="grani-markov-chain.html">
+    <div class="cover"><img src="images/grani-markov-chain/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Algorithm</span><span class="chip">Comic</span></div>
+      <h2>Thuật toán Markov Chain</h2>
+      <p class="subtitle">Nếu bạn có thể dự đoán tương lai mà không cần biết quá khứ - đó có phải là phép thuật?</p>
+      <p class="date"><time datetime="2026-01-30">2026-01-30</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="phỏng vấn ceo moltbot aka clawdbot, openclaw">
+  <a class="card-link" href="interview-moltbot-aka-clawdbot-creator.html">
+    <div class="cover"><img src="images/interview-moltbot-aka-clawdbot-creator/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Interview</span><span class="chip">AI Agents</span></div>
+      <h2>Phỏng vấn CEO Moltbot aka Clawdbot, OpenClaw</h2>
+      <p class="subtitle">Peter Steinberger từng bán công ty triệu đô. Rồi anh ta biến mất.</p>
+      <p class="date"><time datetime="2026-01-30">2026-01-30</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="game theory: lý thuyết trò chơi">
+  <a class="card-link" href="grani-game-theory.html">
+    <div class="cover"><img src="images/grani-game-theory/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Algorithm</span><span class="chip">Computer Science</span><span class="chip">Comic</span></div>
+      <h2>Game Theory: Lý Thuyết Trò Chơi</h2>
+      <p class="subtitle">Tit For Tat: Thuật toán đơn giản đã đánh bại những bộ óc thiên tài như thế nào?</p>
+      <p class="date"><time datetime="2026-01-24">2026-01-24</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="vibe coders | software development &amp; saas tập 5">
+  <a class="card-link" href="saas-ep5-traffic-jam.html">
+    <div class="cover"><img src="images/saas-ep5-traffic-jam/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Software Development</span><span class="chip">SaaS</span></div>
+      <h2>VIBE CODERS | Software Development &amp; SaaS Tập 5</h2>
+      <p class="subtitle">Sự cố kẹt xe kinh hoàng &amp; Chiến thần Scalability</p>
+      <p class="date"><time datetime="2026-01-20">2026-01-20</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="học tập đúng lúc (just-in-time learning)">
+  <a class="card-link" href="just-in-time-learning.html">
+    <div class="cover"><img src="images/just-in-time-learning/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Learning Method</span><span class="chip">Psychology</span></div>
+      <h2>Học tập Đúng lúc (Just-In-Time Learning)</h2>
+      <p class="subtitle">một phương pháp học tập mà trong đó nội dung đào tạo được cung cấp chính xác vào thời điểm người học cần đến</p>
+      <p class="date"><time datetime="2026-01-19">2026-01-19</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;software engineering at google&quot;">
+  <a class="card-link" href="swe-google.html">
+    <div class="cover"><img src="images/swe-google/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Software Engineering</span><span class="chip">Programming</span><span class="chip">Book Summary</span></div>
+      <h2>Tóm tắt sách &quot;Software Engineering at Google&quot;</h2>
+      <p class="subtitle">Những kiến thức đầy giá trị cho cộng đồng kỹ sư phần mềm trong tư duy thiết kế hệ thống và tổ chức đội ngũ.</p>
+      <p class="date"><time datetime="2026-01-18">2026-01-18</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="não của những kẻ &quot;xuất chúng&quot; có gì?">
+  <a class="card-link" href="genius-mind-os.html">
+    <div class="cover"><img src="images/genius-mind-os/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Learning Method</span><span class="chip">Psychology</span></div>
+      <h2>Não của những kẻ &quot;xuất chúng&quot; có gì?</h2>
+      <p class="subtitle">Tôi lang thang và đọc bài này trên threads của nick @cwokaz thấy hay quá</p>
+      <p class="date"><time datetime="2026-01-17">2026-01-17</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="interpretability: ai suy nghĩ như thế nào?">
+  <a class="card-link" href="anthropic-how-ai-think.html">
+    <div class="cover"><img src="images/anthropic-how-ai-think/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">AI</span><span class="chip">LLMs</span><span class="chip">Psychology</span></div>
+      <h2>Interpretability: AI suy nghĩ như thế nào?</h2>
+      <p class="subtitle">..Những VIBE CODER giỏi nhất, thực ra là những Product Manager</p>
+      <p class="date"><time datetime="2026-01-15">2026-01-15</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="phỏng vấn elon musk về tương lai nhân loại">
+  <a class="card-link" href="elon-musk-agi.html">
+    <div class="cover"><img src="images/elon-musk-agi/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Interview</span><span class="chip">AI</span><span class="chip">LLMs</span></div>
+      <h2>Phỏng vấn Elon Musk về Tương lai Nhân loại</h2>
+      <p class="subtitle">AGI</p>
+      <p class="date"><time datetime="2026-01-14">2026-01-14</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tôi nhận ra mình không biết gì về lập trình">
+  <a class="card-link" href="reddit-tutorial-hell.html">
+    <div class="cover"><img src="images/reddit-tutorial-hell/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Programming</span><span class="chip">Reddit</span><span class="chip">Learning Method</span></div>
+      <h2>Tôi nhận ra mình không biết gì về lập trình</h2>
+      <p class="subtitle">Tại sao khi HỌC bạn tưởng mình có thể hiểu mọi thứ nhưng khi LÀM thì não lại rỗng tuếch?</p>
+      <p class="date"><time datetime="2026-01-14">2026-01-14</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="phỏng vấn ceo replit về vibe coding">
+  <a class="card-link" href="replit-ceo-interview.html">
+    <div class="cover"><img src="images/replit-ceo-interview/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Vibe Coding</span><span class="chip">Interview</span><span class="chip">Programming</span></div>
+      <h2>Phỏng vấn CEO Replit về Vibe Coding</h2>
+      <p class="subtitle">..Những VIBE CODER giỏi nhất, thực ra là những Product Manager</p>
+      <p class="date"><time datetime="2026-01-13">2026-01-13</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="học như một nghiên cứu sinh phd">
+  <a class="card-link" href="phd-learning-method.html">
+    <div class="cover"><img src="images/phd-learning-method/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Learning Method</span><span class="chip">Psychology</span></div>
+      <h2>Học như một nghiên cứu sinh PhD</h2>
+      <p class="subtitle">Học tập không phải là cuộc đua, nó là việc chăm sóc một khu vườn.</p>
+      <p class="date"><time datetime="2026-01-12">2026-01-12</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="git thật đơn giản">
+  <a class="card-link" href="git-easy.html">
+    <div class="cover"><img src="images/git-easy/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Programming</span><span class="chip">Git</span></div>
+      <h2>GIT thật đơn giản</h2>
+      <p class="subtitle">3 Thế Giới: Working Directory, Staging Area, và Repository</p>
+      <p class="date"><time datetime="2026-01-11">2026-01-11</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="kỹ năng lập trình &quot;bền vững&quot;">
+  <a class="card-link" href="timeless-programming-skills.html">
+    <div class="cover"><img src="images/timeless-programming-skills/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Programming</span><span class="chip">Reddit</span></div>
+      <h2>Kỹ năng lập trình &quot;Bền Vững&quot;</h2>
+      <p class="subtitle">Một Senior Dev trên Reddit đã đúc kết lại 4 chân lý &quot;bất biến&quot; này. Lướt xem trọn bộ để thấm từng câu từng chữ!</p>
+      <p class="date"><time datetime="2026-01-10">2026-01-10</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="13 bước thiết lập claude code từ boris cherny">
+  <a class="card-link" href="boris-claude-setup.html">
+    <div class="cover"><img src="images/boris-claude-setup/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Claude Code</span><span class="chip">Vibe Coding</span><span class="chip">Programming</span></div>
+      <h2>13 Bước Thiết Lập Claude Code từ Boris Cherny</h2>
+      <p class="subtitle">Mô tả ngắn gọn về nội dung bài viết (1-2 câu)</p>
+      <p class="date"><time datetime="2026-01-09">2026-01-09</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="trust the process">
+  <a class="card-link" href="trust-the-process.html">
+    <div class="cover"><img src="images/trust-the-process/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Learning Method</span><span class="chip">Productivity</span></div>
+      <h2>Trust The Process</h2>
+      <p class="subtitle">Bắt đầu học thì dễ. Ai cũng có thể hừng hực khí thế trong ngày đầu tiên.</p>
+      <p class="date"><time datetime="2026-01-07">2026-01-07</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;refactoring ui&quot;">
+  <a class="card-link" href="summary-refactoring-ui-carousel.html">
+    <div class="cover"><img src="images/summary-refactoring-ui-carousel/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">UI</span><span class="chip">UX</span><span class="chip">Web Development</span></div>
+      <h2>Tóm tắt sách &quot;Refactoring UI&quot;</h2>
+      <p class="subtitle">Adam Wathan &amp; Steve Schoger</p>
+      <p class="date"><time datetime="2026-01-06">2026-01-06</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="boris cherny - bộ não đứng sau claude code">
+  <a class="card-link" href="boris-cherny-claude-code.html">
+    <div class="cover"><img src="images/boris-cherny-claude-code/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Claude Code</span><span class="chip">Vibe Coding</span></div>
+      <h2>Boris Cherny - bộ não đứng sau Claude Code</h2>
+      <p class="subtitle">Chúng ta đang sống trong thời điểm mà định nghĩa về &quot;Lập trình viên&quot; đang thay đổi vĩnh viễn.</p>
+      <p class="date"><time datetime="2026-01-05">2026-01-05</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tôi đã viết 500.000 dòng code với ai">
+  <a class="card-link" href="500k-codes.html">
+    <div class="cover"><img src="images/500k-codes/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Programming</span><span class="chip">Vibe Coding</span></div>
+      <h2>TÔI ĐÃ VIẾT 500.000 DÒNG CODE VỚI AI</h2>
+      <p class="subtitle">&quot;Sau 2 năm và hàng chục dự án chạy bằng LLMs, tôi nhận ra cuộc chơi lập trình đã thay đổi hoàn toàn&quot; - đây là chia sẻ của dhruv1103, một thành viên trên Reddit.</p>
+      <p class="date"><time datetime="2026-01-04">2026-01-04</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="titans tập 5 - pinterest">
+  <a class="card-link" href="titan-5-pinterest.html">
+    <div class="cover"><img src="images/titan-5-pinterest/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">SaaS</span><span class="chip">Pinterest</span></div>
+      <h2>TITANS Tập 5 - PINTEREST</h2>
+      <p class="subtitle">NGƯỜI ĐẸP HAY QUÁI VẬT CÔNG NGHỆ?</p>
+      <p class="date"><time datetime="2026-01-03">2026-01-03</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="6 chiếc mũ tư duy trong vận hành team phát triển phần mềm">
+  <a class="card-link" href="6-thinking-hats.html">
+    <div class="cover"><img src="images/6-thinking-hats/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">SaaS</span><span class="chip">Software Development</span></div>
+      <h2>6 chiếc mũ tư duy trong vận hành team phát triển phần mềm</h2>
+      <p class="subtitle">VIẾT CODE CHO MÁY THÌ DỄ. &quot;VIẾT CODE&quot; CHO TEAM MỚI KHÓ.</p>
+      <p class="date"><time datetime="2026-01-01">2026-01-01</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="hành trình 14 ngày tạo nên code ai blog">
+  <a class="card-link" href="code-ai-campaign.html">
+    <div class="cover"><img src="images/code-ai-campaign/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Programming</span><span class="chip">Vibe Coding</span></div>
+      <h2>Hành trình 14 ngày tạo nên Code AI Blog</h2>
+      <p class="subtitle">Những gì tôi đã trải qua</p>
+      <p class="date"><time datetime="2025-12-31">2025-12-31</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="andrej karpathy - cuộc đại tái thiết của ai trong lập trình">
+  <a class="card-link" href="karpathy-pivot.html">
+    <div class="cover"><img src="images/karpathy-pivot/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Vibe Coding</span><span class="chip">Programming</span><span class="chip">Software Development</span></div>
+      <h2>Andrej Karpathy - Cuộc ĐẠI TÁI THIẾT của AI trong lập trình</h2>
+      <p class="subtitle">Mô tả ngắn gọn về nội dung bài viết (1-2 câu)</p>
+      <p class="date"><time datetime="2025-12-28">2025-12-28</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;domain driven design&quot; của eric evans">
+  <a class="card-link" href="summary-domain-driven-design.html">
+    <div class="cover"><img src="images/summary-domain-driven-design/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Programming</span></div>
+      <h2>Tóm tắt sách &quot;Domain Driven Design&quot; của Eric Evans</h2>
+      <p class="subtitle">Domain Driven Design (DDD) Cuốn bí kíp bị hiểu lầm nhiều nhất thế giới lập trình</p>
+      <p class="date"><time datetime="2025-12-28">2025-12-28</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="vibe coders | software development &amp; saas tập 4">
+  <a class="card-link" href="saas-ep4-tech-debt.html">
+    <div class="cover"><img src="images/saas-ep4-tech-debt/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">SaaS</span><span class="chip">Software Development</span></div>
+      <h2>VIBE CODERS | Software Development &amp; SaaS Tập 4</h2>
+      <p class="subtitle">&quot;Trong bóng tối của những dòng code cũ, sự cố không bao giờ đến đột ngột. Nó là một sự mục nát âm thầm từ bên trong.&quot;</p>
+      <p class="date"><time datetime="2025-12-27">2025-12-27</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="bạn kém cỏi hơn bạn nghĩ - unknown unknowns">
+  <a class="card-link" href="unknown-unknowns.html">
+    <div class="cover"><img src="images/unknown-unknowns/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Learning Method</span><span class="chip">Psychology</span></div>
+      <h2>Bạn kém cỏi hơn bạn nghĩ - Unknown Unknowns</h2>
+      <p class="subtitle">TẠI SAO STEVE JOBS ĐI HỌC THƯ PHÁP?</p>
+      <p class="date"><time datetime="2025-12-26">2025-12-26</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="chia sẻ kinh nghiệm tự học code cho dân trái ngành">
+  <a class="card-link" href="marketing-to-dev.html">
+    <div class="cover"><img src="images/marketing-to-dev/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Learning Method</span><span class="chip">Programming</span><span class="chip">Vibe Coding</span></div>
+      <h2>Chia sẻ kinh nghiệm tự học CODE cho dân trái ngành</h2>
+      <p class="subtitle">Đừng học CODE để trở thành Lập Trình Viên chuyên nghiệp. Hãy học để giải quyết NỖI ĐAU của chính mình.</p>
+      <p class="date"><time datetime="2025-12-25">2025-12-25</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tự động hoá cuộc sống bằng claude code">
+  <a class="card-link" href="teresa-torres-claude-code.html">
+    <div class="cover"><img src="images/teresa-torres-claude-code/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Claude Code</span><span class="chip">Productivity</span><span class="chip">Obsidian</span></div>
+      <h2>Tự Động Hoá Cuộc Sống Bằng Claude Code</h2>
+      <p class="subtitle">Chúng ta tưởng mình đang dùng công cụ, nhưng thực ra công cụ đang hút cạn năng lượng của chúng ta trước khi kịp làm việc gì ra hồn.</p>
+      <p class="date"><time datetime="2025-12-24">2025-12-24</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="kỹ thuật vibe debugging của dan abramov">
+  <a class="card-link" href="how-to-fix-any-bug.html">
+    <div class="cover"><img src="images/how-to-fix-any-bug/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Vibe Coding</span><span class="chip">Programming</span></div>
+      <h2>Kỹ thuật Vibe Debugging của Dan Abramov</h2>
+      <p class="subtitle">Một số kinh nghiệm thú vị về VIBE Debugging từ Dan Abramov*</p>
+      <p class="date"><time datetime="2025-12-23">2025-12-23</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="kinh nghiệm quản lý tri thức cá nhân từ ceo obsidian">
+  <a class="card-link" href="obsidian-ceo-notes.html">
+    <div class="cover"><img src="images/obsidian-ceo-notes/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Obsidian</span><span class="chip">Learning Method</span></div>
+      <h2>Kinh nghiệm quản lý tri thức cá nhân từ CEO Obsidian</h2>
+      <p class="subtitle">Obsidian không phải là ứng dụng để bạn chất đống các ghi chú (như Evernote, Notion kiểu gom hết vào folder)</p>
+      <p class="date"><time datetime="2025-12-21">2025-12-21</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="điều gì vẫn khiến tôi &quot;kinh ngạc&quot; sau 10 năm code?">
+  <a class="card-link" href="10-years-code.html">
+    <div class="cover"><img src="images/10-years-code/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Programming</span><span class="chip">Software Development</span><span class="chip">Reddit</span></div>
+      <h2>Điều gì vẫn khiến tôi &quot;Kinh Ngạc&quot; sau 10 Năm Code?</h2>
+      <p class="subtitle">Đây là chia sẻ của một Senior Developer trên Reddit đã nhận được hơn 12k upvote, và nó chạm đúng vào &quot;tim đen&quot; của hàng ngàn lập trình viên khác.</p>
+      <p class="date"><time datetime="2025-12-19">2025-12-19</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="titans tập 4 - amazon">
+  <a class="card-link" href="titan-4-amazon.html">
+    <div class="cover"><img src="images/titan-4-amazon/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Amazon</span><span class="chip">SaaS</span></div>
+      <h2>TITANS Tập 4 - AMAZON</h2>
+      <p class="subtitle">Bạn có bao giờ tự hỏi tại sao Amazon có thể bán mọi thứ, còn AWS thì vận hành gần như cả internet?</p>
+      <p class="date"><time datetime="2025-12-18">2025-12-18</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="bloom&#x27;s taxonomy trong giáo dục">
+  <a class="card-link" href="bloom-aesthetic-dark.html">
+    <div class="cover"><img src="images/bloom-aesthetic-dark/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Learning Method</span><span class="chip">Psychology</span></div>
+      <h2>Bloom&#x27;s Taxonomy Trong Giáo Dục</h2>
+      <p class="subtitle">Giáo dục truyền thống (và cả thói quen lướt mạng xã hội) thường chỉ đưa chúng ta đến 2 tầng thấp nhất của tư duy: Remember (Nhớ) và Understand (Hiểu). Nó cho bạn cảm giác &quot;biết tuốt&quot;, nhưng thực tế tay nghề của bạn vẫn bằng 0.</p>
+      <p class="date"><time datetime="2025-12-17">2025-12-17</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="google cloud console cho vibe-coders (ver 2)">
+  <a class="card-link" href="google-cloud-console-ver2.html">
+    <div class="cover"><img src="images/google-cloud-console-ver2/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Google Cloud Console</span><span class="chip">Tutorial</span></div>
+      <h2>Google Cloud Console cho VIBE-CODERS (ver 2)</h2>
+      <p class="subtitle">Nhiều đồng VIBE rất hay lúng túng khi cấu hình API và Services trên Google Cloud Console (bao gồm cả mình).</p>
+      <p class="date"><time datetime="2025-12-17">2025-12-17</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="9 pro tips để &quot;thuần hóa&quot; claude code">
+  <a class="card-link" href="9-claude-code-tips.html">
+    <div class="cover"><img src="images/9-claude-code-tips/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Claude</span><span class="chip">Claude Code</span><span class="chip">Reddit</span></div>
+      <h2>9 PRO TIPS ĐỂ &quot;THUẦN HÓA&quot; CLAUDE CODE</h2>
+      <p class="subtitle">9 kỹ thuật để Claude Code vừa làm đồng VIBE, vừa làm thầy VIBE của bạn</p>
+      <p class="date"><time datetime="2025-12-15">2025-12-15</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="the way of code (tiếng việt)">
+  <a class="card-link" href="the-way-of-code.html">
+    <div class="cover"><img src="images/the-way-of-code/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Vibe Coding</span><span class="chip">Programming</span></div>
+      <h2>The Way Of Code (Tiếng Việt)</h2>
+      <p class="subtitle">Rick Rubin</p>
+      <p class="date"><time datetime="2025-12-14">2025-12-14</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="astro - framework tối ưu cho dự án blog">
+  <a class="card-link" href="astro-web-dev-blog.html">
+    <div class="cover"><img src="images/astro-web-dev-blog/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Astro</span><span class="chip">Web Development</span></div>
+      <h2>Astro - Framework tối ưu cho dự án Blog</h2>
+      <p class="subtitle">Thay vì render toàn bộ trang web thành một cục JS khổng lồ (SPA), Astro coi trang web là một &quot;biển tĩnh&quot; (HTML thuần) và chỉ &quot;tưới nước&quot; (hydrate) cho những &quot;hòn đảo&quot; cần tương tác.</p>
+      <p class="date"><time datetime="2025-12-08">2025-12-08</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="vibe coders | software development &amp; saas tập 1">
+  <a class="card-link" href="saas-ep1-introduction.html">
+    <div class="cover"><img src="images/saas-ep1-introduction/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">SaaS</span><span class="chip">Software Development</span></div>
+      <h2>VIBE CODERS | Software Development &amp; SaaS Tập 1</h2>
+      <p class="subtitle">Ai đứng sau chiếc app bạn dùng?</p>
+      <p class="date"><time datetime="2025-12-07">2025-12-07</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="claude code commands (tổng hợp)">
+  <a class="card-link" href="claude-code-commands.html">
+    <div class="cover"><img src="images/claude-code-commands/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Claude Code</span><span class="chip">Tutorial</span></div>
+      <h2>Claude Code Commands (Tổng Hợp)</h2>
+      <p class="subtitle">Claude Code nhiều commands quá không nhớ hết, làm cái cheatsheet tổng hợp</p>
+      <p class="date"><time datetime="2025-12-06">2025-12-06</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;clean architecture&quot;">
+  <a class="card-link" href="clean-architecture.html">
+    <div class="cover"><img src="images/clean-architecture/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Programming</span><span class="chip">Book Summary</span></div>
+      <h2>Tóm tắt sách &quot;Clean Architecture&quot;</h2>
+      <p class="subtitle">Dành cho: Junior muốn lên Mid, Mid muốn hiểu sâu, Senior muốn refresh, Vibe-coder muốn... đổi đời!</p>
+      <p class="date"><time datetime="2025-12-06">2025-12-06</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;the art of asking essential questions&quot;">
+  <a class="card-link" href="summary-the-art-of-asking.html">
+    <div class="cover"><img src="images/summary-the-art-of-asking/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Psychology</span></div>
+      <h2>Tóm tắt sách &quot;The Art of Asking Essential Questions&quot;</h2>
+      <p class="subtitle">Richard Paul, Linda Elder</p>
+      <p class="date"><time datetime="2025-12-06">2025-12-06</time></p>
+    </div>
+  </a>
+</article>
+<article class="card" data-title="tóm tắt sách &quot;tư duy nhanh và chậm&quot;">
+  <a class="card-link" href="summary-thinking-fast-slow.html">
+    <div class="cover"><img src="images/summary-thinking-fast-slow/01.webp" alt="" loading="lazy"></div>
+    <div class="body">
+      <div class="chips"><span class="chip">Book Summary</span><span class="chip">Psychology</span></div>
+      <h2>Tóm tắt sách &quot;Tư Duy Nhanh Và Chậm&quot;</h2>
+      <p class="subtitle">Tác giả Daniel Kahneman</p>
+      <p class="date"><time datetime="2025-12-06">2025-12-06</time></p>
+    </div>
+  </a>
+</article>
+      <p class="empty-state hidden" id="empty">Không có bài viết nào khớp.</p>
+    </div>
+  </main>
+
+  <footer class="site">
+    <p>Generated 73 posts &mdash; mirrored from <a href="https://codeai.zone/blog">codeai.zone/blog</a></p>
+  </footer>
+
+  <!-- Floating search popover (above the FAB stack) -->
+  <div class="search-pop" id="searchPop" role="search">
+    <input id="search" type="search" placeholder="Tìm theo tiêu đề..." aria-label="Search">
+    <p class="count" id="count">73 bài viết</p>
+  </div>
+
+  <!-- FAB stack: back-to-top on top, search underneath -->
+  <div class="fab-stack" aria-label="Actions">
+    <button class="fab hidden-fab" id="toTop" aria-label="Lên đầu trang" title="Lên đầu trang">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 15 12 9 18 15"></polyline></svg>
+    </button>
+    <button class="fab" id="toggleSearch" aria-label="Tìm kiếm" title="Tìm kiếm">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </button>
+  </div>
+
+  <script>
+    (function() {
+      const search = document.getElementById('search');
+      const cards = Array.from(document.querySelectorAll('.card'));
+      const empty = document.getElementById('empty');
+      const count = document.getElementById('count');
+      const total = cards.length;
+
+      function apply() {
+        const q = (search.value || '').trim().toLowerCase();
+        let visible = 0;
+        cards.forEach(c => {
+          const match = !q || c.dataset.title.includes(q);
+          c.classList.toggle('hidden', !match);
+          if (match) visible++;
+        });
+        empty.classList.toggle('hidden', visible > 0);
+        count.textContent = visible === total
+          ? total + ' bài viết'
+          : visible + ' / ' + total + ' bài viết';
+      }
+      search.addEventListener('input', apply);
+
+      // Back-to-top
+      const toTop = document.getElementById('toTop');
+      function onScroll() {
+        toTop.classList.toggle('hidden-fab', window.scrollY < 400);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      onScroll();
+
+      // Search popover toggle
+      const pop = document.getElementById('searchPop');
+      const toggle = document.getElementById('toggleSearch');
+      toggle.addEventListener('click', e => {
+        e.stopPropagation();
+        const open = pop.classList.toggle('open');
+        if (open) setTimeout(() => search.focus(), 50);
+      });
+      // Close when clicking outside
+      document.addEventListener('click', e => {
+        if (!pop.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+          pop.classList.remove('open');
+        }
+      });
+      // Esc closes popover
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') pop.classList.remove('open');
+      });
+    })();
+  </script>
+</body>
+</html>

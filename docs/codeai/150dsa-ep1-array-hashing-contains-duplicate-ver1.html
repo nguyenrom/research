@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phá đảo 150 DSA Tập 1 - Arrays & Hashing: Contains Duplicate — Code AI (mirror)</title>
+<meta name="description" content="Bắt đầu hành trình 150 bài DSA bằng một bài toán tưởng như "mẫu giáo" nhưng lại chứa đựng một kiến thức cực kỳ quyền lực: Hashing">
+<link href="css/about.DXnd9SXP.css" rel="stylesheet"/>
+<link as="font" crossorigin="anonymous" href="fonts/space-grotesk-vietnamese-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="fonts/space-grotesk-latin-400.woff2" rel="preload" type="font/woff2"/>
+
+<style>.vertical-gallery[data-astro-cid-uwa7taal]{max-width:100%}.gallery-item[data-astro-cid-uwa7taal] img[data-astro-cid-uwa7taal]{display:block;width:100%;height:auto;object-fit:contain}
+
+</style>
+<style>
+  body { background:#18181b; color:#f4f4f5; font-family: 'Space Grotesk', system-ui, sans-serif; max-width: 64rem; margin: 0 auto; padding: 2.5rem 1.5rem; min-height: 100vh; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid #27272a; }
+  .topbar a { color:#a1a1aa; text-decoration:none; font-size:.875rem; }
+  .topbar a:hover { color:#f4f4f5; }
+  .logo { font-size:1.5rem; font-weight:600; letter-spacing:-0.05em; }
+  .logo i { color:#52525b; font-style:italic; }
+  .meta-footer { margin-top:3rem; padding-top:1.5rem; border-top:1px solid #27272a; color:#71717a; font-size:.75rem; text-align:center; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html"><span class="logo">CODE<i>_AI_</i></span></a>
+  <a href="index.html">← Quay lại danh sách bài viết</a>
+</header>
+<main>
+<article class="container mx-auto px-4 py-16"> <div class="max-w-4xl mx-auto"> <!-- Back to Blog -->  <!-- Article Header --> <header class="max-w-2xl mx-auto mb-12"> <div class="flex items-center gap-3 text-sm mb-4 flex-wrap"> <span class="px-3 py-1 bg-zinc-700 text-zinc-300 rounded-full"> Data Structures </span><span class="px-3 py-1 bg-zinc-700 text-zinc-300 rounded-full"> Algorithms </span> <span class="text-zinc-500"> 12 tháng 4, 2026 </span> </div> <h1 class="text-4xl md:text-5xl font-bold text-zinc-100 mb-4"> Phá đảo 150 DSA Tập 1 - Arrays &amp; Hashing: Contains Duplicate </h1> <p class="text-xl text-zinc-400"> Bắt đầu hành trình 150 bài DSA bằng một bài toán tưởng như "mẫu giáo" nhưng lại chứa đựng một kiến thức cực kỳ quyền lực: Hashing </p> </header> <!-- Article Content (Markdown) --> <div class="prose prose-invert prose-lg max-w-2xl mx-auto mb-12"> <p>Bắt đầu hành trình 150 bài DSA bằng một bài toán tưởng như “mẫu giáo” nhưng lại chứa đựng một kiến thức cực kỳ quyền lực: Hashing. “Contains Duplicate” chỉ đơn giản yêu cầu bạn tìm xem có con số nào lặp lại trong một mảng hay không. Nếu theo tư duy tự nhiên nhất, chúng ta hay giải bằng Brute Force là đem từng số đi so sánh với tất cả các số còn lại, nhưng cách này thì thực sự quá chậm. Nhạy bén hơn một chút, chúng ta có thể sắp xếp (Sorting) mảng lại để các số giống nhau tự động chạy đến đứng cạnh nhau, giúp việc tìm kiếm nhanh hơn đáng kể. Tuy nhiên, “trùm cuối” cho bài toán này phải là HashSet. Nôm na là chúng ta chỉ cần dùng thêm một “cuốn sổ tay” bộ nhớ, cứ đi qua số nào thì ghi số đó vào sổ. Điểm kỳ diệu của HashSet là tốc độ kiểm tra xem một số đã có mặt trong sổ chưa gần như là tức thì. Bằng cách đánh đổi một chút không gian lưu trữ để nhận lại tốc độ duyệt O(n) thần tốc, đây chính là “vũ khí” cốt lõi mà bạn sẽ còn đem đi dùng lại rất nhiều lần trong các cuộc phỏng vấn thuật toán. Vuốt sang bên để xem từng cách giải này được mình mô phỏng chi tiết bằng hình ảnh cực cute nhé!</p> </div> <!-- Slides Viewer --> <div class="max-w-2xl mx-auto mb-12" id="slides"> <h2 class="text-2xl font-bold text-zinc-100 mb-6">Slides</h2> <div class="vertical-gallery space-y-4" data-astro-cid-uwa7taal=""> <div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 1" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/01.webp"/> </div> <div class="" data-draft="false" id="product-paywall"> <div class="my-4 rounded-2xl border border-zinc-700 bg-zinc-800/50 p-6 flex flex-col items-center gap-3"> <p class="text-zinc-400 text-sm">🔒 Bộ đầy đủ 36 slides · nhận PDF qua email</p> <button class="px-6 py-3 bg-zinc-100 text-zinc-900 font-bold rounded-full hover:bg-white transition-colors text-sm" id="btn-open-buy-modal">
+Xem đầy đủ — 50.000đ
+</button> </div> </div> <div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 2" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/02.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 3" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/03.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 4" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/04.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 5" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/05.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 6" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/06.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 7" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/07.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 8" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/150dsa-ep1-array-hashing-contains-duplicate-ver1/08.webp"/> </div> </div> </div> <dialog class="bg-zinc-900 border border-zinc-700 rounded-2xl p-0 w-full max-w-md m-auto shadow-2xl backdrop:bg-black/70 backdrop:backdrop-blur-sm" id="buy-modal"> <div class="p-6"> <!-- Header --> <div class="flex items-start justify-between mb-6"> <div> <h2 class="text-lg font-bold text-zinc-100">Phá đảo 150 DSA Tập 1 - Arrays &amp; Hashing: Contains Duplicate</h2> <p class="text-zinc-400 text-sm mt-0.5">50.000đ · PDF qua email</p> </div> <button aria-label="Đóng" class="text-zinc-500 hover:text-zinc-300 transition-colors ml-4 shrink-0" id="btn-close-modal"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"> <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path> </svg> </button> </div> <!-- Step 1: Email input --> <div id="step-email"> <p class="text-zinc-300 text-sm mb-4">Nhập email để nhận PDF sau khi thanh toán:</p> <input autocomplete="email" class="w-full px-4 py-3 bg-zinc-800 border border-zinc-600 rounded-xl text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-zinc-400 text-sm" id="email-input" placeholder="your@email.com" type="email"/> <p class="text-red-400 text-xs mt-2 hidden" id="email-error">Email không hợp lệ</p> <button class="w-full mt-4 py-3 bg-zinc-100 text-zinc-900 font-bold rounded-xl hover:bg-white transition-colors text-sm" id="btn-confirm-email">
+Tiếp tục →
+</button> </div> <!-- Step 2: Email confirmation --> <div class="hidden" id="step-confirm"> <p class="text-zinc-300 text-sm mb-4">PDF sẽ được gửi đến:</p> <div class="px-4 py-3 bg-zinc-800 rounded-xl border border-zinc-600 mb-6"> <span class="text-zinc-100 font-semibold text-sm" id="display-email"></span> </div> <p class="text-zinc-500 text-xs mb-6">
+Sau khi chuyển khoản thành công, PDF được gửi tự động trong vài phút.
+</p> <div class="flex gap-3"> <button class="flex-1 py-3 border border-zinc-600 text-zinc-300 font-medium rounded-xl hover:border-zinc-400 transition-colors text-sm" id="btn-back-to-email">
+← Sửa email
+</button> <button class="flex-1 py-3 bg-zinc-100 text-zinc-900 font-bold rounded-xl hover:bg-white transition-colors text-sm" id="btn-proceed-to-qr">
+Thanh toán
+</button> </div> <p class="text-red-400 text-xs mt-2 hidden text-center" id="proceed-error">Có lỗi xảy ra, vui lòng thử lại</p> </div> <!-- Step 3: QR Code --> <div class="hidden" id="step-qr"> <p class="text-zinc-300 text-sm mb-4 text-center">
+Chuyển khoản <span class="font-bold text-zinc-100">50.000đ</span> theo QR bên dưới:
+</p> <!-- QR Image --> <div class="flex justify-center mb-4"> <div class="bg-white p-3 rounded-xl"> <img alt="QR thanh toán VietQR" class="w-48 h-48 object-contain" height="192" id="qr-image" src="" width="192"/> </div> </div> <!-- Transfer note --> <div class="bg-zinc-800 rounded-xl px-4 py-3 mb-4 text-center"> <p class="text-zinc-500 text-xs mb-1">Nội dung chuyển khoản</p> <code class="text-zinc-100 font-mono font-bold text-sm" id="transfer-note"></code> </div> <p class="text-zinc-500 text-xs text-center mb-4">
+Mở app ngân hàng → quét QR → kiểm tra số tiền và nội dung → xác nhận
+</p> <!-- Waiting status --> <div class="flex items-center justify-center gap-2 text-zinc-400 text-xs" id="waiting-status"> <span class="inline-block w-2 h-2 bg-zinc-400 rounded-full animate-pulse"></span>
+Đang chờ xác nhận thanh toán...
+</div> <!-- Self-service resend hint (shown after 2 min) --> <p class="text-zinc-600 text-xs text-center mt-4 hidden" id="resend-hint">
+Đã chuyển khoản nhưng chưa nhận email?
+<button class="text-zinc-400 underline hover:text-zinc-200 transition-colors" id="btn-resend">
+Gửi lại PDF
+</button> </p> </div> <!-- Step 4: Payment success --> <div class="hidden text-center py-4" id="step-success"> <div class="text-4xl mb-4">✓</div> <h3 class="text-zinc-100 font-bold text-lg mb-2">Thanh toán thành công!</h3> <p class="text-zinc-400 text-sm">PDF đã được gửi vào email của bạn.<br/>Kiểm tra hộp thư (và mục Spam nếu không thấy).</p> </div> </div> </dialog> <script>(function(){const productSlug = "150dsa-ep1-array-hashing-contains-duplicate-ver1";
+const price = 50000;
+
+  function show(el) { el?.classList.remove('hidden'); }
+  function hide(el) { el?.classList.add('hidden'); }
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  // Wrap all DOM queries + event listener setup in astro:page-load so it re-runs
+  // correctly after every View Transition navigation (not just the first page load)
+  document.addEventListener('astro:page-load', () => {
+    const modal = /** @type {HTMLDialogElement} */ (document.getElementById('buy-modal'));
+    if (!modal) return; // not a product page, skip
+
+    const emailInput = /** @type {HTMLInputElement} */ (document.getElementById('email-input'));
+    const stepEmail = document.getElementById('step-email');
+    const stepConfirm = document.getElementById('step-confirm');
+    const stepQr = document.getElementById('step-qr');
+    const stepSuccess = document.getElementById('step-success');
+    const displayEmail = document.getElementById('display-email');
+    const emailError = document.getElementById('email-error');
+    const proceedError = document.getElementById('proceed-error');
+    const qrImage = /** @type {HTMLImageElement} */ (document.getElementById('qr-image'));
+    const transferNoteEl = document.getElementById('transfer-note');
+    const resendHint = document.getElementById('resend-hint');
+
+    // State scoped per page-load — reset automatically on each navigation
+    let currentEmail = '';
+    let currentOrderId = '';
+    let pollInterval = null;
+
+    function startPolling(orderId) {
+      pollInterval = setInterval(async () => {
+        try {
+          const res = await fetch(`/api/store/check-order?orderId=${orderId}`);
+          if (!res.ok) return;
+          const { status } = await res.json();
+          if (status === 'paid') {
+            clearInterval(pollInterval);
+            hide(stepQr); show(stepSuccess);
+          }
+        } catch { /* silent — retry next tick */ }
+      }, 5000);
+    }
+
+    // Stop polling when modal closes
+    modal.addEventListener('close', () => {
+      if (pollInterval) clearInterval(pollInterval);
+    });
+
+    // Reset to step 1 when modal opens (custom event dispatched by buy button)
+    modal.addEventListener('modal-open', () => {
+      show(stepEmail); hide(stepConfirm); hide(stepQr); hide(stepSuccess);
+      hide(emailError); hide(proceedError);
+      if (emailInput) emailInput.value = '';
+      if (pollInterval) { clearInterval(pollInterval); pollInterval = null; }
+    });
+
+    // Close modal
+    document.getElementById('btn-close-modal')?.addEventListener('click', () => modal.close());
+
+    // Close on backdrop click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.close();
+    });
+
+    // Step 1 → Step 2: validate email
+    document.getElementById('btn-confirm-email')?.addEventListener('click', () => {
+      const email = emailInput?.value.trim() ?? '';
+      if (!isValidEmail(email)) { show(emailError); return; }
+      hide(emailError);
+      currentEmail = email;
+      if (displayEmail) displayEmail.textContent = email;
+      hide(stepEmail); show(stepConfirm);
+    });
+
+    // Enter key on email input
+    emailInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('btn-confirm-email')?.click();
+    });
+
+    // Step 2 → Step 1: back
+    document.getElementById('btn-back-to-email')?.addEventListener('click', () => {
+      hide(stepConfirm); show(stepEmail);
+    });
+
+    // Step 2 → Step 3: create order + show QR
+    document.getElementById('btn-proceed-to-qr')?.addEventListener('click', async () => {
+      hide(proceedError);
+      const btn = /** @type {HTMLButtonElement} */ (document.getElementById('btn-proceed-to-qr'));
+      if (btn) { btn.disabled = true; btn.textContent = 'Đang xử lý...'; }
+      try {
+        const res = await fetch('/api/store/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: currentEmail, productSlug, price }),
+        });
+        if (!res.ok) throw new Error('Server error');
+        const { orderId, qrUrl, transferNote } = await res.json();
+        currentOrderId = orderId;
+        if (qrImage) qrImage.src = qrUrl;
+        if (transferNoteEl) transferNoteEl.textContent = transferNote;
+        hide(stepConfirm); show(stepQr);
+        startPolling(orderId);
+        setTimeout(() => show(resendHint), 2 * 60 * 1000);
+      } catch {
+        show(proceedError);
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = 'Thanh toán'; }
+      }
+    });
+
+    // Self-service resend
+    document.getElementById('btn-resend')?.addEventListener('click', async () => {
+      if (!currentOrderId || !currentEmail) return;
+      const btn = /** @type {HTMLButtonElement} */ (document.getElementById('btn-resend'));
+      if (btn) btn.textContent = 'Đang gửi...';
+      try {
+        await fetch('/api/store/resend-pdf', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: currentOrderId, email: currentEmail }),
+        });
+        if (btn) btn.textContent = 'Đã gửi!';
+      } catch {
+        if (btn) btn.textContent = 'Lỗi, thử lại sau';
+      }
+    });
+  });
+})();</script> <!-- Newsletter Full - Prominent for conversion --> <div class="max-w-2xl mx-auto mb-12"> <section class="bg-zinc-800/50 rounded-lg p-8 md:p-12 border border-zinc-700"> <div class="max-w-2xl mx-auto"> <h2 class="text-2xl md:text-3xl font-bold text-zinc-100 mb-6 text-center"> Bạn muốn đọc về chủ đề nào tiếp theo? </h2>  </div> </section> <script type="module">document.addEventListener("astro:page-load",()=>{const s=document.getElementById("newsletter-form");if(!s)return;const n=document.getElementById("newsletter-message"),e=n?.querySelector("p"),a=document.getElementById("submit-btn");s.addEventListener("submit",async i=>{i.preventDefault();const r=new FormData(s),c=r.get("email"),d=r.get("message");a.disabled=!0,a.textContent="Đang gửi...";try{const t=await fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:c,message:d||""})}),o=await t.json();if(t.ok)e.textContent=o.message||"Cảm ơn! Tôi đã nhận được yêu cầu của bạn.",n.classList.remove("hidden"),e.classList.remove("text-red-400"),e.classList.add("text-green-400"),s.reset(),setTimeout(()=>{n.classList.add("hidden")},5e3);else throw new Error(o.error||"Có lỗi xảy ra")}catch(t){e.textContent=t instanceof Error?t.message:"Không thể gửi yêu cầu. Vui lòng thử lại.",n.classList.remove("hidden"),e.classList.remove("text-green-400"),e.classList.add("text-red-400")}finally{a.disabled=!1,a.textContent="Gửi yêu cầu"}})});</script> </div> <!-- Back to Blog Footer --> <div class="pt-8 border-t border-zinc-800">  </div> </div> </article>
+</main>
+<footer class="meta-footer">
+  <p>Bản lưu trữ local của <a href="https://codeai.zone/blog/150dsa-ep1-array-hashing-contains-duplicate-ver1" style="color:#a1a1aa">https://codeai.zone/blog/150dsa-ep1-array-hashing-contains-duplicate-ver1</a></p>
+  <p>© Code AI — mirrored for offline reading</p>
+</footer>
+</body>
+</html>

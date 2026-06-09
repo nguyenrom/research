@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hành trình 14 ngày tạo nên Code AI Blog — Code AI (mirror)</title>
+<meta name="description" content="Những gì tôi đã trải qua">
+<link href="css/about.DXnd9SXP.css" rel="stylesheet"/>
+<link as="font" crossorigin="anonymous" href="fonts/space-grotesk-vietnamese-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="anonymous" href="fonts/space-grotesk-latin-400.woff2" rel="preload" type="font/woff2"/>
+
+<style>.vertical-gallery[data-astro-cid-uwa7taal]{max-width:100%}.gallery-item[data-astro-cid-uwa7taal] img[data-astro-cid-uwa7taal]{display:block;width:100%;height:auto;object-fit:contain}
+
+</style>
+<style>
+  body { background:#18181b; color:#f4f4f5; font-family: 'Space Grotesk', system-ui, sans-serif; max-width: 64rem; margin: 0 auto; padding: 2.5rem 1.5rem; min-height: 100vh; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid #27272a; }
+  .topbar a { color:#a1a1aa; text-decoration:none; font-size:.875rem; }
+  .topbar a:hover { color:#f4f4f5; }
+  .logo { font-size:1.5rem; font-weight:600; letter-spacing:-0.05em; }
+  .logo i { color:#52525b; font-style:italic; }
+  .meta-footer { margin-top:3rem; padding-top:1.5rem; border-top:1px solid #27272a; color:#71717a; font-size:.75rem; text-align:center; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html"><span class="logo">CODE<i>_AI_</i></span></a>
+  <a href="index.html">← Quay lại danh sách bài viết</a>
+</header>
+<main>
+<article class="container mx-auto px-4 py-16"> <div class="max-w-4xl mx-auto"> <!-- Back to Blog -->  <!-- Article Header --> <header class="max-w-2xl mx-auto mb-12"> <div class="flex items-center gap-3 text-sm mb-4 flex-wrap"> <span class="px-3 py-1 bg-zinc-700 text-zinc-300 rounded-full"> Programming </span><span class="px-3 py-1 bg-zinc-700 text-zinc-300 rounded-full"> Vibe Coding </span> <span class="text-zinc-500"> 31 tháng 12, 2025 </span> </div> <h1 class="text-4xl md:text-5xl font-bold text-zinc-100 mb-4"> Hành trình 14 ngày tạo nên Code AI Blog </h1> <p class="text-xl text-zinc-400"> Những gì tôi đã trải qua </p> </header> <!-- Article Content (Markdown) --> <div class="prose prose-invert prose-lg max-w-2xl mx-auto mb-12"> <h1 id="kể-chuyện-vibe---14-ngày-xây-dựng-một-blog">KỂ CHUYỆN VIBE - 14 Ngày Xây Dựng Một Blog</h1>
+<hr/>
+<h2 id="day-1">Day 1</h2>
+<p>Bữa tự nhiên không ngủ được.</p>
+<p>Một ý tưởng cứ văng vào đầu: <strong>Tự học code …vui vl</strong></p>
+<p>Không có đồng đội ngoài ông nội Claude Code và mấy video YouTube 😅</p>
+<p>Vậy là tôi quyết định xây một trang web nhỏ (thực ra chỉ là blog cá nhân đơn giản). Chỉ để kể: các bạn đồng <strong>VIBE</strong> không cô đơn.</p>
+<p><strong>Coming soon…</strong></p>
+<hr/>
+<h2 id="day-2---đang-nghiên-cứu-tech-stack">Day 2 - Đang nghiên cứu tech stack…</h2>
+<p>Tự học thì nói chung phải chấp nhận cái việc lộn xộn thôi, nhưng mà tôi thích, không bị thúc ép hay phải đạt được chứng nhận. Nếu kiến thức giải quyết được nhu cầu công việc hay cá nhân lại càng hay.</p>
+<p>Như thời ChatGPT mới ra, tôi cũng hay nhờ nó code mấy cái Apps Script để quản lý file nhạc công ty trên Google Drive.</p>
+<p>Ngồi ghi 100 cái ghi chú rồi canvas ý tưởng này nọ trong Obsidian. Thêm đống bookmark trong điện thoại.</p>
+<p>Do cũng hay đọc Substack của mấy cao thủ <strong>BUILDER</strong>, nên tôi chợt nghĩ đến blog cá nhân. Chà, cái này thì được, để lưu trữ những gì tôi đã viết trên Facebook cũi hay hay.</p>
+<p>Vậy thì… tự build một cái.</p>
+<hr/>
+<h2 id="day-3---chọn-tech-stack-hết-nửa-ngày">Day 3 - Chọn tech stack hết nửa ngày</h2>
+<p>Không phải vì khó - mà vì thích nghiên cứu.</p>
+<p>Tôi chọn <strong>Astro</strong> vì nó không tải mấy cái JavaScript thừa thải.</p>
+<p>Blog thì cần gì đâu ngoài cái việc người dùng cần đọc cho nhanh thôi. Astro làm đúng cái chuyện này.</p>
+<h3 id="tech-stack">Tech Stack</h3>
+<ul>
+<li>
+<p><strong>Astro</strong> - SSG (nhanh)</p>
+</li>
+<li>
+<p><strong>Tailwind v4</strong> - nền tối</p>
+</li>
+<li>
+<p><strong>TypeScript</strong> - strict mode</p>
+</li>
+</ul>
+<h3 id="tại-sao-tôi-không-dùng-wordpress">Tại sao tôi không dùng WordPress?</h3>
+<p>Vì tôi là <strong>VIBE-CODER</strong>. Phải tự build nó mới…chất.</p>
+<p><strong>Day 3:</strong> Setup xong rồi. Đêm nay code.</p>
+<hr/>
+<h2 id="day-4">Day 4</h2>
+<p>Tối qua tôi ngồi <strong>VIBE</strong> đến 2h sáng.</p>
+<p>Cuối cùng cái Dev server nó cũng chạy. Tạm thời demo trước phần About thôi.</p>
+<p>Chỉ biết là… nền tối cho dễ coi, font chữ tối giản.</p>
+<p>Steve Krug nói: <em>“lướt web chứ không phải học toán, đừng bắt người phải suy nghĩ”</em></p>
+<p>→ <strong>Đơn giản = đẹp.</strong></p>
+<p><strong>Day 4:</strong> Đang làm trang Home dang dở. Tiếp tục cày cuốc.</p>
+<hr/>
+<h2 id="day-5---nâng-cấp-feature-đầu-tiên-chức-năng-search">Day 5 - Nâng cấp Feature đầu tiên: chức năng SEARCH</h2>
+<p>Ủa sao nghe đơn giản vậy, nhưng mà thử nghĩ nha.</p>
+<p>Nếu có từ năm chục bài viết trên blog trở lên, và muốn tìm lại một cái bài về “Bloom’s Taxonomy” hồi trước. Xài Ctrl+F à? Không có đủ đâu.</p>
+<p>Nên trao đổi một hồi với mấy ông trong series Saas Team, tôi quyết định chọn <strong>Pagefind</strong></p>
+<ul>
+<li>
+<p>Nó tự quét hết nội dung lúc build</p>
+</li>
+<li>
+<p>Khi bạn gõ tìm kiếm, nó chạy ngay trên trình duyệt</p>
+</li>
+<li>
+<p>Không gọi server, không chờ đợi</p>
+</li>
+<li>
+<p>Gõ tới đâu, kết quả hiện tới đó</p>
+</li>
+</ul>
+<p><strong>Day 5:</strong> Test xong phát. Gõ search thử chạy nhanh rẹt rẹt ta nói nó sướng gì đâu.</p>
+<hr/>
+<h2 id="day-6---test-thử-tốc-độ-tải-trang">Day 6 - Test thử tốc độ tải trang</h2>
+<p><strong>Kết quả:</strong></p>
+<ul>
+<li>
+<p>Tạo xong 14 trang trong 2 giây</p>
+</li>
+<li>
+<p>Google chấm điểm hiệu năng: <strong>95/100</strong></p>
+</li>
+<li>
+<p>Mở trang trên điện thoại: dưới 2 giây</p>
+</li>
+</ul>
+<p><strong>Tại sao phải ưu tiên cái này?</strong></p>
+<p>Anh Google dùng thang điểm này để xếp hạng tìm kiếm trang web. Trang chậm, Google đẩy xuống, ít ai thấy.</p>
+<p>Nghiên cứu chỉ ra: nếu quá 3 giây, <strong>53% người dùng sẽ thoát trang</strong> (hoặc app). Cứ nhớ mấy cái quảng cáo tự nhiên hiện lên khi lướt phở bò là hiểu.</p>
+<p>Não người ghét chờ đợi. Đặc biệt trên điện thoại, mạng 4G chập chờn.</p>
+<p>Tôi muốn tối ưu từ đầu vì không thích việc bug chồng bug. Để sau mới sửa, phải bới cả đống ra. Làm đúng từ đầu thì ngủ ngon. Mấy ông real-coder hay gọi cái này là <em>over-engineering</em>, haha</p>
+<p><strong>Day 6:</strong> Nhanh rồi. Giờ yên tâm đi ngủ, tranh thủ lướt trang của mình trên điện thoại xíu…</p>
+<hr/>
+<h2 id="day-7---gặp-con-bug-đầu-tiên">Day 7 - Gặp con bug đầu tiên</h2>
+<p>Nay bị dính một lỗi là ảnh thumbnail không hiện.</p>
+<p>Ngồi tìm nguyên nhân mất bà nó 30 phút.</p>
+<p>Sửa xong.</p>
+<p>Nhưng không quan trọng sửa cái gì. <strong>Quan trọng là bạn phải ghi lại.</strong></p>
+<p>Hoặc yêu cầu Claude Code viết vào file Troubleshooting_Tips.md. Mẹo này trong một bài tôi cũng đã từng nói.</p>
+<p>Dân code có một tình huống kinh điển:</p>
+<blockquote>
+<p>“Tao hôm nay nhìn code hiểu rõ ràng, hai tuần sau đọc lại như của thằng nào viết.”</p>
+</blockquote>
+<p><strong>Não người không đáng tin như mình tưởng.</strong></p>
+<p>Ghi lại một phút, tiết kiệm một tiếng sau này.</p>
+<p><strong>Day 7:</strong> Một lỗi xong. Còn chín mươi chín lỗi nữa.</p>
+<hr/>
+<h2 id="day-8">Day 8</h2>
+<p>Một tuần rồi. 7 ngày code.</p>
+<p>Có một thứ tôi nhận ra:</p>
+<p><strong>Tự học code giống tập đàn guitar.</strong></p>
+<ul>
+<li>
+<p>Ngày đầu bấm hợp âm, đau tay, muốn bỏ</p>
+</li>
+<li>
+<p>Tuần đầu code, đọc lỗi đỏ lòm, muốn đập máy</p>
+</li>
+<li>
+<p>Nhưng rồi một ngày, ngón tay tự biết chỗ</p>
+</li>
+<li>
+<p>Một ngày, đọc lỗi mà hiểu nó đang nói gì</p>
+</li>
+</ul>
+<p>Không có đường tắt.</p>
+<p>Chỉ có ngồi xuống, làm tiếp.</p>
+<p><strong>Day 8:</strong> Còn 6 ngày nữa</p>
+<hr/>
+<h2 id="day-9">Day 9</h2>
+<p><strong>2010:</strong> Bắt đầu học nhạc viện và chơi guitar.</p>
+<p><strong>2020:</strong> Vì lý do cá nhân, tôi nghỉ chơi nhạc và chuyển sang làm music producer.</p>
+<p><strong>2022:</strong> ChatGPT ra đời. Bắt đầu nhờ AI nó viết mấy script chạy trên Google Apps để quản lý file nhạc cho khách hàng cũng như cho doanh nghiệp tôi đang làm việc.</p>
+<p><strong>2025:</strong> Tự build automation cho công ty bằng n8n.</p>
+<p>Bốn lần thay đổi trong 10 năm.</p>
+<p>Mỗi lần đều sợ.</p>
+<p>Mỗi lần đều không biết có làm được không.</p>
+<p>Nhưng <strong>thay đổi thì vẫn sống.</strong></p>
+<p>Đứng yên mới mệt.</p>
+<hr/>
+<h2 id="day-10">Day 10</h2>
+<p>Hôm nay làm một việc nhỏ cho Blog nhưng lại có tác động lớn đến người dùng: <strong>đổi định dạng ảnh.</strong></p>
+<ul>
+<li>
+<p>Ảnh cũ: <strong>PNG</strong> → 1.2MB</p>
+</li>
+<li>
+<p>Ảnh mới: <strong>WebP</strong> → 350KB</p>
+</li>
+</ul>
+<p>Dung lượng giảm <strong>70%</strong>.</p>
+<h3 id="png-vs-webp">PNG vs WebP</h3>
+<p><strong>PNG</strong> thì ai cũng biết, ra đời từ 1996. Giữ nguyên chất lượng, nhưng nặng.</p>
+<p><strong>WebP</strong> thì Google mới tạo ra năm 2010. Nén thông minh hơn, nhẹ hơn, mà mắt nhìn không khác mấy.</p>
+<h3 id="tại-sao-phải-tối-ưu">Tại sao phải tối ưu?</h3>
+<ul>
+<li>
+<p>Một bài có 5 ảnh PNG = 6MB</p>
+</li>
+<li>
+<p>Mạng 4G chập chờn = chờ cả chục giây</p>
+</li>
+<li>
+<p>Đổi sang WebP = dưới 2 giây</p>
+</li>
+</ul>
+<p><strong>Người đọc không biết bạn làm gì, họ không cần biết, không quan tâm.</strong></p>
+<p>Họ chỉ thấy: mở nhanh thì đọc, chậm thì tắt.</p>
+<p><strong>Day 10:</strong> Còn 4 ngày nữa.</p>
+<hr/>
+<h2 id="day-11---còn-96-giờ-nữa">Day 11 - Còn 96 giờ nữa</h2>
+<p>Nói thật lòng là blog này tôi làm cho bản thân trước.</p>
+<p>Viết trên phở bò thì bài hay bài dở là do…duyên số.</p>
+<p>Viết trên đất anh đầu xoăn, luật chơi là do ảnh đặt.</p>
+<p><strong>Blog là nhà của mình.</strong></p>
+<ul>
+<li>
+<p>Bài mình viết, mình giữ</p>
+</li>
+<li>
+<p>Không ai giấu, không ai xóa</p>
+</li>
+<li>
+<p>Có người đọc thì vui</p>
+</li>
+<li>
+<p>Không có cũng không sao</p>
+</li>
+</ul>
+<p>Một năm nữa tôi có thể quên hết mình học được gì, <strong>blog vẫn còn</strong>.</p>
+<p>Ai đó đang mò cách build Astro, tình cờ đọc được, đỡ mất 30 phút.</p>
+<p>Vì mục đích đầu tiên là: <strong>ghi lại cho mình.</strong></p>
+<p><strong>Day 11:</strong> Còn 4 ngày nữa. Mà công nhận viết About page khó thiệt chứ, vì bạn không thể chỉ có <strong>VIBE</strong>, mà phải viết câu chuyện thật từ bản thân.</p>
+<hr/>
+<h2 id="day-12">Day 12</h2>
+<p>48 giờ nữa.</p>
+<p>12 ngày.</p>
+<p>4 tính năng chính cho một cái blog đơn giản.</p>
+<p>Không một thứ thừa thải.</p>
+<p>Tất cả trong một.</p>
+<p><strong>Day 12:</strong> Xong 95% rồi. Còn mỗi nút bấm cuối cùng.</p>
+<hr/>
+<h2 id="day-13">Day 13</h2>
+<p>Ngày mai 9h sáng, link mình sẽ để trên trang.</p>
+<p>Cảm ơn các bạn đã theo dõi Code AI.</p>
+<p><strong>Hẹn gặp lại ngày mai</strong></p>
+<hr/>
+<h2 id="day-14">Day 14</h2>
+<p>14 ngày.</p>
+<p>1 blog.</p>
+<p><strong>Xong.</strong></p>
+<p>Chỗ ghi lại những gì mình học.</p>
+<ul>
+<li>
+<p>Có người đọc thì vui</p>
+</li>
+<li>
+<p>Không có cũng không sao</p>
+</li>
+</ul>
+<p><strong>codeai.zone</strong></p>
+<p><strong>Day 14:</strong> Cầm vé vào cổng thôi. Cảm ơn các bạn đã theo dõi hành trình!</p> </div> <!-- Slides Viewer --> <div class="max-w-2xl mx-auto mb-12" id="slides"> <h2 class="text-2xl font-bold text-zinc-100 mb-6">Slides</h2> <div class="vertical-gallery space-y-4" data-astro-cid-uwa7taal=""> <div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 1" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/code-ai-campaign/01.webp"/> </div> <div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 2" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/code-ai-campaign/02.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 3" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/code-ai-campaign/03.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 4" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/code-ai-campaign/04.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 5" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="eager" src="images/code-ai-campaign/05.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 6" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/06.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 7" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/07.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 8" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/08.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 9" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/09.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 10" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/10.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 11" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/11.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 12" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/12.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 13" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/13.webp"/> </div><div class="gallery-item" data-astro-cid-uwa7taal=""> <img alt="Slide 14" class="w-full h-auto rounded-lg" data-astro-cid-uwa7taal="" loading="lazy" src="images/code-ai-campaign/14.webp"/> </div> </div> </div> <!-- Newsletter Full - Prominent for conversion --> <div class="max-w-2xl mx-auto mb-12"> <section class="bg-zinc-800/50 rounded-lg p-8 md:p-12 border border-zinc-700"> <div class="max-w-2xl mx-auto"> <h2 class="text-2xl md:text-3xl font-bold text-zinc-100 mb-6 text-center"> Bạn muốn đọc về chủ đề nào tiếp theo? </h2>  </div> </section> <script type="module">document.addEventListener("astro:page-load",()=>{const s=document.getElementById("newsletter-form");if(!s)return;const n=document.getElementById("newsletter-message"),e=n?.querySelector("p"),a=document.getElementById("submit-btn");s.addEventListener("submit",async i=>{i.preventDefault();const r=new FormData(s),c=r.get("email"),d=r.get("message");a.disabled=!0,a.textContent="Đang gửi...";try{const t=await fetch("/api/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:c,message:d||""})}),o=await t.json();if(t.ok)e.textContent=o.message||"Cảm ơn! Tôi đã nhận được yêu cầu của bạn.",n.classList.remove("hidden"),e.classList.remove("text-red-400"),e.classList.add("text-green-400"),s.reset(),setTimeout(()=>{n.classList.add("hidden")},5e3);else throw new Error(o.error||"Có lỗi xảy ra")}catch(t){e.textContent=t instanceof Error?t.message:"Không thể gửi yêu cầu. Vui lòng thử lại.",n.classList.remove("hidden"),e.classList.remove("text-green-400"),e.classList.add("text-red-400")}finally{a.disabled=!1,a.textContent="Gửi yêu cầu"}})});</script> </div> <!-- Back to Blog Footer --> <div class="pt-8 border-t border-zinc-800">  </div> </div> </article>
+</main>
+<footer class="meta-footer">
+  <p>Bản lưu trữ local của <a href="https://codeai.zone/blog/code-ai-campaign" style="color:#a1a1aa">https://codeai.zone/blog/code-ai-campaign</a></p>
+  <p>© Code AI — mirrored for offline reading</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,834 @@
+[
+  {
+    "slug": "150dsa-ep1-array-hashing-contains-duplicate-ver1",
+    "title": "Phá đảo 150 DSA Tập 1 - Arrays & Hashing: Contains Duplicate",
+    "date": "2026-04-12",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Bắt đầu hành trình 150 bài DSA bằng một bài toán tưởng như \"mẫu giáo\" nhưng lại chứa đựng một kiến thức cực kỳ quyền lực: Hashing",
+    "cover": "images/150dsa-ep1-array-hashing-contains-duplicate-ver1/01.webp"
+  },
+  {
+    "slug": "summary-atomic-habits",
+    "title": "Tóm tắt sách \"Atomic Habits - Thói Quen Nguyên Tử\"",
+    "date": "2026-03-14",
+    "categories": [
+      "Book Summary",
+      "Knowledge"
+    ],
+    "subtitle": "Câu hỏi thú vị nhất trong Atomic Habits không phải \"làm sao xây thói quen tốt\", mà là \"tại sao người có ý chí mạnh lại không cần dùng đến ý chí?\"",
+    "cover": "images/summary-atomic-habits/01.webp"
+  },
+  {
+    "slug": "summary-elon-musk-the-quest",
+    "title": "Tóm tắt sách \"Elon Musk: Tesla, SpaceX và sứ mệnh...\"",
+    "date": "2026-03-13",
+    "categories": [
+      "Book Summary",
+      "Technical"
+    ],
+    "subtitle": "Đêm 23 tháng 12 năm 2008, khi cả thế giới đang chuẩn bị đón Giáng sinh, Elon Musk đang đếm từng giờ trước khi Tesla tuyên bố phá sản.",
+    "cover": "images/summary-elon-musk-the-quest/01.webp"
+  },
+  {
+    "slug": "grand-slam-offer",
+    "title": "GRAND SLAM OFFER - Tóm tắt từ \"$100M Offers\"",
+    "date": "2026-03-11",
+    "categories": [
+      "Startup",
+      "Business",
+      "Sales"
+    ],
+    "subtitle": "Bạn có bao giờ tự hỏi: tại sao cùng một sản phẩm, có người bán giá gấp 10 lần mà khách vẫn xếp hàng?",
+    "cover": "images/grand-slam-offer/01.webp"
+  },
+  {
+    "slug": "dsa-ep11-data-structures-linear-node-circular-linked-list",
+    "title": "Data Structures & Algorithms - Tập 11: Circular Linked List",
+    "date": "2026-03-10",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Doubly Linked List thêm một sợi dây nữa: mỗi Node giờ nhớ cả quá khứ lẫn tương lai",
+    "cover": "images/dsa-ep11-data-structures-linear-node-circular-linked-list/01.webp"
+  },
+  {
+    "slug": "dsa-ep10-data-structures-linear-node-doubly-linked-list",
+    "title": "Data Structures & Algorithms - Tập 10: Doubly Linked List",
+    "date": "2026-03-06",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Doubly Linked List thêm một sợi dây nữa: mỗi Node giờ nhớ cả quá khứ lẫn tương lai",
+    "cover": "images/dsa-ep10-data-structures-linear-node-doubly-linked-list/01.webp"
+  },
+  {
+    "slug": "dsa-ep9-data-structures-linear-node-singly-linked-list",
+    "title": "Data Structures & Algorithms - Tập 9: Singly Linked List",
+    "date": "2026-03-03",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Singly Linked List — một cấu trúc dữ liệu mà các phần tử không nằm cạnh nhau trong bộ nhớ.",
+    "cover": "images/dsa-ep9-data-structures-linear-node-singly-linked-list/01.webp"
+  },
+  {
+    "slug": "summary-hard-thing-hard-things",
+    "title": "Tóm tắt sách \"The Hard Thing About Hard Things\"",
+    "date": "2026-03-02",
+    "categories": [
+      "Business",
+      "Startup",
+      "SaaS"
+    ],
+    "subtitle": "Nếu bạn là người mới vào nghề data analyst hoặc đã đi làm một thời gian nhưng vẫn cảm thấy mình đang thiếu một mảnh ghép nào đó giữa kỹ năng kỹ thuật và khả năng deliver giá trị thật sự, thì đây là cuốn sách đáng đọc.",
+    "cover": "images/summary-hard-thing-hard-things/01.webp"
+  },
+  {
+    "slug": "summary-effective-data-analysis",
+    "title": "Tóm tắt sách \"Effective Data Analysis\"",
+    "date": "2026-02-28",
+    "categories": [
+      "Data Analyst",
+      "Data Science",
+      "Book Summary"
+    ],
+    "subtitle": "Nếu bạn là người mới vào nghề data analyst hoặc đã đi làm một thời gian nhưng vẫn cảm thấy mình đang thiếu một mảnh ghép nào đó giữa kỹ năng kỹ thuật và khả năng deliver giá trị thật sự, thì đây là cuốn sách đáng đọc.",
+    "cover": "images/summary-effective-data-analysis/01.webp"
+  },
+  {
+    "slug": "reverse-engineering",
+    "title": "Reverse Engineering là gì?",
+    "date": "2026-02-27",
+    "categories": [
+      "Technical",
+      "Knowledge"
+    ],
+    "subtitle": "Reverse Engineering là quá trình tìm ra các nguyên lý kỹ thuật của một phần mềm ứng dụng hay thiết bị cơ khí",
+    "cover": "images/reverse-engineering/01.webp"
+  },
+  {
+    "slug": "anthropic-agentic-coding-trends-report-2026",
+    "title": "Báo cáo xu hướng Agentic Coding năm 2026 từ Anthropic",
+    "date": "2026-02-25",
+    "categories": [
+      "AI Agents",
+      "Productivity"
+    ],
+    "subtitle": "Mô tả ngắn gọn về nội dung bài viết (1-2 câu)",
+    "cover": "images/anthropic-agentic-coding-trends-report-2026/01.webp"
+  },
+  {
+    "slug": "summary-introduction-to-machine-learning",
+    "title": "Giới thiệu về Machine Learning",
+    "date": "2026-02-25",
+    "categories": [
+      "AI",
+      "Machine Learning",
+      "Book Summary"
+    ],
+    "subtitle": "Laurent Younes",
+    "cover": "images/summary-introduction-to-machine-learning/01.webp"
+  },
+  {
+    "slug": "dsa-ep8-data-structures-linear-array-circular-buffer",
+    "title": "Data Structures & Algorithms - Tập 8: Circular Buffer",
+    "date": "2026-02-24",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Tưởng tượng hình ảnh một bàn xoay sushi. Đầu bếp đặt đĩa mới lên, khách lấy đĩa cũ đi, băng chuyền không bao giờ dừng. Đó là Circular Buffer.",
+    "cover": "images/dsa-ep8-data-structures-linear-array-circular-buffer/01.webp"
+  },
+  {
+    "slug": "summary-the-design-everyday",
+    "title": "Tóm tắt sách \"The Design of Everyday Things\"",
+    "date": "2026-02-22",
+    "categories": [
+      "Book Summary",
+      "Design",
+      "UX",
+      "UI"
+    ],
+    "subtitle": "Một quyển sách về thiết kế trải nghiệm người dùng (UX) được viết từ những năm 8",
+    "cover": "images/summary-the-design-everyday/01.webp"
+  },
+  {
+    "slug": "summary-the-embedded-entrepreneur",
+    "title": "Tóm tắt sách \"THE EMBEDDED ENTREPRENEUR\"",
+    "date": "2026-02-22",
+    "categories": [
+      "Book Summary",
+      "Productivity",
+      "SaaS",
+      "Software Development"
+    ],
+    "subtitle": "Nghĩ ra ý tưởng, lao vào code, xây xong rồi mới đi tìm người mua. Kết quả là ngồi nhìn sản phẩm phủ bụi, tự hỏi tại sao không ai quan tâm?",
+    "cover": "images/summary-the-embedded-entrepreneur/01.webp"
+  },
+  {
+    "slug": "summary-thinking-in-system",
+    "title": "Tóm tắt sách \"Thinking in System\"",
+    "date": "2026-02-20",
+    "categories": [
+      "Book Summary",
+      "Productivity",
+      "Learning Method",
+      "Psychology"
+    ],
+    "subtitle": "Tác giả Donella Meadows",
+    "cover": "images/summary-thinking-in-system/01.webp"
+  },
+  {
+    "slug": "dsa-ep7-data-structures-linear-array-matrix-2d-array",
+    "title": "Data Structures & Algorithms - Tập 7: Matrix & 2D Array",
+    "date": "2026-02-19",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Ma trận, hay mảng hai chiều, không chỉ là một khái niệm toán học khô khan mà là cách máy tính nhìn nhận và tổ chức thực tại, từ những điểm ảnh RGB đến những bản đồ game rộng lớn.",
+    "cover": "images/dsa-ep7-data-structures-linear-array-matrix-2d-array/01.webp"
+  },
+  {
+    "slug": "summary-inspired-marty-cagan",
+    "title": "Tóm tắt sách \"INSPIRED\" của tác giả Marty Cagan",
+    "date": "2026-02-15",
+    "categories": [
+      "Book Summary",
+      "SaaS",
+      "Software Development"
+    ],
+    "subtitle": "Làm thế nào để tạo ra những sản phẩm công nghệ khiến khách hàng yêu mến?",
+    "cover": "images/summary-inspired-marty-cagan/01.webp"
+  },
+  {
+    "slug": "curse-of-knowledge",
+    "title": "Lời Nguyền Tri Thức (Curse of Knowledge)",
+    "date": "2026-02-14",
+    "categories": [
+      "Psychology",
+      "Learning Method"
+    ],
+    "subtitle": "một khi bạn đã BIẾT một điều gì đó, bộ não của bạn sẽ tự động \"xóa sạch\" ký ức về việc \"không biết\" nó là như thế nào",
+    "cover": "images/curse-of-knowledge/01.webp"
+  },
+  {
+    "slug": "python-object-oriented-programming",
+    "title": "Lập trình hướng đối tượng (OOP)",
+    "date": "2026-02-13",
+    "categories": [
+      "Programming",
+      "Python"
+    ],
+    "subtitle": "Một phương pháp tổ chức mã nguồn bằng cách mô phỏng các thực thể trong thế giới thực vào ngôn ngữ lập trình",
+    "cover": "images/python-object-oriented-programming/01.webp"
+  },
+  {
+    "slug": "dsa-ep6-data-structures-linear-array-dynamic-array",
+    "title": "Data Structures & Algorithms - Tập 6: Dynamic Array",
+    "date": "2026-02-12",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "String không chỉ là kỹ thuật khô khan, nó là cách chúng ta dịch chuyển văn hóa loài người vào máy tính.",
+    "cover": "images/dsa-ep6-data-structures-linear-array-dynamic-array/01.webp"
+  },
+  {
+    "slug": "dsa-ep5-data-structures-linear-array-string",
+    "title": "Data Structures & Algorithms - Tập 5: String",
+    "date": "2026-02-11",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "String không chỉ là kỹ thuật khô khan, nó là cách chúng ta dịch chuyển văn hóa loài người vào máy tính.",
+    "cover": "images/dsa-ep5-data-structures-linear-array-string/01.webp"
+  },
+  {
+    "slug": "dsa-ep4-data-structures-linear-array-array",
+    "title": "Data Structures & Algorithms - Tập 4: Array",
+    "date": "2026-02-10",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Array giống như một dãy tủ locker trong trường học hay những hàng ghế liên tiếp trong rạp chiếu phim.",
+    "cover": "images/dsa-ep4-data-structures-linear-array-array/01.webp"
+  },
+  {
+    "slug": "dsa-ep3-complex-analyze-space-complex",
+    "title": "Data Structures & Algorithms - Tập 3: Space Complexity",
+    "date": "2026-02-09",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Độ phức tạp không gian không phải là kích thước tệp code của bạn hay dung lượng file trên ổ cứng.",
+    "cover": "images/dsa-ep3-complex-analyze-space-complex/01.webp"
+  },
+  {
+    "slug": "dsa-ep1-complex-analyze-big-o-notation",
+    "title": "Data Structures & Algorithms - Tập 1: Big O Notation",
+    "date": "2026-02-06",
+    "categories": [
+      "Computer Science",
+      "Comic",
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Thước đo cho sự tăng trưởng của Code",
+    "cover": "images/dsa-ep1-complex-analyze-big-o-notation/01.webp"
+  },
+  {
+    "slug": "dsa-ep2-complex-analyze-time-complex",
+    "title": "Data Structures & Algorithms - Tập 2: Time Complexity",
+    "date": "2026-02-06",
+    "categories": [
+      "Data Structures",
+      "Algorithms"
+    ],
+    "subtitle": "Mô tả ngắn gọn về nội dung bài viết (1-2 câu)",
+    "cover": "images/dsa-ep2-complex-analyze-time-complex/01.webp"
+  },
+  {
+    "slug": "saas-ep6-code-review",
+    "title": "VIBE CODERS | Software Development & SaaS Tập 6",
+    "date": "2026-02-06",
+    "categories": [
+      "SaaS",
+      "Software Development"
+    ],
+    "subtitle": "Không khí trong các team Dev ngày cuối năm thường chia làm hai thái cực: Một bên là sự vội vã \"merge cho xong\" để về quê, một bên là nỗi lo \"deploy chiều 30 Tết\" rồi toang ngay mùng 1.",
+    "cover": "images/saas-ep6-code-review/01.webp"
+  },
+  {
+    "slug": "summary-algorithms-to-live-by-brian-christian",
+    "title": "Tóm tắt sách \"Algorithms to Live By\" của Brian Christian",
+    "date": "2026-02-05",
+    "categories": [
+      "Algorithms",
+      "Book Summary"
+    ],
+    "subtitle": "Computational Kindness (Sự bao dung thuật toán)....",
+    "cover": "images/summary-algorithms-to-live-by-brian-christian/01.webp"
+  },
+  {
+    "slug": "how-ai-impacts-skill-formation",
+    "title": "Năng suất không đại diện cho sự tinh thông",
+    "date": "2026-02-02",
+    "categories": [
+      "Research",
+      "Productivity",
+      "Learning Method"
+    ],
+    "subtitle": "Nghiên cứu của Judy Hanwen Shen, Alex Tamkin (2026) - \"How AI Impacts Skill Formation\"",
+    "cover": "images/how-ai-impacts-skill-formation/01.webp"
+  },
+  {
+    "slug": "interview-joel-david-hamkins-godel",
+    "title": "Godel - Định lý Bất toàn (Incompleteness Theorems)",
+    "date": "2026-02-01",
+    "categories": [
+      "Mathematic",
+      "Computer Science"
+    ],
+    "subtitle": "Chúng ta thường nghĩ: \"Nếu nó đúng, nó phải chứng minh được.\"",
+    "cover": "images/interview-joel-david-hamkins-godel/01.webp"
+  },
+  {
+    "slug": "agent-skill-with-anthropic",
+    "title": "Hướng dẫn về Agent Skills",
+    "date": "2026-01-31",
+    "categories": [
+      "Agent Skills",
+      "Prompt Engineering",
+      "Vibe Coding"
+    ],
+    "subtitle": "Nếu coi Prompt là một tờ giấy A4 hướng dẫn công việc mà bạn đưa cho nhân viên AI mỗi sáng...",
+    "cover": "images/agent-skill-with-anthropic/01.webp"
+  },
+  {
+    "slug": "grani-markov-chain",
+    "title": "Thuật toán Markov Chain",
+    "date": "2026-01-30",
+    "categories": [
+      "Algorithm",
+      "Comic"
+    ],
+    "subtitle": "Nếu bạn có thể dự đoán tương lai mà không cần biết quá khứ - đó có phải là phép thuật?",
+    "cover": "images/grani-markov-chain/01.webp"
+  },
+  {
+    "slug": "interview-moltbot-aka-clawdbot-creator",
+    "title": "Phỏng vấn CEO Moltbot aka Clawdbot, OpenClaw",
+    "date": "2026-01-30",
+    "categories": [
+      "Interview",
+      "AI Agents"
+    ],
+    "subtitle": "Peter Steinberger từng bán công ty triệu đô. Rồi anh ta biến mất.",
+    "cover": "images/interview-moltbot-aka-clawdbot-creator/01.webp"
+  },
+  {
+    "slug": "grani-game-theory",
+    "title": "Game Theory: Lý Thuyết Trò Chơi",
+    "date": "2026-01-24",
+    "categories": [
+      "Algorithm",
+      "Computer Science",
+      "Comic"
+    ],
+    "subtitle": "Tit For Tat: Thuật toán đơn giản đã đánh bại những bộ óc thiên tài như thế nào?",
+    "cover": "images/grani-game-theory/01.webp"
+  },
+  {
+    "slug": "saas-ep5-traffic-jam",
+    "title": "VIBE CODERS | Software Development & SaaS Tập 5",
+    "date": "2026-01-20",
+    "categories": [
+      "Software Development",
+      "SaaS"
+    ],
+    "subtitle": "Sự cố kẹt xe kinh hoàng & Chiến thần Scalability",
+    "cover": "images/saas-ep5-traffic-jam/01.webp"
+  },
+  {
+    "slug": "just-in-time-learning",
+    "title": "Học tập Đúng lúc (Just-In-Time Learning)",
+    "date": "2026-01-19",
+    "categories": [
+      "Learning Method",
+      "Psychology"
+    ],
+    "subtitle": "một phương pháp học tập mà trong đó nội dung đào tạo được cung cấp chính xác vào thời điểm người học cần đến",
+    "cover": "images/just-in-time-learning/01.webp"
+  },
+  {
+    "slug": "swe-google",
+    "title": "Tóm tắt sách \"Software Engineering at Google\"",
+    "date": "2026-01-18",
+    "categories": [
+      "Software Engineering",
+      "Programming",
+      "Book Summary"
+    ],
+    "subtitle": "Những kiến thức đầy giá trị cho cộng đồng kỹ sư phần mềm trong tư duy thiết kế hệ thống và tổ chức đội ngũ.",
+    "cover": "images/swe-google/01.webp"
+  },
+  {
+    "slug": "genius-mind-os",
+    "title": "Não của những kẻ \"xuất chúng\" có gì?",
+    "date": "2026-01-17",
+    "categories": [
+      "Learning Method",
+      "Psychology"
+    ],
+    "subtitle": "Tôi lang thang và đọc bài này trên threads của nick @cwokaz thấy hay quá",
+    "cover": "images/genius-mind-os/01.webp"
+  },
+  {
+    "slug": "anthropic-how-ai-think",
+    "title": "Interpretability: AI suy nghĩ như thế nào?",
+    "date": "2026-01-15",
+    "categories": [
+      "AI",
+      "LLMs",
+      "Psychology"
+    ],
+    "subtitle": "..Những VIBE CODER giỏi nhất, thực ra là những Product Manager",
+    "cover": "images/anthropic-how-ai-think/01.webp"
+  },
+  {
+    "slug": "elon-musk-agi",
+    "title": "Phỏng vấn Elon Musk về Tương lai Nhân loại",
+    "date": "2026-01-14",
+    "categories": [
+      "Interview",
+      "AI",
+      "LLMs"
+    ],
+    "subtitle": "AGI",
+    "cover": "images/elon-musk-agi/01.webp"
+  },
+  {
+    "slug": "reddit-tutorial-hell",
+    "title": "Tôi nhận ra mình không biết gì về lập trình",
+    "date": "2026-01-14",
+    "categories": [
+      "Programming",
+      "Reddit",
+      "Learning Method"
+    ],
+    "subtitle": "Tại sao khi HỌC bạn tưởng mình có thể hiểu mọi thứ nhưng khi LÀM thì não lại rỗng tuếch?",
+    "cover": "images/reddit-tutorial-hell/01.webp"
+  },
+  {
+    "slug": "replit-ceo-interview",
+    "title": "Phỏng vấn CEO Replit về Vibe Coding",
+    "date": "2026-01-13",
+    "categories": [
+      "Vibe Coding",
+      "Interview",
+      "Programming"
+    ],
+    "subtitle": "..Những VIBE CODER giỏi nhất, thực ra là những Product Manager",
+    "cover": "images/replit-ceo-interview/01.webp"
+  },
+  {
+    "slug": "phd-learning-method",
+    "title": "Học như một nghiên cứu sinh PhD",
+    "date": "2026-01-12",
+    "categories": [
+      "Learning Method",
+      "Psychology"
+    ],
+    "subtitle": "Học tập không phải là cuộc đua, nó là việc chăm sóc một khu vườn.",
+    "cover": "images/phd-learning-method/01.webp"
+  },
+  {
+    "slug": "git-easy",
+    "title": "GIT thật đơn giản",
+    "date": "2026-01-11",
+    "categories": [
+      "Programming",
+      "Git"
+    ],
+    "subtitle": "3 Thế Giới: Working Directory, Staging Area, và Repository",
+    "cover": "images/git-easy/01.webp"
+  },
+  {
+    "slug": "timeless-programming-skills",
+    "title": "Kỹ năng lập trình \"Bền Vững\"",
+    "date": "2026-01-10",
+    "categories": [
+      "Programming",
+      "Reddit"
+    ],
+    "subtitle": "Một Senior Dev trên Reddit đã đúc kết lại 4 chân lý \"bất biến\" này. Lướt xem trọn bộ để thấm từng câu từng chữ!",
+    "cover": "images/timeless-programming-skills/01.webp"
+  },
+  {
+    "slug": "boris-claude-setup",
+    "title": "13 Bước Thiết Lập Claude Code từ Boris Cherny",
+    "date": "2026-01-09",
+    "categories": [
+      "Claude Code",
+      "Vibe Coding",
+      "Programming"
+    ],
+    "subtitle": "Mô tả ngắn gọn về nội dung bài viết (1-2 câu)",
+    "cover": "images/boris-claude-setup/01.webp"
+  },
+  {
+    "slug": "trust-the-process",
+    "title": "Trust The Process",
+    "date": "2026-01-07",
+    "categories": [
+      "Learning Method",
+      "Productivity"
+    ],
+    "subtitle": "Bắt đầu học thì dễ. Ai cũng có thể hừng hực khí thế trong ngày đầu tiên.",
+    "cover": "images/trust-the-process/01.webp"
+  },
+  {
+    "slug": "summary-refactoring-ui-carousel",
+    "title": "Tóm tắt sách \"Refactoring UI\"",
+    "date": "2026-01-06",
+    "categories": [
+      "UI",
+      "UX",
+      "Web Development"
+    ],
+    "subtitle": "Adam Wathan & Steve Schoger",
+    "cover": "images/summary-refactoring-ui-carousel/01.webp"
+  },
+  {
+    "slug": "boris-cherny-claude-code",
+    "title": "Boris Cherny - bộ não đứng sau Claude Code",
+    "date": "2026-01-05",
+    "categories": [
+      "Claude Code",
+      "Vibe Coding"
+    ],
+    "subtitle": "Chúng ta đang sống trong thời điểm mà định nghĩa về \"Lập trình viên\" đang thay đổi vĩnh viễn.",
+    "cover": "images/boris-cherny-claude-code/01.webp"
+  },
+  {
+    "slug": "500k-codes",
+    "title": "TÔI ĐÃ VIẾT 500.000 DÒNG CODE VỚI AI",
+    "date": "2026-01-04",
+    "categories": [
+      "Programming",
+      "Vibe Coding"
+    ],
+    "subtitle": "\"Sau 2 năm và hàng chục dự án chạy bằng LLMs, tôi nhận ra cuộc chơi lập trình đã thay đổi hoàn toàn\" - đây là chia sẻ của dhruv1103, một thành viên trên Reddit.",
+    "cover": "images/500k-codes/01.webp"
+  },
+  {
+    "slug": "titan-5-pinterest",
+    "title": "TITANS Tập 5 - PINTEREST",
+    "date": "2026-01-03",
+    "categories": [
+      "SaaS",
+      "Pinterest"
+    ],
+    "subtitle": "NGƯỜI ĐẸP HAY QUÁI VẬT CÔNG NGHỆ?",
+    "cover": "images/titan-5-pinterest/01.webp"
+  },
+  {
+    "slug": "6-thinking-hats",
+    "title": "6 chiếc mũ tư duy trong vận hành team phát triển phần mềm",
+    "date": "2026-01-01",
+    "categories": [
+      "SaaS",
+      "Software Development"
+    ],
+    "subtitle": "VIẾT CODE CHO MÁY THÌ DỄ. \"VIẾT CODE\" CHO TEAM MỚI KHÓ.",
+    "cover": "images/6-thinking-hats/01.webp"
+  },
+  {
+    "slug": "code-ai-campaign",
+    "title": "Hành trình 14 ngày tạo nên Code AI Blog",
+    "date": "2025-12-31",
+    "categories": [
+      "Programming",
+      "Vibe Coding"
+    ],
+    "subtitle": "Những gì tôi đã trải qua",
+    "cover": "images/code-ai-campaign/01.webp"
+  },
+  {
+    "slug": "karpathy-pivot",
+    "title": "Andrej Karpathy - Cuộc ĐẠI TÁI THIẾT của AI trong lập trình",
+    "date": "2025-12-28",
+    "categories": [
+      "Vibe Coding",
+      "Programming",
+      "Software Development"
+    ],
+    "subtitle": "Mô tả ngắn gọn về nội dung bài viết (1-2 câu)",
+    "cover": "images/karpathy-pivot/01.webp"
+  },
+  {
+    "slug": "summary-domain-driven-design",
+    "title": "Tóm tắt sách \"Domain Driven Design\" của Eric Evans",
+    "date": "2025-12-28",
+    "categories": [
+      "Book Summary",
+      "Programming"
+    ],
+    "subtitle": "Domain Driven Design (DDD) Cuốn bí kíp bị hiểu lầm nhiều nhất thế giới lập trình",
+    "cover": "images/summary-domain-driven-design/01.webp"
+  },
+  {
+    "slug": "saas-ep4-tech-debt",
+    "title": "VIBE CODERS | Software Development & SaaS Tập 4",
+    "date": "2025-12-27",
+    "categories": [
+      "SaaS",
+      "Software Development"
+    ],
+    "subtitle": "\"Trong bóng tối của những dòng code cũ, sự cố không bao giờ đến đột ngột. Nó là một sự mục nát âm thầm từ bên trong.\"",
+    "cover": "images/saas-ep4-tech-debt/01.webp"
+  },
+  {
+    "slug": "unknown-unknowns",
+    "title": "Bạn kém cỏi hơn bạn nghĩ - Unknown Unknowns",
+    "date": "2025-12-26",
+    "categories": [
+      "Learning Method",
+      "Psychology"
+    ],
+    "subtitle": "TẠI SAO STEVE JOBS ĐI HỌC THƯ PHÁP?",
+    "cover": "images/unknown-unknowns/01.webp"
+  },
+  {
+    "slug": "marketing-to-dev",
+    "title": "Chia sẻ kinh nghiệm tự học CODE cho dân trái ngành",
+    "date": "2025-12-25",
+    "categories": [
+      "Learning Method",
+      "Programming",
+      "Vibe Coding"
+    ],
+    "subtitle": "Đừng học CODE để trở thành Lập Trình Viên chuyên nghiệp. Hãy học để giải quyết NỖI ĐAU của chính mình.",
+    "cover": "images/marketing-to-dev/01.webp"
+  },
+  {
+    "slug": "teresa-torres-claude-code",
+    "title": "Tự Động Hoá Cuộc Sống Bằng Claude Code",
+    "date": "2025-12-24",
+    "categories": [
+      "Claude Code",
+      "Productivity",
+      "Obsidian"
+    ],
+    "subtitle": "Chúng ta tưởng mình đang dùng công cụ, nhưng thực ra công cụ đang hút cạn năng lượng của chúng ta trước khi kịp làm việc gì ra hồn.",
+    "cover": "images/teresa-torres-claude-code/01.webp"
+  },
+  {
+    "slug": "how-to-fix-any-bug",
+    "title": "Kỹ thuật Vibe Debugging của Dan Abramov",
+    "date": "2025-12-23",
+    "categories": [
+      "Vibe Coding",
+      "Programming"
+    ],
+    "subtitle": "Một số kinh nghiệm thú vị về VIBE Debugging từ Dan Abramov*",
+    "cover": "images/how-to-fix-any-bug/01.webp"
+  },
+  {
+    "slug": "obsidian-ceo-notes",
+    "title": "Kinh nghiệm quản lý tri thức cá nhân từ CEO Obsidian",
+    "date": "2025-12-21",
+    "categories": [
+      "Obsidian",
+      "Learning Method"
+    ],
+    "subtitle": "Obsidian không phải là ứng dụng để bạn chất đống các ghi chú (như Evernote, Notion kiểu gom hết vào folder)",
+    "cover": "images/obsidian-ceo-notes/01.webp"
+  },
+  {
+    "slug": "10-years-code",
+    "title": "Điều gì vẫn khiến tôi \"Kinh Ngạc\" sau 10 Năm Code?",
+    "date": "2025-12-19",
+    "categories": [
+      "Programming",
+      "Software Development",
+      "Reddit"
+    ],
+    "subtitle": "Đây là chia sẻ của một Senior Developer trên Reddit đã nhận được hơn 12k upvote, và nó chạm đúng vào \"tim đen\" của hàng ngàn lập trình viên khác.",
+    "cover": "images/10-years-code/01.webp"
+  },
+  {
+    "slug": "titan-4-amazon",
+    "title": "TITANS Tập 4 - AMAZON",
+    "date": "2025-12-18",
+    "categories": [
+      "Amazon",
+      "SaaS"
+    ],
+    "subtitle": "Bạn có bao giờ tự hỏi tại sao Amazon có thể bán mọi thứ, còn AWS thì vận hành gần như cả internet?",
+    "cover": "images/titan-4-amazon/01.webp"
+  },
+  {
+    "slug": "bloom-aesthetic-dark",
+    "title": "Bloom's Taxonomy Trong Giáo Dục",
+    "date": "2025-12-17",
+    "categories": [
+      "Learning Method",
+      "Psychology"
+    ],
+    "subtitle": "Giáo dục truyền thống (và cả thói quen lướt mạng xã hội) thường chỉ đưa chúng ta đến 2 tầng thấp nhất của tư duy: Remember (Nhớ) và Understand (Hiểu). Nó cho bạn cảm giác \"biết tuốt\", nhưng thực tế tay nghề của bạn vẫn bằng 0.",
+    "cover": "images/bloom-aesthetic-dark/01.webp"
+  },
+  {
+    "slug": "google-cloud-console-ver2",
+    "title": "Google Cloud Console cho VIBE-CODERS (ver 2)",
+    "date": "2025-12-17",
+    "categories": [
+      "Google Cloud Console",
+      "Tutorial"
+    ],
+    "subtitle": "Nhiều đồng VIBE rất hay lúng túng khi cấu hình API và Services trên Google Cloud Console (bao gồm cả mình).",
+    "cover": "images/google-cloud-console-ver2/01.webp"
+  },
+  {
+    "slug": "9-claude-code-tips",
+    "title": "9 PRO TIPS ĐỂ \"THUẦN HÓA\" CLAUDE CODE",
+    "date": "2025-12-15",
+    "categories": [
+      "Claude",
+      "Claude Code",
+      "Reddit"
+    ],
+    "subtitle": "9 kỹ thuật để Claude Code vừa làm đồng VIBE, vừa làm thầy VIBE của bạn",
+    "cover": "images/9-claude-code-tips/01.webp"
+  },
+  {
+    "slug": "the-way-of-code",
+    "title": "The Way Of Code (Tiếng Việt)",
+    "date": "2025-12-14",
+    "categories": [
+      "Book Summary",
+      "Vibe Coding",
+      "Programming"
+    ],
+    "subtitle": "Rick Rubin",
+    "cover": "images/the-way-of-code/01.webp"
+  },
+  {
+    "slug": "astro-web-dev-blog",
+    "title": "Astro - Framework tối ưu cho dự án Blog",
+    "date": "2025-12-08",
+    "categories": [
+      "Astro",
+      "Web Development"
+    ],
+    "subtitle": "Thay vì render toàn bộ trang web thành một cục JS khổng lồ (SPA), Astro coi trang web là một \"biển tĩnh\" (HTML thuần) và chỉ \"tưới nước\" (hydrate) cho những \"hòn đảo\" cần tương tác.",
+    "cover": "images/astro-web-dev-blog/01.webp"
+  },
+  {
+    "slug": "saas-ep1-introduction",
+    "title": "VIBE CODERS | Software Development & SaaS Tập 1",
+    "date": "2025-12-07",
+    "categories": [
+      "SaaS",
+      "Software Development"
+    ],
+    "subtitle": "Ai đứng sau chiếc app bạn dùng?",
+    "cover": "images/saas-ep1-introduction/01.webp"
+  },
+  {
+    "slug": "claude-code-commands",
+    "title": "Claude Code Commands (Tổng Hợp)",
+    "date": "2025-12-06",
+    "categories": [
+      "Claude Code",
+      "Tutorial"
+    ],
+    "subtitle": "Claude Code nhiều commands quá không nhớ hết, làm cái cheatsheet tổng hợp",
+    "cover": "images/claude-code-commands/01.webp"
+  },
+  {
+    "slug": "clean-architecture",
+    "title": "Tóm tắt sách \"Clean Architecture\"",
+    "date": "2025-12-06",
+    "categories": [
+      "Programming",
+      "Book Summary"
+    ],
+    "subtitle": "Dành cho: Junior muốn lên Mid, Mid muốn hiểu sâu, Senior muốn refresh, Vibe-coder muốn... đổi đời!",
+    "cover": "images/clean-architecture/01.webp"
+  },
+  {
+    "slug": "summary-the-art-of-asking",
+    "title": "Tóm tắt sách \"The Art of Asking Essential Questions\"",
+    "date": "2025-12-06",
+    "categories": [
+      "Book Summary",
+      "Psychology"
+    ],
+    "subtitle": "Richard Paul, Linda Elder",
+    "cover": "images/summary-the-art-of-asking/01.webp"
+  },
+  {
+    "slug": "summary-thinking-fast-slow",
+    "title": "Tóm tắt sách \"Tư Duy Nhanh Và Chậm\"",
+    "date": "2025-12-06",
+    "categories": [
+      "Book Summary",
+      "Psychology"
+    ],
+    "subtitle": "Tác giả Daniel Kahneman",
+    "cover": "images/summary-thinking-fast-slow/01.webp"
+  }
+]
