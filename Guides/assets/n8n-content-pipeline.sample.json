@@ -1,0 +1,118 @@
+{
+  "name": "Blue Coral — AI Content Pipeline (collect → keywords → draft → WP pending)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [ { "field": "cronExpression", "expression": "0 7 * * 1" } ] }
+      },
+      "id": "node-schedule",
+      "name": "Weekly Trigger (Mon 07:00)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [ 240, 300 ]
+    },
+    {
+      "parameters": {
+        "url": "https://example.com/feed",
+        "options": {}
+      },
+      "id": "node-rss",
+      "name": "1 · Collect sources (RSS)",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1,
+      "position": [ 460, 300 ]
+    },
+    {
+      "parameters": { "maxItems": 3 },
+      "id": "node-limit",
+      "name": "Take 3 newest",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [ 680, 300 ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [
+          { "name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+          { "name": "anthropic-version", "value": "2023-06-01" },
+          { "name": "content-type", "value": "application/json" }
+        ] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-6\",\n  \"max_tokens\": 400,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"From this source, return JSON with one primary_keyword, 3-5 secondary_keywords and a search_intent label. Source title: {{ $json.title }}. Snippet: {{ $json.contentSnippet }}\"\n  }]\n}",
+        "options": {}
+      },
+      "id": "node-llm-keywords",
+      "name": "2 · LLM — extract keywords",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [ 900, 300 ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [
+          { "name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+          { "name": "anthropic-version", "value": "2023-06-01" },
+          { "name": "content-type", "value": "application/json" }
+        ] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-6\",\n  \"max_tokens\": 1500,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"Write a 700-word WordPress blog post in our brand voice targeting this keyword naturally. Return JSON with title, meta_description and html_body. Keyword: {{ $('2 · LLM — extract keywords').item.json.content[0].text }}\"\n  }]\n}",
+        "options": {}
+      },
+      "id": "node-llm-draft",
+      "name": "3 · LLM — draft post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [ 1120, 300 ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://YOURSITE.com/wp-json/wp/v2/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"status\": \"pending\",\n  \"title\": \"AI draft — review me\",\n  \"content\": \"{{ $('3 · LLM — draft post').item.json.content[0].text }}\"\n}",
+        "options": {}
+      },
+      "id": "node-wp",
+      "name": "4 · WordPress — create PENDING post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [ 1340, 300 ],
+      "credentials": { "httpBasicAuth": { "id": "REPLACE", "name": "WP Application Password" } }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "mode": "id", "value": "YOUR_SHEET_ID" },
+        "sheetName": { "__rl": true, "mode": "name", "value": "tracker" },
+        "columns": { "mappingMode": "autoMapInputData", "value": {} },
+        "options": {}
+      },
+      "id": "node-sheet",
+      "name": "5 · Log row to tracker",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [ 1560, 300 ]
+    }
+  ],
+  "connections": {
+    "Weekly Trigger (Mon 07:00)": { "main": [ [ { "node": "1 · Collect sources (RSS)", "type": "main", "index": 0 } ] ] },
+    "1 · Collect sources (RSS)": { "main": [ [ { "node": "Take 3 newest", "type": "main", "index": 0 } ] ] },
+    "Take 3 newest": { "main": [ [ { "node": "2 · LLM — extract keywords", "type": "main", "index": 0 } ] ] },
+    "2 · LLM — extract keywords": { "main": [ [ { "node": "3 · LLM — draft post", "type": "main", "index": 0 } ] ] },
+    "3 · LLM — draft post": { "main": [ [ { "node": "4 · WordPress — create PENDING post", "type": "main", "index": 0 } ] ] },
+    "4 · WordPress — create PENDING post": { "main": [ [ { "node": "5 · Log row to tracker", "type": "main", "index": 0 } ] ] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "_blue_coral_notes": "TEMPLATE — import via n8n > Workflows > Import from File, then: (1) set RSS feed URL, (2) add ANTHROPIC_API_KEY as an env var or swap in your LLM node, (3) attach a WP Application Password credential to node 4, (4) point node 5 at your Google Sheet. Node 4 hard-codes status=pending on purpose — never change it to publish."
+}

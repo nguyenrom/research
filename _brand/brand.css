@@ -1,0 +1,167 @@
+/* ===================================================================
+   BLUE CORAL — Brand Design System  v1.0.0
+   Single source of truth: _brand/brand-tokens.json
+   Usage in any HTML deliverable:
+     <link rel="stylesheet" href="../_brand/brand.css">
+   Then wrap content in <div class="bc-doc"> ... </div>
+   Do NOT redefine these colors per-document — change the token file instead.
+   =================================================================== */
+
+:root {
+  /* Primary — Trust Blue (Royal), hướng Samsung Blue #1428A0. Tin cậy / hiện đại / premium.
+     Blue sâu → 600 base phục vụ MỌI vai trò ở AAA: nền chữ trắng (11.41), chữ trên nền
+     sáng / link / KPI (11.41), badge trên 100 (8.89). Không cần phân vai shade.
+     700/800 = gradient sâu & nền đậm · 500 = vivid điểm nhấn · 100 = nền chip/badge. */
+  --bc-primary-900:#060B3D; --bc-primary-800:#0B1566; --bc-primary-700:#0E1E78;
+  --bc-primary-600:#1428A0; --bc-primary-500:#2540BE; --bc-primary-400:#4E66D6;
+  --bc-primary-300:#8094E0; --bc-primary-200:#AEBCEC; --bc-primary-100:#DCE3F7; --bc-primary-50:#EFF2FC;
+  --bc-primary:var(--bc-primary-600);
+  --bc-primary-dark:var(--bc-primary-700);
+  --bc-primary-ink:var(--bc-primary-600);
+
+  /* Accent — Coral.  RULE: brand/decorative ONLY. Never white text on solid coral
+     (contrast 2.80, fails). Never use coral for status — danger stays --bc-bad.
+     Text on coral-100 uses --bc-accent-ink (AA 6.78), not -700 (3.66, fails small text). */
+  --bc-accent-700:#D8463A; --bc-accent-600:#FF6B5C; --bc-accent-400:#FF8E82;
+  --bc-accent-200:#FFC2BA; --bc-accent-100:#FFE7E3; --bc-accent-ink:#97271C;
+  --bc-accent:var(--bc-accent-600);
+
+  /* Neutral */
+  --bc-ink:#15192B; --bc-ink2:#2E3447; --bc-muted:#5B6173; --bc-faint:#8B90A0;
+  --bc-line:#DEE1EA; --bc-line-soft:#EDEFF5;
+  --bc-bg:#F6F7FC; --bc-card:#FFFFFF; --bc-fill:#EFF1F8;
+
+  /* Semantic */
+  --bc-good:#1F8A5B; --bc-good-bg:#E5F4EC; --bc-good-ink:#136B45;
+  --bc-warn:#B47514; --bc-warn-bg:#FBF1DD; --bc-warn-ink:#8A5A0E;
+  --bc-bad:#C0392B;  --bc-bad-bg:#FBEAE8;  --bc-bad-ink:#97271C;
+  --bc-info:#1C6FB8; --bc-info-bg:#E8F2FB; --bc-info-ink:#14548C;
+  --bc-gold:#C9A227; --bc-gold-soft:#F6EDD2;
+
+  /* Type */
+  --bc-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --bc-mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+
+  /* Space / radius / shadow */
+  --bc-s-xs:4px; --bc-s-sm:8px; --bc-s-md:12px; --bc-s-lg:16px;
+  --bc-s-xl:24px; --bc-s-2xl:32px; --bc-s-3xl:48px; --bc-s-4xl:64px;
+  --bc-r-sm:6px; --bc-r-md:10px; --bc-r-lg:14px; --bc-r-xl:20px; --bc-r-pill:999px;
+  --bc-sh-sm:0 1px 2px rgba(16,40,45,.06);
+  --bc-sh-md:0 1px 3px rgba(16,40,45,.07),0 8px 24px rgba(16,40,45,.06);
+  --bc-sh-lg:0 12px 40px rgba(16,40,45,.10);
+
+  --bc-content:920px; --bc-wide:1140px;
+}
+
+/* ---------- Document shell ---------- */
+.bc-doc{
+  font-family:var(--bc-font); color:var(--bc-ink); background:var(--bc-bg);
+  font-size:15.5px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  margin:0; padding:var(--bc-s-2xl) var(--bc-s-lg);
+}
+.bc-doc *{box-sizing:border-box;}
+.bc-wrap{max-width:var(--bc-content); margin:0 auto;}
+.bc-wrap.bc-wide{max-width:var(--bc-wide);}
+
+/* ---------- Typography ---------- */
+.bc-doc h1,.bc-doc h2,.bc-doc h3,.bc-doc h4{color:var(--bc-ink); margin:1.4em 0 .5em; line-height:1.25;}
+.bc-doc h1{font-size:26px; font-weight:700;}
+.bc-doc h2{font-size:21px; font-weight:700; padding-bottom:.3em; border-bottom:2px solid var(--bc-primary-100);}
+.bc-doc h3{font-size:17px; font-weight:650; color:var(--bc-ink2);}
+.bc-doc h4{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--bc-primary-ink);}
+.bc-doc p{margin:0 0 1em;}
+.bc-doc a{color:var(--bc-primary-ink); text-decoration:none; border-bottom:1px solid var(--bc-primary-200);}
+.bc-doc a:hover{color:var(--bc-accent-700); border-color:var(--bc-accent-400);}
+.bc-doc code{font-family:var(--bc-mono); font-size:.88em; background:var(--bc-fill); padding:.12em .4em; border-radius:var(--bc-r-sm); color:var(--bc-primary-ink);}
+.bc-doc strong{color:var(--bc-ink); font-weight:700;}
+.bc-muted{color:var(--bc-muted);} .bc-small{font-size:13.5px;}
+.bc-caption{font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--bc-muted);}
+
+/* ---------- Brand header / masthead ---------- */
+.bc-masthead{
+  background:linear-gradient(135deg,var(--bc-primary-800),var(--bc-primary-600));
+  color:#fff; border-radius:var(--bc-r-lg); padding:var(--bc-s-2xl);
+  box-shadow:var(--bc-sh-md); position:relative; overflow:hidden;
+}
+.bc-masthead::after{content:""; position:absolute; right:-40px; top:-40px; width:200px; height:200px;
+  background:radial-gradient(circle,var(--bc-accent-600) 0%,transparent 70%); opacity:.25;}
+.bc-masthead .bc-brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.02em; margin-bottom:var(--bc-s-md);}
+.bc-masthead .bc-logo{width:26px; height:26px; border-radius:7px; background:#fff; display:inline-flex; align-items:center; justify-content:center; color:var(--bc-primary-ink); font-weight:800; font-size:15px;}
+.bc-masthead h1{color:#fff; margin:.1em 0; font-size:28px;}
+.bc-masthead .bc-sub{color:rgba(255,255,255,.82); font-size:15px; max-width:60ch;}
+.bc-masthead .bc-meta{margin-top:var(--bc-s-lg); display:flex; flex-wrap:wrap; gap:var(--bc-s-md) var(--bc-s-xl); font-size:13px; color:rgba(255,255,255,.9);}
+.bc-masthead .bc-meta b{color:#fff;}
+
+/* ---------- Card ---------- */
+.bc-card{background:var(--bc-card); border:1px solid var(--bc-line); border-radius:var(--bc-r-lg); padding:var(--bc-s-xl); box-shadow:var(--bc-sh-sm); margin:var(--bc-s-lg) 0;}
+.bc-card.bc-flush{padding:0; overflow:hidden;}
+
+/* ---------- Tables ---------- */
+.bc-table{width:100%; border-collapse:collapse; font-size:14px; margin:var(--bc-s-lg) 0; background:var(--bc-card); border:1px solid var(--bc-line); border-radius:var(--bc-r-md); overflow:hidden;}
+.bc-table thead th{background:var(--bc-primary-100); color:var(--bc-ink); text-align:left; font-weight:700; padding:11px 14px; border-bottom:2px solid var(--bc-primary-600); font-size:13px;}
+.bc-table td{padding:10px 14px; border-bottom:1px solid var(--bc-line-soft); vertical-align:top;}
+.bc-table tbody tr:nth-child(even) td{background:var(--bc-bg);}
+.bc-table tbody tr:last-child td{border-bottom:none;}
+.bc-table td.bc-num,.bc-table th.bc-num{text-align:right; font-variant-numeric:tabular-nums;}
+/* Phase divider row */
+.bc-table tr.bc-phase td{background:var(--bc-accent-100); color:var(--bc-accent-ink); font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:12px; border-top:1px solid var(--bc-accent-200);}
+.bc-table tr.bc-total td{background:var(--bc-fill); font-weight:700; border-top:2px solid var(--bc-primary-600);}
+
+/* ---------- Callouts ---------- */
+.bc-callout{border-radius:var(--bc-r-md); padding:14px 16px 14px 18px; margin:var(--bc-s-lg) 0; border-left:4px solid; font-size:14.5px;}
+.bc-callout .bc-callout-t{font-weight:700; margin-bottom:3px; display:block;}
+.bc-callout.info{background:var(--bc-info-bg); border-color:var(--bc-info); color:var(--bc-info-ink);}
+.bc-callout.good{background:var(--bc-good-bg); border-color:var(--bc-good); color:var(--bc-good-ink);}
+.bc-callout.warn{background:var(--bc-warn-bg); border-color:var(--bc-warn); color:var(--bc-warn-ink);}
+.bc-callout.bad {background:var(--bc-bad-bg);  border-color:var(--bc-bad);  color:var(--bc-bad-ink);}
+.bc-callout.accent{background:var(--bc-accent-100); border-color:var(--bc-accent-600); color:var(--bc-accent-ink);}
+
+/* ---------- Badges / chips ---------- */
+.bc-badge{display:inline-block; font-size:11.5px; font-weight:700; padding:3px 10px; border-radius:var(--bc-r-pill); letter-spacing:.02em; line-height:1.5;}
+.bc-badge.primary{background:var(--bc-primary-100); color:var(--bc-primary-ink);}
+.bc-badge.accent {background:var(--bc-accent-100); color:var(--bc-accent-ink);}
+.bc-badge.good{background:var(--bc-good-bg); color:var(--bc-good-ink);}
+.bc-badge.warn{background:var(--bc-warn-bg); color:var(--bc-warn-ink);}
+.bc-badge.bad {background:var(--bc-bad-bg);  color:var(--bc-bad-ink);}
+.bc-badge.gold{background:var(--bc-gold-soft); color:#7a6113;}
+.bc-badge.ghost{background:transparent; color:var(--bc-muted); border:1px solid var(--bc-line);}
+
+/* ---------- KPI / stat cards ---------- */
+.bc-kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:var(--bc-s-md); margin:var(--bc-s-lg) 0;}
+.bc-kpi{background:var(--bc-card); border:1px solid var(--bc-line); border-radius:var(--bc-r-md); padding:16px 18px; border-top:3px solid var(--bc-primary-600);}
+.bc-kpi .bc-kpi-v{font-size:26px; font-weight:800; color:var(--bc-primary-ink); line-height:1.1;}
+.bc-kpi .bc-kpi-l{font-size:12px; color:var(--bc-muted); margin-top:4px; text-transform:uppercase; letter-spacing:.04em;}
+.bc-kpi.accent{border-top-color:var(--bc-accent-600);} .bc-kpi.accent .bc-kpi-v{color:var(--bc-accent-700);}
+
+/* ---------- Phase divider (section banner) ---------- */
+.bc-phase-band{display:flex; align-items:center; gap:12px; margin:var(--bc-s-2xl) 0 var(--bc-s-md);}
+.bc-phase-band .bc-phase-no{flex:none; width:34px; height:34px; border-radius:9px; background:var(--bc-primary-800); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px;}
+.bc-phase-band .bc-phase-tx{font-size:18px; font-weight:700; color:var(--bc-ink);}
+.bc-phase-band::after{content:""; flex:1; height:1px; background:var(--bc-line);}
+
+/* ---------- Recommendation: 2 options + verdict (house standard) ---------- */
+.bc-options{display:grid; grid-template-columns:1fr 1fr; gap:var(--bc-s-lg); margin:var(--bc-s-lg) 0;}
+.bc-option{background:var(--bc-card); border:1px solid var(--bc-line); border-radius:var(--bc-r-md); padding:18px; position:relative;}
+.bc-option.bc-pick{border-color:var(--bc-primary-500); box-shadow:0 0 0 3px var(--bc-primary-100);}
+.bc-option .bc-opt-h{font-weight:700; font-size:16px; margin-bottom:6px; color:var(--bc-ink);}
+.bc-option .bc-opt-tag{position:absolute; top:-11px; right:14px;}
+.bc-recommend{background:var(--bc-good-bg); border:1px solid var(--bc-good); border-radius:var(--bc-r-md); padding:14px 16px; color:var(--bc-good-ink); font-weight:600;}
+@media(max-width:680px){ .bc-options{grid-template-columns:1fr;} }
+
+/* ---------- Footer ---------- */
+.bc-footer{margin-top:var(--bc-s-3xl); padding-top:var(--bc-s-lg); border-top:1px solid var(--bc-line); color:var(--bc-muted); font-size:12.5px; display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:space-between;}
+.bc-footer .bc-foot-brand{font-weight:700; color:var(--bc-primary-ink);}
+
+/* ---------- Utilities ---------- */
+.bc-row{display:flex; gap:var(--bc-s-lg); flex-wrap:wrap;}
+.bc-grid-2{display:grid; grid-template-columns:1fr 1fr; gap:var(--bc-s-lg);}
+.bc-grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--bc-s-lg);}
+@media(max-width:680px){ .bc-grid-2,.bc-grid-3{grid-template-columns:1fr;} }
+.bc-divider{height:1px; background:var(--bc-line); border:0; margin:var(--bc-s-xl) 0;}
+
+@media print{
+  .bc-doc{background:#fff; padding:0; font-size:11pt;}
+  .bc-card,.bc-kpi,.bc-table{box-shadow:none;}
+  .bc-masthead{box-shadow:none; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  .bc-table thead th,.bc-callout,.bc-badge,.bc-phase-band .bc-phase-no{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+}

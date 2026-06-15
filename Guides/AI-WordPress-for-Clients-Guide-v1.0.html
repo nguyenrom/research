@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Coral — Building &amp; Running WordPress with AI: A Hands-On Guide</title>
+<style>
+/* ===== Blue Coral brand.css — inlined for standalone hosting ===== */
+/* ===================================================================
+   BLUE CORAL — Brand Design System  v1.0.0
+   Single source of truth: _brand/brand-tokens.json
+   This stylesheet is INLINED in this file for standalone hosting.
+   Source of truth remains _brand/brand-tokens.json in the repo.
+   Content is wrapped in a bc-doc container.
+   Do NOT redefine these colors per-document — change the token file instead.
+   =================================================================== */
+
+:root {
+  /* Primary — Trust Blue (Royal), hướng Samsung Blue #1428A0. Tin cậy / hiện đại / premium.
+     Blue sâu → 600 base phục vụ MỌI vai trò ở AAA: nền chữ trắng (11.41), chữ trên nền
+     sáng / link / KPI (11.41), badge trên 100 (8.89). Không cần phân vai shade.
+     700/800 = gradient sâu & nền đậm · 500 = vivid điểm nhấn · 100 = nền chip/badge. */
+  --bc-primary-900:#060B3D; --bc-primary-800:#0B1566; --bc-primary-700:#0E1E78;
+  --bc-primary-600:#1428A0; --bc-primary-500:#2540BE; --bc-primary-400:#4E66D6;
+  --bc-primary-300:#8094E0; --bc-primary-200:#AEBCEC; --bc-primary-100:#DCE3F7; --bc-primary-50:#EFF2FC;
+  --bc-primary:var(--bc-primary-600);
+  --bc-primary-dark:var(--bc-primary-700);
+  --bc-primary-ink:var(--bc-primary-600);
+
+  /* Accent — Coral.  RULE: brand/decorative ONLY. Never white text on solid coral
+     (contrast 2.80, fails). Never use coral for status — danger stays --bc-bad.
+     Text on coral-100 uses --bc-accent-ink (AA 6.78), not -700 (3.66, fails small text). */
+  --bc-accent-700:#D8463A; --bc-accent-600:#FF6B5C; --bc-accent-400:#FF8E82;
+  --bc-accent-200:#FFC2BA; --bc-accent-100:#FFE7E3; --bc-accent-ink:#97271C;
+  --bc-accent:var(--bc-accent-600);
+
+  /* Neutral */
+  --bc-ink:#15192B; --bc-ink2:#2E3447; --bc-muted:#5B6173; --bc-faint:#8B90A0;
+  --bc-line:#DEE1EA; --bc-line-soft:#EDEFF5;
+  --bc-bg:#F6F7FC; --bc-card:#FFFFFF; --bc-fill:#EFF1F8;
+
+  /* Semantic */
+  --bc-good:#1F8A5B; --bc-good-bg:#E5F4EC; --bc-good-ink:#136B45;
+  --bc-warn:#B47514; --bc-warn-bg:#FBF1DD; --bc-warn-ink:#8A5A0E;
+  --bc-bad:#C0392B;  --bc-bad-bg:#FBEAE8;  --bc-bad-ink:#97271C;
+  --bc-info:#1C6FB8; --bc-info-bg:#E8F2FB; --bc-info-ink:#14548C;
+  --bc-gold:#C9A227; --bc-gold-soft:#F6EDD2;
+
+  /* Type */
+  --bc-font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --bc-mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+
+  /* Space / radius / shadow */
+  --bc-s-xs:4px; --bc-s-sm:8px; --bc-s-md:12px; --bc-s-lg:16px;
+  --bc-s-xl:24px; --bc-s-2xl:32px; --bc-s-3xl:48px; --bc-s-4xl:64px;
+  --bc-r-sm:6px; --bc-r-md:10px; --bc-r-lg:14px; --bc-r-xl:20px; --bc-r-pill:999px;
+  --bc-sh-sm:0 1px 2px rgba(16,40,45,.06);
+  --bc-sh-md:0 1px 3px rgba(16,40,45,.07),0 8px 24px rgba(16,40,45,.06);
+  --bc-sh-lg:0 12px 40px rgba(16,40,45,.10);
+
+  --bc-content:920px; --bc-wide:1140px;
+}
+
+/* ---------- Document shell ---------- */
+.bc-doc{
+  font-family:var(--bc-font); color:var(--bc-ink); background:var(--bc-bg);
+  font-size:15.5px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  margin:0; padding:var(--bc-s-2xl) var(--bc-s-lg);
+}
+.bc-doc *{box-sizing:border-box;}
+.bc-wrap{max-width:var(--bc-content); margin:0 auto;}
+.bc-wrap.bc-wide{max-width:var(--bc-wide);}
+
+/* ---------- Typography ---------- */
+.bc-doc h1,.bc-doc h2,.bc-doc h3,.bc-doc h4{color:var(--bc-ink); margin:1.4em 0 .5em; line-height:1.25;}
+.bc-doc h1{font-size:26px; font-weight:700;}
+.bc-doc h2{font-size:21px; font-weight:700; padding-bottom:.3em; border-bottom:2px solid var(--bc-primary-100);}
+.bc-doc h3{font-size:17px; font-weight:650; color:var(--bc-ink2);}
+.bc-doc h4{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--bc-primary-ink);}
+.bc-doc p{margin:0 0 1em;}
+.bc-doc a{color:var(--bc-primary-ink); text-decoration:none; border-bottom:1px solid var(--bc-primary-200);}
+.bc-doc a:hover{color:var(--bc-accent-700); border-color:var(--bc-accent-400);}
+.bc-doc code{font-family:var(--bc-mono); font-size:.88em; background:var(--bc-fill); padding:.12em .4em; border-radius:var(--bc-r-sm); color:var(--bc-primary-ink);}
+.bc-doc strong{color:var(--bc-ink); font-weight:700;}
+.bc-muted{color:var(--bc-muted);} .bc-small{font-size:13.5px;}
+.bc-caption{font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--bc-muted);}
+
+/* ---------- Brand header / masthead ---------- */
+.bc-masthead{
+  background:linear-gradient(135deg,var(--bc-primary-800),var(--bc-primary-600));
+  color:#fff; border-radius:var(--bc-r-lg); padding:var(--bc-s-2xl);
+  box-shadow:var(--bc-sh-md); position:relative; overflow:hidden;
+}
+.bc-masthead::after{content:""; position:absolute; right:-40px; top:-40px; width:200px; height:200px;
+  background:radial-gradient(circle,var(--bc-accent-600) 0%,transparent 70%); opacity:.25;}
+.bc-masthead .bc-brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.02em; margin-bottom:var(--bc-s-md);}
+.bc-masthead .bc-logo{width:26px; height:26px; border-radius:7px; background:#fff; display:inline-flex; align-items:center; justify-content:center; color:var(--bc-primary-ink); font-weight:800; font-size:15px;}
+.bc-masthead h1{color:#fff; margin:.1em 0; font-size:28px;}
+.bc-masthead .bc-sub{color:rgba(255,255,255,.82); font-size:15px; max-width:60ch;}
+.bc-masthead .bc-meta{margin-top:var(--bc-s-lg); display:flex; flex-wrap:wrap; gap:var(--bc-s-md) var(--bc-s-xl); font-size:13px; color:rgba(255,255,255,.9);}
+.bc-masthead .bc-meta b{color:#fff;}
+
+/* ---------- Card ---------- */
+.bc-card{background:var(--bc-card); border:1px solid var(--bc-line); border-radius:var(--bc-r-lg); padding:var(--bc-s-xl); box-shadow:var(--bc-sh-sm); margin:var(--bc-s-lg) 0;}
+.bc-card.bc-flush{padding:0; overflow:hidden;}
+
+/* ---------- Tables ---------- */
+.bc-table{width:100%; border-collapse:collapse; font-size:14px; margin:var(--bc-s-lg) 0; background:var(--bc-card); border:1px solid var(--bc-line); border-radius:var(--bc-r-md); overflow:hidden;}
+.bc-table thead th{background:var(--bc-primary-100); color:var(--bc-ink); text-align:left; font-weight:700; padding:11px 14px; border-bottom:2px solid var(--bc-primary-600); font-size:13px;}
+.bc-table td{padding:10px 14px; border-bottom:1px solid var(--bc-line-soft); vertical-align:top;}
+.bc-table tbody tr:nth-child(even) td{background:var(--bc-bg);}
+.bc-table tbody tr:last-child td{border-bottom:none;}
+.bc-table td.bc-num,.bc-table th.bc-num{text-align:right; font-variant-numeric:tabular-nums;}
+/* Phase divider row */
+.bc-table tr.bc-phase td{background:var(--bc-accent-100); color:var(--bc-accent-ink); font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:12px; border-top:1px solid var(--bc-accent-200);}
+.bc-table tr.bc-total td{background:var(--bc-fill); font-weight:700; border-top:2px solid var(--bc-primary-600);}
+
+/* ---------- Callouts ---------- */
+.bc-callout{border-radius:var(--bc-r-md); padding:14px 16px 14px 18px; margin:var(--bc-s-lg) 0; border-left:4px solid; font-size:14.5px;}
+.bc-callout .bc-callout-t{font-weight:700; margin-bottom:3px; display:block;}
+.bc-callout.info{background:var(--bc-info-bg); border-color:var(--bc-info); color:var(--bc-info-ink);}
+.bc-callout.good{background:var(--bc-good-bg); border-color:var(--bc-good); color:var(--bc-good-ink);}
+.bc-callout.warn{background:var(--bc-warn-bg); border-color:var(--bc-warn); color:var(--bc-warn-ink);}
+.bc-callout.bad {background:var(--bc-bad-bg);  border-color:var(--bc-bad);  color:var(--bc-bad-ink);}
+.bc-callout.accent{background:var(--bc-accent-100); border-color:var(--bc-accent-600); color:var(--bc-accent-ink);}
+
+/* ---------- Badges / chips ---------- */
+.bc-badge{display:inline-block; font-size:11.5px; font-weight:700; padding:3px 10px; border-radius:var(--bc-r-pill); letter-spacing:.02em; line-height:1.5;}
+.bc-badge.primary{background:var(--bc-primary-100); color:var(--bc-primary-ink);}
+.bc-badge.accent {background:var(--bc-accent-100); color:var(--bc-accent-ink);}
+.bc-badge.good{background:var(--bc-good-bg); color:var(--bc-good-ink);}
+.bc-badge.warn{background:var(--bc-warn-bg); color:var(--bc-warn-ink);}
+.bc-badge.bad {background:var(--bc-bad-bg);  color:var(--bc-bad-ink);}
+.bc-badge.gold{background:var(--bc-gold-soft); color:#7a6113;}
+.bc-badge.ghost{background:transparent; color:var(--bc-muted); border:1px solid var(--bc-line);}
+
+/* ---------- KPI / stat cards ---------- */
+.bc-kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:var(--bc-s-md); margin:var(--bc-s-lg) 0;}
+.bc-kpi{background:var(--bc-card); border:1px solid var(--bc-line); border-radius:var(--bc-r-md); padding:16px 18px; border-top:3px solid var(--bc-primary-600);}
+.bc-kpi .bc-kpi-v{font-size:26px; font-weight:800; color:var(--bc-primary-ink); line-height:1.1;}
+.bc-kpi .bc-kpi-l{font-size:12px; color:var(--bc-muted); margin-top:4px; text-transform:uppercase; letter-spacing:.04em;}
+.bc-kpi.accent{border-top-color:var(--bc-accent-600);} .bc-kpi.accent .bc-kpi-v{color:var(--bc-accent-700);}
+
+/* ---------- Phase divider (section banner) ---------- */
+.bc-phase-band{display:flex; align-items:center; gap:12px; margin:var(--bc-s-2xl) 0 var(--bc-s-md);}
+.bc-phase-band .bc-phase-no{flex:none; width:34px; height:34px; border-radius:9px; background:var(--bc-primary-800); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px;}
+.bc-phase-band .bc-phase-tx{font-size:18px; font-weight:700; color:var(--bc-ink);}
+.bc-phase-band::after{content:""; flex:1; height:1px; background:var(--bc-line);}
+
+/* ---------- Recommendation: 2 options + verdict (house standard) ---------- */
+.bc-options{display:grid; grid-template-columns:1fr 1fr; gap:var(--bc-s-lg); margin:var(--bc-s-lg) 0;}
+.bc-option{background:var(--bc-card); border:1px solid var(--bc-line); border-radius:var(--bc-r-md); padding:18px; position:relative;}
+.bc-option.bc-pick{border-color:var(--bc-primary-500); box-shadow:0 0 0 3px var(--bc-primary-100);}
+.bc-option .bc-opt-h{font-weight:700; font-size:16px; margin-bottom:6px; color:var(--bc-ink);}
+.bc-option .bc-opt-tag{position:absolute; top:-11px; right:14px;}
+.bc-recommend{background:var(--bc-good-bg); border:1px solid var(--bc-good); border-radius:var(--bc-r-md); padding:14px 16px; color:var(--bc-good-ink); font-weight:600;}
+@media(max-width:680px){ .bc-options{grid-template-columns:1fr;} }
+
+/* ---------- Footer ---------- */
+.bc-footer{margin-top:var(--bc-s-3xl); padding-top:var(--bc-s-lg); border-top:1px solid var(--bc-line); color:var(--bc-muted); font-size:12.5px; display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:space-between;}
+.bc-footer .bc-foot-brand{font-weight:700; color:var(--bc-primary-ink);}
+
+/* ---------- Utilities ---------- */
+.bc-row{display:flex; gap:var(--bc-s-lg); flex-wrap:wrap;}
+.bc-grid-2{display:grid; grid-template-columns:1fr 1fr; gap:var(--bc-s-lg);}
+.bc-grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--bc-s-lg);}
+@media(max-width:680px){ .bc-grid-2,.bc-grid-3{grid-template-columns:1fr;} }
+.bc-divider{height:1px; background:var(--bc-line); border:0; margin:var(--bc-s-xl) 0;}
+
+@media print{
+  .bc-doc{background:#fff; padding:0; font-size:11pt;}
+  .bc-card,.bc-kpi,.bc-table{box-shadow:none;}
+  .bc-masthead{box-shadow:none; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  .bc-table thead th,.bc-callout,.bc-badge,.bc-phase-band .bc-phase-no{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+}
+
+</style>
+<style>
+  /* page-only helpers — no brand tokens are redefined here */
+  .toc{columns:2;column-gap:32px;font-size:14px;margin:8px 0}
+  .toc a{display:block;padding:3px 0;border:0}
+  .toc a b{color:var(--bc-primary-ink)}
+  @media(max-width:680px){.toc{columns:1}}
+  .step{display:flex;gap:14px;margin:14px 0;align-items:flex-start}
+  .step .n{flex:none;width:30px;height:30px;border-radius:8px;background:var(--bc-primary-600);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .step .b{flex:1}
+  .step .b p{margin:.15em 0 .35em}
+  pre.bc-pre{background:#0B1566;color:#E7ECFB;font-family:var(--bc-mono);font-size:12.5px;line-height:1.6;padding:14px 16px;border-radius:10px;overflow-x:auto;margin:10px 0;border:1px solid var(--bc-primary-700)}
+  pre.bc-pre .cm{color:#8094E0}
+  pre.bc-pre .ok{color:#7FD7A8}
+  .prompt{background:var(--bc-fill);border:1px solid var(--bc-line);border-left:4px solid var(--bc-accent-600);border-radius:8px;padding:12px 14px;font-family:var(--bc-mono);font-size:12.5px;line-height:1.62;white-space:pre-wrap;color:var(--bc-ink2);margin:10px 0}
+  .prompt .ph{color:var(--bc-accent-700);font-weight:700}
+  .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--bc-accent-700);margin:22px 0 4px}
+  .kbd{font-family:var(--bc-mono);font-size:11.5px;background:#fff;border:1px solid var(--bc-line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;color:var(--bc-ink)}
+  .chk{list-style:none;padding:0;margin:10px 0}
+  .chk li{padding:5px 0 5px 28px;position:relative;border-bottom:1px solid var(--bc-line-soft)}
+  .chk li::before{content:"";position:absolute;left:4px;top:9px;width:12px;height:12px;border:2px solid var(--bc-primary-500);border-radius:3px}
+  .pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0}
+  .pipe .s{background:var(--bc-card);border:1px solid var(--bc-line);border-top:3px solid var(--bc-primary-600);border-radius:10px;padding:12px 10px;font-size:12.5px;position:relative}
+  .pipe .s b{display:block;color:var(--bc-primary-ink);font-size:12px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px}
+  @media(max-width:680px){.pipe{grid-template-columns:1fr;}}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:680px){.two{grid-template-columns:1fr}}
+  .num-tag{display:inline-block;min-width:22px}
+  /* sticky two-column layout */
+  .bc-layout{display:grid;grid-template-columns:225px minmax(0,1fr);gap:44px;align-items:start;margin-top:24px}
+  .bc-toc-side{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow-y:auto}
+  .bc-toc-h{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--bc-muted);padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--bc-line)}
+  .bc-toc-nav a{display:flex;gap:6px;align-items:baseline;padding:6px 10px;margin:1px 0;font-size:13px;color:var(--bc-ink2);border:0;border-radius:7px;border-left:2px solid transparent;text-decoration:none;line-height:1.35}
+  .bc-toc-nav a:hover{background:var(--bc-primary-50);color:var(--bc-primary-ink)}
+  .bc-toc-nav a.active{background:var(--bc-primary-50);color:var(--bc-primary-ink);border-left-color:var(--bc-primary-600);font-weight:700}
+  .bc-toc-nav .num-tag{color:var(--bc-primary-ink);font-weight:700;font-size:12px;min-width:24px}
+  .bc-main [id]{scroll-margin-top:20px}
+  @media(max-width:900px){
+    .bc-layout{grid-template-columns:1fr;gap:0}
+    .bc-toc-side{position:static;max-height:none;overflow:visible;margin-bottom:24px}
+  }
+  /* reading progress bar */
+  #bc-progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:9999;background:linear-gradient(90deg,var(--bc-primary-500),var(--bc-accent-600));transition:width .08s linear}
+  /* real logo */
+  .bc-masthead .bc-logo-img{height:30px;width:auto;display:block}
+  /* tabs */
+  .bc-tabs{display:flex;gap:6px;margin:26px 0 0;border-bottom:2px solid var(--bc-line);flex-wrap:wrap}
+  .bc-tab{appearance:none;border:0;background:transparent;font-family:inherit;font-size:14.5px;font-weight:700;color:var(--bc-muted);padding:11px 16px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:9px}
+  .bc-tab .t-no{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--bc-fill);color:var(--bc-muted);align-items:center;justify-content:center;font-size:12px;font-weight:800}
+  .bc-tab:hover{color:var(--bc-primary-ink)}
+  .bc-tab.is-active{color:var(--bc-primary-ink);border-bottom-color:var(--bc-primary-600)}
+  .bc-tab.is-active .t-no{background:var(--bc-primary-600);color:#fff}
+  .bc-panel[hidden]{display:none}
+  html{scroll-behavior:smooth}
+  /* content-engine workflow diagram */
+  .flow{display:flex;flex-direction:column;gap:0;margin:14px 0}
+  .flow .frow{display:flex;gap:12px;align-items:flex-start;padding:12px 0}
+  .flow .frow:not(:last-child){border-bottom:1px dashed var(--bc-line)}
+  .flow .fn{flex:none;width:30px;height:30px;border-radius:8px;background:var(--bc-primary-600);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .flow .ft{flex:1}
+  .flow .ft b{color:var(--bc-primary-ink)}
+  .flow .gate{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--bc-accent-700);background:var(--bc-accent-100);padding:2px 8px;border-radius:var(--bc-r-pill);white-space:nowrap}
+</style>
+</head>
+<body class="bc-doc">
+<div id="bc-progress"></div>
+<div class="bc-wrap bc-wide">
+
+  <!-- MASTHEAD -->
+  <header class="bc-masthead">
+    <div class="bc-brand"><svg class="bc-logo-img" role="img" aria-label="Blue Coral" style="color:#ffffff" width="210" height="50" viewBox="0 0 210 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M140.977 11.1597C137.51 11.1597 134.547 12.3046 132.124 14.628C129.733 16.9515 128.521 19.8474 128.521 23.3158C128.521 26.7842 129.733 29.6801 132.124 32.0035C134.547 34.2933 137.51 35.4382 140.977 35.4382C144.646 35.4382 148.013 33.8556 150.302 31.1617L147.474 28.7035C145.825 30.6566 143.637 31.6331 140.977 31.6331C138.621 31.6331 136.634 30.8587 135.052 29.276C133.47 27.6933 132.696 25.7066 132.696 23.3158C132.696 20.925 133.47 18.9382 135.052 17.3556C136.634 15.7729 138.621 14.9648 140.977 14.9648C143.569 14.9648 145.724 15.9076 147.407 17.827L150.268 15.3689C147.811 12.574 144.714 11.1597 140.977 11.1597Z" fill="currentColor"/>
+                <path d="M154.22 32.9464C156.004 34.6638 158.192 35.5393 160.784 35.5393C163.377 35.5393 165.565 34.6638 167.349 32.9464C169.133 31.2291 170.042 29.074 170.042 26.5484C170.042 24.0229 169.133 21.8678 167.349 20.1505C165.565 18.4331 163.377 17.5576 160.784 17.5576C158.192 17.5576 156.004 18.4331 154.22 20.1505C152.436 21.8678 151.527 24.0229 151.527 26.5484C151.527 29.074 152.436 31.2291 154.22 32.9464ZM160.784 31.8689C159.27 31.8689 158.024 31.3638 157.014 30.3535C156.038 29.3097 155.533 28.0638 155.533 26.5484C155.533 25.0331 156.038 23.7872 157.014 22.777C158.024 21.7331 159.27 21.228 160.784 21.228C162.266 21.228 163.511 21.7331 164.521 22.777C165.531 23.7872 166.036 25.0331 166.036 26.5484C166.036 28.0638 165.531 29.3097 164.521 30.3535C163.511 31.3638 162.266 31.8689 160.784 31.8689Z" fill="currentColor"/>
+                <path d="M176.886 35.0342V26.1107C176.886 23.3158 178.67 21.5648 181.464 21.5648C182.07 21.5648 182.643 21.6321 183.147 21.7331V17.827C182.811 17.7597 182.407 17.726 181.936 17.726C179.545 17.726 177.694 18.8035 176.886 20.5882V18.0627H172.88V35.0342H176.886Z" fill="currentColor"/>
+                <path d="M184.01 30.3535C184.01 33.4515 186.534 35.5056 190.271 35.5056C192.931 35.5056 194.849 34.7984 196.028 33.4178C196.196 33.9229 196.398 34.2933 196.634 34.5291C197.172 35.0678 197.879 35.3372 198.788 35.3372C199.63 35.3372 200.269 35.2025 200.673 34.9668V31.8352H200.572C199.596 31.8352 199.158 31.7005 199.158 30.5219V23.0127C199.158 19.5444 196.533 17.524 192.325 17.524C189.328 17.524 187.006 18.6689 185.356 20.9923L187.847 23.1138C189.059 21.6321 190.574 20.8913 192.392 20.8913C194.277 20.8913 195.22 21.6995 195.22 22.7433C195.22 24.0566 194.21 24.427 191.348 24.6964C186.332 25.1342 184.01 26.8852 184.01 30.3535ZM187.948 30.0168C187.948 28.8382 189.126 28.0974 191.483 27.828C193.099 27.6597 193.604 27.5923 194.378 27.3229C194.748 27.1882 195.051 27.0199 195.22 26.8178V28.7035C195.22 30.8587 193.57 32.0709 190.877 32.0709C189.025 32.0709 187.948 31.3301 187.948 30.0168Z" fill="currentColor"/>
+                <path d="M202.729 30.0168C202.729 33.6872 204.513 35.5056 208.081 35.5056C208.889 35.5056 209.529 35.4382 210 35.3035V31.7005C209.664 31.8015 209.26 31.8352 208.788 31.8352C207.307 31.8352 206.768 31.128 206.768 29.478V11.5638H202.729V30.0168Z" fill="currentColor"/>
+                <path d="M67.6464 35.0339C69.6999 35.0339 71.3831 34.3941 72.7297 33.0808C74.1099 31.7676 74.7832 30.0839 74.7832 28.0971C74.7832 25.1002 73.0663 22.8104 70.0702 22.2716C71.9554 21.5645 73.0663 19.8135 73.0663 17.5574C73.0663 15.84 72.4267 14.392 71.1475 13.2808C69.9019 12.1359 68.3534 11.5635 66.5019 11.5635H58.0186V35.0339H67.6464ZM62.2265 15.3686H65.9632C67.7138 15.3686 68.9593 16.5472 68.9593 18.1298C68.9593 19.8471 67.7138 21.0257 65.9296 21.0257H62.2265V15.3686ZM62.2265 24.5614H66.9058C69.0603 24.5614 70.6089 25.9757 70.6089 27.8614C70.6089 29.7808 69.0603 31.2288 66.9395 31.2288H62.2265V24.5614Z" fill="currentColor"/>
+                <path d="M77.8216 30.0165C77.8216 33.6869 79.6058 35.5053 83.1742 35.5053C83.9821 35.5053 84.6217 35.438 85.093 35.3033V31.7002C84.7564 31.8012 84.3524 31.8349 83.8811 31.8349C82.3999 31.8349 81.8613 31.1278 81.8613 29.4778V11.5635H77.8216V30.0165Z" fill="currentColor"/>
+                <path d="M87.1878 28.2992C87.1878 30.6227 87.9284 32.3737 89.3759 33.6196C90.8235 34.8655 92.675 35.4716 94.9305 35.4716C97.186 35.4716 99.0375 34.8655 100.519 33.6196C102 32.3737 102.741 30.5553 102.741 28.1982V18.0625H98.6672V27.9288C98.6672 30.488 97.2196 31.7676 94.9642 31.7676C92.7087 31.7676 91.2611 30.5216 91.2611 27.9625V18.0625H87.1878V28.2992Z" fill="currentColor"/>
+                <path d="M105.355 26.6829C105.355 29.3431 106.197 31.4645 107.846 33.0471C109.496 34.6298 111.684 35.438 114.343 35.438C117.205 35.438 119.561 34.4278 121.48 32.4074L119.056 30.0502C117.743 31.3635 116.228 32.0033 114.478 32.0033C111.482 32.0033 109.496 30.2523 109.361 27.5584H122.557C122.591 27.1206 122.625 26.6492 122.625 26.1441C122.625 23.7196 121.85 21.6992 120.268 20.0492C118.72 18.3992 116.7 17.591 114.242 17.591C111.65 17.591 109.529 18.3992 107.846 20.0492C106.197 21.6992 105.355 23.8543 105.355 26.5482V26.6829ZM109.462 24.7298C109.563 23.6859 110.068 22.8104 110.977 22.1033C111.886 21.3961 112.997 21.0257 114.242 21.0257C115.42 21.0257 116.397 21.3961 117.238 22.1369C118.08 22.8441 118.518 23.7196 118.518 24.7298H109.462Z" fill="currentColor"/>
+                <g clip-path="url(#clip0_4482_3133)">
+                <path d="M43.1933 25C42.4279 25.8519 41.5328 26.5771 40.5412 27.1488L39.6371 27.6709C40.3242 28.3575 40.8443 29.1932 41.1572 30.1135C41.4701 31.0337 41.5675 32.0138 41.4417 32.9777C41.3159 33.9417 40.9704 34.8637 40.4318 35.6725C39.8933 36.4812 39.1763 37.155 38.3361 37.6416L26.09 44.7245C25.1346 45.2852 24.0481 45.5824 22.9408 45.586C22.1089 45.5889 21.2847 45.4269 20.5155 45.1093C19.7464 44.7918 19.0476 44.3249 18.4594 43.7356C17.8711 43.1463 17.4051 42.4462 17.0881 41.6757C16.7711 40.9052 16.6094 40.0795 16.6123 39.2461V20.1121H12.2022V38.242V39.2461C12.1979 41.1344 12.6909 42.9905 13.6315 44.6269C14.5721 46.2633 15.927 47.6221 17.5594 48.5663C19.1918 49.5105 21.044 50.0065 22.9289 50.0044C24.8138 50.0022 26.6648 49.502 28.2951 48.5541L40.5412 41.4712C41.9209 40.6717 43.1058 39.5747 44.01 38.2597C44.9141 36.9447 45.5149 35.4446 45.7688 33.8682C46.0227 32.2918 45.9233 30.6786 45.4778 29.1455C45.0324 27.6123 44.252 26.1977 43.1933 25.004V25Z" fill="currentColor"/>
+                <path d="M40.5411 8.53288L28.295 1.44998C26.9181 0.649193 25.3802 0.166143 23.7933 0.0360054C22.2064 -0.0941319 20.6106 0.13192 19.122 0.697698C17.6333 1.26348 16.2894 2.15474 15.188 3.30658C14.0867 4.45841 13.2556 5.84183 12.7554 7.35608C13.9297 7.58522 15.0577 8.00872 16.093 8.60919L16.8387 9.03693C17.2172 7.70844 18.0168 6.53934 19.1169 5.70613C20.2169 4.87292 21.5577 4.42082 22.9367 4.41809C24.0436 4.42045 25.1302 4.7163 26.086 5.27559L38.332 12.3585C42.0526 14.5093 42.4836 19.5117 39.633 22.3292C39.2435 22.7176 38.8063 23.055 38.332 23.3333L35.4314 25.0101L21.8923 32.9344L24.0553 36.7902L39.6431 27.671L40.5471 27.1488C41.5387 26.5771 42.4338 25.8519 43.1992 25.0001C44.2579 23.8064 45.0383 22.3918 45.4838 20.8586C45.9292 19.3255 46.0286 17.7122 45.7748 16.1359C45.5209 14.5595 44.9201 13.0594 44.0159 11.7444C43.1117 10.4294 41.9269 9.33238 40.5471 8.53288H40.5411Z" fill="currentColor"/>
+                <path d="M16.8386 9.03687L16.0889 8.6031C15.0535 8.00263 13.9255 7.57913 12.7513 7.34999C12.087 7.21883 11.4117 7.15158 10.7346 7.14917C7.8865 7.15343 5.15645 8.28972 3.14383 10.3086C1.13122 12.3274 0.000527902 15.0639 0 17.9171L0 32.0829C0.00318348 34.9351 1.13559 37.6695 3.14879 39.6864C5.16199 41.7032 7.89155 42.8376 10.7386 42.8408C11.4157 42.8384 12.091 42.7711 12.7553 42.64C12.3888 41.5433 12.202 40.3945 12.202 39.2381V38.234C11.7233 38.3533 11.2319 38.4139 10.7386 38.4147C9.06143 38.4153 7.45266 37.7486 6.26594 36.5613C5.07923 35.3739 4.41171 33.7631 4.41012 32.0829V17.9171C4.40985 17.0845 4.57337 16.2599 4.89131 15.4906C5.20926 14.7213 5.6754 14.0223 6.26311 13.4336C6.85082 12.8448 7.54858 12.3778 8.31651 12.0593C9.08444 11.7408 9.90749 11.577 10.7386 11.5772C11.2318 11.5784 11.723 11.6384 12.202 11.756C12.7933 11.9009 13.3609 12.1295 13.8879 12.4347L16.6121 14.0112L30.3797 22.0761L32.5747 18.2424L16.8386 9.03687Z" fill="currentColor"/>
+                </g>
+                <path d="M60.5895 42.5714C60.954 42.5714 61.2696 42.6395 61.5362 42.7755C61.8082 42.9061 62.0204 43.0939 62.1727 43.3388C62.325 43.5837 62.4012 43.8748 62.4012 44.2122C62.4012 44.5497 62.325 44.8408 62.1727 45.0857C62.0204 45.3306 61.8082 45.5211 61.5362 45.6571C61.2696 45.7878 60.954 45.8531 60.5895 45.8531H59.3409V47.9592H58.688V42.5714H60.5895ZM60.4916 45.2408C60.9159 45.2408 61.226 45.1537 61.4219 44.9796C61.6178 44.8 61.7157 44.5442 61.7157 44.2122C61.7157 43.8748 61.6178 43.619 61.4219 43.4449C61.226 43.2707 60.9159 43.1837 60.4916 43.1837H59.3409V45.2408H60.4916Z" fill="currentColor"/>
+                <path d="M65.1642 43.7959C65.5505 43.7959 65.8905 43.8803 66.1843 44.049C66.4836 44.2177 66.7175 44.4626 66.8862 44.7837C67.0548 45.0993 67.1392 45.4776 67.1392 45.9184C67.1392 46.3592 67.0548 46.7401 66.8862 47.0612C66.7175 47.3769 66.4836 47.619 66.1843 47.7878C65.8905 47.9565 65.5505 48.0408 65.1642 48.0408C64.7834 48.0408 64.4433 47.9565 64.1441 47.7878C63.8449 47.619 63.6109 47.3769 63.4422 47.0612C63.2736 46.7401 63.1893 46.3592 63.1893 45.9184C63.1893 45.4776 63.2736 45.0993 63.4422 44.7837C63.6109 44.4626 63.8449 44.2177 64.1441 44.049C64.4433 43.8803 64.7834 43.7959 65.1642 43.7959ZM65.1642 44.3592C64.8867 44.3592 64.6501 44.4218 64.4542 44.5469C64.2583 44.6721 64.106 44.8517 63.9972 45.0857C63.8938 45.3143 63.8421 45.5918 63.8421 45.9184C63.8421 46.2395 63.8938 46.517 63.9972 46.751C64.106 46.985 64.2583 47.1646 64.4542 47.2898C64.6501 47.415 64.8867 47.4776 65.1642 47.4776C65.4417 47.4776 65.6783 47.415 65.8742 47.2898C66.0701 47.1646 66.2197 46.985 66.3231 46.751C66.4319 46.517 66.4863 46.2395 66.4863 45.9184C66.4863 45.5918 66.4319 45.3143 66.3231 45.0857C66.2197 44.8517 66.0701 44.6721 65.8742 44.5469C65.6783 44.4218 65.4417 44.3592 65.1642 44.3592Z" fill="currentColor"/>
+                <path d="M73.3577 43.8776H74.084L72.664 47.9592H72.0111L70.8604 44.7102L69.775 47.9592H69.1221L67.7021 43.8776H68.4285L69.4567 47.2L70.5666 43.8776H71.2195L72.3294 47.2L73.3577 43.8776Z" fill="currentColor"/>
+                <path d="M76.6409 48.0408C76.2546 48.0408 75.9092 47.9565 75.6045 47.7878C75.3052 47.619 75.0713 47.3769 74.9026 47.0612C74.734 46.7401 74.6496 46.3592 74.6496 45.9184C74.6496 45.4776 74.734 45.0993 74.9026 44.7837C75.0713 44.4626 75.3025 44.2177 75.5963 44.049C75.8901 43.8803 76.2247 43.7959 76.6001 43.7959C76.981 43.7959 77.3047 43.8776 77.5713 44.0408C77.8433 44.2041 78.05 44.4272 78.1915 44.7102C78.333 44.9878 78.4037 45.3007 78.4037 45.649C78.4037 45.7415 78.401 45.8259 78.3955 45.902C78.3901 45.9782 78.3819 46.0463 78.371 46.1061H75.074V45.5265H78.0854L77.7508 45.5918C77.7508 45.2 77.642 44.898 77.4244 44.6857C77.2122 44.4735 76.932 44.3673 76.5838 44.3673C76.3172 44.3673 76.086 44.4299 75.8901 44.5551C75.6997 44.6748 75.5501 44.8517 75.4413 45.0857C75.3379 45.3143 75.2862 45.5918 75.2862 45.9184C75.2862 46.2395 75.3406 46.517 75.4494 46.751C75.5582 46.985 75.7106 47.1646 75.9064 47.2898C76.1077 47.4095 76.3471 47.4694 76.6246 47.4694C76.9238 47.4694 77.1659 47.4122 77.3509 47.298C77.5413 47.1837 77.6937 47.0286 77.8079 46.8327L78.3221 47.1347C78.2187 47.3197 78.0854 47.4803 77.9222 47.6163C77.7644 47.7524 77.5767 47.8585 77.3591 47.9347C77.1469 48.0054 76.9075 48.0408 76.6409 48.0408Z" fill="currentColor"/>
+                <path d="M79.6454 47.9592V43.8776H80.1758L80.2656 44.5469C80.3798 44.2966 80.5458 44.1088 80.7634 43.9837C80.9865 43.8585 81.2558 43.7959 81.5713 43.7959C81.6421 43.7959 81.7182 43.8014 81.7998 43.8122C81.8869 43.8231 81.9603 43.8449 82.0202 43.8776L81.9059 44.4735C81.8461 44.4517 81.7808 44.4354 81.7101 44.4245C81.6393 44.4136 81.5387 44.4082 81.4081 44.4082C81.2395 44.4082 81.0681 44.4571 80.894 44.5551C80.7253 44.6531 80.5839 44.8027 80.4696 45.0041C80.3554 45.2 80.2982 45.4503 80.2982 45.7551V47.9592H79.6454Z" fill="currentColor"/>
+                <path d="M84.5548 48.0408C84.1685 48.0408 83.823 47.9565 83.5184 47.7878C83.2191 47.619 82.9852 47.3769 82.8165 47.0612C82.6479 46.7401 82.5635 46.3592 82.5635 45.9184C82.5635 45.4776 82.6479 45.0993 82.8165 44.7837C82.9852 44.4626 83.2164 44.2177 83.5102 44.049C83.804 43.8803 84.1386 43.7959 84.514 43.7959C84.8948 43.7959 85.2186 43.8776 85.4852 44.0408C85.7572 44.2041 85.9639 44.4272 86.1054 44.7102C86.2468 44.9878 86.3176 45.3007 86.3176 45.649C86.3176 45.7415 86.3148 45.8259 86.3094 45.902C86.304 45.9782 86.2958 46.0463 86.2849 46.1061H82.9879V45.5265H85.9993L85.6647 45.5918C85.6647 45.2 85.5559 44.898 85.3383 44.6857C85.1261 44.4735 84.8459 44.3673 84.4977 44.3673C84.2311 44.3673 83.9999 44.4299 83.804 44.5551C83.6136 44.6748 83.464 44.8517 83.3551 45.0857C83.2518 45.3143 83.2001 45.5918 83.2001 45.9184C83.2001 46.2395 83.2545 46.517 83.3633 46.751C83.4721 46.985 83.6245 47.1646 83.8203 47.2898C84.0216 47.4095 84.261 47.4694 84.5385 47.4694C84.8377 47.4694 85.0798 47.4122 85.2648 47.298C85.4552 47.1837 85.6076 47.0286 85.7218 46.8327L86.236 47.1347C86.1326 47.3197 85.9993 47.4803 85.8361 47.6163C85.6783 47.7524 85.4906 47.8585 85.273 47.9347C85.0608 48.0054 84.8214 48.0408 84.5548 48.0408Z" fill="currentColor"/>
+                <path d="M89.1506 48.0408C88.8133 48.0408 88.5032 47.9565 88.2203 47.7878C87.9374 47.619 87.7116 47.3769 87.5429 47.0612C87.3743 46.7401 87.2899 46.3592 87.2899 45.9184C87.2899 45.4667 87.3797 45.083 87.5592 44.7673C87.7388 44.4517 87.9755 44.2122 88.2692 44.049C88.563 43.8803 88.8786 43.7959 89.2159 43.7959C89.5532 43.7959 89.8443 43.883 90.0891 44.0571C90.3394 44.2313 90.5053 44.4626 90.587 44.751L90.5053 44.8082V42H91.1582V47.9592H90.587L90.5298 46.9714L90.6196 46.9224C90.5815 47.1619 90.489 47.366 90.3421 47.5347C90.2007 47.698 90.0238 47.8231 89.8117 47.9102C89.6049 47.9973 89.3846 48.0408 89.1506 48.0408ZM89.2159 47.4694C89.4771 47.4694 89.7029 47.4041 89.8933 47.2735C90.0891 47.1429 90.2388 46.9578 90.3421 46.7184C90.4509 46.4735 90.5053 46.1878 90.5053 45.8612C90.5053 45.551 90.4509 45.2844 90.3421 45.0612C90.2388 44.8381 90.0919 44.6667 89.9014 44.5469C89.7165 44.4272 89.4988 44.3673 89.2486 44.3673C88.8351 44.3673 88.5141 44.5088 88.2856 44.7918C88.0571 45.0748 87.9428 45.4503 87.9428 45.9184C87.9428 46.3864 88.0543 46.7619 88.2774 47.0449C88.5005 47.3279 88.8133 47.4694 89.2159 47.4694Z" fill="currentColor"/>
+                <path d="M97.4566 48.0408C97.2281 48.0408 97.0159 48 96.8201 47.9184C96.6242 47.8367 96.4555 47.7224 96.3141 47.5755C96.1726 47.4286 96.0665 47.2626 95.9958 47.0776L96.0856 46.9633L96.0285 47.9592H95.4572V42H96.1101V44.8L96.0285 44.6776C96.1373 44.4218 96.3195 44.2122 96.5752 44.049C96.8364 43.8803 97.1329 43.7959 97.4648 43.7959C97.8021 43.7959 98.1122 43.8803 98.3951 44.049C98.678 44.2177 98.9038 44.4599 99.0725 44.7755C99.2411 45.0912 99.3255 45.4721 99.3255 45.9184C99.3255 46.3592 99.2384 46.7401 99.0643 47.0612C98.8957 47.3769 98.6699 47.619 98.387 47.7878C98.1041 47.9565 97.7939 48.0408 97.4566 48.0408ZM97.3913 47.4694C97.7939 47.4694 98.1068 47.3279 98.3298 47.0449C98.5583 46.7619 98.6726 46.3864 98.6726 45.9184C98.6726 45.4503 98.5611 45.0748 98.338 44.7918C98.1149 44.5088 97.8021 44.3673 97.3995 44.3673C97.1438 44.3673 96.918 44.4327 96.7221 44.5633C96.5317 44.6939 96.3821 44.8762 96.2733 45.1102C96.1645 45.3442 96.1101 45.619 96.1101 45.9347C96.1101 46.2449 96.1618 46.517 96.2651 46.751C96.3739 46.9796 96.5236 47.1565 96.714 47.2816C96.9098 47.4068 97.1356 47.4694 97.3913 47.4694Z" fill="currentColor"/>
+                <path d="M103.808 43.8776L101.89 48.6449C101.787 48.9116 101.673 49.1211 101.548 49.2735C101.428 49.4313 101.292 49.5429 101.14 49.6082C100.993 49.6789 100.821 49.7143 100.626 49.7143C100.441 49.7143 100.269 49.6871 100.111 49.6327C99.9591 49.5837 99.8231 49.5156 99.7034 49.4286L99.8829 48.8571C99.9917 48.9551 100.106 49.0259 100.226 49.0694C100.351 49.1184 100.473 49.1429 100.593 49.1429C100.734 49.1429 100.868 49.0993 100.993 49.0122C101.118 48.9252 101.232 48.7483 101.336 48.4816L101.548 47.951L101.14 46.9796L99.8421 43.8776H100.585L101.605 46.5388L101.858 47.2653L102.152 46.4571L103.106 43.8776H103.808Z" fill="currentColor"/>
+                <path d="M111.325 47.9592H110.631L110.06 46.4653H107.62L107.048 47.9592H106.363L108.46 42.5714H109.235L111.325 47.9592ZM107.856 45.8531H109.823L108.836 43.2L107.856 45.8531Z" fill="currentColor"/>
+                <path d="M114.158 42.5714C115.001 42.5714 115.662 42.8054 116.141 43.2735C116.625 43.7361 116.867 44.4 116.867 45.2653C116.867 46.1306 116.625 46.7973 116.141 47.2653C115.662 47.7279 115.001 47.9592 114.158 47.9592H112.42V42.5714H114.158ZM114.223 47.3469C114.838 47.3469 115.317 47.1646 115.659 46.8C116.008 46.4299 116.182 45.9184 116.182 45.2653C116.182 44.6122 116.008 44.1034 115.659 43.7388C115.317 43.3687 114.838 43.1837 114.223 43.1837H113.072V47.3469H114.223Z" fill="currentColor"/>
+                <path d="M122.529 42.5714V47.9592H121.721L119.468 44.351L118.897 43.3388H118.889L118.921 44.1551V47.9592H118.301V42.5714H119.109L121.353 46.1633L121.933 47.2H121.941L121.908 46.3755V42.5714H122.529Z" fill="currentColor"/>
+                <path d="M126.024 42.4898C126.498 42.4898 126.906 42.5878 127.249 42.7837C127.591 42.9741 127.877 43.2571 128.105 43.6327L127.559 44.0571C127.357 43.7088 127.129 43.4639 126.873 43.3224C126.623 43.1755 126.318 43.102 125.959 43.102C125.671 43.102 125.431 43.1429 125.241 43.2245C125.056 43.3061 124.92 43.415 124.833 43.551C124.746 43.6816 124.702 43.8313 124.702 44C124.702 44.1905 124.762 44.3592 124.882 44.5061C125.002 44.6476 125.241 44.7592 125.6 44.8408L126.767 45.102C127.284 45.2163 127.643 45.3905 127.844 45.6245C128.051 45.8531 128.154 46.1388 128.154 46.4816C128.154 46.7864 128.067 47.0585 127.893 47.298C127.725 47.532 127.485 47.7143 127.175 47.8449C126.865 47.9755 126.501 48.0408 126.082 48.0408C125.69 48.0408 125.344 47.9891 125.045 47.8857C124.751 47.7769 124.498 47.6327 124.286 47.4531C124.074 47.2735 123.9 47.0721 123.764 46.849L124.335 46.3837C124.439 46.5905 124.572 46.7728 124.735 46.9306C124.898 47.0884 125.094 47.2109 125.323 47.298C125.557 47.385 125.823 47.4286 126.122 47.4286C126.4 47.4286 126.639 47.3959 126.841 47.3306C127.047 47.2599 127.205 47.1592 127.314 47.0286C127.423 46.8925 127.477 46.7293 127.477 46.5388C127.477 46.3646 127.42 46.2095 127.306 46.0735C127.191 45.932 126.977 45.8259 126.661 45.7551L125.396 45.4694C125.064 45.3932 124.795 45.2898 124.588 45.1592C124.387 45.0231 124.24 44.8653 124.147 44.6857C124.06 44.5007 124.017 44.302 124.017 44.0898C124.017 43.8014 124.096 43.5374 124.254 43.298C124.417 43.0531 124.648 42.8571 124.947 42.7102C125.252 42.5633 125.611 42.4898 126.024 42.4898Z" fill="currentColor"/>
+                <defs>
+                    <linearGradient id="paint0_linear_604:154" x1="12.2414" y1="20.068" x2="45.9056" y2="24.1474" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="currentColor" />
+                        <stop offset="1" stop-color="#CCCCCC" />
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_604:154" x1="25.163" y1="33.3334" x2="13.7055" y2="10.1446" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="currentColor" />
+                        <stop offset="1" stop-color="#CCCCCC" />
+                    </linearGradient>
+                    <linearGradient id="paint2_linear_604:154" x1="30.9436" y1="18.7075" x2="17.4757" y2="41.4981" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="currentColor" />
+                        <stop offset="1" stop-color="#CCCCCC" />
+                    </linearGradient>
+                    <clipPath id="clip0_604:154">
+                        <rect width="45.9053" height="50" fill="white" />
+                    </clipPath>
+                </defs>
+                </svg></div>
+    <h1>Building &amp; Running WordPress with AI</h1>
+    <div class="bc-sub">A hands-on, click-by-click playbook for non-developers. Use an AI coding assistant (Claude Code or Codex) to safely develop your WordPress site, then run an AI content engine that drafts posts for your review — without breaking your live website.</div>
+    <div class="bc-meta">
+      <span><b>Version</b> 1.0</span>
+      <span><b>Date</b> 15/06/2026</span>
+      <span><b>Audience</b> Site owners &amp; marketers (no coding required)</span>
+      <span><b>Reading time</b> ~25 min · doing time ~1 day</span>
+    </div>
+  </header>
+
+  <!-- WHAT YOU'LL ACHIEVE -->
+  <div class="bc-kpis">
+    <div class="bc-kpi"><div class="bc-kpi-v">0</div><div class="bc-kpi-l">Lines of code you write by hand</div></div>
+    <div class="bc-kpi"><div class="bc-kpi-v">100%</div><div class="bc-kpi-l">Changes tested locally before going live</div></div>
+    <div class="bc-kpi accent"><div class="bc-kpi-v">5-stage</div><div class="bc-kpi-l">Content pipeline, tracked in Excel</div></div>
+    <div class="bc-kpi"><div class="bc-kpi-v">Pending</div><div class="bc-kpi-l">Every AI post waits for your approval</div></div>
+  </div>
+
+  <div class="bc-callout info">
+    <span class="bc-callout-t">How to read this guide</span>
+    The guide has <strong>two tracks</strong> — use the tabs below. <strong>① Develop the site with AI</strong> covers setup, safe local development and deploying. <strong>② Run the content engine</strong> is the automated post-writing pipeline. Do the Develop track first (it installs the tools the content engine also needs), then switch tabs. Use the sticky menu on the left to jump around; the bar at the very top shows your reading progress. Every command sits in a dark box you can copy; every instruction you give the AI sits in a coral-edged <em>prompt box</em>; words in <span class="kbd">grey keys</span> are buttons you click.
+  </div>
+
+  <!-- TABS -->
+  <div class="bc-tabs" role="tablist">
+    <button class="bc-tab is-active" type="button" data-tab="dev"><span class="t-no">1</span> Develop the site with AI</button>
+    <button class="bc-tab" type="button" data-tab="content"><span class="t-no">2</span> Run the content engine</button>
+  </div>
+
+  <!-- TWO-COLUMN: sticky TOC sidebar + content -->
+  <div class="bc-layout">
+  <aside class="bc-toc-side">
+    <div class="bc-toc-h">On this page</div>
+    <nav class="bc-toc-nav" id="toc-dev" data-tab="dev">
+      <a href="#mental"><span class="num-tag">0</span> The mental model</a>
+      <a href="#part1"><span class="num-tag">1</span> Set up your AI cockpit</a>
+      <a href="#part2"><span class="num-tag">2</span> Context &amp; access</a>
+      <a href="#part3"><span class="num-tag">3</span> Local-first development</a>
+      <a href="#debate"><span class="num-tag">3.5</span> Foundation vs. Leaf</a>
+      <a href="#part5"><span class="num-tag">4</span> Prompt-writing playbook</a>
+      <a href="#rules"><span class="num-tag">5</span> Rules &amp; troubleshooting</a>
+      <a href="#glossary"><span class="num-tag">6</span> Glossary</a>
+    </nav>
+    <nav class="bc-toc-nav" id="toc-content" data-tab="content" hidden>
+      <a href="#ce-overview"><span class="num-tag">1</span> How the engine works</a>
+      <a href="#ce-tracker"><span class="num-tag">2</span> The Excel tracker</a>
+      <a href="#ce-local"><span class="num-tag">3</span> Setup A — Local LLM</a>
+      <a href="#ce-n8n"><span class="num-tag">4</span> Setup B — n8n</a>
+      <a href="#ce-sample"><span class="num-tag">5</span> n8n sample workflow</a>
+      <a href="#ce-review"><span class="num-tag">6</span> Review &amp; publish</a>
+    </nav>
+  </aside>
+  <main class="bc-main">
+  <div class="bc-panel" id="panel-dev" data-tab="dev">
+
+  <!-- ===================== PART 0 — MENTAL MODEL ===================== -->
+  <div class="bc-phase-band" id="mental"><span class="bc-phase-no">0</span><span class="bc-phase-tx">The mental model — how AI coding actually works</span></div>
+
+  <p>Before any clicks, understand what you are about to do. You are <strong>not</strong> learning to code. You are learning to <strong>direct a very fast, very literal junior developer</strong> who never gets tired, has read most of the internet, but has <em>no idea what your business is</em> until you tell it. Your job is three things only:</p>
+
+  <div class="bc-grid-3">
+    <div class="bc-card">
+      <h4>1 · Give context</h4>
+      <p class="bc-small">The AI can only make good decisions if it understands your site, your plugins, and your business goal. You feed it that context once, then keep it updated.</p>
+    </div>
+    <div class="bc-card">
+      <h4>2 · Set boundaries</h4>
+      <p class="bc-small">It works on a <em>copy</em> of your site on your own computer (local), never the live site directly. Nothing reaches customers until you press publish.</p>
+    </div>
+    <div class="bc-card">
+      <h4>3 · Review &amp; decide</h4>
+      <p class="bc-small">You judge whether the work is right — especially whether it respects your business logic. You approve; the AI executes. Never the reverse.</p>
+    </div>
+  </div>
+
+  <div class="bc-callout warn">
+    <span class="bc-callout-t">The one risk that matters most</span>
+    An AI will happily write code that <em>works</em> but is <em>structurally wrong</em> for your business — because it didn't understand what is foundational versus cosmetic. A wrong button colour is a 2-minute fix. A wrong data model (how your products, members, or orders are stored) can cost weeks. Section <a href="#debate">3.5</a> is the antidote: you <strong>debate</strong> the AI about what is foundation and what is leaf <em>before</em> it writes anything important.
+  </div>
+
+  <h3>The two "surfaces" you'll work with</h3>
+  <table class="bc-table">
+    <thead><tr><th>Surface</th><th>What it is</th><th>You use it for</th></tr></thead>
+    <tbody>
+      <tr><td><strong>The CLI</strong> (Terminal)</td><td>A text window where you chat with the AI assistant. "CLI" = Command-Line Interface. It looks intimidating but you mostly type plain English.</td><td>Telling the AI what to build, fix, or write. This is your steering wheel.</td></tr>
+      <tr><td><strong>WordPress admin</strong></td><td>The <code>/wp-admin</code> dashboard you already know.</td><td>Reviewing the AI's work visually, approving content, publishing.</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="bc-divider">
+
+  <!-- ===================== PART 1 — SET UP COCKPIT ===================== -->
+  <div class="bc-phase-band" id="part1"><span class="bc-phase-no">1</span><span class="bc-phase-tx">Set up your AI cockpit</span></div>
+
+  <p>You install three things, once: <strong>(a)</strong> a base toolkit (Node.js), <strong>(b)</strong> an AI coding assistant (the CLI), and <strong>(c)</strong> two free "skill packs" that make the assistant dramatically better at disciplined work and at WordPress specifically.</p>
+
+  <h3>1.1 — Choose your AI assistant</h3>
+  <p>Two excellent options. Both run in your Terminal, both can read and edit files and run commands for you. The difference that matters for <em>you</em>: which one the free skill packs are built for.</p>
+
+  <div class="bc-options">
+    <div class="bc-option bc-pick">
+      <span class="bc-opt-tag bc-badge good">Recommended</span>
+      <div class="bc-opt-h">Claude Code</div>
+      <p class="bc-small">Anthropic's CLI. The two skill packs in this guide (Superpowers + WordPress Agent Skills) are <strong>native to it</strong> — they install in one command and "just work". Best disciplined-workflow support (it can be told to test before shipping). <em>Best choice for non-developers.</em></p>
+    </div>
+    <div class="bc-option">
+      <span class="bc-opt-tag bc-badge ghost">Alternative</span>
+      <div class="bc-opt-h">Codex CLI</div>
+      <p class="bc-small">OpenAI's CLI. Very capable and a great fallback if you already pay for ChatGPT. The skills below follow the open "Agent Skills" standard, so they can be adapted to Codex, but it takes a little more manual wiring.</p>
+    </div>
+  </div>
+  <div class="bc-recommend">→ This guide is written for <strong>Claude Code</strong>. Every step works on Codex too; where a command differs, we note it. Pick one and stay with it for your first project.</div>
+
+  <h3>1.2 — Install the base toolkit &amp; the CLI</h3>
+  <p>You need <strong>Node.js</strong> (the engine these tools run on) and <strong>Git</strong> (used to download skills and track changes). Then the CLI itself.</p>
+
+  <div class="step"><span class="n">1</span><div class="b">
+    <p><strong>Install Node.js (LTS).</strong> Go to <code>nodejs.org</code> → click the big <span class="kbd">LTS</span> download button → run the installer → click <span class="kbd">Next</span> through to <span class="kbd">Finish</span>. This also installs <code>npm</code>, the command you'll use next.</p>
+  </div></div>
+  <div class="step"><span class="n">2</span><div class="b">
+    <p><strong>Install Git.</strong> Mac: it installs itself the first time you use it (or get it from <code>git-scm.com</code>). Windows: download from <code>git-scm.com</code>, run installer, accept defaults.</p>
+  </div></div>
+  <div class="step"><span class="n">3</span><div class="b">
+    <p><strong>Open your Terminal.</strong> Mac: press <span class="kbd">⌘ Space</span>, type "Terminal", <span class="kbd">Enter</span>. Windows: open the Start menu, type "PowerShell", <span class="kbd">Enter</span>.</p>
+  </div></div>
+  <div class="step"><span class="n">4</span><div class="b">
+    <p><strong>Confirm Node is ready.</strong> Type this and press <span class="kbd">Enter</span>. You should see version numbers, not errors.</p>
+    <pre class="bc-pre">node --version   <span class="cm"># should print something like v20.x or v22.x</span>
+npm --version    <span class="cm"># should print a number like 10.x</span></pre>
+  </div></div>
+  <div class="step"><span class="n">5</span><div class="b">
+    <p><strong>Install the CLI.</strong> Paste the line for your choice and press <span class="kbd">Enter</span>. (On Mac, if it complains about permissions, add <code>sudo </code> in front and enter your password.)</p>
+    <pre class="bc-pre"><span class="cm"># Recommended:</span>
+npm install -g @anthropic-ai/claude-code
+
+<span class="cm"># Alternative (Codex):</span>
+npm install -g @openai/codex</pre>
+  </div></div>
+  <div class="step"><span class="n">6</span><div class="b">
+    <p><strong>Start it and sign in.</strong> Move into a folder for your project first, then launch. The CLI will open a browser to log in the first time.</p>
+    <pre class="bc-pre">mkdir my-wordpress-project
+cd my-wordpress-project
+claude            <span class="cm"># (or: codex)  — then follow the sign-in prompt</span></pre>
+    <p class="bc-small bc-muted">You're now talking to the AI. Type "hello, what can you do?" to test. Press <span class="kbd">Ctrl</span>+<span class="kbd">C</span> twice to exit any time.</p>
+  </div></div>
+
+  <div class="bc-callout info"><span class="bc-callout-t">"It asked me to approve a command — what do I do?"</span>
+    Good. By default the assistant <em>asks permission</em> before running anything that changes files or your system. Read the one-line summary; if it matches what you asked for, approve it. This is your safety net — keep it on while you're learning.</div>
+
+  <h3>1.3 — Install the two skill packs</h3>
+  <p>Skills are pre-packaged expertise. Out of the box the AI is smart but undisciplined. These two packs fix that.</p>
+
+  <div class="two">
+    <div class="bc-card">
+      <h4>Superpowers <span class="bc-badge primary">discipline</span></h4>
+      <p class="bc-small">From <code>github.com/obra/superpowers</code>. Teaches the AI <em>professional habits</em>: brainstorm before building, test before claiming "done", debug systematically, and stop to get your sign-off at checkpoints. This is what stops the AI from confidently shipping broken work.</p>
+    </div>
+    <div class="bc-card">
+      <h4>WordPress Agent Skills <span class="bc-badge primary">domain</span></h4>
+      <p class="bc-small">From <code>github.com/WordPress/agent-skills</code>. The official WordPress skill pack: how to build plugins and blocks correctly, follow WordPress coding &amp; security standards, and use <code>WP-CLI</code> (the WordPress command tool). This is what stops the AI from writing un-WordPress-y, insecure code.</p>
+    </div>
+  </div>
+
+  <p><strong>Install both (Claude Code).</strong> Inside the <code>claude</code> session, skill packs install as "plugins" via a marketplace. Type these as messages/commands to the assistant:</p>
+  <pre class="bc-pre"><span class="cm"># 1) Add the Superpowers marketplace, then install it:</span>
+/plugin marketplace add obra/superpowers
+/plugin install superpowers
+
+<span class="cm"># 2) Add the WordPress skills the same way (repo: WordPress/agent-skills):</span>
+/plugin marketplace add WordPress/agent-skills
+/plugin install wordpress-agent-skills</pre>
+
+  <div class="bc-callout warn"><span class="bc-callout-t">Names can change — verify against the README</span>
+    Repos evolve. If a <code>/plugin install</code> name doesn't match, open the repo's README (the front page on GitHub) and copy the exact install command shown there. As a universal fallback that works for any Agent-Skills repo, you can clone it straight into your skills folder:
+    <pre class="bc-pre" style="margin-top:8px"><span class="cm"># Universal fallback — works for Claude Code AND Codex:</span>
+git clone https://github.com/obra/superpowers ~/.claude/skills/superpowers
+git clone https://github.com/WordPress/agent-skills ~/.claude/skills/wordpress</pre>
+    For Codex, place them in Codex's skills/prompts directory instead (see its README) — the skill <em>content</em> is portable; only the folder location differs.</div>
+
+  <p><strong>Confirm they loaded.</strong> Ask the assistant in plain English:</p>
+  <div class="prompt"><span class="ph">List the skills you currently have available, and tell me which ones relate to WordPress and which enforce a testing or review workflow.</span></div>
+
+  <hr class="bc-divider">
+
+  <!-- ===================== PART 2 — CONTEXT & ACCESS ===================== -->
+  <div class="bc-phase-band" id="part2"><span class="bc-phase-no">2</span><span class="bc-phase-tx">Give the AI a memory: context &amp; access</span></div>
+
+  <p>This is the step most people skip — and it's the one that decides whether the AI is brilliant or dangerous. Two files live in your project folder: a <strong>context file</strong> (what your site <em>is</em>) and a <strong>secure access file</strong> (how to <em>reach</em> it). Do this carefully.</p>
+
+  <h3>2.1 — Build the project context</h3>
+  <p>The goal: a single document the AI reads at the start of every session so it understands your plugin/site without re-explaining. The clever part — you don't write it by hand. You point the AI at your plugin/theme code and have it <em>generate the context for you</em>, then you correct it.</p>
+
+  <div class="lbl">Prompt — generate the context file</div>
+  <div class="prompt">Read every file in this project (the plugin/theme folder I've placed here). Then create a file called <span class="ph">CONTEXT.md</span> that documents, in plain English a non-developer can follow:
+1. What this plugin/theme does and the business problem it solves.
+2. Its main features and where each lives in the code.
+3. Custom data it stores — post types, taxonomies, database tables, options.
+4. Integrations — any external services, APIs, or payment/CRM connections.
+5. Anything fragile or risky to change.
+Keep it under two pages. After writing it, list the <span class="ph">5 things you are least sure about</span> so I can clarify them.</div>
+
+  <div class="step"><span class="n">1</span><div class="b"><p><strong>Put your code where the AI can see it.</strong> If you have the plugin/theme files, copy that folder into your project folder. If you don't yet, that's fine — you'll pull them from your live site in Part 3, then run this prompt.</p></div></div>
+  <div class="step"><span class="n">2</span><div class="b"><p><strong>Run the prompt above.</strong> The AI scans and drafts <code>CONTEXT.md</code>.</p></div></div>
+  <div class="step"><span class="n">3</span><div class="b"><p><strong>Correct it — this is the valuable part.</strong> Read the draft. Answer its "least sure about" list. Fix anything it misunderstood about your <em>business</em>. The 15 minutes you spend here prevents the structural mistakes warned about in Part 0.</p></div></div>
+
+  <div class="bc-callout good"><span class="bc-callout-t">Why this works</span>
+    From now on you can start any session with "Read CONTEXT.md first." The AI inherits a correct mental model instantly, instead of guessing. Keep <code>CONTEXT.md</code> updated as the site grows — treat it as the site's memory.</div>
+
+  <h3>2.2 — The secure access file (<code>prod.md</code>)</h3>
+  <p>To let the AI work with your real site, it needs connection details: SFTP (file access), the WordPress admin/REST credentials, and sometimes database access. You'll keep these in a file commonly called <code>prod.md</code> (or <code>.env</code>). <strong>This file is sensitive — treat it like a password vault.</strong></p>
+
+  <div class="bc-callout bad"><span class="bc-callout-t">Security — read before you create this file</span>
+    <ul style="margin:6px 0 0 18px;padding:0">
+      <li><strong>Never commit it to Git or send it in chat/email.</strong> Add it to <code>.gitignore</code> immediately (step 1 below).</li>
+      <li><strong>Use a WordPress Application Password, not your real login.</strong> It's a revocable, limited key — if anything leaks, you delete it and the damage stops.</li>
+      <li><strong>Prefer staging credentials</strong> over production wherever possible. Give the AI the least access it needs.</li>
+      <li>If your host offers it, store secrets in a manager (1Password, host vault) and reference them — don't paste raw passwords if you can avoid it.</li>
+    </ul>
+  </div>
+
+  <div class="step"><span class="n">1</span><div class="b">
+    <p><strong>Protect it first.</strong> Create a <code>.gitignore</code> so the secret file can never be uploaded by accident:</p>
+    <pre class="bc-pre">echo "prod.md" &gt;&gt; .gitignore
+echo ".env"   &gt;&gt; .gitignore</pre>
+  </div></div>
+  <div class="step"><span class="n">2</span><div class="b">
+    <p><strong>Create the WordPress Application Password.</strong> In <code>wp-admin</code> → <span class="kbd">Users</span> → your profile → scroll to <span class="kbd">Application Passwords</span> → type a name like "AI Assistant" → <span class="kbd">Add New Application Password</span> → <strong>copy the password shown (you only see it once).</strong></p>
+  </div></div>
+  <div class="step"><span class="n">3</span><div class="b">
+    <p><strong>Get your SFTP details</strong> from your host's control panel (host address, username, password or key, port — usually 22). If unsure, ask your host for "SFTP credentials".</p>
+  </div></div>
+  <div class="step"><span class="n">4</span><div class="b">
+    <p><strong>Fill in the template.</strong> Create <code>prod.md</code> with this shape (replace the bracketed parts):</p>
+    <pre class="bc-pre"><span class="cm"># prod.md — SENSITIVE. Never commit. Never paste in chat.</span>
+
+<span class="cm">## Site</span>
+URL:            https://yoursite.com
+WP admin:       https://yoursite.com/wp-admin
+
+<span class="cm">## WordPress REST API (for content + management)</span>
+WP_USER:        your-admin-username
+WP_APP_PASSWORD: xxxx xxxx xxxx xxxx xxxx xxxx   <span class="cm"># Application Password</span>
+
+<span class="cm">## SFTP (for files / plugin deploys)</span>
+SFTP_HOST:      sftp.yourhost.com
+SFTP_USER:      [user]
+SFTP_PORT:      22
+SFTP_KEY:       ~/.ssh/id_site   <span class="cm"># prefer a key over a password</span>
+
+<span class="cm">## Notes for the AI</span>
+- This is PRODUCTION. Do not deploy here without my explicit approval.
+- Always develop and test on LOCAL first (see Part 3).</pre>
+  </div></div>
+
+  <div class="bc-callout info"><span class="bc-callout-t">How the AI uses this safely</span>
+    You tell the assistant: <em>"Credentials are in <code>prod.md</code>. Use the WordPress REST API with the Application Password to read or create content. Do not touch production files or deploy without asking me first."</em> Because the assistant asks permission before acting (Part 1.2), you stay in control of every connection it makes.</div>
+
+  <hr class="bc-divider">
+
+  <!-- ===================== PART 3 — LOCAL-FIRST DEV ===================== -->
+  <div class="bc-phase-band" id="part3"><span class="bc-phase-no">3</span><span class="bc-phase-tx">Local-first development (the safe sandbox)</span></div>
+
+  <p><strong>The golden rule of this entire guide:</strong> the AI develops on a private copy of your site running on <em>your own computer</em> (called "local"). You see changes there first. Only when you're happy does anything reach the live site ("production"). This single habit removes ~90% of the risk of AI development.</p>
+
+  <div class="two">
+    <div class="bc-card"><h4>Local = sandbox</h4><p class="bc-small">A full copy of WordPress on your laptop. Break it, experiment, undo — customers never see it. No internet visitor can reach it.</p></div>
+    <div class="bc-card"><h4>Production = live</h4><p class="bc-small">Your real website that customers visit. Sacred. Changes arrive here only after you approve them locally.</p></div>
+  </div>
+
+  <h3>3.1 — Install a local WordPress (one-time)</h3>
+  <div class="bc-options">
+    <div class="bc-option bc-pick">
+      <span class="bc-opt-tag bc-badge good">Recommended</span>
+      <div class="bc-opt-h">LocalWP (by WP Engine)</div>
+      <p class="bc-small">Free, visual, one-click. No technical setup. Made exactly for non-developers. Pull your live site into it with a couple of clicks. <em>Use this.</em></p>
+    </div>
+    <div class="bc-option">
+      <span class="bc-opt-tag bc-badge ghost">Alternative</span>
+      <div class="bc-opt-h">wp-env (Docker)</div>
+      <p class="bc-small">The developer-favourite, fully command-line. More flexible and scriptable, but you'll be installing Docker and reading more docs. Choose only if a developer is helping you.</p>
+    </div>
+  </div>
+  <div class="bc-recommend">→ Use <strong>LocalWP</strong>. It's the fastest path from zero to a working sandbox for a non-developer.</div>
+
+  <div class="step"><span class="n">1</span><div class="b"><p><strong>Download &amp; install LocalWP</strong> from <code>localwp.com</code> → run the installer → open the app.</p></div></div>
+  <div class="step"><span class="n">2</span><div class="b"><p><strong>Create a site:</strong> click <span class="kbd">+ Create a new site</span> → give it a name → accept the defaults → set an admin username/password you'll remember → <span class="kbd">Add Site</span>. In ~1 minute you have a working WordPress at a local address.</p></div></div>
+  <div class="step"><span class="n">3</span><div class="b"><p><strong>Bring your live site in.</strong> Easiest for non-developers: install the free <em>"All-in-One WP Migration"</em> plugin on production, <span class="kbd">Export</span> the site to a file, then <span class="kbd">Import</span> that file into your Local site. Now your sandbox mirrors production. (Your host or Blue Coral can do this for you if preferred.)</p></div></div>
+  <div class="step"><span class="n">4</span><div class="b"><p><strong>Point the AI at the local files.</strong> In LocalWP, right-click your site → <span class="kbd">Open site shell</span> or <span class="kbd">Reveal in Finder/Explorer</span> to find the folder. Run <code>claude</code> from inside that folder (specifically the <code>wp-content</code> area where themes/plugins live).</p></div></div>
+
+  <h3>3.2 — Let the AI develop locally</h3>
+  <p>Now the loop you'll repeat for every change. Always brainstorm before building (the Superpowers skill enforces this if you let it).</p>
+
+  <div class="pipe">
+    <div class="s"><b>1 · Ask</b>Describe the change in plain English + the goal behind it.</div>
+    <div class="s"><b>2 · Agree plan</b>AI proposes an approach; you approve or adjust.</div>
+    <div class="s"><b>3 · Build</b>AI edits local files; approves each action with you.</div>
+    <div class="s"><b>4 · Test</b>You view it in the Local site; AI checks it works.</div>
+    <div class="s"><b>5 · Iterate</b>Refine until right — all still local.</div>
+  </div>
+
+  <div class="lbl">Prompt — a well-formed change request</div>
+  <div class="prompt">Read CONTEXT.md first. I want to <span class="ph">[describe the change, e.g. "add a 'Download brochure' button on every product page that logs each click"]</span>.
+The business goal is <span class="ph">[why — e.g. "I need to know which products generate brochure interest"]</span>.
+Before writing any code: tell me your plan, which files you'll touch, and whether any part of this is "foundation" (hard to change later) versus "leaf" (cosmetic). Wait for my approval. We are on LOCAL only — do not touch production.</div>
+
+  <div class="bc-callout good"><span class="bc-callout-t">Always state the <em>goal</em>, not just the task</span>
+    "Add a button" tells the AI <em>what</em>. "So I can track brochure interest per product" tells it <em>why</em> — and the why is what lets it choose a structurally correct solution (e.g. store clicks properly) instead of a quick hack.</div>
+
+  <!-- 3.5 DEBATE -->
+  <div class="bc-phase-band" id="debate"><span class="bc-phase-no">3.5</span><span class="bc-phase-tx">The "Foundation vs. Leaf" debate</span></div>
+
+  <p>This is the most important habit in the whole guide, and the cheapest insurance you'll ever buy. Before the AI builds anything non-trivial, you make it <strong>separate the foundation from the leaf — and defend the call.</strong></p>
+
+  <table class="bc-table">
+    <thead><tr><th>Foundation (the trunk) — get it right, hard to change</th><th>Leaf (the branches) — easy to change later</th></tr></thead>
+    <tbody>
+      <tr><td>How data is stored: post types, taxonomies, custom tables, fields</td><td>Colours, fonts, spacing, button styles</td></tr>
+      <tr><td>Integrations: payment, CRM, email, external APIs</td><td>Wording and copy on a page</td></tr>
+      <tr><td>User roles &amp; permissions, membership/access logic</td><td>Which widgets show in a sidebar</td></tr>
+      <tr><td>URL structure &amp; how content is organised</td><td>Layout of a single landing page</td></tr>
+      <tr><td>Anything other features will depend on later</td><td>Anything self-contained you can redo in an hour</td></tr>
+    </tbody>
+  </table>
+
+  <p>The danger: the AI doesn't know <em>your</em> business, so it may treat a foundational decision as casual and bolt on a quick fix that traps you later. You break that by forcing a short debate.</p>
+
+  <div class="lbl">Prompt — force the foundation/leaf debate</div>
+  <div class="prompt">Before coding, classify this work. Make a two-column list: what is FOUNDATION (expensive to change later, other things will depend on it) and what is LEAF (cosmetic, easily redone).
+For each FOUNDATION item, propose the option you'd choose and explain the trade-off in plain English — as if I'll have to live with it for two years.
+Then <span class="ph">argue against your own choice once</span>: what would make this decision wrong? Only after we agree on the foundation do you write code.</div>
+
+  <div class="bc-callout warn"><span class="bc-callout-t">Push back — you're allowed to disagree with the AI</span>
+    If the AI's reasoning doesn't match how your business actually works, say so: <em>"No — our members can belong to multiple companies, so that one-to-one structure is wrong. Rethink the foundation."</em> The AI is fast and knowledgeable but you are the domain expert. The debate exists so your knowledge shapes the structure <strong>before</strong> code is written, not after.</div>
+
+  <h3>3.6 — Review and push to production</h3>
+  <p>Once it's right on Local and you've reviewed it, you promote it to the live site. For non-developers, keep this <strong>controlled and reversible</strong>.</p>
+
+  <div class="bc-options">
+    <div class="bc-option bc-pick">
+      <span class="bc-opt-tag bc-badge good">Recommended</span>
+      <div class="bc-opt-h">Plugin / managed deploy</div>
+      <p class="bc-small">Use your host's staging→live "push" button, or a migration plugin, to move tested changes up. Simple, visual, and your host keeps backups. Safest for non-developers.</p>
+    </div>
+    <div class="bc-option">
+      <span class="bc-opt-tag bc-badge ghost">Alternative</span>
+      <div class="bc-opt-h">AI-assisted SFTP deploy</div>
+      <p class="bc-small">Let the AI upload the specific changed files via SFTP using <code>prod.md</code>. Faster for small code changes — but only with a backup taken first and your explicit go-ahead each time.</p>
+    </div>
+  </div>
+  <div class="bc-recommend">→ Whichever you pick: <strong>back up production first</strong>, deploy, then check the live site immediately.</div>
+
+  <ul class="chk">
+    <li><strong>Backup taken</strong> of production (host snapshot or migration export) before any deploy.</li>
+    <li>Change <strong>tested and approved on Local</strong> — you saw it work with your own eyes.</li>
+    <li>Foundation/leaf debate done for anything structural.</li>
+    <li>Deploy only the <strong>changed files/content</strong>, not the whole site, unless doing a full migration.</li>
+    <li>After deploy: open the live site, click through the affected pages, confirm nothing else broke.</li>
+    <li>Know your <strong>rollback</strong>: "if this breaks, restore the backup from [where]".</li>
+  </ul>
+
+  <div class="lbl">Prompt — controlled deploy</div>
+  <div class="prompt">The change on Local is approved. Walk me through deploying ONLY the files we changed to production using the SFTP details in prod.md.
+First: list exactly which files will be uploaded and confirm a backup exists. Wait for my "go".
+After upload: tell me the precise pages I should check on the live site to verify it worked, and how to roll back if it didn't.</div>
+
+  <hr class="bc-divider">
+
+  <!-- ===================== PART 5 — PROMPT PLAYBOOK ===================== -->
+  <div class="bc-phase-band" id="part5"><span class="bc-phase-no">4</span><span class="bc-phase-tx">The prompt-writing playbook</span></div>
+
+  <p>Everything above depends on one skill: writing a clear instruction. A good prompt has six parts. You won't always use all six, but keep them in mind.</p>
+
+  <table class="bc-table">
+    <thead><tr><th>Part</th><th>What it does</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Context</strong></td><td>Point to what it should know first</td><td>"Read CONTEXT.md first."</td></tr>
+      <tr><td><strong>Task</strong></td><td>The concrete thing to do</td><td>"Add a brochure-download button to product pages."</td></tr>
+      <tr><td><strong>Goal</strong></td><td>The <em>why</em> — enables good judgement</td><td>"So I can track interest per product."</td></tr>
+      <tr><td><strong>Constraints</strong></td><td>Boundaries &amp; rules</td><td>"Local only. WordPress standards. Ask before deploying."</td></tr>
+      <tr><td><strong>Output</strong></td><td>What you want back &amp; in what form</td><td>"Show me the plan as a short bullet list first."</td></tr>
+      <tr><td><strong>Verify</strong></td><td>How you'll both know it worked</td><td>"Then tell me exactly how to test it."</td></tr>
+    </tbody>
+  </table>
+
+  <div class="two">
+    <div class="bc-card"><h4>Weak prompt</h4>
+      <div class="prompt" style="border-left-color:var(--bc-bad)">make a button to download the brochure</div>
+      <p class="bc-small bc-muted">No context, no goal, no boundaries. The AI guesses — and may guess structurally wrong.</p>
+    </div>
+    <div class="bc-card"><h4>Strong prompt</h4>
+      <div class="prompt" style="border-left-color:var(--bc-good)">Read CONTEXT.md first. Add a "Download brochure" button to every product page <span class="ph">(task)</span> so I can track which products drive interest <span class="ph">(goal)</span>. Local only; follow WordPress standards; classify foundation vs leaf before coding <span class="ph">(constraints)</span>. Give me the plan first <span class="ph">(output)</span>, then how to test it <span class="ph">(verify)</span>.</div>
+    </div>
+  </div>
+
+  <h3>Five habits that make the AI reliable</h3>
+  <ul class="chk">
+    <li><strong>Always give the goal, not just the task</strong> — the "why" is what produces correct structure.</li>
+    <li><strong>Ask for the plan before the code</strong> — cheap to fix a plan, expensive to undo code.</li>
+    <li><strong>Make it debate foundation vs leaf</strong> on anything structural (Part 3.5).</li>
+    <li><strong>Demand a test step</strong> — "tell me how to verify this worked" — never trust "done" alone.</li>
+    <li><strong>One change at a time</strong> — small, reviewable steps beat one giant request you can't check.</li>
+  </ul>
+
+  <hr class="bc-divider">
+
+  <!-- ===================== PART 6 — RULES & TROUBLESHOOTING ===================== -->
+  <div class="bc-phase-band" id="rules"><span class="bc-phase-no">5</span><span class="bc-phase-tx">Golden rules &amp; troubleshooting</span></div>
+
+  <div class="bc-card">
+    <h3 style="margin-top:0">The 7 golden rules</h3>
+    <ul class="chk">
+      <li><strong>Local first, always.</strong> Develop and test on your computer; production is the last step.</li>
+      <li><strong>Back up before every deploy.</strong> A snapshot is your undo button.</li>
+      <li><strong>Secrets never leave <code>prod.md</code>.</strong> Use Application Passwords; never commit or paste them.</li>
+      <li><strong>Foundation gets a debate.</strong> Structure is expensive to change — decide it deliberately.</li>
+      <li><strong>Content is always "Pending".</strong> A human approves every post before the public sees it.</li>
+      <li><strong>You approve; the AI executes.</strong> Keep permission prompts on. Read before you approve.</li>
+      <li><strong>One small change at a time.</strong> Reviewable steps, tracked in <code>CONTEXT.md</code> / Excel.</li>
+    </ul>
+  </div>
+
+  <table class="bc-table">
+    <thead><tr><th>Symptom</th><th>Likely cause</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr><td>AI's code "works" but is wrong for your business</td><td>Missing context / no foundation debate</td><td>Update CONTEXT.md; re-run the foundation/leaf debate (3.5) before rebuilding.</td></tr>
+      <tr><td>Live site broke after a deploy</td><td>Untested change or no backup</td><td>Restore the pre-deploy backup; reproduce and fix on Local; redeploy.</td></tr>
+      <tr><td>"Permission denied" / can't connect to WordPress</td><td>Wrong Application Password or SFTP details</td><td>Regenerate the Application Password; re-check host/port in prod.md.</td></tr>
+      <tr><td>A post went public unexpectedly</td><td>A prompt used <code>publish</code></td><td>Set it back to draft; fix every prompt to use <code>pending</code> only.</td></tr>
+      <tr><td>AI says "done" but it isn't</td><td>No verification step</td><td>Always add "tell me how to test this"; confirm with your own eyes.</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="bc-divider">
+
+  <!-- ===================== PART 7 — GLOSSARY ===================== -->
+  <div class="bc-phase-band" id="glossary"><span class="bc-phase-no">6</span><span class="bc-phase-tx">Glossary</span></div>
+  <table class="bc-table">
+    <tbody>
+      <tr><td><strong>CLI / Terminal</strong></td><td>The text window where you chat with the AI assistant and run commands.</td></tr>
+      <tr><td><strong>Local</strong></td><td>A private copy of your website running on your own computer. Your safe sandbox.</td></tr>
+      <tr><td><strong>Production</strong></td><td>Your live website that real customers visit.</td></tr>
+      <tr><td><strong>Skill / Skill pack</strong></td><td>Pre-packaged expertise that makes the AI better at a task (e.g. WordPress, disciplined workflows).</td></tr>
+      <tr><td><strong>Foundation vs Leaf</strong></td><td>Foundation = structural decisions that are costly to change. Leaf = cosmetic changes that are cheap to redo.</td></tr>
+      <tr><td><strong>Application Password</strong></td><td>A revocable WordPress key for tools, separate from your real login. Safer to share with the AI.</td></tr>
+      <tr><td><strong>REST API</strong></td><td>The doorway that lets the AI create/read WordPress content programmatically.</td></tr>
+      <tr><td><strong>WP-CLI</strong></td><td>WordPress's own command tool the AI can use to manage the site.</td></tr>
+      <tr><td><strong>Pending</strong></td><td>A post saved in WordPress but hidden from the public until a human publishes it.</td></tr>
+      <tr><td><strong>n8n</strong></td><td>A visual automation tool that can run the content pipeline on a schedule.</td></tr>
+      <tr><td><strong>SFTP</strong></td><td>A secure way to transfer website files between your computer and the server.</td></tr>
+    </tbody>
+  </table>
+
+  </div><!-- /panel-dev -->
+
+  <!-- ===================================================================
+       PANEL 2 — THE CONTENT ENGINE
+       =================================================================== -->
+  <div class="bc-panel" id="panel-content" data-tab="content" hidden>
+
+  <!-- CE.1 — HOW IT WORKS -->
+  <div class="bc-phase-band" id="ce-overview"><span class="bc-phase-no">1</span><span class="bc-phase-tx">How the content engine works</span></div>
+
+  <p>This is a repeatable system that researches, writes, and illustrates blog posts — then drops each one into WordPress as <strong>Pending Review</strong> so a human approves every word before the public sees it. Nothing auto-publishes. Every stage is logged in an Excel tracker so you can manage and QC the flow at a glance.</p>
+
+  <div class="bc-callout warn"><span class="bc-callout-t">Prerequisites from the Develop tab</span>
+    The engine reuses two things you set up in <strong>① Develop the site</strong>: the AI assistant (Part 1) and the secure <code>prod.md</code> credentials file with your WordPress Application Password (Part 2). If you skipped those, do them first.</div>
+
+  <h3>The five stages</h3>
+  <div class="pipe">
+    <div class="s"><b>1 · Collect</b>Gather source articles &amp; references on your topic.</div>
+    <div class="s"><b>2 · Keywords</b>Extract the keywords/intents worth targeting.</div>
+    <div class="s"><b>3 · Create</b>Draft the content + a matching image per keyword.</div>
+    <div class="s"><b>4 · Push</b>Upload to WordPress as <em>Pending</em>, one by one.</div>
+    <div class="s"><b>5 · Review</b>You edit, approve, schedule, publish.</div>
+  </div>
+
+  <h3>How the data flows (and where humans step in)</h3>
+  <p>Follow one article through the machine. At each stage, something goes <em>in</em>, the AI does work, and a result is written to the Excel tracker. Two checkpoints are human gates — the engine pauses for you.</p>
+
+  <div class="flow">
+    <div class="frow"><span class="fn">1</span><div class="ft"><b>Collect.</b> <em>In:</em> a topic. <em>Out:</em> 3–5 source links + key points → written to <code>Sources</code> column. <span class="gate">auto</span></div></div>
+    <div class="frow"><span class="fn">2</span><div class="ft"><b>Keywords.</b> <em>In:</em> the sources. <em>Out:</em> one primary + several secondary keywords + intent → written to <code>keyword</code> columns. <span class="gate">gate · you approve</span></div></div>
+    <div class="frow"><span class="fn">3</span><div class="ft"><b>Create.</b> <em>In:</em> approved keywords. <em>Out:</em> a 600–1,000-word draft + featured image saved to disk; <code>Title / Draft status / Image</code> filled. <span class="gate">gate · you approve drafts</span></div></div>
+    <div class="frow"><span class="fn">4</span><div class="ft"><b>Push.</b> <em>In:</em> approved drafts. <em>Out:</em> a WordPress post created with <code>status = pending</code>; <code>WP post ID</code> recorded. <span class="gate">auto</span></div></div>
+    <div class="frow"><span class="fn">5</span><div class="ft"><b>Review.</b> <em>In:</em> pending posts in <code>wp-admin</code>. <em>Out:</em> you publish/schedule; <code>Reviewer / Published date</code> filled. <span class="gate">human</span></div></div>
+  </div>
+
+  <div class="bc-callout good"><span class="bc-callout-t">The one rule that never changes</span>
+    No matter which setup you choose below, Stage 4 always writes <code>status = pending</code> — never <code>publish</code>. That single setting is your guarantee that AI never speaks to your audience without a human sign-off.</div>
+
+  <!-- CE.2 — EXCEL TRACKER -->
+  <div class="bc-phase-band" id="ce-tracker"><span class="bc-phase-no">2</span><span class="bc-phase-tx">The Excel tracker (your control panel)</span></div>
+  <p>One workbook, one row per article, columns that mirror the five stages. The AI fills columns as it works; you QC each stage by reading the sheet. This is your single source of truth whichever setup you run.</p>
+
+  <table class="bc-table">
+    <thead><tr><th>Column</th><th>Stage</th><th>What goes here</th></tr></thead>
+    <tbody>
+      <tr class="bc-phase"><td colspan="3">Stage 1 — Collect</td></tr>
+      <tr><td>ID</td><td>1</td><td>Simple row number (1, 2, 3…)</td></tr>
+      <tr><td>Topic</td><td>1</td><td>The subject of this article</td></tr>
+      <tr><td>Sources</td><td>1</td><td>Links to the reference articles collected</td></tr>
+      <tr class="bc-phase"><td colspan="3">Stage 2 — Keywords</td></tr>
+      <tr><td>Primary keyword</td><td>2</td><td>The main term to rank for</td></tr>
+      <tr><td>Secondary keywords</td><td>2</td><td>Supporting terms / questions</td></tr>
+      <tr><td>Search intent</td><td>2</td><td>Informational / commercial / how-to</td></tr>
+      <tr class="bc-phase"><td colspan="3">Stage 3 — Create</td></tr>
+      <tr><td>Title</td><td>3</td><td>Proposed post title</td></tr>
+      <tr><td>Draft status</td><td>3</td><td>Drafted / needs edit / approved-to-push</td></tr>
+      <tr><td>Image file</td><td>3</td><td>Path/name of the generated featured image</td></tr>
+      <tr class="bc-phase"><td colspan="3">Stage 4 — Push</td></tr>
+      <tr><td>WP post ID</td><td>4</td><td>Returned by WordPress after upload</td></tr>
+      <tr><td>WP status</td><td>4</td><td>Pending (always) — never auto-publish</td></tr>
+      <tr class="bc-phase"><td colspan="3">Stage 5 — Review</td></tr>
+      <tr><td>Reviewer</td><td>5</td><td>Who approved it</td></tr>
+      <tr><td>Published date</td><td>5</td><td>Date you published / scheduled</td></tr>
+    </tbody>
+  </table>
+  <div class="bc-callout info"><span class="bc-callout-t">Keep the sheet honest</span>
+    Tell the AI: <em>"After every stage, update the tracker row and never skip a column. If you couldn't complete a step, write why in that cell."</em> Now the sheet shows at a glance what's collected, drafted, pushed, and pending.</div>
+
+  <!-- CE.3 — SETUP A: LOCAL LLM -->
+  <div class="bc-phase-band" id="ce-local"><span class="bc-phase-no">3</span><span class="bc-phase-tx">Setup A — Run it through your local AI</span></div>
+
+  <div class="bc-options">
+    <div class="bc-option bc-pick">
+      <span class="bc-opt-tag bc-badge good">Start here</span>
+      <div class="bc-opt-h">Setup A — Local LLM (assistant-driven)</div>
+      <p class="bc-small">You drive each stage by prompting your AI assistant in the Terminal; it reads/writes the Excel tracker and pushes drafts via the WordPress REST API. Zero extra tools, full visibility, easy to QC. Perfect for learning the workflow and for low-to-medium volume.</p>
+    </div>
+    <div class="bc-option">
+      <span class="bc-opt-tag bc-badge ghost">Later</span>
+      <div class="bc-opt-h">Setup B — n8n (automated)</div>
+      <p class="bc-small">The same five stages, but running unattended on a schedule. More setup and a monthly cost. Covered in section 4–5. Move here only once Setup A reliably produces posts you'd publish.</p>
+    </div>
+  </div>
+  <div class="bc-recommend">→ <strong>Prove quality with Setup A first.</strong> Automating bad prompts just scales up mistakes.</div>
+
+  <h3>The run loop</h3>
+  <div class="step"><span class="n">1</span><div class="b"><p>Create an empty <code>content-tracker.xlsx</code> with the columns above (or ask the AI to create it). Keep it in your project folder.</p></div></div>
+  <div class="step"><span class="n">2</span><div class="b"><p>Open the Terminal in that folder and run <code>claude</code> (or <code>codex</code>).</p></div></div>
+  <div class="step"><span class="n">3</span><div class="b"><p>Run the four stage-prompts below in order. After Stage 2 and Stage 3, <strong>stop and review</strong> in the tracker before continuing — those are your gates.</p></div></div>
+  <div class="step"><span class="n">4</span><div class="b"><p>When drafts are pushed, switch to <code>wp-admin</code> for Stage 5 (section 6).</p></div></div>
+
+  <div class="lbl">Stage 1 — Collect</div>
+  <div class="prompt">For the topic "<span class="ph">[your topic]</span>", find <span class="ph">5</span> strong reference articles. For each, capture the title, link, and 3 key points. Create/append rows in content-tracker.xlsx with the Topic and Sources columns filled. Do not invent sources — only list ones you actually found, and flag any you're unsure about.</div>
+
+  <div class="lbl">Stage 2 — Extract keywords <span class="bc-badge accent">gate</span></div>
+  <div class="prompt">For each row that has Sources but no keywords, extract one Primary keyword, 3–5 Secondary keywords, and label the Search intent — based on the sources, not guesswork. Fill those columns and show me the table so I can approve before Stage 3.</div>
+
+  <div class="lbl">Stage 3 — Create content + image <span class="bc-badge accent">gate</span></div>
+  <div class="prompt">For each approved row, write a WordPress-ready post (600–1,000 words) targeting the Primary keyword naturally, in <span class="ph">our brand voice [describe it]</span>. Include a title, meta description, headings, and a relevant featured image saved to <span class="ph">/images</span>. Save the post body as a file; update Title / Draft status / Image file in the tracker. Do NOT push to WordPress yet — I review drafts first.</div>
+
+  <div class="lbl">Stage 4 — Push to WordPress as Pending</div>
+  <div class="prompt">For each row marked "approved-to-push", use the WordPress REST API with the credentials in prod.md to: (1) upload the featured image to the media library, (2) create the post with status = <span class="ph">pending</span> (never "publish"), with title, content and the featured image attached. Record the returned WP post ID and set WP status = Pending in the tracker. Process them one at a time and report each result.</div>
+
+  <!-- CE.4 — SETUP B: n8n -->
+  <div class="bc-phase-band" id="ce-n8n"><span class="bc-phase-no">4</span><span class="bc-phase-tx">Setup B — Automate with n8n</span></div>
+  <p><strong>n8n</strong> is a visual automation tool: you connect "nodes" (little boxes that each do one job) into a flow that runs on a schedule, unattended. It runs the exact same five stages — and still stops at Pending for your review. Graduate here once Setup A's prompts are proven and you want volume without hand-holding.</p>
+
+  <div class="bc-options">
+    <div class="bc-option bc-pick">
+      <span class="bc-opt-tag bc-badge good">Easiest</span>
+      <div class="bc-opt-h">n8n Cloud</div>
+      <p class="bc-small">Sign up at <code>n8n.io</code>, nothing to install. Monthly fee. Best if you don't run your own server. Recommended for non-technical teams.</p>
+    </div>
+    <div class="bc-option">
+      <span class="bc-opt-tag bc-badge ghost">Self-host</span>
+      <div class="bc-opt-h">n8n on Docker</div>
+      <p class="bc-small">Free software you run on your own machine/server (<code>docker run n8nio/n8n</code>). Cheaper at scale, but you maintain it. Choose with technical help.</p>
+    </div>
+  </div>
+  <div class="bc-recommend">→ Start on <strong>n8n Cloud</strong>; move to self-host only if cost or data-residency demands it.</div>
+
+  <h3>What the workflow looks like (node by node)</h3>
+  <table class="bc-table">
+    <thead><tr><th>#</th><th>Node</th><th>Job (maps to a stage)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Schedule Trigger</td><td>Starts the flow on a timer (e.g. every Monday 07:00)</td></tr>
+      <tr><td>2</td><td>RSS / HTTP Read</td><td><strong>Collect</strong> — pull recent source articles</td></tr>
+      <tr><td>3</td><td>Limit</td><td>Take the few newest items so you don't flood the queue</td></tr>
+      <tr><td>4</td><td>HTTP → LLM</td><td><strong>Keywords</strong> — ask the model for primary/secondary keywords</td></tr>
+      <tr><td>5</td><td>HTTP → LLM</td><td><strong>Create</strong> — ask the model for a titled, formatted draft</td></tr>
+      <tr><td>6</td><td>HTTP → WordPress</td><td><strong>Push</strong> — create the post with <code>status = pending</code></td></tr>
+      <tr><td>7</td><td>Google Sheets / Excel</td><td>Log the row to your tracker for QC</td></tr>
+    </tbody>
+  </table>
+
+  <div class="bc-callout warn"><span class="bc-callout-t">Credentials you'll attach inside n8n</span>
+    (1) Your <strong>LLM API key</strong> (Anthropic or OpenAI) on the two HTTP→LLM nodes; (2) a <strong>WordPress Application Password</strong> as an "HTTP Basic Auth" credential on the WordPress node; (3) optionally a <strong>Google Sheets</strong> connection for the tracker. Store these in n8n's credential vault — never paste them into a node's plain text.</div>
+
+  <!-- CE.5 — SAMPLE WORKFLOW -->
+  <div class="bc-phase-band" id="ce-sample"><span class="bc-phase-no">5</span><span class="bc-phase-tx">n8n — sample workflow (import this)</span></div>
+  <p>We've prepared a ready-to-import starter workflow with all seven nodes wired together. Import it, then attach your own credentials and adjust the prompts/schedule.</p>
+
+  <div class="step"><span class="n">1</span><div class="b"><p><strong>Download the file:</strong> <a href="data:application/json;base64,ewogICJuYW1lIjogIkJsdWUgQ29yYWwg4oCUIEFJIENvbnRlbnQgUGlwZWxpbmUgKGNvbGxlY3Qg4oaSIGtleXdvcmRzIOKGkiBkcmFmdCDihpIgV1AgcGVuZGluZykiLAogICJub2RlcyI6IFsKICAgIHsKICAgICAgInBhcmFtZXRlcnMiOiB7CiAgICAgICAgInJ1bGUiOiB7ICJpbnRlcnZhbCI6IFsgeyAiZmllbGQiOiAiY3JvbkV4cHJlc3Npb24iLCAiZXhwcmVzc2lvbiI6ICIwIDcgKiAqIDEiIH0gXSB9CiAgICAgIH0sCiAgICAgICJpZCI6ICJub2RlLXNjaGVkdWxlIiwKICAgICAgIm5hbWUiOiAiV2Vla2x5IFRyaWdnZXIgKE1vbiAwNzowMCkiLAogICAgICAidHlwZSI6ICJuOG4tbm9kZXMtYmFzZS5zY2hlZHVsZVRyaWdnZXIiLAogICAgICAidHlwZVZlcnNpb24iOiAxLjIsCiAgICAgICJwb3NpdGlvbiI6IFsgMjQwLCAzMDAgXQogICAgfSwKICAgIHsKICAgICAgInBhcmFtZXRlcnMiOiB7CiAgICAgICAgInVybCI6ICJodHRwczovL2V4YW1wbGUuY29tL2ZlZWQiLAogICAgICAgICJvcHRpb25zIjoge30KICAgICAgfSwKICAgICAgImlkIjogIm5vZGUtcnNzIiwKICAgICAgIm5hbWUiOiAiMSDCtyBDb2xsZWN0IHNvdXJjZXMgKFJTUykiLAogICAgICAidHlwZSI6ICJuOG4tbm9kZXMtYmFzZS5yc3NGZWVkUmVhZCIsCiAgICAgICJ0eXBlVmVyc2lvbiI6IDEsCiAgICAgICJwb3NpdGlvbiI6IFsgNDYwLCAzMDAgXQogICAgfSwKICAgIHsKICAgICAgInBhcmFtZXRlcnMiOiB7ICJtYXhJdGVtcyI6IDMgfSwKICAgICAgImlkIjogIm5vZGUtbGltaXQiLAogICAgICAibmFtZSI6ICJUYWtlIDMgbmV3ZXN0IiwKICAgICAgInR5cGUiOiAibjhuLW5vZGVzLWJhc2UubGltaXQiLAogICAgICAidHlwZVZlcnNpb24iOiAxLAogICAgICAicG9zaXRpb24iOiBbIDY4MCwgMzAwIF0KICAgIH0sCiAgICB7CiAgICAgICJwYXJhbWV0ZXJzIjogewogICAgICAgICJtZXRob2QiOiAiUE9TVCIsCiAgICAgICAgInVybCI6ICJodHRwczovL2FwaS5hbnRocm9waWMuY29tL3YxL21lc3NhZ2VzIiwKICAgICAgICAic2VuZEhlYWRlcnMiOiB0cnVlLAogICAgICAgICJoZWFkZXJQYXJhbWV0ZXJzIjogeyAicGFyYW1ldGVycyI6IFsKICAgICAgICAgIHsgIm5hbWUiOiAieC1hcGkta2V5IiwgInZhbHVlIjogIj17eyAkZW52LkFOVEhST1BJQ19BUElfS0VZIH19IiB9LAogICAgICAgICAgeyAibmFtZSI6ICJhbnRocm9waWMtdmVyc2lvbiIsICJ2YWx1ZSI6ICIyMDIzLTA2LTAxIiB9LAogICAgICAgICAgeyAibmFtZSI6ICJjb250ZW50LXR5cGUiLCAidmFsdWUiOiAiYXBwbGljYXRpb24vanNvbiIgfQogICAgICAgIF0gfSwKICAgICAgICAic2VuZEJvZHkiOiB0cnVlLAogICAgICAgICJzcGVjaWZ5Qm9keSI6ICJqc29uIiwKICAgICAgICAianNvbkJvZHkiOiAiPXtcbiAgXCJtb2RlbFwiOiBcImNsYXVkZS1zb25uZXQtNC02XCIsXG4gIFwibWF4X3Rva2Vuc1wiOiA0MDAsXG4gIFwibWVzc2FnZXNcIjogW3tcbiAgICBcInJvbGVcIjogXCJ1c2VyXCIsXG4gICAgXCJjb250ZW50XCI6IFwiRnJvbSB0aGlzIHNvdXJjZSwgcmV0dXJuIEpTT04gd2l0aCBvbmUgcHJpbWFyeV9rZXl3b3JkLCAzLTUgc2Vjb25kYXJ5X2tleXdvcmRzIGFuZCBhIHNlYXJjaF9pbnRlbnQgbGFiZWwuIFNvdXJjZSB0aXRsZToge3sgJGpzb24udGl0bGUgfX0uIFNuaXBwZXQ6IHt7ICRqc29uLmNvbnRlbnRTbmlwcGV0IH19XCJcbiAgfV1cbn0iLAogICAgICAgICJvcHRpb25zIjoge30KICAgICAgfSwKICAgICAgImlkIjogIm5vZGUtbGxtLWtleXdvcmRzIiwKICAgICAgIm5hbWUiOiAiMiDCtyBMTE0g4oCUIGV4dHJhY3Qga2V5d29yZHMiLAogICAgICAidHlwZSI6ICJuOG4tbm9kZXMtYmFzZS5odHRwUmVxdWVzdCIsCiAgICAgICJ0eXBlVmVyc2lvbiI6IDQuMiwKICAgICAgInBvc2l0aW9uIjogWyA5MDAsIDMwMCBdCiAgICB9LAogICAgewogICAgICAicGFyYW1ldGVycyI6IHsKICAgICAgICAibWV0aG9kIjogIlBPU1QiLAogICAgICAgICJ1cmwiOiAiaHR0cHM6Ly9hcGkuYW50aHJvcGljLmNvbS92MS9tZXNzYWdlcyIsCiAgICAgICAgInNlbmRIZWFkZXJzIjogdHJ1ZSwKICAgICAgICAiaGVhZGVyUGFyYW1ldGVycyI6IHsgInBhcmFtZXRlcnMiOiBbCiAgICAgICAgICB7ICJuYW1lIjogIngtYXBpLWtleSIsICJ2YWx1ZSI6ICI9e3sgJGVudi5BTlRIUk9QSUNfQVBJX0tFWSB9fSIgfSwKICAgICAgICAgIHsgIm5hbWUiOiAiYW50aHJvcGljLXZlcnNpb24iLCAidmFsdWUiOiAiMjAyMy0wNi0wMSIgfSwKICAgICAgICAgIHsgIm5hbWUiOiAiY29udGVudC10eXBlIiwgInZhbHVlIjogImFwcGxpY2F0aW9uL2pzb24iIH0KICAgICAgICBdIH0sCiAgICAgICAgInNlbmRCb2R5IjogdHJ1ZSwKICAgICAgICAic3BlY2lmeUJvZHkiOiAianNvbiIsCiAgICAgICAgImpzb25Cb2R5IjogIj17XG4gIFwibW9kZWxcIjogXCJjbGF1ZGUtc29ubmV0LTQtNlwiLFxuICBcIm1heF90b2tlbnNcIjogMTUwMCxcbiAgXCJtZXNzYWdlc1wiOiBbe1xuICAgIFwicm9sZVwiOiBcInVzZXJcIixcbiAgICBcImNvbnRlbnRcIjogXCJXcml0ZSBhIDcwMC13b3JkIFdvcmRQcmVzcyBibG9nIHBvc3QgaW4gb3VyIGJyYW5kIHZvaWNlIHRhcmdldGluZyB0aGlzIGtleXdvcmQgbmF0dXJhbGx5LiBSZXR1cm4gSlNPTiB3aXRoIHRpdGxlLCBtZXRhX2Rlc2NyaXB0aW9uIGFuZCBodG1sX2JvZHkuIEtleXdvcmQ6IHt7ICQoJzIgwrcgTExNIOKAlCBleHRyYWN0IGtleXdvcmRzJykuaXRlbS5qc29uLmNvbnRlbnRbMF0udGV4dCB9fVwiXG4gIH1dXG59IiwKICAgICAgICAib3B0aW9ucyI6IHt9CiAgICAgIH0sCiAgICAgICJpZCI6ICJub2RlLWxsbS1kcmFmdCIsCiAgICAgICJuYW1lIjogIjMgwrcgTExNIOKAlCBkcmFmdCBwb3N0IiwKICAgICAgInR5cGUiOiAibjhuLW5vZGVzLWJhc2UuaHR0cFJlcXVlc3QiLAogICAgICAidHlwZVZlcnNpb24iOiA0LjIsCiAgICAgICJwb3NpdGlvbiI6IFsgMTEyMCwgMzAwIF0KICAgIH0sCiAgICB7CiAgICAgICJwYXJhbWV0ZXJzIjogewogICAgICAgICJtZXRob2QiOiAiUE9TVCIsCiAgICAgICAgInVybCI6ICJodHRwczovL1lPVVJTSVRFLmNvbS93cC1qc29uL3dwL3YyL3Bvc3RzIiwKICAgICAgICAiYXV0aGVudGljYXRpb24iOiAiZ2VuZXJpY0NyZWRlbnRpYWxUeXBlIiwKICAgICAgICAiZ2VuZXJpY0F1dGhUeXBlIjogImh0dHBCYXNpY0F1dGgiLAogICAgICAgICJzZW5kQm9keSI6IHRydWUsCiAgICAgICAgInNwZWNpZnlCb2R5IjogImpzb24iLAogICAgICAgICJqc29uQm9keSI6ICI9e1xuICBcInN0YXR1c1wiOiBcInBlbmRpbmdcIixcbiAgXCJ0aXRsZVwiOiBcIkFJIGRyYWZ0IOKAlCByZXZpZXcgbWVcIixcbiAgXCJjb250ZW50XCI6IFwie3sgJCgnMyDCtyBMTE0g4oCUIGRyYWZ0IHBvc3QnKS5pdGVtLmpzb24uY29udGVudFswXS50ZXh0IH19XCJcbn0iLAogICAgICAgICJvcHRpb25zIjoge30KICAgICAgfSwKICAgICAgImlkIjogIm5vZGUtd3AiLAogICAgICAibmFtZSI6ICI0IMK3IFdvcmRQcmVzcyDigJQgY3JlYXRlIFBFTkRJTkcgcG9zdCIsCiAgICAgICJ0eXBlIjogIm44bi1ub2Rlcy1iYXNlLmh0dHBSZXF1ZXN0IiwKICAgICAgInR5cGVWZXJzaW9uIjogNC4yLAogICAgICAicG9zaXRpb24iOiBbIDEzNDAsIDMwMCBdLAogICAgICAiY3JlZGVudGlhbHMiOiB7ICJodHRwQmFzaWNBdXRoIjogeyAiaWQiOiAiUkVQTEFDRSIsICJuYW1lIjogIldQIEFwcGxpY2F0aW9uIFBhc3N3b3JkIiB9IH0KICAgIH0sCiAgICB7CiAgICAgICJwYXJhbWV0ZXJzIjogewogICAgICAgICJvcGVyYXRpb24iOiAiYXBwZW5kIiwKICAgICAgICAiZG9jdW1lbnRJZCI6IHsgIl9fcmwiOiB0cnVlLCAibW9kZSI6ICJpZCIsICJ2YWx1ZSI6ICJZT1VSX1NIRUVUX0lEIiB9LAogICAgICAgICJzaGVldE5hbWUiOiB7ICJfX3JsIjogdHJ1ZSwgIm1vZGUiOiAibmFtZSIsICJ2YWx1ZSI6ICJ0cmFja2VyIiB9LAogICAgICAgICJjb2x1bW5zIjogeyAibWFwcGluZ01vZGUiOiAiYXV0b01hcElucHV0RGF0YSIsICJ2YWx1ZSI6IHt9IH0sCiAgICAgICAgIm9wdGlvbnMiOiB7fQogICAgICB9LAogICAgICAiaWQiOiAibm9kZS1zaGVldCIsCiAgICAgICJuYW1lIjogIjUgwrcgTG9nIHJvdyB0byB0cmFja2VyIiwKICAgICAgInR5cGUiOiAibjhuLW5vZGVzLWJhc2UuZ29vZ2xlU2hlZXRzIiwKICAgICAgInR5cGVWZXJzaW9uIjogNC41LAogICAgICAicG9zaXRpb24iOiBbIDE1NjAsIDMwMCBdCiAgICB9CiAgXSwKICAiY29ubmVjdGlvbnMiOiB7CiAgICAiV2Vla2x5IFRyaWdnZXIgKE1vbiAwNzowMCkiOiB7ICJtYWluIjogWyBbIHsgIm5vZGUiOiAiMSDCtyBDb2xsZWN0IHNvdXJjZXMgKFJTUykiLCAidHlwZSI6ICJtYWluIiwgImluZGV4IjogMCB9IF0gXSB9LAogICAgIjEgwrcgQ29sbGVjdCBzb3VyY2VzIChSU1MpIjogeyAibWFpbiI6IFsgWyB7ICJub2RlIjogIlRha2UgMyBuZXdlc3QiLCAidHlwZSI6ICJtYWluIiwgImluZGV4IjogMCB9IF0gXSB9LAogICAgIlRha2UgMyBuZXdlc3QiOiB7ICJtYWluIjogWyBbIHsgIm5vZGUiOiAiMiDCtyBMTE0g4oCUIGV4dHJhY3Qga2V5d29yZHMiLCAidHlwZSI6ICJtYWluIiwgImluZGV4IjogMCB9IF0gXSB9LAogICAgIjIgwrcgTExNIOKAlCBleHRyYWN0IGtleXdvcmRzIjogeyAibWFpbiI6IFsgWyB7ICJub2RlIjogIjMgwrcgTExNIOKAlCBkcmFmdCBwb3N0IiwgInR5cGUiOiAibWFpbiIsICJpbmRleCI6IDAgfSBdIF0gfSwKICAgICIzIMK3IExMTSDigJQgZHJhZnQgcG9zdCI6IHsgIm1haW4iOiBbIFsgeyAibm9kZSI6ICI0IMK3IFdvcmRQcmVzcyDigJQgY3JlYXRlIFBFTkRJTkcgcG9zdCIsICJ0eXBlIjogIm1haW4iLCAiaW5kZXgiOiAwIH0gXSBdIH0sCiAgICAiNCDCtyBXb3JkUHJlc3Mg4oCUIGNyZWF0ZSBQRU5ESU5HIHBvc3QiOiB7ICJtYWluIjogWyBbIHsgIm5vZGUiOiAiNSDCtyBMb2cgcm93IHRvIHRyYWNrZXIiLCAidHlwZSI6ICJtYWluIiwgImluZGV4IjogMCB9IF0gXSB9CiAgfSwKICAic2V0dGluZ3MiOiB7ICJleGVjdXRpb25PcmRlciI6ICJ2MSIgfSwKICAiX2JsdWVfY29yYWxfbm90ZXMiOiAiVEVNUExBVEUg4oCUIGltcG9ydCB2aWEgbjhuID4gV29ya2Zsb3dzID4gSW1wb3J0IGZyb20gRmlsZSwgdGhlbjogKDEpIHNldCBSU1MgZmVlZCBVUkwsICgyKSBhZGQgQU5USFJPUElDX0FQSV9LRVkgYXMgYW4gZW52IHZhciBvciBzd2FwIGluIHlvdXIgTExNIG5vZGUsICgzKSBhdHRhY2ggYSBXUCBBcHBsaWNhdGlvbiBQYXNzd29yZCBjcmVkZW50aWFsIHRvIG5vZGUgNCwgKDQpIHBvaW50IG5vZGUgNSBhdCB5b3VyIEdvb2dsZSBTaGVldC4gTm9kZSA0IGhhcmQtY29kZXMgc3RhdHVzPXBlbmRpbmcgb24gcHVycG9zZSDigJQgbmV2ZXIgY2hhbmdlIGl0IHRvIHB1Ymxpc2guIgp9Cg==" download="n8n-content-pipeline.sample.json">n8n-content-pipeline.sample.json</a> (next to this guide, in <code>/assets</code>).</p></div></div>
+  <div class="step"><span class="n">2</span><div class="b"><p>In n8n, open <span class="kbd">Workflows</span> → <span class="kbd">⋯</span> menu → <span class="kbd">Import from File</span> → choose the downloaded JSON.</p></div></div>
+  <div class="step"><span class="n">3</span><div class="b"><p>Edit four things: <strong>(a)</strong> the RSS feed URL on node 2, <strong>(b)</strong> your LLM API key on nodes 4 &amp; 5, <strong>(c)</strong> the WordPress Application Password credential + your site URL on node 6, <strong>(d)</strong> your Google Sheet on node 7.</p></div></div>
+  <div class="step"><span class="n">4</span><div class="b"><p>Click <span class="kbd">Execute Workflow</span> once to test. Check that a <strong>Pending</strong> post appears in <code>wp-admin</code>. Only then turn the schedule on.</p></div></div>
+
+  <p class="bc-small bc-muted">Excerpt — the WordPress node is hard-wired to Pending on purpose:</p>
+  <pre class="bc-pre">{
+  "name": "4 · WordPress — create PENDING post",
+  "type": "n8n-nodes-base.httpRequest",
+  "parameters": {
+    "method": "POST",
+    "url": "https://YOURSITE.com/wp-json/wp/v2/posts",
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpBasicAuth",
+    "jsonBody": {
+      <span class="ok">"status": "pending"</span>,   <span class="cm">// never change to "publish"</span>
+      "title":  "AI draft — review me",
+      "content": "={{ $('3 · LLM — draft post').item.json... }}"
+    }
+  }
+}</pre>
+
+  <div class="bc-callout bad"><span class="bc-callout-t">This sample is a template, not magic</span>
+    Node type versions and field names in n8n change over time. If a node shows a warning after import, open it and re-select the option — the structure and the prompts are the valuable part. Always run one manual test before scheduling, and confirm the result is <code>Pending</code>, not live.</div>
+
+  <!-- CE.6 — REVIEW & PUBLISH -->
+  <div class="bc-phase-band" id="ce-review"><span class="bc-phase-no">6</span><span class="bc-phase-tx">Review &amp; publish (you, in wp-admin)</span></div>
+  <p>Both setups end the same way: drafts wait for a human. This is where your judgement protects your brand.</p>
+  <div class="step"><span class="n">1</span><div class="b"><p>Open <code>wp-admin</code> → <span class="kbd">Posts</span> → <span class="kbd">Pending</span>. Each AI draft is waiting.</p></div></div>
+  <div class="step"><span class="n">2</span><div class="b"><p>Open one. Read it as your reader would. Fix tone, check facts, confirm the image fits.</p></div></div>
+  <div class="step"><span class="n">3</span><div class="b"><p>When happy, <span class="kbd">Publish</span> (or <span class="kbd">Schedule</span>). Update Reviewer + Published date in the tracker.</p></div></div>
+
+  <div class="bc-callout good"><span class="bc-callout-t">Never publish unread</span>
+    The whole engine exists to save you the <em>drafting</em> time, not the <em>judgement</em>. Treat every AI post as a confident first draft from a junior writer who has never met your customers.</div>
+
+  </div><!-- /panel-content -->
+
+  </main>
+  </div><!-- /bc-layout -->
+
+  <!-- SHARED CTA (both tabs) -->
+  <div class="bc-callout info" style="margin-top:24px"><span class="bc-callout-t">Need a hand getting started?</span>
+    Blue Coral can set up your local environment, install and configure the skill packs, and run the first content-pipeline cycle with you so your team can take it from there. The whole stack above is free software plus AI usage — the value we add is the safe, repeatable workflow.</div>
+
+  <!-- FOOTER -->
+  <footer class="bc-footer">
+    <span>© 2026 <span class="bc-foot-brand">Blue Coral</span> · nguyen@bluecoral.vn</span>
+    <span>Building &amp; Running WordPress with AI · v1.0 · 15/06/2026</span>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var bar=document.getElementById('bc-progress');
+  function progress(){
+    var h=document.documentElement, b=document.body;
+    var max=(h.scrollHeight||b.scrollHeight)-h.clientHeight;
+    var top=h.scrollTop||b.scrollTop;
+    bar.style.width=(max>0?(top/max*100):0)+'%';
+  }
+  var tabs=[].slice.call(document.querySelectorAll('.bc-tab'));
+  function activate(name){
+    tabs.forEach(function(t){t.classList.toggle('is-active',t.dataset.tab===name);});
+    document.querySelectorAll('.bc-panel').forEach(function(p){p.hidden=(p.dataset.tab!==name);});
+    document.querySelectorAll('.bc-toc-nav').forEach(function(n){n.hidden=(n.dataset.tab!==name);});
+    window.scrollTo(0,0); progress(); spy();
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){activate(t.dataset.tab);});});
+  function spy(){
+    var nav=document.querySelector('.bc-toc-nav:not([hidden])');
+    if(!nav)return;
+    var links=[].slice.call(nav.querySelectorAll('a')), cur=-1;
+    links.forEach(function(a,i){
+      var el=document.getElementById(a.getAttribute('href').slice(1));
+      if(el && el.getBoundingClientRect().top<=120) cur=i;
+    });
+    links.forEach(function(a,i){a.classList.toggle('active',i===cur);});
+  }
+  window.addEventListener('scroll',function(){progress();spy();},{passive:true});
+  window.addEventListener('resize',function(){progress();spy();});
+  progress(); spy();
+})();
+</script>
+</body>
+</html>

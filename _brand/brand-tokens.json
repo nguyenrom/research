@@ -1,0 +1,144 @@
+{
+  "$meta": {
+    "name": "Blue Coral Brand Tokens",
+    "version": "1.2.1",
+    "updated": "2026-06-15",
+    "model": "House brand — one Blue Coral identity applied to every deliverable",
+    "note": "SINGLE SOURCE OF TRUTH. Every format (CSS / Excel / Word / PPTX) reads colors, fonts and company facts from this file. Change a value here, regenerate, and all deliverables stay consistent. Do not hard-code hex codes in individual documents."
+  },
+
+  "company": {
+    "brand": "Blue Coral",
+    "legal_name": "CÔNG TY TNHH ADNS",
+    "tax_id": "0313209465",
+    "email": "nguyen@bluecoral.vn",
+    "website": "",
+    "tagline": "Data & Marketing Implementation Studio",
+    "tagline_vi": "Triển khai Dữ liệu & Marketing",
+    "footer": "Blue Coral · CÔNG TY TNHH ADNS · MST 0313209465 · nguyen@bluecoral.vn",
+    "confidential_note": "Tài liệu nội bộ / dành riêng cho khách hàng — không phổ biến ngoài phạm vi.",
+    "_editable": "tagline, website, footer are DRAFT — confirm or replace. Core facts (brand, legal_name, tax_id, email) are confirmed."
+  },
+
+  "color": {
+    "primary": {
+      "900": "#060B3D",
+      "800": "#0B1566",
+      "700": "#0E1E78",
+      "600": "#1428A0",
+      "500": "#2540BE",
+      "400": "#4E66D6",
+      "300": "#8094E0",
+      "200": "#AEBCEC",
+      "100": "#DCE3F7",
+      "50":  "#EFF2FC",
+      "_base": "600",
+      "_dark": "700",
+      "_ink": "600",
+      "_name": "Trust Blue (Royal)",
+      "_inspiration": "Royal/navy blue theo hướng Samsung Blue #1428A0 — tin cậy, hiện đại, premium.",
+      "_usage": "Blue sâu nên 600 base #1428A0 phục vụ MỌI vai trò ở mức AAA: nền chữ trắng (11.41), chữ trên nền sáng / link / KPI (11.41), badge trên 100 (8.89). Không cần phân vai shade. 700/800 dùng cho gradient sâu & nền đậm; 500 vivid cho điểm nhấn lớn; 100 cho nền chip/badge."
+    },
+    "accent": {
+      "700": "#D8463A",
+      "600": "#FF6B5C",
+      "400": "#FF8E82",
+      "200": "#FFC2BA",
+      "100": "#FFE7E3",
+      "ink":  "#97271C",
+      "_base": "600",
+      "_name": "Coral",
+      "_usage": "Coral = brand/decorative accent ONLY (thanh nhấn, viền, nền badge nhạt, phase divider). HARD RULES: (1) KHÔNG đặt chữ trắng lên coral đặc — tương phản chỉ 2.80, fail WCAG. (2) KHÔNG dùng coral cho trạng thái/status — danger giữ màu 'bad' #C0392B để tránh đụng họ đỏ. (3) Chữ trên nền coral-100 phải dùng accent.ink #97271C (AA 6.78), không dùng 700. (4) Giữ coral ≤10% diện tích (quy tắc 60-30-10)."
+    },
+    "neutral": {
+      "ink":       "#15192B",
+      "ink2":      "#2E3447",
+      "muted":     "#5B6173",
+      "faint":     "#8B90A0",
+      "line":      "#DEE1EA",
+      "line_soft": "#EDEFF5",
+      "bg":        "#F6F7FC",
+      "card":      "#FFFFFF",
+      "fill":      "#EFF1F8"
+    },
+    "semantic": {
+      "good":    "#1F8A5B", "good_bg": "#E5F4EC", "good_ink": "#136B45",
+      "warn":    "#B47514", "warn_bg": "#FBF1DD", "warn_ink": "#8A5A0E",
+      "bad":     "#C0392B", "bad_bg":  "#FBEAE8", "bad_ink":  "#97271C",
+      "info":    "#1C6FB8", "info_bg": "#E8F2FB", "info_ink": "#14548C"
+    },
+    "extra": {
+      "gold":      "#C9A227",
+      "gold_soft": "#F6EDD2"
+    }
+  },
+
+  "gradient": {
+    "header": ["#0B1566", "#1428A0"],
+    "header_accent": ["#0E1E78", "#D8463A"]
+  },
+
+  "font": {
+    "web": {
+      "sans": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Inter, Roboto, \"Helvetica Neue\", Arial, sans-serif",
+      "mono": "ui-monospace, \"SF Mono\", Menlo, Consolas, \"Liberation Mono\", monospace"
+    },
+    "office": {
+      "body": "Calibri",
+      "heading": "Calibri",
+      "mono": "Consolas",
+      "_note": "Office formats (docx/pptx/xlsx) use installed fonts; Calibri chosen for cross-platform consistency with existing pipeline."
+    }
+  },
+
+  "type_scale_px": {
+    "display": { "size": 32, "weight": 700, "line": 1.15 },
+    "h1":      { "size": 26, "weight": 700, "line": 1.2 },
+    "h2":      { "size": 21, "weight": 700, "line": 1.3 },
+    "h3":      { "size": 17, "weight": 650, "line": 1.35 },
+    "h4":      { "size": 15, "weight": 700, "line": 1.4, "transform": "uppercase", "tracking": 0.04 },
+    "body":    { "size": 15.5, "weight": 400, "line": 1.65 },
+    "small":   { "size": 13.5, "weight": 400, "line": 1.55 },
+    "caption": { "size": 11.5, "weight": 600, "line": 1.4, "transform": "uppercase", "tracking": 0.06 }
+  },
+
+  "office_type_pt": {
+    "title":   { "size": 22, "bold": true },
+    "h1":      { "size": 16, "bold": true },
+    "h2":      { "size": 13, "bold": true },
+    "h3":      { "size": 11.5, "bold": true },
+    "body":    { "size": 11, "bold": false },
+    "small":   { "size": 9.5, "bold": false },
+    "caption": { "size": 8.5, "bold": true }
+  },
+
+  "space_px": { "xs": 4, "sm": 8, "md": 12, "lg": 16, "xl": 24, "2xl": 32, "3xl": 48, "4xl": 64 },
+  "radius_px": { "sm": 6, "md": 10, "lg": 14, "xl": 20, "pill": 999 },
+  "shadow": {
+    "sm": "0 1px 2px rgba(16,40,45,.06)",
+    "md": "0 1px 3px rgba(16,40,45,.07), 0 8px 24px rgba(16,40,45,.06)",
+    "lg": "0 12px 40px rgba(16,40,45,.10)"
+  },
+  "layout_px": { "content_max": 920, "wide_max": 1140, "page_pad": 32 },
+
+  "excel": {
+    "title":        { "fill": "#1428A0", "font": "#FFFFFF", "bold": true,  "size": 14 },
+    "subtitle":     { "fill": "#EFF2FC", "font": "#5B6173", "bold": false, "size": 10 },
+    "header":       { "fill": "#DCE3F7", "font": "#15192B", "bold": true,  "size": 11, "border_bottom": "#1428A0" },
+    "phase_divider":{ "fill": "#FFE7E3", "font": "#97271C", "bold": true,  "size": 11 },
+    "body":         { "fill": "#FFFFFF", "font": "#15192B", "bold": false, "size": 11 },
+    "zebra":        { "fill": "#F6F7FC" },
+    "total":        { "fill": "#EFF1F8", "font": "#15192B", "bold": true,  "size": 11, "border_top": "#1428A0" },
+    "border":       "#DEE1EA",
+    "recommend":    { "fill": "#FBF1DD", "font": "#8A5A0E", "bold": true },
+    "_rules": [
+      "Tiếng Việt cho tài liệu client-facing.",
+      "KHÔNG dùng icon/emoji trong ô.",
+      "KHÔNG có hàng mô tả ở row 2 — vào thẳng dữ liệu.",
+      "Mỗi phase ngăn bằng một phase-divider row (merge full width).",
+      "Mốc đầu tiên (M1) luôn là Foundation/Nền tảng.",
+      "Khi đề xuất: trình bày đúng 2 phương án + 1 khuyến nghị.",
+      "Freeze hàng header; auto-fit độ rộng cột; canh phải số/tiền."
+    ]
+  }
+}

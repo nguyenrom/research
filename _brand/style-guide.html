@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Coral — Brand Style Guide v1.0</title>
+<link rel="stylesheet" href="brand.css">
+<style>
+  /* page-only helpers for the guide itself */
+  .sw{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+  .chip{width:120px;border:1px solid var(--bc-line);border-radius:10px;overflow:hidden;font-size:11px}
+  .chip .c{height:54px} .chip .l{padding:6px 8px;background:#fff}
+  .chip .l b{display:block;color:var(--bc-ink)} .chip .l span{color:var(--bc-muted);font-family:var(--bc-mono)}
+  .demo-label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--bc-accent-700);margin:28px 0 6px}
+</style>
+</head>
+<body class="bc-doc">
+<div class="bc-wrap">
+
+  <!-- MASTHEAD -->
+  <header class="bc-masthead">
+    <div class="bc-brand"><span class="bc-logo">BC</span> Blue Coral</div>
+    <h1>Brand &amp; Document Style Guide</h1>
+    <div class="bc-sub">Nền tảng thống nhất cho mọi deliverable — HTML, Excel, Word, PPTX. Một identity Blue Coral áp lên tất cả tài liệu.</div>
+    <div class="bc-meta">
+      <span><b>Version</b> 1.0.0</span>
+      <span><b>Cập nhật</b> 10/06/2026</span>
+      <span><b>Source</b> _brand/brand-tokens.json</span>
+    </div>
+  </header>
+
+  <!-- COLOR -->
+  <div class="bc-phase-band"><span class="bc-phase-no">1</span><span class="bc-phase-tx">Bảng màu</span></div>
+
+  <h4>Primary — Trust Blue (Royal · hướng Samsung #1428A0)</h4>
+  <div class="sw">
+    <div class="chip"><div class="c" style="background:#060B3D"></div><div class="l"><b>900</b><span>#060B3D</span></div></div>
+    <div class="chip"><div class="c" style="background:#0B1566"></div><div class="l"><b>800</b><span>#0B1566</span></div></div>
+    <div class="chip"><div class="c" style="background:#0E1E78"></div><div class="l"><b>700 dark</b><span>#0E1E78</span></div></div>
+    <div class="chip"><div class="c" style="background:#1428A0"></div><div class="l"><b>600 base</b><span>#1428A0</span></div></div>
+    <div class="chip"><div class="c" style="background:#2540BE"></div><div class="l"><b>500</b><span>#2540BE</span></div></div>
+    <div class="chip"><div class="c" style="background:#8094E0"></div><div class="l"><b>300</b><span>#8094E0</span></div></div>
+    <div class="chip"><div class="c" style="background:#AEBCEC"></div><div class="l"><b>200</b><span>#AEBCEC</span></div></div>
+    <div class="chip"><div class="c" style="background:#DCE3F7"></div><div class="l"><b>100</b><span>#DCE3F7</span></div></div>
+  </div>
+  <p class="bc-small bc-muted"><b>600 base #1428A0</b> phục vụ mọi vai trò ở mức AAA (nền chữ trắng, link, KPI, badge) — blue sâu, tin cậy, không cần phân vai shade.</p>
+  <h4>Accent — Coral</h4>
+  <div class="sw">
+    <div class="chip"><div class="c" style="background:#D8463A"></div><div class="l"><b>700</b><span>#D8463A</span></div></div>
+    <div class="chip"><div class="c" style="background:#FF6B5C"></div><div class="l"><b>600 base</b><span>#FF6B5C</span></div></div>
+    <div class="chip"><div class="c" style="background:#FF8E82"></div><div class="l"><b>400</b><span>#FF8E82</span></div></div>
+    <div class="chip"><div class="c" style="background:#FFE7E3"></div><div class="l"><b>100</b><span>#FFE7E3</span></div></div>
+  </div>
+  <h4>Neutral &amp; Semantic</h4>
+  <div class="sw">
+    <div class="chip"><div class="c" style="background:#15192B"></div><div class="l"><b>ink</b><span>#15192B</span></div></div>
+    <div class="chip"><div class="c" style="background:#5B6173"></div><div class="l"><b>muted</b><span>#5B6173</span></div></div>
+    <div class="chip"><div class="c" style="background:#DEE1EA"></div><div class="l"><b>line</b><span>#DEE1EA</span></div></div>
+    <div class="chip"><div class="c" style="background:#1F8A5B"></div><div class="l"><b>good</b><span>#1F8A5B</span></div></div>
+    <div class="chip"><div class="c" style="background:#B47514"></div><div class="l"><b>warn</b><span>#B47514</span></div></div>
+    <div class="chip"><div class="c" style="background:#C0392B"></div><div class="l"><b>bad</b><span>#C0392B</span></div></div>
+    <div class="chip"><div class="c" style="background:#1C6FB8"></div><div class="l"><b>info</b><span>#1C6FB8</span></div></div>
+    <div class="chip"><div class="c" style="background:#C9A227"></div><div class="l"><b>gold</b><span>#C9A227</span></div></div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="bc-phase-band"><span class="bc-phase-no">2</span><span class="bc-phase-tx">Typography</span></div>
+  <div class="bc-card">
+    <h1>Heading 1 — 26px / 700</h1>
+    <h2>Heading 2 — 21px / 700</h2>
+    <h3>Heading 3 — 17px / 650</h3>
+    <h4>Heading 4 / Eyebrow — uppercase</h4>
+    <p>Body 15.5px / line-height 1.65. Đoạn văn chuẩn cho tài liệu. Có thể chèn <strong>nhấn mạnh</strong>, <a href="#">liên kết</a>, và <code>inline code</code>.</p>
+    <p class="bc-small bc-muted">Small / muted 13.5px — chú thích, footnote, metadata.</p>
+    <p class="bc-caption">Caption — nhãn nhỏ uppercase</p>
+  </div>
+
+  <!-- COMPONENTS -->
+  <div class="bc-phase-band"><span class="bc-phase-no">3</span><span class="bc-phase-tx">Components</span></div>
+
+  <div class="demo-label">Badges / chips</div>
+  <p>
+    <span class="bc-badge primary">Primary</span>
+    <span class="bc-badge accent">Accent</span>
+    <span class="bc-badge good">Hoàn thành</span>
+    <span class="bc-badge warn">Đang chờ</span>
+    <span class="bc-badge bad">Rủi ro</span>
+    <span class="bc-badge gold">Premium</span>
+    <span class="bc-badge ghost">Ghost</span>
+  </p>
+
+  <div class="demo-label">KPI cards</div>
+  <div class="bc-kpis">
+    <div class="bc-kpi"><div class="bc-kpi-v">$97.5k</div><div class="bc-kpi-l">Doanh thu Năm 0</div></div>
+    <div class="bc-kpi"><div class="bc-kpi-v">3.2×</div><div class="bc-kpi-l">ROAS mục tiêu</div></div>
+    <div class="bc-kpi accent"><div class="bc-kpi-v">8 tuần</div><div class="bc-kpi-l">Thời gian triển khai</div></div>
+    <div class="bc-kpi"><div class="bc-kpi-v">67%</div><div class="bc-kpi-l">Founder retention</div></div>
+  </div>
+
+  <div class="demo-label">Callouts</div>
+  <div class="bc-callout info"><span class="bc-callout-t">Thông tin</span>Bối cảnh hoặc ghi chú trung lập cho người đọc.</div>
+  <div class="bc-callout good"><span class="bc-callout-t">Khuyến nghị</span>Lựa chọn đề xuất kèm lý do ngắn gọn.</div>
+  <div class="bc-callout warn"><span class="bc-callout-t">Lưu ý</span>Điểm cần cân nhắc trước khi quyết định.</div>
+  <div class="bc-callout bad"><span class="bc-callout-t">Rủi ro</span>Vấn đề có thể ảnh hưởng tiến độ/chi phí.</div>
+
+  <div class="demo-label">Table — có phase divider &amp; total row</div>
+  <table class="bc-table">
+    <thead><tr><th>Hạng mục</th><th>Mô tả</th><th class="bc-num">Ngày công</th><th class="bc-num">Chi phí (VND)</th></tr></thead>
+    <tbody>
+      <tr class="bc-phase"><td colspan="4">Giai đoạn 1 — Nền tảng (Foundation)</td></tr>
+      <tr><td>Khảo sát &amp; setup</td><td>Thu thập yêu cầu, dựng môi trường</td><td class="bc-num">5</td><td class="bc-num">12.000.000</td></tr>
+      <tr><td>Kiến trúc dữ liệu</td><td>Mô hình hoá, chuẩn hoá nguồn</td><td class="bc-num">8</td><td class="bc-num">20.000.000</td></tr>
+      <tr class="bc-phase"><td colspan="4">Giai đoạn 2 — Triển khai</td></tr>
+      <tr><td>Pipeline &amp; dashboard</td><td>Tự động hoá + báo cáo</td><td class="bc-num">12</td><td class="bc-num">30.000.000</td></tr>
+      <tr class="bc-total"><td colspan="2">Tổng cộng</td><td class="bc-num">25</td><td class="bc-num">62.000.000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="demo-label">Recommendation — 2 phương án + khuyến nghị (chuẩn house)</div>
+  <div class="bc-options">
+    <div class="bc-option bc-pick">
+      <span class="bc-opt-tag bc-badge good">Khuyến nghị</span>
+      <div class="bc-opt-h">Phương án A — Foundation-first</div>
+      <p class="bc-small">Đầu tư nền tảng trước, mở rộng theo dữ liệu thực tế. Rủi ro thấp, đo lường rõ.</p>
+    </div>
+    <div class="bc-option">
+      <span class="bc-opt-tag bc-badge ghost">Thay thế</span>
+      <div class="bc-opt-h">Phương án B — Scale nhanh</div>
+      <p class="bc-small">Tăng ngân sách sớm để bắt thị trường, đổi lại chi phí và rủi ro cao hơn.</p>
+    </div>
+  </div>
+  <div class="bc-recommend">→ Đề xuất chọn <strong>Phương án A</strong>: phù hợp pattern M1 = nền tảng, tối ưu chi phí học việc trước khi scale.</div>
+
+  <!-- FOOTER -->
+  <footer class="bc-footer">
+    <span><span class="bc-foot-brand">Blue Coral</span> · CÔNG TY TNHH ADNS · MST 0313209465 · nguyen@bluecoral.vn</span>
+    <span>Brand Style Guide v1.0 · 10/06/2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
