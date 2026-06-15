@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLU Workspace Standard · Chuẩn hóa AI cho team</title>
+<style>
+  :root{
+    --navy:#1a3a5c; --gold:#d4a418; --cream:#f9f8f5; --sky:#3a7abc;
+    --maroon:#7e1f2e; --red:#e63946; --green:#2a7a3e; --ink:#1f2733; --muted:#5a6675;
+    --line:#e0dcd0; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--cream);line-height:1.6;font-size:16px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+  header{background:linear-gradient(135deg,var(--navy),#26527f);color:#fff;padding:46px 0 40px}
+  .kicker{color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+  h1{margin:8px 0 12px;font-size:33px;line-height:1.2}
+  header p{margin:0;color:#d7e2ee;max-width:720px}
+
+  section{padding:36px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:23px;color:var(--navy);margin:0 0 6px;display:flex;align-items:center;gap:10px}
+  h2 .n{background:var(--gold);color:var(--navy);width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex:none}
+  .sub{color:var(--muted);margin:0 0 22px}
+
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:760px){.g3,.g2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+  .card h3{margin:0 0 6px;font-size:16px;color:var(--navy);display:flex;align-items:center;gap:9px}
+  .card .ico{display:inline-flex;color:var(--navy)}
+  .card .ico svg{width:22px;height:22px}
+  .card p{margin:0;color:var(--muted);font-size:14.5px}
+  .card .role{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--navy);
+    background:#f3f1ea;border-radius:6px;padding:3px 9px}
+
+  .pain{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .pain.two{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:760px){.pain.two{grid-template-columns:1fr}}
+  .pain li{background:#fff;border:1px solid var(--line);border-left:5px solid var(--red);border-radius:10px;
+    padding:12px 14px;font-size:14.5px;display:flex;gap:10px;align-items:flex-start}
+  .pain li .x{color:var(--red);flex:none;display:inline-flex}
+  .pain li .x svg{width:18px;height:18px;display:block}
+  .pain li b{color:var(--navy)}
+
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:10px}
+  .steps li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px 12px 52px;position:relative;font-size:14.8px}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:11px;
+    width:28px;height:28px;background:var(--navy);color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .steps li b{color:var(--navy)}
+
+  .check{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .check li{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;
+    display:flex;gap:10px;align-items:flex-start}
+  .check li .box{flex:none;width:18px;height:18px;border:2px solid var(--gold);border-radius:5px;margin-top:2px}
+  .check li b{color:var(--navy)}
+
+  .tree{background:#13314d;color:#e8eef5;border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.8;overflow:auto;margin:0}
+  .tree .c{color:#8fb0d0}
+
+  .prio{background:#fff;border:1px dashed var(--gold);border-radius:10px;padding:13px 16px;color:var(--navy);font-size:14.5px}
+  .prio b{color:var(--maroon)}
+
+  .promptwrap{background:var(--navy);border-radius:14px;overflow:hidden;border:1px solid #102438;box-shadow:0 8px 24px rgba(26,58,92,.18)}
+  .promptbar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#13314d;color:#cfe0f0}
+  .promptbar .t{font-size:13px;font-weight:600;letter-spacing:.04em}
+  .copybtn{background:var(--gold);color:var(--navy);border:none;border-radius:8px;padding:8px 16px;
+    font-weight:800;font-size:13px;cursor:pointer;transition:.15s}
+  .copybtn:hover{filter:brightness(1.07)}
+  .copybtn.done{background:var(--green);color:#fff}
+  pre.prompt{margin:0;max-height:360px;overflow:auto;padding:18px;color:#e8eef5;font-size:12.5px;line-height:1.55;white-space:pre-wrap}
+  pre.prompt::-webkit-scrollbar{width:10px}
+  pre.prompt::-webkit-scrollbar-thumb{background:#2c4c6e;border-radius:8px}
+
+  .note{background:#fef9e7;border:1px solid var(--gold);border-radius:10px;padding:13px 16px;font-size:14.5px;color:#5b4a12}
+  .danger{background:#fde8e8;border:1px solid var(--red);border-radius:10px;padding:13px 16px;font-size:14.5px;color:#7a1d24}
+  .danger b{color:var(--red)}
+  .ok{background:#e6f4ea;border:1px solid var(--green);border-radius:10px;padding:13px 16px;font-size:14.5px;color:#1b5e20}
+  .ok b{color:var(--green)}
+
+  footer{padding:24px 0;color:var(--muted);font-size:13px;text-align:center}
+  footer b{color:var(--navy)}
+  td code,p code,li code,.sub code{background:#f3f1ea;padding:1px 6px;border-radius:5px;font-size:13px;color:var(--maroon)}
+  table{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:14px}
+  th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line)}
+  th{background:var(--navy);color:#fff;font-weight:600}
+  tr:last-child td{border-bottom:none}
+  td:first-child{color:var(--muted)}
+  .opt{display:inline-block;font-size:11px;font-weight:700;color:#9a7400;background:#fff8e1;border:1px solid var(--gold);border-radius:6px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">VLU · Digital Transformation</div>
+    <h1>VLU Workspace Standard: chuẩn hóa làm việc với AI</h1>
+    <p>Tài liệu nội bộ quy định chuẩn làm việc với AI cho toàn đội. Mục tiêu là mọi thành viên, dù
+       sử dụng công cụ AI khác nhau, vẫn tạo ra kết quả thống nhất về concept, brand, thuật ngữ và
+       dữ liệu, đồng thời rút ngắn thời gian onboard, bàn giao và recheck.</p>
+  </div>
+</header>
+
+<!-- 1. PAIN POINTS -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">1</span> Pain points</h2>
+    <p class="sub">Khi không có chuẩn chung, cùng một dự án sẽ phát sinh các vấn đề sau:</p>
+    <ul class="pain two">
+      <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span><span><b>Lệch concept:</b> mỗi bản một màu, font, layout, không nhận ra cùng một bộ nhận diện.</span></li>
+      <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span><span><b>Thuật ngữ thiếu nhất quán:</b> cùng một khái niệm bị gọi bằng nhiều tên khác nhau.</span></li>
+      <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span><span><b>Dữ liệu phân mảnh:</b> nằm rải rác ở nhiều file, không rõ bản nào mới nhất.</span></li>
+      <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span><span><b>Cập nhật lẻ tẻ:</b> sửa một nơi nhưng các bản khác không theo, phải gộp tay tốn thời gian.</span></li>
+      <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span><span><b>Recheck tốn kém:</b> nhiều team cùng cập nhật, phải kiểm tra chéo thủ công nhiều vòng.</span></li>
+      <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span><span><b>Onboard chậm:</b> người mới mất nhiều ngày mới nắm được cách làm chung.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2. CONG CU -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">2</span> Phương án: Dùng công cụ gì?</h2>
+    <p class="sub">Hai công cụ bắt buộc, một công cụ tùy chọn. Không cần hạ tầng phức tạp.</p>
+    <div class="grid g3">
+      <div class="card" style="border-top:4px solid var(--sky)">
+        <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 18A4.5 4.5 0 0 1 6 9.05 6 6 0 0 1 17.7 10 4 4 0 0 1 17 18z"/></svg></span> Cloud Drive</h3>
+        <p>OneDrive, Dropbox hoặc Google Drive. Một folder chung, tự sync về máy mọi người. Cả đội dùng chung một bản.</p>
+        <span class="role">Nơi chứa và chia sẻ</span>
+      </div>
+      <div class="card" style="border-top:4px solid var(--navy)">
+        <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 11l-5.2 1.8L12 18l-1.8-5.2L5 11l5.2-1.8z"/></svg></span> AI · Claude / Codex</h3>
+        <p>Chạy trên file đã sync về máy. Đọc Foundation trước khi làm và tạo deliverable đúng chuẩn.</p>
+        <span class="role">Người thực thi</span>
+      </div>
+      <div class="card" style="border-top:4px solid var(--gold)">
+        <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span> Bảng dữ liệu chung</h3>
+        <p>Google Sheets nếu đã quen, hoặc Airtable nếu cần quản lý content kèm hình ảnh và theo dõi cập nhật chặt hơn.</p>
+        <span class="role">Kênh đồng bộ · optional</span>
+      </div>
+    </div>
+    <div class="note" style="margin-top:16px">Hai công cụ đầu là bắt buộc. AI chạy trên file <b>local đã sync</b> từ Cloud Drive, không chạy trực tiếp trên web. Bảng dữ liệu chung là <b>tùy chọn</b>, chỉ cần khi muốn quản lý nội dung cập nhật tập trung.</div>
+
+    <div class="ok" style="margin-top:14px"><b>Nên dùng Google Sheets hay Airtable?</b> Nếu đội đã quen Google Sheets thì bắt đầu với Sheets là đủ, không cần học công cụ mới. Nếu muốn đồng nhất content và theo dõi cập nhật chặt hơn, nên chuyển sang Airtable: Airtable chèn được ảnh trực tiếp vào ô (Google Sheets không làm được), nên quản lý nội dung kèm hình ảnh trực quan hơn nhiều.</div>
+
+    <table>
+      <tr><th>Tiêu chí</th><th>Google Sheets</th><th>Airtable</th></tr>
+      <tr><td>Quen thuộc, không cần học</td><td>Có</td><td>Cần làm quen</td></tr>
+      <tr><td>Chèn ảnh trực tiếp vào ô</td><td>Không</td><td>Có</td></tr>
+      <tr><td>View, lọc, theo dõi cập nhật</td><td>Cơ bản</td><td>Mạnh</td></tr>
+      <tr><td>Khuyến nghị khi</td><td>Bắt đầu nhanh, dữ liệu đơn giản</td><td>Content nhiều hình ảnh, cần theo dõi chặt</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 3. WORKFLOW -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">3</span> Workflow</h2>
+    <p class="sub">Quy trình chuẩn mỗi khi một thành viên làm việc trong workspace.</p>
+    <ol class="steps">
+      <li>AI đọc bộ luật trong <code>_foundation/</code> trước khi thực hiện bất kỳ tác vụ nào.</li>
+      <li>AI làm việc trong folder dự án tương ứng và kế thừa toàn bộ luật Foundation.</li>
+      <li>Nếu workspace dùng bảng dữ liệu chung (tùy chọn), AI lấy dữ liệu từ đó thay vì từ file rời.</li>
+      <li>Deliverable được xuất vào folder dự án dưới dạng snapshot, ghi rõ ngày và nguồn dữ liệu.</li>
+    </ol>
+    <div class="prio" style="margin-top:16px">Thứ tự ưu tiên khi có mâu thuẫn: lệnh user, sau đó <code>_foundation/RULES.md</code>, sau đó context dự án, cuối cùng là mặc định của AI.</div>
+  </div>
+</section>
+
+<!-- 4. SETUP GUIDELINE -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">4</span> Setup để có guideline</h2>
+    <p class="sub">Người đứng đầu (lead) làm một lần, theo đúng thứ tự sau. Phần giải thích cấu trúc nằm ở cuối mục.</p>
+
+    <ol class="steps">
+      <li><b>Tạo folder chung</b> trên Cloud Drive (vd <code>VLU Workspace</code>) và bật Drive sync về máy.</li>
+      <li><b>Bỏ tư liệu brand sẵn có vào folder</b> (ví dụ <code>VLU Workspace/Assets/</code>): slide mẫu, Excel mẫu, logo, bảng màu, tài liệu nhận diện. AI sẽ đọc và dùng làm nền tảng để build <code>BRAND.md</code> và template.</li>
+      <li><b>Mở AI</b> (Claude Code / Codex) tại folder local đã sync và <b>dán Bootstrap Prompt</b> bên dưới. AI tự sinh cấu trúc folder và bộ <code>_foundation/</code>.</li>
+    </ol>
+
+    <div class="promptwrap" style="margin:16px 0">
+      <div class="promptbar">
+        <span class="t">BOOTSTRAP PROMPT · dán vào terminal Claude / Codex</span>
+        <button class="copybtn" id="copyBtn" onclick="copyPrompt()">Copy prompt</button>
+      </div>
+      <pre class="prompt" id="prompt">Bạn là trợ lý setup chuẩn hóa workspace cho team. Hãy TẠO toàn bộ cấu trúc folder và file dưới đây ngay trong folder hiện tại; người dùng không tạo gì bằng tay. Viết toàn bộ bằng tiếng Việt, không dùng em-dash. Không tự tạo số liệu không có nguồn, không in token. Nếu file đã tồn tại thì hỏi trước khi ghi đè. Nếu trong folder đã có sẵn tư liệu brand (ví dụ folder Assets/: slide mẫu, Excel mẫu, logo, bảng màu), hãy đọc và dùng làm nền tảng khi sinh BRAND.md và template.
+
+Cấu trúc mục tiêu của workspace:
+WORKSPACE/
+  README.md           (giới thiệu workspace, mô tả cấu trúc, trỏ tới _foundation)
+  _foundation/        (guideline: toàn bộ luật chung)
+  (mỗi dự án sau này là 1 folder riêng, tạo từ _foundation/init/project-template)
+
+Tạo `README.md` ở gốc: giới thiệu workspace; mô tả cấu trúc (README, _foundation là guideline, mỗi dự án 1 folder); hướng dẫn người dùng đọc _foundation/00-START-HERE.md trước, dùng _foundation/init/onboarding-new-member.md để onboard, và _foundation/init/INIT-GUIDE.md để chốt guideline.
+
+Tạo folder `_foundation/` với các file:
+
+1. `00-START-HERE.md`: điểm vào AI đọc đầu tiên. Phải nêu BƯỚC 0 bắt buộc đọc luật trước khi làm; thứ tự ưu tiên "lệnh user, rồi _foundation/RULES.md, rồi context dự án, rồi mặc định AI"; 3 quy tắc vàng: (a) không tự ý lệch concept/brand/term, khác chuẩn thì hỏi confirm; (b) một nguồn sự thật, nếu dùng kênh đồng bộ thì dữ liệu nằm ở đó, file chỉ là snapshot; (c) tái lập được, deliverable kèm script.
+
+2. `RULES.md`: luật cứng R1 tới R7. R1 đọc foundation trước; R2 nếu workspace dùng bảng dữ liệu chung (tùy chọn) thì lấy dữ liệu cập nhật từ đó (Google Sheets hoặc Airtable), không hỏi user copy tay, không nhận token qua chat; R3 brand và format (tiền VND #,##0, ngày dd/mm/yyyy, tiếng Việt); R4 dùng đúng thuật ngữ trong GLOSSARY và ngữ điệu trong TONE-OF-VOICE; R5 mỗi dự án 1 folder, đặt tên chuẩn; R6 tái lập bằng script (Excel openpyxl, Word python-docx, PPTX python-pptx); R7 không commit secret, token lộ thì rotate. Kết bằng checklist trước khi giao deliverable.
+
+3. `BRAND.md`: bảng màu token (cột vai trò, tên, hex, dùng cho); nếu trong folder đã có tư liệu brand (slide, Excel mẫu, logo, bảng màu) thì trích ra để điền, nếu chưa có thì để giá trị là CẦN CHỐT; typography; format số và ngày; logo.
+
+4. `STRUCTURE.md`: sơ đồ folder (workspace gồm README, _foundation, mỗi dự án 1 folder; tiền tố _ cho folder hệ thống; mỗi dự án tự chứa README, scripts, assets, deliverables); quy ước đặt tên file dạng loai-chu-de-pham-vi-yyyy-mm-dd.ext, chữ thường, gạch nối, không dấu; hướng dẫn tạo dự án mới từ template.
+
+5. `TONE-OF-VOICE.md`: tiếng Việt chuyên nghiệp; kết luận trước dẫn chứng sau (Pyramid Principle); mọi nhận định có số liệu hoặc nguồn; không dùng em-dash; khuyến nghị trình bày 2 phương án và 1 đề xuất kèm trade-off.
+
+6. `GLOSSARY.md`: bảng thuật ngữ chuẩn (cột từ chuẩn, viết tắt, EN, định nghĩa, biến thể cấm dùng); quy tắc gặp thuật ngữ mới thì thêm dòng trước khi dùng.
+
+7. `DATA-SSOT.md`: bảng dữ liệu chung là tùy chọn; nếu dùng thì đó là single source of truth cho dữ liệu cập nhật, ưu tiên Airtable (chèn được ảnh vào ô, theo dõi cập nhật tốt) hoặc Google Sheets nếu đã quen; file chỉ chứa snapshot có ngày; cấm sửa file rời rồi gửi qua lại; nếu dùng Airtable, cách lấy dữ liệu là chạy python3 scripts/airtable_inspect.py "URL" --max-records 100 --format json từ folder workspace; thêm quy trình cập nhật content giữa các team: mọi thay đổi đi qua kênh đồng bộ, mỗi bản ghi có trạng thái (Draft, Cần duyệt, Đã duyệt), AI tự rà soát format và thuật ngữ trước khi người duyệt; mục cấu hình nguồn dữ liệu để CẦN CHỐT (công cụ, link hoặc Base ID, view theo dự án, người sở hữu).
+
+8. `init/INIT-GUIDE.md`: quy trình guide init chạy 1 lần, 6 bước confirm và điền: (1) Brand, (2) Structure, (3) Tone, (4) Glossary, (5) Data, (6) rà dự án và shim. Mỗi bước AI đọc file luật và tư liệu brand đã bỏ vào folder, hỏi user xác nhận hoặc điền chỗ CẦN CHỐT, ghi vào file, tick checklist. Kết bằng bump version.
+
+9. `init/onboarding-new-member.md`: 5 bước onboard người mới khoảng 10 phút (lấy folder đã sync; cấu hình kênh dữ liệu nếu có; bảo AI đọc luật trước; quy tắc bất di bất dịch; khi bí đọc RULES).
+
+10. `init/project-template/README.md` và `init/project-template/AGENTS.md`: template tạo dự án mới, kế thừa foundation, chỉ ghi cái riêng của dự án; AGENTS.md template có BƯỚC 0 trỏ về ../_foundation/00-START-HERE.md.
+
+Tạo hoặc ghi đè ở GỐC folder hiện tại:
+- `AGENTS.md` và `CLAUDE.md`: shim BƯỚC 0 trỏ về _foundation/00-START-HERE.md, nêu thứ tự ưu tiên và quy tắc kênh dữ liệu. Hai file dùng chung một nguồn luật để Claude và Codex không lệch nhau.
+- `.gitignore`: thêm .DS_Store, __pycache__/, *.py[cod], .env, .env.*, !.env.example, token.md.
+- `.env.example`: nội dung AIRTABLE_TOKEN=pat_xxx.
+
+Sau khi tạo xong, in cây thư mục đã tạo. Tiếp đó CHẠY LUÔN guide init mà không cần tôi gọi lại: lần lượt đi qua 6 tiêu chí (Brand, Structure, Tone, Glossary, Data, Shim). Với mỗi tiêu chí, đọc tư liệu brand trong folder nếu có, đề xuất giá trị cho các mục CẦN CHỐT, hỏi tôi xác nhận hoặc chỉnh sửa, ghi vào file tương ứng rồi sang tiêu chí kế. Hỏi từng tiêu chí một, không hỏi dồn. Hết 6 tiêu chí thì tóm tắt thay đổi và bump version trong 00-START-HERE.md.</pre>
+    </div>
+
+    <ol class="steps" style="counter-reset:s 3">
+      <li><b>Xác nhận từng tiêu chí:</b> dựng xong, AI tự chạy guide init và lần lượt hỏi bạn duyệt Brand, Structure, Tone, Glossary, Data, Shim. Trả lời hoặc chỉnh cho từng mục.</li>
+      <li><b>Hoàn tất:</b> đủ 6 tiêu chí (checklist dưới), AI bump version. Giờ mới sang mục 5 để share.</li>
+    </ol>
+
+    <h3 style="color:var(--navy);margin:24px 0 10px;font-size:17px">Tiêu chí lead phải xác nhận trước khi share</h3>
+    <ul class="check">
+      <li><span class="box"></span><span><b>Brand:</b> bảng màu, font, logo đã đúng nhận diện VLU (đối chiếu tư liệu brand đã bỏ vào folder).</span></li>
+      <li><span class="box"></span><span><b>Structure:</b> quy ước đặt tên file và sơ đồ folder đã chốt.</span></li>
+      <li><span class="box"></span><span><b>Tone:</b> văn phong và xưng hô đối ngoại đã chốt.</span></li>
+      <li><span class="box"></span><span><b>Glossary:</b> thuật ngữ và số liệu mốc đã điền, không còn chỗ mỗi người gọi một tên.</span></li>
+      <li><span class="box"></span><span><b>Data (nếu dùng):</b> đã chọn Google Sheets hoặc Airtable; link hoặc Base và view theo dự án đã map.</span></li>
+      <li><span class="box"></span><span><b>Shim:</b> <code>AGENTS.md</code> và <code>CLAUDE.md</code> đã trỏ về <code>_foundation/</code>.</span></li>
+    </ul>
+
+    <h3 style="color:var(--navy);margin:26px 0 10px;font-size:17px">Giải thích: cấu trúc folder sau khi tạo</h3>
+    <pre class="tree">VLU Workspace/
+├── README.md          <span class="c"># giới thiệu workspace, trỏ tới guideline</span>
+├── Assets/            <span class="c"># tư liệu brand gốc: slide, Excel mẫu, logo, bảng màu</span>
+├── _foundation/       <span class="c"># guideline: toàn bộ luật chung (brand, term, tone, data)</span>
+├── Project A/         <span class="c"># mỗi dự án 1 folder, tạo từ template</span>
+└── Project B/</pre>
+    <div class="note" style="margin-top:12px">Folder <code>_foundation/</code> chính là "guideline" trong sơ đồ; tiền tố <code>_</code> để luôn nằm trên cùng và tách khỏi các project. Toàn bộ cấu trúc do prompt tự sinh, lead không tạo folder hay file bằng tay.</div>
+  </div>
+</section>
+
+<!-- 5. SHARE -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">5</span> Chia sẻ cho mọi người</h2>
+    <p class="sub">Chỉ share sau khi 6 tiêu chí ở trên đã xác nhận đủ.</p>
+    <ol class="steps">
+      <li><b>Share folder</b> Cloud Drive cho team với quyền edit.</li>
+      <li><b>Mỗi người cài Drive sync</b> để folder về máy local của họ.</li>
+    </ol>
+    <div class="danger" style="margin-top:16px"><b>Bảo mật:</b> nếu dùng Airtable, đừng để token nằm trong folder share. File <code>VLU/token.md</code> hiện đang chứa token thật, hãy <b>rotate token</b> và chỉ giữ ở <code>.env</code> local.</div>
+  </div>
+</section>
+
+<!-- 6. CHUAN HOA CAP NHAT CONTENT -->
+<section>
+  <div class="wrap">
+    <h2><span class="n">6</span> Chuẩn hóa cập nhật content giữa các team</h2>
+    <p class="sub">Mục tiêu: giảm thời gian và nhân lực dành cho việc recheck khi nhiều team cùng cập nhật nội dung.</p>
+    <ol class="steps">
+      <li>Mọi cập nhật content đi qua <b>một kênh đồng bộ online</b> (Google Sheets hoặc Airtable), không gửi file rời qua lại.</li>
+      <li>Mỗi bản ghi gắn <b>trạng thái</b> (vd Draft, Cần duyệt, Đã duyệt) để mọi team thấy cái gì đã chốt.</li>
+      <li><b>AI tự rà soát</b> ngay trên kênh đó: sai format, thiếu trường, sai thuật ngữ, trùng lặp, thiếu ảnh.</li>
+      <li>Người chỉ xử lý phần AI gắn cờ, <b>không recheck từng dòng</b>.</li>
+    </ol>
+    <div class="ok" style="margin-top:14px"><b>Vì sao tiết kiệm resource:</b> khi nội dung nằm tập trung trên một kênh đồng bộ, AI rà soát tự động trước, con người chỉ xử lý ngoại lệ. Không còn vòng lặp gửi file qua lại và kiểm tra chéo thủ công nhiều lần giữa các team.</div>
+    <div class="note" style="margin-top:14px">Đây là lý do nên dùng kênh đồng bộ (Google Sheets hoặc Airtable): chỉ khi dữ liệu online tập trung thì AI mới tự kiểm tra được mà không cần con người rà từng dòng.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>VLU Workspace Standard</b> · Foundation v0.1<br>
+    Nguồn luật: <code>VLU/_foundation/</code> · Prompt: <code>_foundation/init/BOOTSTRAP-PROMPT.md</code>
+  </div>
+</footer>
+
+<script>
+function copyPrompt(){
+  var text = document.getElementById('prompt').innerText;
+  var btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(text).then(function(){
+    btn.textContent = 'Đã copy';
+    btn.classList.add('done');
+    setTimeout(function(){ btn.textContent='Copy prompt'; btn.classList.remove('done'); }, 2200);
+  }).catch(function(){
+    var r=document.createRange(); r.selectNodeContents(document.getElementById('prompt'));
+    var s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    btn.textContent='Nhấn Ctrl/Cmd+C';
+  });
+}
+</script>
+</body>
+</html>
